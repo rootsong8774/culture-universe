@@ -49,19 +49,19 @@
                 </a>
 <!--                <ul class="dropdown-menu cart-list">
                   <li>
-                    <a href="#" class="photo"><img src="../assets/images/thumb01.jpg"
+                    <a href="#" class="photo"><img src="../assets/images/logo.png"
                                                    class="cart-thumb" alt=""/></a>
                     <h6><a href="#">Delica omtantur </a></h6>
                     <p class="m-top-10">2x - <span class="price">$99.99</span></p>
                   </li>
                   <li>
-                    <a href="#" class="photo"><img src="../assets/images/thumb01.jpg"
+                    <a href="#" class="photo"><img src="../assets/images/logo.png"
                                                    class="cart-thumb" alt=""/></a>
                     <h6><a href="#">Delica omtantur </a></h6>
                     <p class="m-top-10">2x - <span class="price">$99.99</span></p>
                   </li>
                   <li>
-                    <a href="#" class="photo"><img src="../assets/images/thumb01.jpg"
+                    <a href="#" class="photo"><img src="../assets/images/logo.png"
                                                    class="cart-thumb" alt=""/></a>
                     <h6><a href="#">Delica omtantur </a></h6>
                     <p class="m-top-10">2x - <span class="price">$99.99</span></p>
@@ -93,13 +93,41 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="navbar-menu">
             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-              <li><a href="#">공연</a></li>
-              <li><a href="#">이벤트</a></li>
-              <li><a href="#">고객센터</a></li>
-              <li><a href="#">기관소개</a></li>
+              <li class="dropdown">
+                <a href="#">공연</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">공연일정</a></li>
+                  <li><a href="#">공연달력</a></li>
+                  <li><a href="#">좌석배치도</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#">이벤트</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">진행 이벤트</a></li>
+                  <li><a href="#">당첨자 발표</a></li>
+                  <li><a href="#">지난 이벤트</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#">고객센터</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">공지 사항</a></li>
+                  <li><a href="#">FAQ</a></li>
+                  <li><a href="#">고객 문의</a></li>
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#">기관소개</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">세종문화회관 소개</a></li>
+                  <li><a href="#">시설 소개</a></li>
+                  <li><a href="#">오시는 길</a></li>
+                </ul>
+              </li>
               <li><a href="#">로그인</a></li>
               <li><a href="#">회원가입</a></li>
-<!--              <li><a href="contactus.html">contact</a></li>-->
+
             </ul>
           </div><!-- /.navbar-collapse -->
         </div>
