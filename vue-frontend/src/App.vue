@@ -8,8 +8,6 @@
 
 import MainPage from "./components/MainPage";
 
-
-
 export default {
   name: 'app',
   components: {MainPage},
