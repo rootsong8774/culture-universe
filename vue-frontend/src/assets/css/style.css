@@ -54,18 +54,18 @@ body {
     Page Content
 ------------------------------------------*/
 /*
-.page-content, 
+.page-content,
 section { overflow: hidden; }*/
 
 /*
-    On Scroll Animations 
+    On Scroll Animations
 ------------------------------------------*/
 
 /*.animated { visibility: hidden; }
 .visible { visibility: visible; }*/
 
 /*
-    Spacing & Alignment 
+    Spacing & Alignment
 ------------------------------------------*/
 
 .roomy-100 {
@@ -123,7 +123,7 @@ section { overflow: hidden; }*/
 .bg-primary{background-color: #1E8BC3;}
 .bg-finence{background-color:#13A0B2;}
 .bg-mega{background-color:#e5e5e5;}
-.bg-grey{background-color: #f5f5f5;}
+.bg-grey{background-color: grey;}
 .bg-black{background-color: #212121;}
 .bg-white{background-color: #fff;}
 
@@ -200,9 +200,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 .form-control{
-    border-radius: 0px;
+    border-radius: 0;
     border:1px solid #ccc;
-    box-shadow: inset 0 0px 0px rgba(0,0,0,.075);
+    box-shadow: inset 0 0 0 rgba(0,0,0,.075);
     width: 100%;
     height: auto;
 }
@@ -210,7 +210,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .form-control:focus {
     border-color: #bcefeb;
     outline: 0;
-    box-shadow: inset 0 0px 0px rgba(0,0,0,.075),0 0 0px rgba(102,175,233,.6);
+    box-shadow: inset 0 0 0 rgba(0,0,0,.075),0 0 0 rgba(102,175,233,.6);
 }
 
 h1,
@@ -265,7 +265,7 @@ p {
     line-height: 1.5rem;
 }
 p:last-child {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 /*colors*/
 .w100 {
@@ -350,7 +350,7 @@ Separator
 .separator_left{
     width:85px;
     height:2px;
-    margin:20px 0px;
+    margin:20px 0;
     background: #000;
 }
 .separator_auto{
@@ -362,7 +362,7 @@ Separator
 .separator_small{
     width:30px;
     height:2px;
-    margin:20px 0px;
+    margin:20px 0;
     background: #000;
 }
 
@@ -399,9 +399,9 @@ Button
 
 .btn-primary{
     color: #fff;
-    background-color: #333;
-    border:1px solid;
-    border-color: #333;
+    background-color: #333333;
+    border:2px solid;
+    border-color: #333333;
     padding: 0.8rem 2.5rem;
     border-radius: 30px;
 }
@@ -458,7 +458,7 @@ Extra height css
     margin-right: 15px;
 }
 .m-l-15{
-    margin-left: 15px; 
+    margin-left: 15px;
 }
 .m-top-10 {
     margin-top: 10px;
@@ -737,9 +737,9 @@ textarea::-ms-input-placeholder{
 }*/
 
 
-.transform_scal_rotate:hover img{ 
-    -webkit-transform: scale(1.1) rotate(4deg); 
-    transform: scale(1.1) rotate(4deg); 
+.transform_scal_rotate:hover img{
+    -webkit-transform: scale(1.1) rotate(4deg);
+    transform: scale(1.1) rotate(4deg);
 }
 
 .culmn{
@@ -774,8 +774,8 @@ textarea::-ms-input-placeholder{
     width: 100%;
     position: fixed;
     z-index: 1;
-    margin-top: 0px;
-    top: 0px;
+    margin-top: 0;
+    top: 0;
     z-index: 90;
 }
 #loading-center{
@@ -808,23 +808,23 @@ textarea::-ms-input-placeholder{
 
 .object:nth-child(10){
     -webkit-animation-delay: 0.9s;
-    animation-delay: 0.9s;	
+    animation-delay: 0.9s;
 }
 .object:nth-child(9){
     -webkit-animation-delay: 0.8s;
-    animation-delay: 0.8s;	
-}	
+    animation-delay: 0.8s;
+}
 .object:nth-child(8){
     -webkit-animation-delay: 0.7s;
-    animation-delay: 0.7s;	
+    animation-delay: 0.7s;
 }
 .object:nth-child(7){
     -webkit-animation-delay: 0.6s;
-    animation-delay: 0.6s;	
+    animation-delay: 0.6s;
 }
 .object:nth-child(6){
     -webkit-animation-delay: 0.5s;
-    animation-delay: 0.5s;	
+    animation-delay: 0.5s;
 }
 .object:nth-child(5){
     -webkit-animation-delay: 0.4s;
@@ -832,21 +832,21 @@ textarea::-ms-input-placeholder{
 }
 .object:nth-child(4){
     -webkit-animation-delay: 0.3s;
-    animation-delay: 0.3s;		
+    animation-delay: 0.3s;
 }
 .object:nth-child(3){
     -webkit-animation-delay: 0.2s;
-    animation-delay: 0.2s;	
+    animation-delay: 0.2s;
 }
 .object:nth-child(2){
     -webkit-animation-delay: 0.1s;
     animation-delay: 0.1s;
-}						
+}
 
 @-webkit-keyframes animate {
 
     50% {
-        -ms-transform: translateX(-25px) scaleY(0.5); 
+        -ms-transform: translateX(-25px) scaleY(0.5);
         -webkit-transform: translateX(-25px) scaleY(0.5);
         transform: translateX(-25px) scaleY(0.5);
 
@@ -856,7 +856,7 @@ textarea::-ms-input-placeholder{
 
 @keyframes animate {
     50% {
-        -ms-transform: translateX(-25px) scaleY(0.5); 
+        -ms-transform: translateX(-25px) scaleY(0.5);
         -webkit-transform: translateX(-25px) scaleY(0.5);
         transform: translateX(-25px) scaleY(0.5);
     }
@@ -910,8 +910,9 @@ Nav Menu style
     position: relative;
 }
 .home{
-    background: url(../images/background/homepage-bg.jpg) no-repeat top center;
+    background: url(../images/background/Anno1800.jpg) no-repeat top center;
 }
+
 .service-banner{
     background: url(../images/background/services-bg.jpg) no-repeat bottom center;
 }
@@ -937,8 +938,8 @@ Home Section style
 
 .main_home{
     overflow: hidden;
-    padding-top: 300px;
-    padding-bottom: 230px;
+    padding-top: 130px;
+    padding-bottom: 100px;
     position: relative;
     z-index: 1;
 }
@@ -1056,14 +1057,14 @@ About section style
     font-weight: 400;
 }
 
-.main-gallery .button:focus, 
-.main-gallery .button:active:focus, 
-.main-gallery .button.active:focus, 
-.main-gallery .button.focus, 
-.main-gallery .button:active.focus, 
+.main-gallery .button:focus,
+.main-gallery .button:active:focus,
+.main-gallery .button.active:focus,
+.main-gallery .button.focus,
+.main-gallery .button:active.focus,
 .main-gallery .button.active.focus{
-    outline: 0; 
-    outline-offset:0; 
+    outline: 0;
+    outline-offset:0;
 }
 
 .main-gallery .button:hover {
@@ -1287,12 +1288,12 @@ Models Section style
 }
 .model_img img{
     width:100%;
-    -webkit-filter: grayscale(100%); 
+    -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
 .model_img:hover img{
     width:100%;
-    -webkit-filter: grayscale(0%); 
+    -webkit-filter: grayscale(0%);
     filter: grayscale(0%);
 }
 .model_caption{
@@ -1641,7 +1642,7 @@ Footer Section style
 
 /*========================================================
         Blog Page
-==========================================================*/ 
+==========================================================*/
 
 .main_blog_fashion{
 
@@ -1682,7 +1683,7 @@ Footer Section style
 
 .fashion_praspect_inner{
     padding:30px 40px 50px 20px;
-    transition: .3s; 
+    transition: .3s;
     transform: rotateY(25deg);
 }
 

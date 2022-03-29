@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.4",
-    "bootstrap": "^3.3.6",
-    "bootstrap-vue": "^2.21.2",
     "vue": "^2.2.6",
     "vue-style-loader": "^4.1.3"
   },
