@@ -21,7 +21,7 @@ const router = new VueRouter({
     },
     {
       path: '',
-      redirect: '/main'
+      redirect: {name : 'main'}
     },
     {
       name: 'performanceDetail',
@@ -32,6 +32,10 @@ const router = new VueRouter({
       name: 'performanceReservation',
       path: '/performance/performanceReservation',
       component: performanceReservation,
+    },
+    {
+      path: '/performance',
+      redirect: {name : 'performanceList'}
     },
     {
       name: 'performanceList',
