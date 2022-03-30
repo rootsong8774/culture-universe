@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header current-class="home"/>
+    <Header current-class="performance"/>
 
     <section>
       <div class="row">
@@ -114,7 +114,7 @@ import Header from "./header";
 import Footer from "./footer";
 
 export default {
-  name: "schedual-detail",
+  name: "performance-detail",
   components: {
     Header, Footer
   }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header current-class="home"/>
+    <Header current-class="performance"/>
     <!--About Sections-->
     <section id="main1">
 
@@ -39,7 +39,7 @@
     </section>
     <ul>
       <li>
-        <img src="../assets/images/item1.jpg" width="350px">
+        <router-link :to="{name: 'performanceDetail'}"><img src="../assets/images/item1.jpg" width="350px"></router-link>
       </li>
     </ul>
 
@@ -75,7 +75,7 @@ import Header from "./header";
 import Footer from "./footer";
 
 export default {
-  name: "schedual",
+  name: "performance-list",
   components: {Header, Footer}
 }
 </script>

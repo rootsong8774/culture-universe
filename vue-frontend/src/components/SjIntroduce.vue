@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header current-class="SjIntroduce"/>
+    <Header current-class="organization"/>
     <div class="row">
       <div class="col-12 text-center mb-2">
         <ul class="list-inline mb-4" id="portfolio-flters">
