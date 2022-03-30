@@ -1,44 +1,14 @@
 <template>
   <div>
-    <Header current-class="loginRegister"/>
+    <Header current-class="Register"/>
     <div class="header-right pull-right">
       <ul>
         <li class="reg">
-          <a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">
-            <h1>Log in</h1>
-          </a>
-          /
           <a href="#" data-toggle="modal" data-target=".bs-example-modal-lg">
             <h1>Register</h1>
           </a>
 
-          <!-- small modal -->
-          <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-            <div class="modal-dialog modal-sm" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											 	<span aria-hidden="true">
-											 		<i class="fa fa-close"></i>
-											 	</span>
-                  </button>
-                  <h4 class="modal-title" id="mySmallModalLabel">
-                    Sign In
-                  </h4>
-                  <form class="sm-frm" style="padding:25px">
-                    <label>Name :</label>
-                    <input type="text" class="form-control" placeholder="Enter Email">
-                    <label>Passoward :</label>
-                    <input type="text" class="form-control" placeholder="Enter Passoward">
-                    <label><input type="checkbox" name="personality"> Remenber Me</label>
-                    <button type="button" class="btn btn-default pull-right">Submit</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- large modal -->
+          <!-- Register modal -->
           <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
@@ -63,13 +33,6 @@
             </div>
           </div>
         </li><!--/li -->
-        <li>
-          <div class="social-icon">
-            <ul>
-              <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-            </ul><!--/.ul -->
-          </div><!--/.social-icon -->
-        </li><!--/li -->
       </ul><!--/ul -->
     </div><!--/.header-right -->
     <Footer/>
@@ -81,12 +44,12 @@ import Header from "./header";
 import Footer from "./footer";
 
 export default {
-  name: "loginRegister",
+  name: "Register",
   components: {Header, Footer}
 }
 </script>
 
-<style scoped>
+<style >
 .modal-header {
   border-bottom: none;
 }
