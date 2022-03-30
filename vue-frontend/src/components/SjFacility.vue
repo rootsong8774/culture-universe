@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header current-class="organization"/>
     <div class="container-fluid py-5">
       <div class="container py-5">
         <div class="row justify-content-center">
@@ -28,18 +27,13 @@
       <img id="artTheater" hidden> 세종예술동 이미지 <br>
       <br>
     </div>
-    <Footer/>
   </div>
 </template>
 
 
 <script>
-import Header from "./header";
-import Footer from "./footer";
-
 export default {
   name: "SjFacilty",
-  components: {Header, Footer}
 }
 </script>
 

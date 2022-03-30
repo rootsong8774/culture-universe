@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header current-class="support"/>
     <div id="contactWrite" style="position:relative;">
       <!-- 비회원 입력 폼 -->
       <form id="support_write_form" name="writeForm" enctype="multipart/form-data" method="post">
@@ -100,7 +99,8 @@
                 </th>
                 <td colspan="3">
                   <div class="tb-l">
-                    <input type="text" name="subject" value="" class="txt-input" style="width: 405px"/>
+                    <input type="text" name="subject" value="" class="txt-input"
+                           style="width: 405px"/>
                   </div>
                 </td>
               </tr>
@@ -212,16 +212,12 @@
         </fieldset>
       </form>
     </div>
-    <Footer/>
   </div>
 </template>
 <script>
-import Header from "./header";
-import Footer from "./footer";
 
 export default {
   name: "qna",
-  components: {Header, Footer}
 }
 </script>
 
@@ -231,13 +227,16 @@ export default {
   _height: 675px;
   background-color: #eeeff4;
 }
+
 #contactWrite .table-w {
   padding: 10px;
 }
+
 #contactWrite th,
 #contactWrite td {
   border: 1px solid #d6e2e9;
 }
+
 #contactWrite th {
   padding: 10px 0 9px;
   font-size: 14px;
@@ -245,34 +244,41 @@ export default {
   color: #414141;
   background-color: #f6f9fa;
 }
+
 #contactWrite th .tb-l {
   padding-left: 14px;
   letter-spacing: -1px;
 }
+
 #contactWrite td {
   padding: 8px 0 7px;
   font-size: 12px;
   color: #6b6b6b;
   background-color: #fff;
 }
+
 #contactWrite td .tb-l {
   position: relative;
   padding: 0 9px;
 }
+
 #contactWrite td .tb-l .btn-logout {
   position: absolute;
   right: 10px;
   top: -1px;
 }
+
 #contactWrite td .txt-input,
 #contactWrite td textarea {
   font-size: 12px;
 }
+
 #contactWrite td .txt-input {
   height: 24px;
   line-height: 24px;
   border: 1px solid #c9d0d6;
 }
+
 #contactWrite td textarea {
   overflow-y: scroll;
   width: 490px;
@@ -281,12 +287,15 @@ export default {
   height: 180px;
   border: 1px solid #c9d0d6;
 }
+
 #contactWrite td .html {
   color: #7f9db9;
 }
+
 #contactWrite td .html-red {
   color: #ff0000;
 }
+
 #contactWrite .file-w {
   overflow: hidden;
   position: relative;
@@ -298,6 +307,7 @@ export default {
   line-height: 0;
   /*background: url(./img/btn/h26_w78_addfile.gif) no-repeat right 0;*/
 }
+
 #contactWrite .file-w .ftrick {
   cursor: pointer;
   position: absolute;
@@ -310,22 +320,27 @@ export default {
   opacity: 0;
   filter: alpha(opacity=0);
 }
+
 #contactWrite .btn-foot {
   margin-top: 45px;
   font-size: 0;
   line-height: 0;
   text-align: center;
 }
+
 #contactWrite .btn-foot .btn-sp {
   margin-left: 11px;
 }
+
 #contactWrite .btn-foot .btn-dbh48 * {
   padding-left: 35px;
   padding-right: 45px;
 }
+
 #contactWrite .btn-foot .btn-dbh48 .raw-db {
   left: -35px;
 }
+
 /* 개인정보 동의 */
 #contactWrite h3.box-tit {
   position: relative;
@@ -342,6 +357,7 @@ export default {
   border-bottom: 0;
   text-align: left;
 }
+
 #contactWrite .agreement_choice {
   position: absolute;
   top: 0px;
@@ -351,20 +367,24 @@ export default {
   font-weight: normal;
   color: #666;
 }
+
 #contactWrite .agreement_choice input {
   width: 12px;
   height: 12px;
   vertical-align: middle;
 }
+
 #contactWrite .tbl {
   width: 98%;
   margin: 0 auto;
   border-top: 1px solid #e0e0e0;
   border-left: 1px solid #e0e0e0;
 }
+
 #contactWrite .tbl caption {
   display: none;
 }
+
 #contactWrite .tbl th,
 #contactWrite .tbl td {
   height: 37px;
@@ -375,24 +395,29 @@ export default {
   border-bottom: 1px solid #e0e0e0;
   font-size: 12px;
 }
+
 #contactWrite .tbl th {
   line-height: 39px;
   background: #fdfdfd;
   text-align: center;
 }
+
 #contactWrite .tbl td div {
   padding: 0 5px;
   text-align: left;
   color: #666;
 }
+
 #contactWrite .tbl td div ul {
   margin-left: 15px;
 }
+
 #contactWrite .tbl td div ul li input {
   width: 12px;
   height: 12px;
   vertical-align: middle;
 }
+
 #contactWrite .btm-txt {
   height: 30px;
   margin-left: 10px;

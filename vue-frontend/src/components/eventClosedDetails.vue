@@ -1,13 +1,12 @@
 <template>
   <div>
-    <Header current-class="EventInProgressConn"/>
     <div id="centerColumn">
-      <h2>진행중인 이벤트</h2>
+      <h2>종료된 이벤트</h2>
       <div>
         <hr>
         <p>이벤트제목:</p>
         <p>이벤트기간:</p>
-        <p>당첨자 발표:</p>
+        <router-link :to="{name: 'eventWinner'}">당첨자발표 바로가기</router-link>
         <hr>
         <div id="container">
           <h4>이벤트 내용 또는 이미지</h4>
@@ -20,22 +19,18 @@
               <div class="row">
                 <div class="col-sm-6 col-xs-12">
                   <div class="form-group">
-                    <input type="text" class="form-control" id="firstname" placeholder="id" name="firstname">
+                    <input type="text" class="form-control" id="firstname" placeholder="id"
+                           name="firstname"
+                    >
                   </div><!--/.form-group-->
                 </div><!--/.col-->
               </div><!--/.row-->
               <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group">
-                    <textarea class="form-control" rows="7" id="comment" placeholder="댓글입력"></textarea>
+                    <textarea class="form-control" rows="7" id="comment" placeholder="이벤트종료"
+                              disabled></textarea>
                   </div><!--/.form-group-->
-                </div><!--/.col-->
-              </div><!--/.row-->
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="single-contact-btn">
-                    <button class="contact-btn" href="#" role="button">댓글 등록</button>
-                  </div><!--/.single-single-contact-btn-->
                 </div><!--/.col-->
               </div><!--/.row-->
             </form><!--/form-->
@@ -67,17 +62,12 @@
         </div><!--/.comments-area-->
       </div>
     </div><!--centerColumn   -->
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Header from "./header";
-import Footer from "./footer";
-
 export default {
-  name: "eventInProgressConn",
-  components: {Header, Footer}
+  name: "eventClosedDetails",
 }
 </script>
 <style scoped>

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header current-class="Notice"/>
     <div id="centerColumn">
       <h2>공지사항</h2>
       <form>
@@ -40,17 +39,12 @@
 
       </table>
     </div>
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Header from "./header";
-import Footer from "./footer";
-
 export default {
   name: "notice",
-  components: {Header, Footer}
 }
 </script>
 

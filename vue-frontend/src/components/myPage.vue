@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header current-class="MyPage"/>
     <div id="container">
       <div id="leftColumn">
         <h2>마이페이지</h2>
@@ -22,7 +21,7 @@
         <p>고객님께서 최근 3개월간 예매하신 내용입니다</p>
         <table border="1">
           <tr>
-<!--            <th colspan="2">제목</th>-->
+            <!--            <th colspan="2">제목</th>-->
             <th>예매일</th>
             <th>예매번호</th>
             <th>공연명</th>
@@ -52,7 +51,7 @@
         </table>
 
         <blockquote>
-          <p><strong>기타 안내 또는 추가 문구</strong><br />
+          <p><strong>기타 안내 또는 추가 문구</strong><br/>
             정해진 문구 없음</p>
         </blockquote>
       </div>
@@ -60,27 +59,22 @@
 
     </div>
     <!--//end #container//-->
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Header from "./header";
-import Footer from "./footer";
-
 export default {
   name: "myPage",
-  components: {Header, Footer}
 }
 </script>
 
-<style >
+<style>
 
 div, span,
 h1, h2, h3, h4, h5, h6, p, blockquote,
-a,em,  q, s, strong, sub, sup, tt, var,
-ul, li, form, label, legend,tbody, tfoot, thead,
- caption {  /*table, tr, th, td*/
+a, em, q, s, strong, sub, sup, tt, var,
+ul, li, form, label, legend, tbody, tfoot, thead,
+caption { /*table, tr, th, td*/
   margin: 0;
   padding: 0;
   border: 0;
@@ -91,104 +85,109 @@ ul, li, form, label, legend,tbody, tfoot, thead,
   font-family: inherit;
   vertical-align: baseline;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 caption, th, td {
   text-align: left;
   font-weight: normal;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
   content: "";
 }
+
 blockquote, q {
   quotes: "" "";
 }
+
 a {
-   color:#cc0000;
-   text-decoration:underline;
- }
+  color: #cc0000;
+  text-decoration: underline;
+}
 
 a:hover {
-  color:#cccccc;
-  text-decoration:none;
+  color: #cccccc;
+  text-decoration: none;
 }
 
 ul {
-  margin:0 0 0 20px;
-  list-style-type:disc;
+  margin: 0 0 0 20px;
+  list-style-type: disc;
 }
 
 li {
-  margin:4px 0 5px 10px;
+  margin: 4px 0 5px 10px;
 }
 
 blockquote {
-  margin:1em;
-  padding:.5em;
-  background-color:#eeeeee;
-  border-top:1px solid #cccccc;
-  border-bottom:1px solid #cccccc;
+  margin: 1em;
+  padding: .5em;
+  background-color: #eeeeee;
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
 }
 
 blockquote p {
-  margin:.2em;
+  margin: .2em;
 }
 
 
 #leftColumn {
-  float:left;
-  margin:0;
-  padding:0;
-  width:160px;
-  font-size:.9em;
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 160px;
+  font-size: .9em;
 }
 
 #leftColumn p {
-  padding:10px
+  padding: 10px
 }
 
 
 #leftColumn h2 {
-  margin:0;
-  padding:10px 0 0 10px;
-  font-size:1em;
+  margin: 0;
+  padding: 10px 0 0 10px;
+  font-size: 1em;
 }
 
 #leftColumn ul {
-  margin:0 0 0 0;
-  list-style:none;
+  margin: 0 0 0 0;
+  list-style: none;
 }
 
 #leftColumn li {
-  margin:4px 0 5px 10px;
+  margin: 4px 0 5px 10px;
 }
 
 #leftColumn li a {
-  text-decoration:underline;
+  text-decoration: underline;
 }
 
-#leftColumn li a:hover{
-  text-decoration:none;
+#leftColumn li a:hover {
+  text-decoration: none;
 }
 
 #centerColumn {
-  margin:0 0 0 180px;
-  padding:0;
-  background-color:#ffffff;
+  margin: 0 0 0 180px;
+  padding: 0;
+  background-color: #ffffff;
 }
 
 #centerColumn p {
-  padding:10px
+  padding: 10px
 }
 
 #centerColumn h2 {
-  margin:0;
-  padding:10px 0 5px 0;
-  font-size:1.3em;
-  letter-spacing:.1em;
+  margin: 0;
+  padding: 10px 0 5px 0;
+  font-size: 1.3em;
+  letter-spacing: .1em;
 }
 
 
