@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header current-class="home"/>
     <section id="body-main" class='bg-white '>
       <button type="button" class="btn-default" id="reservation">예매하기</button>
       <button type="button" class="btn-primary" id="details">상세보기</button>
@@ -13,19 +12,13 @@
         </div><!--End off row-->
       </div><!--End off container -->
     </section> <!--End off Home Sections-->
-    <Footer/>
   </div>
 
 </template>
 
 <script>
-
-import Header from "./header";
-import Footer from "./footer";
-
 export default {
-  name: "MainPage",
-  components: {Header, Footer},
+  name: "mainPage",
 }
 </script>
 

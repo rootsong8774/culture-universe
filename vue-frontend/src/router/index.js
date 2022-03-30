@@ -1,18 +1,26 @@
 import Vue from "vue";
 import VueRouter from 'vue-router'
-import MainPage from "../components/MainPage";
+import MainPage from "../components/mainPage";
 import performanceDetail from "../components/performanceDetail";
 import SjFacility from "../components/SjFacility";
-import SjIntroduce from "../components/SjIntroduce";
+import SjIntroduction from "../components/SjIntroduction";
 import performanceReservation from "../components/performanceReservation";
 import performanceList from "../components/performanceList";
 import qna from "../components/qna";
-import loginRegister from "../components/loginRegister";
+import SjDirections from "../components/SjDirections";
+import notice from "../components/notice";
+import faq from "../components/faq";
+import register from "../components/register";
+import eventInProgress from "../components/eventInProgress";
+import eventInProgressDetails from "../components/eventInProgressDetails";
+import eventWinner from "../components/eventWinner";
+import eventClosed from "../components/eventClosed";
+import eventClosedDetails from "../components/eventClosedDetails";
+import myPage from "../components/myPage";
 
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-  mode: 'history',
   routes: [
     {
       path: '/main',
@@ -25,22 +33,56 @@ const router = new VueRouter({
     },
     {
       name: 'performanceDetail',
-      path: '/performance/performanceDetail',
+      path: '/performances/performanceDetail',
       component: performanceDetail,
     },
     {
       name: 'performanceReservation',
-      path: '/performance/performanceReservation',
+      path: '/performances/performanceReservation',
       component: performanceReservation,
     },
     {
-      path: '/performance',
+      path: '/performances',
       redirect: {name : 'performanceList'}
     },
     {
       name: 'performanceList',
-      path: '/performance/performanceList',
+      path: '/performances/performanceList',
       component: performanceList,
+    },
+    {
+      name: 'eventInProgress',
+      path: '/event/progress',
+      component: eventInProgress
+    },
+    {
+      name: 'eventInProgressDetails',
+      path: '/event/progressDetails',
+      component: eventInProgressDetails
+    },
+    {
+      name: 'eventWinner',
+      path: '/event/winner',
+      component: eventWinner
+    },
+    {
+      name: 'eventClosed',
+      path: '/event/closed',
+      component: eventClosed
+    },
+    {
+      name: 'eventClosedDetails',
+      path: '/event/closedDetails',
+      component: eventClosedDetails
+    },
+    {
+      path: '/event',
+      redirect: {name: eventInProgress}
+    },
+    {
+      name: 'organization',
+      path: '/organization/introduction',
+      component: SjIntroduction
     },
     {
       name: 'facility',
@@ -48,9 +90,23 @@ const router = new VueRouter({
       component: SjFacility
     },
     {
-      name: 'organization',
-      path: '/organization/introduce',
-      component: SjIntroduce
+      name: 'direction',
+      path: '/organization/direction',
+      component: SjDirections
+    },
+    {
+      path: '/organization',
+      redirect: {name: SjIntroduction}
+    },
+    {
+      name: 'notice',
+      path: '/support/notice',
+      component: notice
+    },
+    {
+      name: 'faq',
+      path: '/support/faq',
+      component: faq
     },
     {
       name: 'qna',
@@ -58,9 +114,18 @@ const router = new VueRouter({
       component: qna
     },
     {
-      name: 'loginRegister',
-      path: '/login',
-      component: loginRegister
+      name: 'register',
+      path: '/register',
+      component: register
+    },
+    {
+      name: 'myPage',
+      path: '/myPage/list',
+      component: myPage
+    },
+    {
+      path: '/myPage',
+      redirect: {name: 'myPage'}
     }
 
 

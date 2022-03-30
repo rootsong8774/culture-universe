@@ -102,18 +102,18 @@
                 </ul>
               </li>
               <li class="dropdown">
-                <a href="#">이벤트</a>
+                <router-link :to="{name: 'eventInProgress'}">이벤트</router-link>
                 <ul class="dropdown-menu">
-                  <li><a href="#">진행 이벤트</a></li>
-                  <li><a href="#">당첨자 발표</a></li>
-                  <li><a href="#">지난 이벤트</a></li>
+                  <li><router-link :to="{name: 'eventInProgress'}">진행 이벤트</router-link></li>
+                  <li><router-link :to="{name: 'eventWinner'}">당첨자 발표</router-link></li>
+                  <li><router-link :to="{name: 'eventClosed'}">지난 이벤트</router-link></li>
                 </ul>
               </li>
               <li class="dropdown">
                 <router-link :to="{name: 'qna'}">고객센터</router-link>
                 <ul class="dropdown-menu">
-                  <li><a href="#">공지 사항</a></li>
-                  <li><a href="#">FAQ</a></li>
+                  <li><router-link :to="{name: 'notice'}">공지 사항</router-link></li>
+                  <li><router-link :to="{name: 'faq'}">FAQ</router-link></li>
                   <li><router-link :to="{name: 'qna'}">고객 문의</router-link></li>
                 </ul>
               </li>
@@ -122,11 +122,11 @@
                 <ul class="dropdown-menu">
                   <li><router-link :to="{name: 'organization'}">세종문화회관 소개</router-link></li>
                   <li><router-link :to="{name: 'facility'}">시설 소개</router-link></li>
-                  <li><a href="#">오시는 길</a></li>
+                  <li><router-link :to="{name: 'direction'}">오시는 길</router-link></li>
                 </ul>
               </li>
-              <li><router-link :to="{name: 'loginRegister'}">로그인</router-link></li>
-              <li><a href="#">회원가입</a></li>
+              <li><a href="#">로그인</a></li>
+              <li><router-link :to="{name: 'register'}">회원가입</router-link></li>
 
             </ul>
           </div><!-- /.navbar-collapse -->

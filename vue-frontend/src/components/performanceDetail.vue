@@ -1,7 +1,5 @@
 <template>
   <div>
-    <Header current-class="performance"/>
-
     <section>
       <div class="row">
         <div class="item">
@@ -106,18 +104,11 @@
         </div>
       </div><!-- Portfolio container end -->
     </section><!-- End off portfolio section -->
-    <Footer/>
   </div>
 </template>
 <script>
-import Header from "./header";
-import Footer from "./footer";
-
 export default {
-  name: "performance-detail",
-  components: {
-    Header, Footer
-  }
+  name: "performanceDetail",
 }
 </script>
 

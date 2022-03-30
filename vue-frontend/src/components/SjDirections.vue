@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header current-class="SjWayDirections"/>
     <div class="container-fluid py-5">
       <div class="container py-5">
         <div class="row justify-content-center">
@@ -9,18 +8,19 @@
 
             <div class="tabmenu">
               <ul>
-                <li id="tab1" class="btnCon"><input type="radio" checked name="tabmenu" id="tabmenu1">
+                <li id="tab1" class="btnCon"><input type="radio" checked name="tabmenu"
+                                                    id="tabmenu1">
                   <label for="tabmenu1">자동차</label>
-                  <div class="tabCon"><img id="car" > 자동차 안내 이미지</div>
+                  <div class="tabCon"><img id="car"> 자동차 안내 이미지</div>
                   <br><br><br><br><br>
                 </li>
                 <li id="tab2" class="btnCon"><input type="radio" name="tabmenu" id="tabmenu2">
                   <label for="tabmenu2">대중교통</label>
-                  <div class="tabCon"><img id="transport" > 대중교통 안내 이미지</div>
+                  <div class="tabCon"><img id="transport"> 대중교통 안내 이미지</div>
                 </li>
                 <li id="tab3" class="btnCon"><input type="radio" name="tabmenu" id="tabmenu3">
                   <label for="tabmenu3">도보</label>
-                  <div class="tabCon"><img id="walk" > 도보 안내 이미지</div>
+                  <div class="tabCon"><img id="walk"> 도보 안내 이미지</div>
                 </li>
               </ul>
             </div>
@@ -28,17 +28,12 @@
         </div>
       </div>
     </div>
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Header from "./header";
-import Footer from "./footer";
-
 export default {
-  name: "SjWayDirections",
-  components: {Header, Footer}
+  name: "SjDirections",
 }
 </script>
 

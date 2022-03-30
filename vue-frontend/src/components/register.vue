@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header current-class="Register"/>
     <div class="header-right pull-right">
       <ul>
         <li class="reg">
@@ -9,7 +8,8 @@
           </a>
 
           <!-- Register modal -->
-          <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+          <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+               aria-labelledby="myLargeModalLabel">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -35,21 +35,16 @@
         </li><!--/li -->
       </ul><!--/ul -->
     </div><!--/.header-right -->
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Header from "./header";
-import Footer from "./footer";
-
 export default {
-  name: "Register",
-  components: {Header, Footer}
+  name: "register",
 }
 </script>
 
-<style >
+<style>
 .modal-header {
   border-bottom: none;
 }
