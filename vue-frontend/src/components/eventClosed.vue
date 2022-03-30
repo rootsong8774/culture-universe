@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header current-class="EventClosed"/>
     <!--nwes start -->
     <section class="news">
       <div class="container">
@@ -16,31 +15,34 @@
               <div class="col-md-8">
                 <div class="blog-left">
                   <div class="col-sm-6">
-                    <div class="single-news-box news-mb-20">
-                      <div class="news-box-bg">
-                        <img src="" alt="종료된이벤트이미지 어둡게">
-                        <div class="isotope-overlay">
-                          <a href="./eventClosedConn.vue">
-                            <span class="lnr lnr-link"></span>
-                          </a>
-                        </div>
-                      </div><!--/.team-box-bg-->
-                      <div class="news-box-inner">
-                        <h3>
-                          <a href="#">
-                            종료된 이벤트
-                          </a>
-                        </h3>
-                        <p class="news-meta">
-                          이벤트 기간:2022.01.02~2022.02.01
-                        </p>
-                      </div><!--/.news-box-inner-->
-                    </div><!--/.single-news-box-->
+                    <router-link :to="{name: 'eventClosedDetails'}">
+                      <div class="single-news-box news-mb-20">
+                        <div class="news-box-bg">
+                          <img src="" alt="종료된이벤트이미지 어둡게">
+                          <div class="isotope-overlay">
+                            <a>
+                              <span class="lnr lnr-link"></span>
+                            </a>
+                          </div>
+                        </div><!--/.team-box-bg-->
+                        <div class="news-box-inner">
+                          <h3>
+                            <a href="#">
+                              종료된 이벤트
+                            </a>
+                          </h3>
+                          <p class="news-meta">
+                            이벤트 기간:2022.01.02~2022.02.01
+                          </p>
+                        </div><!--/.news-box-inner-->
+                      </div><!--/.single-news-box-->
+                    </router-link>
                   </div><!--.col-->
 
                   <div class="pagination-part text-center">
                     <ul class="pagination">
-                      <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                      <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a>
+                      </li>
                       <li><a href="#">2</a></li>
                       <li><a href="#">3</a></li>
                       <li>
@@ -60,17 +62,12 @@
       </div>
     </section><!--/news-->
     <!--news end-->
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Header from "./header";
-import Footer from "./footer";
-
 export default {
   name: "eventClosed",
-  components: {Header, Footer}
 }
 </script>
 

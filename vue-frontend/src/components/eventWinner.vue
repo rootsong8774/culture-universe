@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header current-class="EventWinner"/>
     <div id="centerColumn">
       <h2>이벤트 당첨자 발표</h2>
       <form>
@@ -22,7 +21,7 @@
         </tr>
         <tr>
           <td>3</td>
-          <td> '따뜻한 봄 날 연극 보러 가자!' 당첨자 발표 </td>
+          <td> '따뜻한 봄 날 연극 보러 가자!' 당첨자 발표</td>
           <td>2022.03.30</td>
           <td>30</td>
         </tr>
@@ -40,33 +39,35 @@
 
       </table>
     </div>
-    <Footer/>
   </div>
 </template>
 <script>
-import Header from "./header";
-import Footer from "./footer";
-
 export default {
   name: "eventWinner",
-  components: {Header, Footer}
 }
 </script>
 
-<style >
-div{margin: 0;}
-h2 {text-align: center}
+<style>
+div {
+  margin: 0;
+}
+
+h2 {
+  text-align: center
+}
+
 form {
   text-align: right;
 }
+
 table {
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 table, td, th {
-  border-collapse : collapse;
-  border : 1px solid black;
+  border-collapse: collapse;
+  border: 1px solid black;
   font-size: larger;
 }
 </style>

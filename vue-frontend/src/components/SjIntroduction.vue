@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header current-class="organization"/>
     <div class="row">
       <div class="col-12 text-center mb-2">
         <ul class="list-inline mb-4" id="portfolio-flters">
@@ -320,17 +319,12 @@
       </div>
       <!--/.container-->
     </div><!-- vision end  -->
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Header from "./header";
-import Footer from "./footer";
-
 export default {
   name: "SjIntroduce",
-  components: {Header, Footer}
 }
 </script>
 
