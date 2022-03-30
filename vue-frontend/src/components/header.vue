@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="loading">
+<!--    <div id="loading">
       <div id="loading-center">
         <div id="loading-center-absolute">
           <div class="object"></div>
@@ -15,7 +15,7 @@
           <div class="object"></div>
         </div>
       </div>
-    </div>
+    </div>-->
 
     <!--End off Preloader -->
 
@@ -84,9 +84,9 @@
                     data-target="#navbar-menu">
               <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="index.html">
+            <router-link :to="{name:'main'}" class="navbar-brand">
               <img src="../assets/images/logo.png" class="logo logo-display" alt="">
-            </a>
+            </router-link>
           </div>
           <!-- End Header Navigation -->
 
@@ -94,9 +94,9 @@
           <div class="collapse navbar-collapse" id="navbar-menu">
             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
               <li class="dropdown">
-                <a href="#">공연</a>
+                <router-link :to="{name:'performanceList'}">공연</router-link>
                 <ul class="dropdown-menu">
-                  <li><a href="#">공연일정</a></li>
+                  <li><router-link :to="{name: 'performanceList'}">공연일정</router-link></li>
                   <li><a href="#">공연달력</a></li>
                   <li><a href="#">좌석배치도</a></li>
                 </ul>
@@ -110,22 +110,22 @@
                 </ul>
               </li>
               <li class="dropdown">
-                <a href="#">고객센터</a>
+                <router-link :to="{name: 'qna'}">고객센터</router-link>
                 <ul class="dropdown-menu">
                   <li><a href="#">공지 사항</a></li>
                   <li><a href="#">FAQ</a></li>
-                  <li><a href="#">고객 문의</a></li>
+                  <li><router-link :to="{name: 'qna'}">고객 문의</router-link></li>
                 </ul>
               </li>
               <li class="dropdown">
-                <a href="#">기관소개</a>
+                <router-link :to="{name: 'organization'}">기관소개</router-link>
                 <ul class="dropdown-menu">
-                  <li><a href="#">세종문화회관 소개</a></li>
-                  <li><a href="#">시설 소개</a></li>
+                  <li><router-link :to="{name: 'organization'}">세종문화회관 소개</router-link></li>
+                  <li><router-link :to="{name: 'facility'}">시설 소개</router-link></li>
                   <li><a href="#">오시는 길</a></li>
                 </ul>
               </li>
-              <li><a href="#">로그인</a></li>
+              <li><router-link :to="{name: 'loginRegister'}">로그인</router-link></li>
               <li><a href="#">회원가입</a></li>
 
             </ul>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header current-class="qna"/>
+    <Header current-class="support"/>
     <div id="contactWrite" style="position:relative;">
       <!-- 비회원 입력 폼 -->
       <form id="support_write_form" name="writeForm" enctype="multipart/form-data" method="post">

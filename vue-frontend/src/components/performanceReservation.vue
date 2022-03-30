@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header/>
-    <div class="seat-reservation">
+    <div class="performance">
   <section class="">
     <div style="margin:10px;">
       <ul class="nav nav-tabs">
@@ -58,7 +58,7 @@
         <div class="tab-pane fade" id="place">place 메뉴</div>
         <div class="tab-pane fade" id="date">date 메뉴</div>
         <!-- fade 클래스는 선택적인 사항으로 트랜지션(transition)효과가 있다.
-        <!-- in 클래스는 fade 클래스를 선언하여 트랜지션효과를 사용할 때 in은 active와 선택되어 있는 탭 영역의 설정이다. -->
+         in 클래스는 fade 클래스를 선언하여 트랜지션효과를 사용할 때 in은 active와 선택되어 있는 탭 영역의 설정이다. -->
         <div class="tab-pane fade" id="episode">episode 메뉴</div>
         <div class="tab-pane fade" id="personnel">personnel 메뉴</div>
         <div class="tab-pane fade" id="payment">payment 메뉴</div>
@@ -79,7 +79,7 @@
 import Footer from "./footer";
 import Header from "./header";
 export default {
-  name: "seat",
+  name: "performance-reservation",
   components: {Header, Footer}
 }
 </script>
