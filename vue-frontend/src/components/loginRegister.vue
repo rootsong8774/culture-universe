@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Header current-class="LoginRegister"/>
     <div class="header-right pull-right">
       <ul>
         <li class="reg">
@@ -28,9 +27,9 @@
                   <form class="sm-frm" style="padding:25px">
                     <label>Name :</label>
                     <input type="text" class="form-control" placeholder="Enter Email">
-                    <label>Passoward :</label>
-                    <input type="text" class="form-control" placeholder="Enter Passoward">
-                    <label><input type="checkbox" name="personality"> Remenber Me</label>
+                    <label>Password :</label>
+                    <input type="text" class="form-control" placeholder="Enter Password">
+                    <label><input type="checkbox" name="personality"> Remember Me</label>
                     <button type="button" class="btn btn-default pull-right">Submit</button>
                   </form>
                 </div>
@@ -54,8 +53,8 @@
                     <input type="text" class="form-control" placeholder="Enter Name">
                     <label>Email :</label>
                     <input type="text" class="form-control" placeholder="Enter Email">
-                    <label>Passoward :</label>
-                    <input type="text" class="form-control" placeholder="Enter Passoward">
+                    <label>Password :</label>
+                    <input type="text" class="form-control" placeholder="Enter Password">
                     <button type="button" class="btn btn-default pull-right">Submit</button>
                   </form>
                 </div>
@@ -65,7 +64,6 @@
         </li><!--/li -->
       </ul><!--/ul -->
     </div><!--/.header-right -->
-    <Footer/>
   </div>
 </template>
 
@@ -74,8 +72,7 @@ import Header from "./header";
 import Footer from "./footer";
 
 export default {
-  name: "loginRegister",
-  components: {Header, Footer}
+  name: "loginRegister"
 }
 </script>
 

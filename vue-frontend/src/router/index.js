@@ -10,13 +10,13 @@ import qna from "../components/qna";
 import SjDirections from "../components/SjDirections";
 import notice from "../components/notice";
 import faq from "../components/faq";
-import register from "../components/register";
 import eventInProgress from "../components/eventInProgress";
 import eventInProgressDetails from "../components/eventInProgressDetails";
 import eventWinner from "../components/eventWinner";
 import eventClosed from "../components/eventClosed";
 import eventClosedDetails from "../components/eventClosedDetails";
 import myPage from "../components/myPage";
+import loginRegister from "../components/loginRegister";
 
 Vue.use(VueRouter)
 
@@ -114,9 +114,9 @@ const router = new VueRouter({
       component: qna
     },
     {
-      name: 'register',
-      path: '/register',
-      component: register
+      name: 'loginRegister',
+      path: '/loginRegister',
+      component: loginRegister
     },
     {
       name: 'myPage',

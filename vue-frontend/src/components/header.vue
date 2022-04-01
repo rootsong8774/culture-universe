@@ -126,7 +126,7 @@
                 </ul>
               </li>
               <li><a href="#">로그인</a></li>
-              <li><router-link :to="{name: 'register'}">회원가입</router-link></li>
+              <li><router-link :to="{name: 'loginRegister'}">회원가입</router-link></li>
 
             </ul>
           </div><!-- /.navbar-collapse -->
