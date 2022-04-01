@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.entity;
+package com.sejong.cultureuniverse.entity.admin;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

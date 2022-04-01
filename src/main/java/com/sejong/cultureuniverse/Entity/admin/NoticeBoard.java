@@ -1,10 +1,9 @@
-package com.sejong.cultureuniverse.entity;
+package com.sejong.cultureuniverse.entity.admin;
 
 import static javax.persistence.FetchType.*;
 
-import java.util.Date;
+import com.sejong.cultureuniverse.entity.BaseEntity;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @SequenceGenerator(name = "notice_seq", sequenceName = "notice_seq", initialValue = 1, allocationSize = 1)
-public class NoticeBoard {
+public class NoticeBoard extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notice_seq")
@@ -32,7 +31,6 @@ public class NoticeBoard {
     private String noticeTitle;
     private String noticeContent;
     private Long readCount;
-    private Date regDate;
-    private Date modDSate;
+
 
 }

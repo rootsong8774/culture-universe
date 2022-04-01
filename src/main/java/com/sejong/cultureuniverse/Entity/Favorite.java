@@ -1,15 +1,17 @@
-package com.sejong.cultureuniverse.Entity;
+package com.sejong.cultureuniverse.entity;
 
+import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import lombok.*;
 
 import javax.persistence.*;
+import lombok.ToString.Exclude;
 
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = {"member","performanceDetails"})
+@ToString
 public class Favorite {
 
     @Id
@@ -18,12 +20,14 @@ public class Favorite {
 
     @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "user_idx")
+    @Exclude
     private Member member;
 
-//      공연정보와 관계
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "perform_id")
-//    private performance_details performanceDetails;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "perform_id")
+    @Exclude
+    private PerformanceDetails performId;
+
 
 
 }

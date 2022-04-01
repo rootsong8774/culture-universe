@@ -1,15 +1,17 @@
-package com.sejong.cultureuniverse.Entity;
+package com.sejong.cultureuniverse.entity.admin;
 
+import com.sejong.cultureuniverse.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;
+import lombok.ToString.Exclude;
 
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString (exclude = {"member","admin"})
+@ToString
 public class Qna {
 
     @Id
@@ -22,11 +24,14 @@ public class Qna {
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx")
+    @Exclude
     private Member member;
-//    관리자와 1:1
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "admin_id")
-//    private Admin admin;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "admin_id")
+    @Exclude
+    private Admin admin;
+
 
 
 }

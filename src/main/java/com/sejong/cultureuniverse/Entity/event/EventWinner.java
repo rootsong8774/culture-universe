@@ -1,8 +1,9 @@
-package com.sejong.cultureuniverse.entity;
+package com.sejong.cultureuniverse.entity.event;
 
 import static javax.persistence.FetchType.LAZY;
 
-import java.util.Date;
+import com.sejong.cultureuniverse.entity.admin.Admin;
+import com.sejong.cultureuniverse.entity.BaseEntity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @SequenceGenerator(name = "winner_seq", sequenceName = "winner_seq", initialValue = 1, allocationSize = 1)
-public class EventWinner {
+public class EventWinner extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "winner_seq")
@@ -32,7 +33,5 @@ public class EventWinner {
     private String winTitle;
     private String winContent;
     private Long readCount;
-    private Date regDate;
-    private Date modDate;
 
 }

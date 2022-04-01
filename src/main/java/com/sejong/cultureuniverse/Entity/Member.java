@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.Entity;
+package com.sejong.cultureuniverse.entity;
 
 import lombok.*;
 
