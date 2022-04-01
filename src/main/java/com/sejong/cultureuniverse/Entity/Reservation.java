@@ -1,16 +1,17 @@
-package com.sejong.cultureuniverse.Entity;
+package com.sejong.cultureuniverse.entity;
 
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import lombok.ToString.Exclude;
 
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString (exclude = "member")
+@ToString
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +21,7 @@ public class Reservation {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx")
+    @Exclude
     private Member member;
+
 }
