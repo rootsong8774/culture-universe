@@ -26,7 +26,7 @@ public class EventWinner {
     private Long winnerIdx;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name="adminId")
+    @JoinColumn(name="admin_id")
     private Admin adminId;
 
     private String winTitle;

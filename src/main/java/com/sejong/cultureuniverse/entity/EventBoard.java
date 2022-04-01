@@ -26,7 +26,7 @@ public class EventBoard {
     private Long eventIdx;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name="adminId")
+    @JoinColumn(name="admin_id")
     private Admin adminId;
 
     private String eventTitle;
