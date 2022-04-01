@@ -23,15 +23,15 @@ public class EventBoard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_seq")
-    private Long event_idx;
+    private Long eventIdx;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name="admin_id")
-    private Admin admin_id;
+    @JoinColumn(name="adminId")
+    private Admin adminId;
 
-    private String e_title;
-    private String e_content;
-    private Long read_count;
-    private Date reg_date;
-    private Date mod_date;
+    private String eventTitle;
+    private String eventContent;
+    private Long readCount;
+    private Date regDate;
+    private Date modDate;
 }

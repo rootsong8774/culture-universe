@@ -23,16 +23,16 @@ public class EventWinner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "winner_seq")
-    private Long winner_idx;
+    private Long winnerIdx;
 
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name="admin_id")
-    private Admin admin_id;
+    @JoinColumn(name="adminId")
+    private Admin adminId;
 
-    private String win_title;
-    private String win_content;
-    private Long read_count;
-    private Date reg_date;
-    private Date mod_date;
+    private String winTitle;
+    private String winContent;
+    private Long readCount;
+    private Date regDate;
+    private Date modDate;
 
 }

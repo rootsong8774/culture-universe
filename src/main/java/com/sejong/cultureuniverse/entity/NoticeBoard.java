@@ -24,15 +24,15 @@ public class NoticeBoard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notice_seq")
-    private Long notice_idx;
+    private Long noticeIdx;
 
     @OneToOne(fetch = LAZY)
     @JoinColumn(name = "admin_id")
-    private Admin admin_id;
-    private String n_title;
-    private String n_content;
-    private Long read_count;
-    private Date reg_date;
-    private Date mod_date;
+    private Admin adminId;
+    private String noticeTitle;
+    private String noticeContent;
+    private Long readCount;
+    private Date regDate;
+    private Date modDSate;
 
 }
