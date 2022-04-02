@@ -16,7 +16,7 @@ import eventWinner from "../components/eventWinner";
 import eventClosed from "../components/eventClosed";
 import eventClosedDetails from "../components/eventClosedDetails";
 import myPage from "../components/myPage";
-import loginRegister from "../components/loginRegister";
+import header from "../components/header";
 
 Vue.use(VueRouter)
 
@@ -114,11 +114,6 @@ const router = new VueRouter({
       component: qna
     },
     {
-      name: 'loginRegister',
-      path: '/loginRegister',
-      component: loginRegister
-    },
-    {
       name: 'myPage',
       path: '/myPage/list',
       component: myPage
@@ -126,10 +121,12 @@ const router = new VueRouter({
     {
       path: '/myPage',
       redirect: {name: 'myPage'}
+    },{
+      path: '/',
+      name: 'header',
+      component: header
     }
-
-
-  ]
+    ]
 })
 
 export default router
