@@ -7,8 +7,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @SequenceGenerator(name = "performance_seq", sequenceName = "performance_seq", initialValue = 1, allocationSize = 1)
 public class PerformanceDetails {
 
@@ -31,7 +34,7 @@ public class PerformanceDetails {
     private String placeName;
     private String playTime;
 
-    private Integer age;
+    private String age;
 
     private String planCompany;
 
@@ -40,8 +43,7 @@ public class PerformanceDetails {
 
     private String ticketInfo;
 
-    @Enumerated(EnumType.STRING)
-    private Genre genre;
+    private String genreName;
 
     private String isopen;
     private String isopennm;
@@ -49,7 +51,11 @@ public class PerformanceDetails {
     private String fileUrlMi;
     private String fileUrlTi;
 
+    @Lob
     private String info;
+    @Lob
     private String detail;
+    @Lob
     private String castInfo;
+
 }
