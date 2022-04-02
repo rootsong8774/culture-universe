@@ -1,21 +1,21 @@
 <template>
   <div>
-<!--    <div id="loading">
-      <div id="loading-center">
-        <div id="loading-center-absolute">
-          <div class="object"></div>
-          <div class="object"></div>
-          <div class="object"></div>
-          <div class="object"></div>
-          <div class="object"></div>
-          <div class="object"></div>
-          <div class="object"></div>
-          <div class="object"></div>
-          <div class="object"></div>
-          <div class="object"></div>
-        </div>
-      </div>
-    </div>-->
+    <!--    <div id="loading">
+          <div id="loading-center">
+            <div id="loading-center-absolute">
+              <div class="object"></div>
+              <div class="object"></div>
+              <div class="object"></div>
+              <div class="object"></div>
+              <div class="object"></div>
+              <div class="object"></div>
+              <div class="object"></div>
+              <div class="object"></div>
+              <div class="object"></div>
+              <div class="object"></div>
+            </div>
+          </div>
+        </div>-->
 
     <!--End off Preloader -->
 
@@ -47,31 +47,31 @@
                   <i class="fa fa-shopping-bag"></i>
                   <span class="badge">3</span>
                 </a>
-<!--                <ul class="dropdown-menu cart-list">
-                  <li>
-                    <a href="#" class="photo"><img src="../assets/images/logo.png"
-                                                   class="cart-thumb" alt=""/></a>
-                    <h6><a href="#">Delica omtantur </a></h6>
-                    <p class="m-top-10">2x - <span class="price">$99.99</span></p>
-                  </li>
-                  <li>
-                    <a href="#" class="photo"><img src="../assets/images/logo.png"
-                                                   class="cart-thumb" alt=""/></a>
-                    <h6><a href="#">Delica omtantur </a></h6>
-                    <p class="m-top-10">2x - <span class="price">$99.99</span></p>
-                  </li>
-                  <li>
-                    <a href="#" class="photo"><img src="../assets/images/logo.png"
-                                                   class="cart-thumb" alt=""/></a>
-                    <h6><a href="#">Delica omtantur </a></h6>
-                    <p class="m-top-10">2x - <span class="price">$99.99</span></p>
-                  </li>
-                  &lt;!&ndash;&#45;&#45; More List &#45;&#45;&ndash;&gt;
-                  <li class="total">
-                    <span class="pull-right"><strong>Total</strong>: $0.00</span>
-                    <a href="#" class="btn btn-cart">Cart</a>
-                  </li>
-                </ul>-->
+                <!--                <ul class="dropdown-menu cart-list">
+                                  <li>
+                                    <a href="#" class="photo"><img src="../assets/images/logo.png"
+                                                                   class="cart-thumb" alt=""/></a>
+                                    <h6><a href="#">Delica omtantur </a></h6>
+                                    <p class="m-top-10">2x - <span class="price">$99.99</span></p>
+                                  </li>
+                                  <li>
+                                    <a href="#" class="photo"><img src="../assets/images/logo.png"
+                                                                   class="cart-thumb" alt=""/></a>
+                                    <h6><a href="#">Delica omtantur </a></h6>
+                                    <p class="m-top-10">2x - <span class="price">$99.99</span></p>
+                                  </li>
+                                  <li>
+                                    <a href="#" class="photo"><img src="../assets/images/logo.png"
+                                                                   class="cart-thumb" alt=""/></a>
+                                    <h6><a href="#">Delica omtantur </a></h6>
+                                    <p class="m-top-10">2x - <span class="price">$99.99</span></p>
+                                  </li>
+                                  &lt;!&ndash;&#45;&#45; More List &#45;&#45;&ndash;&gt;
+                                  <li class="total">
+                                    <span class="pull-right"><strong>Total</strong>: $0.00</span>
+                                    <a href="#" class="btn btn-cart">Cart</a>
+                                  </li>
+                                </ul>-->
               </li>
 
             </ul>
@@ -96,7 +96,9 @@
               <li class="dropdown">
                 <router-link :to="{name:'performanceList'}">공연</router-link>
                 <ul class="dropdown-menu">
-                  <li><router-link :to="{name: 'performanceList'}">공연일정</router-link></li>
+                  <li>
+                    <router-link :to="{name: 'performanceList'}">공연일정</router-link>
+                  </li>
                   <li><a href="#">공연달력</a></li>
                   <li><a href="#">좌석배치도</a></li>
                 </ul>
@@ -104,30 +106,117 @@
               <li class="dropdown">
                 <router-link :to="{name: 'eventInProgress'}">이벤트</router-link>
                 <ul class="dropdown-menu">
-                  <li><router-link :to="{name: 'eventInProgress'}">진행 이벤트</router-link></li>
-                  <li><router-link :to="{name: 'eventWinner'}">당첨자 발표</router-link></li>
-                  <li><router-link :to="{name: 'eventClosed'}">지난 이벤트</router-link></li>
+                  <li>
+                    <router-link :to="{name: 'eventInProgress'}">진행 이벤트</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{name: 'eventWinner'}">당첨자 발표</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{name: 'eventClosed'}">지난 이벤트</router-link>
+                  </li>
                 </ul>
               </li>
               <li class="dropdown">
                 <router-link :to="{name: 'qna'}">고객센터</router-link>
                 <ul class="dropdown-menu">
-                  <li><router-link :to="{name: 'notice'}">공지 사항</router-link></li>
-                  <li><router-link :to="{name: 'faq'}">FAQ</router-link></li>
-                  <li><router-link :to="{name: 'qna'}">고객 문의</router-link></li>
+                  <li>
+                    <router-link :to="{name: 'notice'}">공지 사항</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{name: 'faq'}">FAQ</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{name: 'qna'}">고객 문의</router-link>
+                  </li>
                 </ul>
               </li>
               <li class="dropdown">
                 <router-link :to="{name: 'organization'}">기관소개</router-link>
                 <ul class="dropdown-menu">
-                  <li><router-link :to="{name: 'organization'}">세종문화회관 소개</router-link></li>
-                  <li><router-link :to="{name: 'facility'}">시설 소개</router-link></li>
-                  <li><router-link :to="{name: 'direction'}">오시는 길</router-link></li>
+                  <li>
+                    <router-link :to="{name: 'organization'}">세종문화회관 소개</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{name: 'facility'}">시설 소개</router-link>
+                  </li>
+                  <li>
+                    <router-link :to="{name: 'direction'}">오시는 길</router-link>
+                  </li>
                 </ul>
               </li>
-              <li><a href="#">로그인</a></li>
-              <li><router-link :to="{name: 'loginRegister'}">회원가입</router-link></li>
-
+              <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm"
+              action="/member/login" methods="post">로그인/회원가입</a></li>
+              <!-- login modal -->
+              <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+                   aria-labelledby="mySmallModalLabel">
+                <div class="modal-dialog modal-sm" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											 	<span aria-hidden="true">
+											 		<i class="fa fa-close"></i>
+											 	</span>
+                      </button>
+                      <h4 class="modal-title" id="mySmallModalLabel">
+                        Sign In
+                      </h4>
+                      <form class="sm-frm" style="padding:25px">
+                        <label>ID :</label>
+                        <input type="text" class="form-control" placeholder="Enter Email" >
+                        <label>Password :</label>
+                        <input type="text" class="form-control" placeholder="Enter Password" >
+                        <label><input type="checkbox" name="personality" class="remember"> Remember Me</label>
+                        <br>
+                        <button type="button" class="btn btn-default pull-right">로그인</button>
+                        <button data-toggle="modal" data-target=".bs-example-modal-lg"
+                                class="btn btn-default pull-left">회원가입
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- register modal -->
+              <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
+                   aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											 	<span aria-hidden="true">
+											 		<i class="fa fa-close"></i>
+											 	</span>
+                      </button>
+                      <h4 class="modal-title" id="myLargeModalLabel">Register</h4>
+                      <form class="lg-frm" style="padding:25px">
+                        <label>이름 :</label>
+                        <input type="text" class="form-control" placeholder="Enter Name" v-model:name="username">
+                        <label>아이디 :</label>
+                        <input type="text" class="form-control" placeholder="Enter ID" v-model:name="name">
+                        <label>비밀번호 :</label>
+                        <input type="text" class="form-control" placeholder="Enter Password" v-model:name="pw">
+<!--                        <label>생년월일 :</label>-->
+<!--                        <input type="date" class="form-control" placeholder="Enter Birth" v-model:name="birth">-->
+<!--                        <label>성별 :</label><br>-->
+<!--                        <select name="gender">-->
+<!--                          <option value="none">=== 선택 ===</option>-->
+<!--                          <option value="men">남</option>-->
+<!--                          <option value="women">여</option>-->
+<!--                        </select><br>-->
+                        <label>이메일 :</label>
+                        <input type="drop" class="form-control" placeholder="Enter Email" v-model:name="email">
+                        <label>휴대폰 :</label>
+                        <input type="text" class="form-control" v-model:name="phoneNum"><br>
+                        <button type="submit" class="btn btn-default pull-right"
+                          v-on:click="clickBtn"
+                        >회원가입 완료</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">마이페이지</a></li>
             </ul>
           </div><!-- /.navbar-collapse -->
         </div>
@@ -138,7 +227,7 @@
 
       <!--Home Sections-->
 
-      <section id="hello" class = 'bg-mega' :class="currentClass" >
+      <section id="hello" class='bg-mega' :class="currentClass">
         <div class="container">
           <div class="row">
             <div class="main_home text-center">
@@ -162,15 +251,179 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "header",
   props: {
     currentClass: String
+  },
+  data(){
+    return{
+      username:'',
+      name:'',
+      pw:'',
+      email:'',
+      phoneNum:''
+    }
+  },
+  methods:{
+    clickBtn: function (){
+      axios({
+        method:'post',
+        url:'localhost:8081/api/register',
+        data:{
+          username: this.username,
+          name: this.name,
+          pw: this.pw,
+          email: this.email,
+          phoneNum: this.phoneNum
+        }
+      }).then(function (response){
+        console.log(response);
+      }).catch(function (error){
+        console.log(error);
+      });
+      alert('회원가입 성공');
+      console.log('회원가입 완료');
+    }
   }
 }
 
+
+
 </script>
 
-<style scoped>
 
+
+<style scoped>
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-title {
+  font-size: 30px;
+  font-weight: 500;
+  color: #eb751b;
+}
+
+modal-open {
+  overflow: hidden
+}
+
+.modal {
+  position: fixed;
+  font-size: large;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /*z-index: 1050;*/
+  display: none;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  outline: 0
+}
+
+.modal.fade .modal-dialog {
+  -webkit-transition: -webkit-transform .3s ease-out;
+  -o-transition: -o-transform .3s ease-out;
+  transition: transform .3s ease-out;
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  -o-transform: translate(0, -25%);
+  transform: translate(0, -25%)
+}
+
+.modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0)
+}
+
+.modal-open .modal {
+  overflow-x: hidden;
+  overflow-y: auto
+}
+
+.modal-dialog {
+  position: relative;
+  width: auto;
+  margin: 10px
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 6px;
+  outline: 0;
+  -webkit-box-shadow: 0 3px 9px ;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, .5)
+}
+
+.modal-header {
+  padding: 15px;
+
+}
+
+.modal-header .close {
+  margin-top: -2px
+}
+
+.modal-title {
+  margin: 0;
+  line-height: 1.42857143
+}
+
+.btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px
+}
+
+.remember {
+  padding: 1px;
+  text-align: left;
+}
+
+/*modal box location*/
+@media (min-width: 1090px) {
+  .modal-dialog {
+    width: 600px;
+    margin: 30px auto;
+  }
+
+  .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+    height: 100%;
+    padding-bottom: 20px;
+
+  }
+
+  .modal-sm {
+    width: 350px;
+
+  }
+}
+/*register*/
+@media (min-width: 1090px) {
+
+  .modal-lg {
+    width: 900px
+  }
+}
+
+.pull-left{
+  float: bottom;
+  left: auto;
+}
+
+.pull-right{
+  float: bottom;
+}
 </style>
