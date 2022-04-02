@@ -22,7 +22,7 @@ public class FeignRestController {
     private final MyFeignClient feignClient;
     private final PerformanceDetailsService service;
 
-    @GetMapping("/feign/{endIndex}")
+    @GetMapping("performances/feign/{endIndex}")
     public void savePerformanceDetailsAPItoDB(@PathVariable("endIndex") Integer endIndex) {
         List<PerformanceDetailsFeignDto> dtoList = feignClient.getDTO(endIndex);
         for (PerformanceDetailsFeignDto dto : dtoList) {
@@ -32,7 +32,7 @@ public class FeignRestController {
 
     }
 
-    @GetMapping("/api/{endIndex}")
+    @GetMapping("performances/api/{endIndex}")
     public JsonNode readJsonFromUrl(@PathVariable("endIndex") Integer endIndex) throws IOException {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> entity = restTemplate.getForEntity(

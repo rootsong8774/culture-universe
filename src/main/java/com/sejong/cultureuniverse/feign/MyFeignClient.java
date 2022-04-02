@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface MyFeignClient {
 
 
-    @GetMapping(value = "/test/api/{endIndex}", produces = "application/json")
+    @GetMapping(value = "performances/api/{endIndex}", produces = "application/json")
     List<PerformanceDetailsFeignDto> getDTO(@PathVariable("endIndex") Integer endIndex);
 }
