@@ -145,8 +145,7 @@
                   </li>
                 </ul>
               </li>
-              <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm"
-              action="/member/login" methods="post">로그인/회원가입</a></li>
+              <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">로그인/회원가입</a></li>
               <!-- login modal -->
               <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
                    aria-labelledby="mySmallModalLabel">
@@ -163,10 +162,11 @@
                       </h4>
                       <form class="sm-frm" style="padding:25px">
                         <label>ID :</label>
-                        <input type="text" class="form-control" placeholder="Enter Email" >
+                        <input type="text" class="form-control" placeholder="Enter Email">
                         <label>Password :</label>
-                        <input type="text" class="form-control" placeholder="Enter Password" >
-                        <label><input type="checkbox" name="personality" class="remember"> Remember Me</label>
+                        <input type="text" class="form-control" placeholder="Enter Password">
+                        <label><input type="checkbox" name="personality" class="remember"> Remember
+                          Me</label>
                         <br>
                         <button type="button" class="btn btn-default pull-right">로그인</button>
                         <button data-toggle="modal" data-target=".bs-example-modal-lg"
@@ -191,26 +191,30 @@
                       <h4 class="modal-title" id="myLargeModalLabel">Register</h4>
                       <form class="lg-frm" style="padding:25px">
                         <label>이름 :</label>
-                        <input type="text" class="form-control" placeholder="Enter Name" v-model:name="username">
+                        <input type="text" class="form-control" placeholder="Enter Name"
+                               v-model:name="username">
                         <label>아이디 :</label>
-                        <input type="text" class="form-control" placeholder="Enter ID" v-model:name="name">
+                        <input type="text" class="form-control" placeholder="Enter ID"
+                               v-model:name="name">
                         <label>비밀번호 :</label>
-                        <input type="text" class="form-control" placeholder="Enter Password" v-model:name="pw">
-<!--                        <label>생년월일 :</label>-->
-<!--                        <input type="date" class="form-control" placeholder="Enter Birth" v-model:name="birth">-->
-<!--                        <label>성별 :</label><br>-->
-<!--                        <select name="gender">-->
-<!--                          <option value="none">=== 선택 ===</option>-->
-<!--                          <option value="men">남</option>-->
-<!--                          <option value="women">여</option>-->
-<!--                        </select><br>-->
+                        <input type="text" class="form-control" placeholder="Enter Password"
+                               v-model:name="pw">
+                        <!--                        <label>생년월일 :</label>-->
+                        <!--                        <input type="date" class="form-control" placeholder="Enter Birth" v-model:name="birth">-->
+                        <!--                        <label>성별 :</label><br>-->
+                        <!--                        <select name="gender">-->
+                        <!--                          <option value="none">=== 선택 ===</option>-->
+                        <!--                          <option value="men">남</option>-->
+                        <!--                          <option value="women">여</option>-->
+                        <!--                        </select><br>-->
                         <label>이메일 :</label>
-                        <input type="drop" class="form-control" placeholder="Enter Email" v-model:name="email">
+                        <input type="email" class="form-control" placeholder="Enter Email"
+                               v-model:name="email">
                         <label>휴대폰 :</label>
                         <input type="text" class="form-control" v-model:name="phoneNum"><br>
-                        <button type="submit" class="btn btn-default pull-right"
-                          v-on:click="clickBtn"
-                        >회원가입 완료</button>
+                        <button type="submit" class="btn btn-default pull-right" @click="register" >
+                          회원가입 완료
+                        </button>
                       </form>
                     </div>
                   </div>
@@ -258,42 +262,41 @@ export default {
   props: {
     currentClass: String
   },
-  data(){
-    return{
-      username:'',
-      name:'',
-      pw:'',
-      email:'',
-      phoneNum:''
+  data() {
+    return {
+      username: '',
+      name: '',
+      pw: '',
+      email: '',
+      phoneNum: ''
     }
   },
-  methods:{
-    clickBtn: function (){
+  methods: {
+    register: function () {
       axios({
-        method:'post',
-        url:'localhost:8081/api/register',
-        data:{
+        url: '/api/register',
+        method: 'post',
+        data: {
           username: this.username,
           name: this.name,
           pw: this.pw,
           email: this.email,
           phoneNum: this.phoneNum
-        }
-      }).then(function (response){
+        },
+      }).then(function (response) {
         console.log(response);
-      }).catch(function (error){
+        alert('회원가입 성공');
+        $('.bs-example-modal-lg').modal('hide');
+      }).catch(function (error) {
         console.log(error);
       });
-      alert('회원가입 성공');
-      console.log('회원가입 완료');
+
     }
   }
 }
 
 
-
 </script>
-
 
 
 <style scoped>
@@ -307,7 +310,7 @@ export default {
   color: #eb751b;
 }
 
-modal-open {
+.modal-open {
   overflow: hidden
 }
 
@@ -362,7 +365,7 @@ modal-open {
   border: 1px solid rgba(0, 0, 0, .2);
   border-radius: 6px;
   outline: 0;
-  -webkit-box-shadow: 0 3px 9px ;
+  -webkit-box-shadow: 0 3px 9px;
   box-shadow: 0 3px 9px rgba(0, 0, 0, .5)
 }
 
@@ -410,6 +413,7 @@ modal-open {
 
   }
 }
+
 /*register*/
 @media (min-width: 1090px) {
 
@@ -418,12 +422,12 @@ modal-open {
   }
 }
 
-.pull-left{
+.pull-left {
   float: bottom;
   left: auto;
 }
 
-.pull-right{
+.pull-right {
   float: bottom;
 }
 </style>

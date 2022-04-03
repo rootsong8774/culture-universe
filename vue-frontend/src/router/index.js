@@ -16,7 +16,6 @@ import eventWinner from "../components/eventWinner";
 import eventClosed from "../components/eventClosed";
 import eventClosedDetails from "../components/eventClosedDetails";
 import myPage from "../components/myPage";
-import header from "../components/header";
 
 Vue.use(VueRouter)
 
@@ -121,10 +120,6 @@ const router = new VueRouter({
     {
       path: '/myPage',
       redirect: {name: 'myPage'}
-    },{
-      path: '/',
-      name: 'header',
-      component: header
     }
     ]
 })
