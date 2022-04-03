@@ -1,11 +1,11 @@
-package com.sejong.cultureuniverse.service;
+package com.sejong.cultureuniverse.service.performances;
 
 import com.sejong.cultureuniverse.dto.PerformanceDetailsFeignDto;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public interface PerformanceDetailsService {
+public interface PerformanceFeignService {
 
     void register(PerformanceDetails details);
 
@@ -33,4 +33,8 @@ public interface PerformanceDetailsService {
             .castInfo(dto.getCastInfo())
             .build();
     }
+
+
+
+
 }

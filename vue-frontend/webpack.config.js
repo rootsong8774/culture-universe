@@ -56,8 +56,8 @@ module.exports = {
     overlay: true,
     proxy: {
       "/api/*": {
-        target: "http://localhost:9090",
-        changeOrigin:true
+  target: "http://localhost:9090",
+    changeOrigin:true
       },
     },
   },

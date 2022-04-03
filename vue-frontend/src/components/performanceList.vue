@@ -26,7 +26,6 @@
               </div>
             </div>
           </li>
-          <li class="item s3" tabindex="0">
           <li class="item s2" tabindex="0">
             <div class="dropdown">
               <button class="dropbtn">
@@ -43,7 +42,7 @@
               </div>
             </div>
           </li>
-          <li >
+          <li class="item s3" tabindex="0">
             <div class="searchArea">
               <form action="">
                 <input type="search" placeholder="검색"><span>?</span>
@@ -51,58 +50,100 @@
             </div>
           </li>
         </ul>
+        <ul class="clearfix">
+          <li class="img_item" v-for="result in resultList">
+            <!--        <router-link :to="{name: 'performanceDetail'}">-->
+            <div>
+              <img :src="result.fileUrlMi" width="150px" :alt="result.title" >
+              <p>{{result.title}}</p>
+              <p>{{result.startDate | yyyyMMdd}}-{{result.endDate | yyyyMMdd}}</p>
+              <p>{{result.genreName}}</p>
+            </div>
+            <!--        </router-link>-->
+          </li>
+        </ul>
       </div>
-
+<!--      <div class="content_page">
+        <button><<</button>
+        <a class="" href="#carousel-example-generic" role="button"
+           data-slide="Previous"></a>
+        <a class="" href="#carousel-example-generic" role="button"
+           data-slide="prev">
+          <span class="fa fa-long-arrow-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a>1</a>
+        <a>2</a>
+        <a>3</a>
+        <a>4</a>
+        <a>5</a>
+        <a class="" href="#carousel-example-generic" role="button"
+           data-slide="next">
+          <span class="fa fa-long-arrow-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+        <a class="" href="#carousel-example-generic" role="button"
+           data-slide="next"></a>
+        <button>>></button>
+      </div>-->
     </section>
-    <ul>
-      <li class="img_item">
-        <router-link :to="{name: 'performanceDetail'}">
-          <img src="../assets/images/item1.jpg" width="350px">
-        </router-link>
-      </li>
-    </ul>
-
-    <section>
-      <div class="content_page">
-      <button><<</button>
-      <a class="" href="#carousel-example-generic" role="button"
-         data-slide="Previous"></a>
-      <a class="" href="#carousel-example-generic" role="button"
-         data-slide="prev">
-        <span class="fa fa-long-arrow-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a>1</a>
-      <a>2</a>
-      <a>3</a>
-      <a>4</a>
-      <a>5</a>
-      <a class="" href="#carousel-example-generic" role="button"
-         data-slide="next">
-        <span class="fa fa-long-arrow-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-      <a class="" href="#carousel-example-generic" role="button"
-         data-slide="next"></a>
-      <button>>></button>
-      </div>
-    </section>
-    <Footer/>
   </div>
 </template>
 
 <script>
 
+import axios from "axios";
 
 export default {
-  name: "schedual",
+  name: "PerformanceList",
+  data () {
+    return {
+      resultList: []
+    }
+  },
+  created() {
+      axios({
+        url: '/api/performancesList',
+        method: 'get',
+      }).then(response => {
+        console.log(response.data);
+        this.resultList = response.data;
+      })
+
+  },
+  filters : {
+    yyyyMMdd : function(value){
+      if(value === '') return '';
+
+      // 현재 Date 혹은 DateTime 데이터를 javaScript date 타입화
+      let js_date = new Date(value);
+
+      // 연도, 월, 일 추출
+      let year = js_date.getFullYear();
+      let month = js_date.getMonth() + 1;
+      let day = js_date.getDate();
+
+      // 월, 일의 경우 한자리 수 값이 있기 때문에 공백에 0 처리
+      if(month < 10){
+        month = '0' + month;
+      }
+
+      if(day < 10){
+        day = '0' + day;
+      }
+
+      // 최종 포맷 (ex - '2021-10-08')
+      return year + '년' + month + '월' + day + '일';
+    }
+  }
 
 }
 </script>
 
 <style scoped>
 .content_page, .img_item{
-  justify-content: center;
+  height: 400px;
+  float: left;
   display: flex;
 }
 .content_page > a {
@@ -129,15 +170,13 @@ export default {
   .dropdown:hover .dropdown-content {    display: block;  }
   /*dropdown -end*/
   .searchArea {
-    margin: 5px;
     display: flex;
     width: 220px;
     height: 40px;
     border: 1px solid rgb(102, 103, 171);
     background-color: rgba(0, 0, 0, 0.2);
-    padding-left: 5px;
     border-radius: 5px;
-    margin-top: 24px;
+
 
   }
 
@@ -145,13 +184,14 @@ export default {
     border: 0;
     outline: none;
     background-color: rgba(0, 0, 0, 0.2);
-    width: 250px;
+    width: 220px;
     height: 40px;
     color: #fff;
     padding-left: 10px;
+    border-radius: 5px;
   }
   .searchArea > form > input:focus {
-    outline: 2px solid white;
+    outline: 2px solid black;
     border-radius: 5px;
   }
   .searchArea > form > span {
