@@ -1,13 +1,13 @@
 <template>
   <div>
     <!--About Sections-->
-    <section id="main1">
+    <section id="gallery" class="gallery margin-top-120 bg-white">
       <div class="schedule_w item5">
         <ul class="clearfix">
           <li class="item s1" tabindex="0">
             <div class="date_select">
-                <input type="date" name="sdate"> ~
-                <input type="date" name="edate" >
+              <input type="date" name="sdate"> ~
+              <input type="date" name="edate">
             </div>
           </li>
           <li class="item s2" tabindex="0">
@@ -50,42 +50,51 @@
             </div>
           </li>
         </ul>
-        <ul class="clearfix">
-          <li class="img_item" v-for="result in resultList">
-            <!--        <router-link :to="{name: 'performanceDetail'}">-->
-            <div>
-              <img :src="result.fileUrlMi" width="150px" :alt="result.title" >
-              <p>{{result.title}}</p>
-              <p>{{result.startDate | yyyyMMdd}}-{{result.endDate | yyyyMMdd}}</p>
-              <p>{{result.genreName}}</p>
-            </div>
-            <!--        </router-link>-->
-          </li>
-        </ul>
       </div>
-<!--      <div class="content_page">
-        <button><<</button>
-        <a class="" href="#carousel-example-generic" role="button"
-           data-slide="Previous"></a>
-        <a class="" href="#carousel-example-generic" role="button"
-           data-slide="prev">
-          <span class="fa fa-long-arrow-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a>1</a>
-        <a>2</a>
-        <a>3</a>
-        <a>4</a>
-        <a>5</a>
-        <a class="" href="#carousel-example-generic" role="button"
-           data-slide="next">
-          <span class="fa fa-long-arrow-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-        <a class="" href="#carousel-example-generic" role="button"
-           data-slide="next"></a>
-        <button>>></button>
-      </div>-->
+
+      <div class="container">
+        <div class="row">
+          <div class="main-gallery main-model roomy-80">
+            <div style="clear: both;"></div>
+            <div class="grid models text-center">
+              <div class="grid-item model-item transition metal ium" v-for="result in resultList">
+                <img :src="result.fileUrlMi" :alt="result.title">
+                <strong class="result-title">{{ result.title }}</strong>
+                <span class="result-date">
+                  {{ result.startDate | yyyyMMdd }} - {{ result.endDate | yyyyMMdd }}
+                </span>
+                <p class="result-genre">{{ result.genreName }}</p>
+                <router-link :to="{name: 'performanceDetail'}" class="btn btn-default m-top-20">
+                  View Details<i class="fa fa-long-arrow-right"></i>
+                </router-link>
+              </div><!-- End off grid item -->
+            </div>
+            <div style="clear: both;"></div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="pagination h-100 justify-content-center align-items-center">
+
+        <li class="page-item " th:if="${result.prev}">
+          <a class="page-link" th:href="@{/board/list(page= ${result.start -1},
+                    type=${pageRequestDTO.type} ,
+                    keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">Previous</a>
+        </li>
+
+        <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
+          <a class="page-link" th:href="@{/board/list(page = ${page} )}">
+            [[${page}]]
+          </a>
+        </li>
+
+        <li class="page-item" th:if="${result.next}">
+          <a class="page-link" th:href="@{/board/list(page= ${result.end + 1} ,
+                    type=${pageRequestDTO.type} ,
+                    keyword = ${pageRequestDTO.keyword} )}">Next</a>
+        </li>
+
+      </ul>
     </section>
   </div>
 </template>
@@ -96,24 +105,30 @@ import axios from "axios";
 
 export default {
   name: "PerformanceList",
-  data () {
+  data() {
     return {
-      resultList: []
+      resultList: [],
+      page: ''
     }
   },
   created() {
-      axios({
-        url: '/api/performancesList',
-        method: 'get',
-      }).then(response => {
-        console.log(response.data);
-        this.resultList = response.data;
-      })
+    axios({
+      url: '/api/performancesList',
+      params: {
+        page: this.page
+      },
+      method: 'get',
+    }).then(response => {
+      console.log(response.data);
+      this.resultList = response.data;
+    })
 
   },
-  filters : {
-    yyyyMMdd : function(value){
-      if(value === '') return '';
+  filters: {
+    yyyyMMdd: function (value) {
+      if (value === '') {
+        return '';
+      }
 
       // 현재 Date 혹은 DateTime 데이터를 javaScript date 타입화
       let js_date = new Date(value);
@@ -124,16 +139,16 @@ export default {
       let day = js_date.getDate();
 
       // 월, 일의 경우 한자리 수 값이 있기 때문에 공백에 0 처리
-      if(month < 10){
+      if (month < 10) {
         month = '0' + month;
       }
 
-      if(day < 10){
+      if (day < 10) {
         day = '0' + day;
       }
 
-      // 최종 포맷 (ex - '2021-10-08')
-      return year + '년' + month + '월' + day + '일';
+      // 최종 포맷 (ex - '2021.10.08')
+      return year + '.' + month + '.' + day;
     }
   }
 
@@ -141,85 +156,153 @@ export default {
 </script>
 
 <style scoped>
-.content_page, .img_item{
+.result-title {
+  display: block;
+  color: black;
+  height: 2.8em;
+  margin: 1em 0 0.8em 0;
+  line-height: 1.35;
+  font-size: 1.125em;
+  font-weight: 700;
+  overflow: hidden;
+  text-align: left;
+}
+
+.result-genre {
+  float: right;
+}
+
+.content_page, .img_item {
   height: 400px;
   float: left;
   display: flex;
 }
+
 .content_page > a {
   padding: 5px;
 }
-.clearfix{
+
+.clearfix {
   padding: 30px;
 }
-  .schedule_w .item {    padding: 0 10px 0 10px;    position: relative;  }
-  .schedule_w .item {    float: left;    width: 25%;    position: relative;  }
 
-  .date_select{
-    justify-content: center;
-    display: flex;
-  }
-  .dropdown {     position: relative;     display: inline-block;   }
-  .dropbtn_icon {    font-family: 'Material Icons';  }
-  .dropbtn {    border: 1px solid rgb(37, 37, 37);    border-radius: 4px;    background-color: #f5f5f5;    font-weight: 400;
-    color: rgb(37, 37, 37);    padding: 12px;    width: 200px;    text-align: left;    cursor: pointer;    font-size: 12px;  }
-  .dropdown-content {    display: none;    position: absolute;    z-index: 1;     font-weight: 400;    background-color: #f9f9f9;
-    min-width: 200px;  }
-  .dropdown-content a {    display: block;    text-decoration: none;    color: rgb(37, 37, 37);    font-size: 12px;    padding: 12px 20px;  }
-  .dropdown-content a:hover {    background-color: #ececec  }
-  .dropdown:hover .dropdown-content {    display: block;  }
-  /*dropdown -end*/
-  .searchArea {
-    display: flex;
-    width: 220px;
-    height: 40px;
-    border: 1px solid rgb(102, 103, 171);
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+.schedule_w .item {
+  padding: 0 10px 0 10px;
+  position: relative;
+}
+
+.schedule_w .item {
+  float: left;
+  width: 25%;
+  position: relative;
+}
+
+.date_select {
+  justify-content: center;
+  display: flex;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn_icon {
+  font-family: 'Material Icons';
+}
+
+.dropbtn {
+  border: 1px solid rgb(37, 37, 37);
+  border-radius: 4px;
+  background-color: #f5f5f5;
+  font-weight: 400;
+  color: rgb(37, 37, 37);
+  padding: 12px;
+  width: 200px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  font-weight: 400;
+  background-color: #f9f9f9;
+  min-width: 200px;
+}
+
+.dropdown-content a {
+  display: block;
+  text-decoration: none;
+  color: rgb(37, 37, 37);
+  font-size: 12px;
+  padding: 12px 20px;
+}
+
+.dropdown-content a:hover {
+  background-color: #ececec
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/*dropdown -end*/
+.searchArea {
+  display: flex;
+  width: 220px;
+  height: 40px;
+  border: 1px solid rgb(102, 103, 171);
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 
 
-  }
+}
 
-  .searchArea > form > input {
-    border: 0;
-    outline: none;
-    background-color: rgba(0, 0, 0, 0.2);
-    width: 220px;
-    height: 40px;
-    color: #fff;
-    padding-left: 10px;
-    border-radius: 5px;
-  }
-  .searchArea > form > input:focus {
-    outline: 2px solid black;
-    border-radius: 5px;
-  }
-  .searchArea > form > span {
-    width: 20px;
-    color: rgba(0, 0, 0, 0);
-    background-repeat: no-repeat;
-    background-position: center;
-    font-weight: bold;
-    cursor: pointer;
-  }
+.searchArea > form > input {
+  border: 0;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 220px;
+  height: 40px;
+  color: #fff;
+  padding-left: 10px;
+  border-radius: 5px;
+}
 
-  .nav1 {
-    margin: 5px;
-    display: flex;
-    justify-content: center;
-    line-height: 30px;
-    width: calc(1280px - 400px);
+.searchArea > form > input:focus {
+  outline: 2px solid black;
+  border-radius: 5px;
+}
 
-  }
+.searchArea > form > span {
+  width: 20px;
+  color: rgba(0, 0, 0, 0);
+  background-repeat: no-repeat;
+  background-position: center;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-  .nav1 > li {
-    padding: 10px;
-    justify-items: center;
-    margin-left: 50px;
-    font-weight: bold;
-  }
+.nav1 {
+  margin: 5px;
+  display: flex;
+  justify-content: center;
+  line-height: 30px;
+  width: calc(1280px - 400px);
 
-  .nav1 > li > a {
-    color: #fff;
-  }
+}
+
+.nav1 > li {
+  padding: 10px;
+  justify-items: center;
+  margin-left: 50px;
+  font-weight: bold;
+}
+
+.nav1 > li > a {
+  color: #fff;
+}
 </style>

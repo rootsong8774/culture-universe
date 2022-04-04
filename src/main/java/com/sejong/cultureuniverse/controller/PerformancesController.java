@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,8 +28,9 @@ public class PerformancesController {
     private final PerformancesService performancesService;
 
     @GetMapping(value="/performancesList")
-    public List<PerformanceListDto> list(PageRequestDTO pageRequestDTO, Model model) throws JsonProcessingException {
-        log.info("list.............");
+    public List<PerformanceListDto> list(PageRequestDTO pageRequestDTO) {
+        System.out.println(pageRequestDTO.getPage());
+
         return performancesService.getList(pageRequestDTO).getDtoList();
 
     }

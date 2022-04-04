@@ -3,6 +3,7 @@ package com.sejong.cultureuniverse.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Sort;
 @Builder
 @AllArgsConstructor
 @Getter
+@Setter
 public class PageRequestDTO {
 
     private int page;
@@ -17,7 +19,7 @@ public class PageRequestDTO {
 
     public PageRequestDTO() {
         this.page = 1;
-        this.size = 10;
+        this.size = 12;
     }
 
     public Pageable getPageable(Sort sort) {
