@@ -3,6 +3,7 @@ package com.sejong.cultureuniverse.Service;
 import com.sejong.cultureuniverse.dto.NoticeBoardDto;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
+import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 import com.sejong.cultureuniverse.service.NoticeBoardService;
 import org.junit.jupiter.api.Test;
@@ -14,12 +15,16 @@ public class NoticeBoardServiceTest {
 
     @Test
         public void testResister(){
+        Admin Admin = null;
         NoticeBoardDto noticeBoardDto = NoticeBoardDto.builder()
-            //.noticeIdx()
+                .adminId(null)
+            .noticeIdx(10L)
             .noticeTitle("Sample title")
             .noticeContent("sample content")
             .build();
     }
+
+
   /*  PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(1).size(10).build();
     PageResultDTO<NoticeBoardDto, NoticeBoard> resultDTO = service.getList(PageRequestDTO);
 

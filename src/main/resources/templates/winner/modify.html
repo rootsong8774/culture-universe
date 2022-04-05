@@ -5,7 +5,7 @@
 
   <th:block th:fragment="content">
 
-    <h1 class="mt-4">win Modify Page</h1>
+    <h1 class="mt-4">관리자 수정 Page</h1>
 
     <form action="/winner/modify" method="post">
 
@@ -16,13 +16,16 @@
 
 
       <div class="form-group">
-        <label>winnerIdx</label>
-        <input type="text" class="form-control" name="noticeIdx" th:value="${dto.winnerIdx}"
-               readonly>
+        <label>noticeIdx</label>
+        <input type="text" class="form-control" name="winnerIdx" th:value="${dto.winnerIdx}" readonly>
+      </div>
+      <div class="form-group">
+        <label>adminIdx</label>
+        <input type="text" class="form-control" name="adminId" th:value="${dto.adminId}"  readonly>
       </div>
 
       <div class="form-group">
-        <label>Title</label>>
+        <label>Title</label>
         <input type="text" class="form-control" name="winTitle" th:value="${dto.winTitle}">
       </div>
       <div class="form-group">
@@ -36,13 +39,11 @@
       </div>
       <div class="form-group">
         <label>RegDate</label>
-        <input type="text" class="form-control"
-               th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
       </div>
       <div class="form-group">
         <label>ModDate</label>
-        <input type="text" class="form-control"
-               th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
       </div>
     </form>
 
@@ -59,8 +60,8 @@
       $(".removeBtn").click(function () {
 
         actionForm
-        .attr("action", "/admin/remove")
-        .attr("method", "post");
+                .attr("action", "/winner/remove")
+                .attr("method", "post");
 
         actionForm.submit();
 
@@ -73,9 +74,9 @@
         }
 
         actionForm
-        .attr("action", "/admin/modify")
-        .attr("method", "post")
-        .submit();
+                .attr("action", "/winner/modify")
+                .attr("method", "post")
+                .submit();
       });
 
       $(".listBtn").click(function () {
@@ -92,8 +93,8 @@
         actionForm.append(keyword);
 
         actionForm
-        .attr("action", "/admin/list")
-        .attr("method", "get");
+                .attr("action", "/winner/list")
+                .attr("method", "get");
 
         actionForm.submit();
 

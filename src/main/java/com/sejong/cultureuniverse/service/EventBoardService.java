@@ -8,33 +8,39 @@ import com.sejong.cultureuniverse.entity.event.EventBoard;
 import org.springframework.stereotype.Service;
 
 
-@Service
+
 public interface EventBoardService {
     Long register(EventBoardDto dto);
+
     PageResultDTO<EventBoardDto, EventBoard> getList(PageRequestDTO requestDTO);
-    EventBoardDto read(Long EventIdx);
+
+    EventBoardDto read(Long eventIdx);
+
     void modify(EventBoardDto dto);
-    void remove(Long EventIdx);
+
+    void remove(Long eventIdx);
 
     default EventBoard dtoToEntity(EventBoardDto dto) {
         return EventBoard.builder()
-            .eventIdx(dto.getEventIdx())
-            .eventTitle(dto.getEventTitle())
-            .eventContent(dto.getEventContent())
-            .readCount(dto.getReadCount())
-            .build();
+                .eventIdx(dto.getEventIdx())
+                .adminId(dto.getAdminId())
+                .eventTitle(dto.getEventTitle())
+                .eventContent(dto.getEventContent())
+                .readCount(dto.getReadCount())
+                .build();
     }
 
     default EventBoardDto entityToDto(EventBoard entity) {
 
         return EventBoardDto.builder()
-            .eventIdx(entity.getEventIdx())
-            .eventTitle(entity.getEventTitle())
-            .eventContent(entity.getEventContent())
-            .readCount(entity.getReadCount())
-            .regDate(entity.getRegDate())
-            .modDate(entity.getModDate())
-            .build();
+                .eventIdx(entity.getEventIdx())
+                .adminId(entity.getAdminId())
+                .eventTitle(entity.getEventTitle())
+                .eventContent(entity.getEventContent())
+                .readCount(entity.getReadCount())
+                .regDate(entity.getRegDate())
+                .modDate(entity.getModDate())
+                .build();
     }
 }
 

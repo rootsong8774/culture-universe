@@ -40,6 +40,7 @@ public class WinnerBoardController {
     public void register() {
         log.info("register get....");
     }
+
     @PostMapping("/register")
     public String registerPost(WinnerBoardDto dto, RedirectAttributes redirectAttributes) {
         log.info("dto...." + dto);
@@ -52,9 +53,9 @@ public class WinnerBoardController {
     }
 
     @GetMapping({"/read", "/modify"})
-    public void read(long winnerIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
+    public void read(Long winnerIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
         Model model) {
-        log.info("gno: " + winnerIdx);
+        log.info("winnerIdx: " + winnerIdx);
 
         WinnerBoardDto dto = service.read(winnerIdx);
 
@@ -62,7 +63,7 @@ public class WinnerBoardController {
     }
 
     @PostMapping("/remove")
-    public String remove(long winnerIdx, RedirectAttributes redirectAttributes) {
+    public String remove(Long winnerIdx, RedirectAttributes redirectAttributes) {
         log.info("winnerIdx: " + winnerIdx);
 
         service.remove(winnerIdx);
@@ -82,7 +83,7 @@ public class WinnerBoardController {
         redirectAttributes.addAttribute("page", requestDTO.getPage());
         redirectAttributes.addAttribute("type", requestDTO.getType());
         redirectAttributes.addAttribute("keyword", requestDTO.getKeyword());
-        redirectAttributes.addAttribute("gno", dto.getWinnerIdx());
+        redirectAttributes.addAttribute("WinnerIdx", dto.getWinnerIdx());
 
         return "redirect:/winner/read";
 

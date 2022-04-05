@@ -1,49 +1,55 @@
 package com.sejong.cultureuniverse.service;
 
-import com.sejong.cultureuniverse.controller.NoticeBoardController;
+import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDto;
 import com.sejong.cultureuniverse.dto.NoticeBoardDto;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
+import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
-import com.sejong.cultureuniverse.repository.NoticeBoardRepository;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.transaction.Transactional;
-
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 
 
 public interface NoticeBoardService {
     Long register(NoticeBoardDto dto);
+
     PageResultDTO<NoticeBoardDto, NoticeBoard> getList(PageRequestDTO requestDTO);
+
     NoticeBoardDto read(Long noticeIdx);
+
     void modify(NoticeBoardDto dto);
+
     void remove(Long noticeIdx);
 
     default NoticeBoard dtoToEntity(NoticeBoardDto dto) {
         return NoticeBoard.builder()
-            .noticeIdx(dto.getNoticeIdx())
-            .noticeTitle(dto.getNoticeTitle())
-            .noticeContent(dto.getNoticeContent())
-            .readCount(dto.getReadCount())
-            .build();
+                .noticeIdx(dto.getNoticeIdx())
+                .adminId(dto.getAdminId())
+                .noticeTitle(dto.getNoticeTitle())
+                .noticeContent(dto.getNoticeContent())
+                .readCount(dto.getReadCount())
+                .build();
     }
 
     default NoticeBoardDto entityToDto(NoticeBoard entity) {
 
         return NoticeBoardDto.builder()
-            .noticeIdx(entity.getNoticeIdx())
-            .noticeTitle(entity.getNoticeTitle())
-            .noticeContent(entity.getNoticeContent())
-            .readCount(entity.getReadCount())
-            .regDate(entity.getRegDate())
-            .modDate(entity.getModDate())
-            .build();
+                .noticeIdx(entity.getNoticeIdx())
+                .adminId(entity.getAdminId())
+                .noticeTitle(entity.getNoticeTitle())
+                .noticeContent(entity.getNoticeContent())
+                .readCount(entity.getReadCount())
+                .regDate(entity.getRegDate())
+                .modDate(entity.getModDate())
+                .build();
+    }
+
+    default NoticeBoard noticeAndAdminToEntity(NoticeBoardAndAdminDto dto) {
+        return NoticeBoard.builder()
+                .noticeIdx(dto.getNoticeIdx())
+                .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))
+                .noticeTitle(dto.getNoticeTitle())
+                .noticeContent(dto.getNoticeContent())
+                .readCount(dto.getReadCount())
+                .build();
     }
 }
 

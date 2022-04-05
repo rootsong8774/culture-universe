@@ -8,33 +8,38 @@ import com.sejong.cultureuniverse.entity.event.EventWinner;
 import org.springframework.stereotype.Service;
 
 
-@Service
+
 public interface WinnerBoardService {
     Long register(WinnerBoardDto dto);
+
     PageResultDTO<WinnerBoardDto, EventWinner> getList(PageRequestDTO requestDTO);
-    WinnerBoardDto read(Long WinnerIdx);
+
+    WinnerBoardDto read(Long winnerIdx);
+
     void modify(WinnerBoardDto dto);
-    void remove(Long WinnerIdx);
+
+    void remove(Long winnerIdx);
 
     default EventWinner dtoToEntity(WinnerBoardDto dto) {
         return EventWinner.builder()
-            .winnerIdx(dto.getWinnerIdx())
-            .winTitle(dto.getWinTitle())
-            .winContent(dto.getWinContent())
-            .readCount(dto.getReadCount())
-            .build();
+                .winnerIdx(dto.getWinnerIdx())
+                .adminId(dto.getAdminId())
+                .winTitle(dto.getWinTitle())
+                .winContent(dto.getWinContent())
+                .readCount(dto.getReadCount())
+                .build();
     }
 
     default WinnerBoardDto entityToDto(EventWinner entity) {
 
         return WinnerBoardDto.builder()
-            .winnerIdx(entity.getWinnerIdx())
-            .winTitle(entity.getWinTitle())
-            .winContent(entity.getWinContent())
-            .readCount(entity.getReadCount())
-            .regDate(entity.getRegDate())
-            .modDate(entity.getModDate())
-            .build();
+                .winnerIdx(entity.getWinnerIdx())
+                .winTitle(entity.getWinTitle())
+                .winContent(entity.getWinContent())
+                .readCount(entity.getReadCount())
+                .regDate(entity.getRegDate())
+                .modDate(entity.getModDate())
+                .build();
     }
 }
 

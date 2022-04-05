@@ -23,7 +23,14 @@ public class NoticeBoardRepositoryTest {
                 .build();
             System.out.println(noticeBoardRepository.save(noticeBoard));
         });
-    }   /*
+    }
+
+    @Test
+    public void findByNoticeIdxTest() {
+        NoticeBoard result = noticeBoardRepository.findByNoticeIdx(16L);
+        System.out.println("result = " + result.toString());
+    }
+    /*
     @Test
     private void updateTest(){
         Optional<NoticeBoard> result = Optional.ofNullable(

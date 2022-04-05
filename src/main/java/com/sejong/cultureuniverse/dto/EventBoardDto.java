@@ -4,16 +4,15 @@ import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 @Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventBoardDto implements Serializable {
+@Data
+public class EventBoardDto {
 
     private Long eventIdx;
     private Admin adminId;
@@ -21,15 +20,5 @@ public class EventBoardDto implements Serializable {
     private String eventContent;
     private Long readCount;
     private LocalDateTime regDate, modDate;
-
-    public EventBoard toEntity(){
-        return EventBoard.builder()
-            .eventIdx(eventIdx)
-            .adminId(adminId)
-            .eventTitle(eventTitle)
-            .eventContent(eventContent)
-            .readCount(readCount)
-            .build();
-    }
 
 }

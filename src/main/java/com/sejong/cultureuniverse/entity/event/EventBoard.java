@@ -31,7 +31,6 @@ public class EventBoard extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name="admin_id")
     private Admin adminId;
-
     private String eventTitle;
     private String eventContent;
     private Long readCount;

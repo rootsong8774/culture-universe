@@ -5,7 +5,7 @@
 
     <th:block th:fragment="content">
 
-        <h1 class="mt-4">admin List Page
+        <h1 class="mt-4">관리자 공지 페이지
             <span>
                 <a th:href="@{/admin/register}">
                     <button type="button" class="btn btn-outline-primary">REGISTER
@@ -42,10 +42,10 @@
             <thead>
             <tr>
                 <th scope="col">Idx</th>
-                <th scope="col">noticeTitle</th>
-                <th scope="col">noticeContent</th>
-                <th scope="col">Regdate</th>
-                <th scope="col">Moddate</th>
+                <th scope="col">공지사항</th>
+                <th scope="col">공지내용</th>
+                <th scope="col">등록일자</th>
+                <th scope="col">수정일자</th>
             </tr>
             </thead>
             <tbody>
@@ -64,9 +64,6 @@
                 <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
                 <td>[[${#temporals.format(dto.modDate, 'yyyy/MM/dd')}]]</td>
             </tr>
-
-
-
             </tbody>
         </table>
 

@@ -15,9 +15,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 @Log4j2
 @RequiredArgsConstructor
+@Transactional
 public class EventBoardServiceImpl implements EventBoardService {
 
     private final EventBoardRepository eventBoardRepository;

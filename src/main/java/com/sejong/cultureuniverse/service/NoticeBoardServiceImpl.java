@@ -1,14 +1,16 @@
 package com.sejong.cultureuniverse.service;
 
-import com.fasterxml.jackson.databind.util.ArrayBuilders.BooleanBuilder;
+import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDto;
 import com.sejong.cultureuniverse.dto.NoticeBoardDto;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 import com.sejong.cultureuniverse.repository.NoticeBoardRepository;
+
 import java.util.Optional;
 import java.util.function.Function;
 import javax.transaction.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -53,23 +55,27 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
     @Override
     public NoticeBoardDto read(Long noticeIdx) {
         Optional<NoticeBoard> result = Optional.ofNullable(
-            noticeBoardRepository.findByNoticeIdx(noticeIdx));
+                noticeBoardRepository.findByNoticeIdx(noticeIdx));
         return result.map(this::entityToDto).orElse(null);
     }
+
     //업데이트 하는 항목은 제목,내용
     @Override
     public void modify(NoticeBoardDto dto) {
-        Optional<NoticeBoard> result = Optional.ofNullable(
-            noticeBoardRepository.findByNoticeIdx(dto.getNoticeIdx()));
-        if (result.isPresent()) {
-            NoticeBoard entity = result.get();
 
-            entity.changeTitle(dto.getNoticeTitle());
-            entity.changeContent(dto.getNoticeContent());
 
-            noticeBoardRepository.save(entity);
-        }
+        NoticeBoardAndAdminDto result = noticeBoardRepository.findNoticeBoardAndAdminByNoticeIdx(dto.getNoticeIdx());
+
+
+        result.changeTitle(dto.getNoticeTitle());
+        result.changeContent(dto.getNoticeContent());
+        NoticeBoard entity = noticeAndAdminToEntity(result);
+
+
+        noticeBoardRepository.save(entity);
     }
+
+
 
     @Override
     public void remove(Long noticeIdx) {

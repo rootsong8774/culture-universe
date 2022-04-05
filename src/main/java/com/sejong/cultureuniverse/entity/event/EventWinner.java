@@ -1,16 +1,11 @@
 package com.sejong.cultureuniverse.entity.event;
 
-import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.FetchType.*;
+
+import com.sejong.cultureuniverse.entity.BaseEntity;
+import javax.persistence.*;
 
 import com.sejong.cultureuniverse.entity.admin.Admin;
-import com.sejong.cultureuniverse.entity.BaseEntity;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -30,7 +25,6 @@ public class EventWinner extends BaseEntity {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name="admin_id")
     private Admin adminId;
-
     private String winTitle;
     private String winContent;
     private Long readCount;

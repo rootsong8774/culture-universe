@@ -52,7 +52,7 @@ public class EventBoardController {
     }
 
     @GetMapping({"/read", "/modify"})
-    public void read(long eventIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
+    public void read(Long eventIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
         Model model) {
         log.info("eventIdx: " + eventIdx);
 
@@ -62,7 +62,7 @@ public class EventBoardController {
     }
 
     @PostMapping("/remove")
-    public String remove(long eventIdx, RedirectAttributes redirectAttributes) {
+    public String remove(Long eventIdx, RedirectAttributes redirectAttributes) {
         log.info("eventIdx: " + eventIdx);
 
         service.remove(eventIdx);

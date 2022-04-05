@@ -9,7 +9,7 @@
 
         <div class="form-group">
             <label >Idx</label>
-            <input type="text" class="form-control" name="idx" th:value="${dto.eventIdx}" readonly >
+            <input type="text" class="form-control" name="eventIdx" th:value="${dto.eventIdx}" readonly >
         </div>
 
         <div class="form-group">
@@ -18,11 +18,11 @@
         </div>
         <div class="form-group">
             <label >이벤트 제목</label>
-            <textarea class="form-control" rows="5" name="noticeTitle">[[${dto.eventTitle}]]</textarea>
+            <textarea class="form-control" rows="5" name="eventTitle">[[${dto.eventTitle}]]</textarea>
         </div>
         <div class="form-group">
             <label >이벤트 내용</label>
-            <input type="text" class="form-control" name="noticeContent" th:value="${dto.eventContent}">
+            <input type="text" class="form-control" name="eventContent" th:value="${dto.eventContent}">
         </div>
         <div class="form-group">
             <label >조회수</label>
@@ -41,7 +41,7 @@
 
 <!--        <a th:href="@{/guestbook/list(page=${requestDTO.page})}"><button type="button" class="btn btn-info">List</button></a>-->
 
-        <a th:href="@{/event/list(idx = ${dto.eventIdx}, page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
+        <a th:href="@{/event/modify(eventIdx = ${dto.eventIdx}, page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
             <button type="button" class="btn btn-primary">Modify</button>
         </a>
 

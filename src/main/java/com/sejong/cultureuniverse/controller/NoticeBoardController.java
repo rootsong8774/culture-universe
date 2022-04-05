@@ -42,7 +42,7 @@ public class NoticeBoardController {
 
     @PostMapping("/register")
     public String registerPost(NoticeBoardDto dto, RedirectAttributes redirectAttributes) {
-        log.info("dto...." + dto);
+        log.info("dto...." + dto.toString());
 
         Long noticeIdx = service.register(dto);
 
@@ -62,7 +62,7 @@ public class NoticeBoardController {
     }
 
     @PostMapping("/remove")
-    public String remove(long noticeIdx, RedirectAttributes redirectAttributes) {
+    public String remove(Long noticeIdx, RedirectAttributes redirectAttributes) {
         log.info("noticeIdx: " + noticeIdx);
 
         service.remove(noticeIdx);
@@ -79,10 +79,11 @@ public class NoticeBoardController {
         log.info("dto: " + dto);
 
         service.modify(dto);
+        redirectAttributes.addAttribute("NoticeIdx", dto.getNoticeIdx());
         redirectAttributes.addAttribute("page", requestDTO.getPage());
         redirectAttributes.addAttribute("type", requestDTO.getType());
         redirectAttributes.addAttribute("keyword", requestDTO.getKeyword());
-        redirectAttributes.addAttribute("gno", dto.getNoticeIdx());
+
 
         return "redirect:/admin/read";
 
