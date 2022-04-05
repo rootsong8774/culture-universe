@@ -209,8 +209,15 @@
                 href="#">목록보기</a></span>
             </div>
           </div>
+          <form hidden>
+            <div class="tb-l">1:1문의 답변</div>
+             <span>고객센터 답변
+             <textarea name="contents" cols="70" rows="10" onchange=""></textarea></span>
+
+          </form>
         </fieldset>
       </form>
+
     </div>
   </div>
 </template>
