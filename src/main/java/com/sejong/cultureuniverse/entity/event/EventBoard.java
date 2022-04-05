@@ -12,9 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Builder
 @Entity
 @Getter
 @AllArgsConstructor
@@ -33,5 +35,11 @@ public class EventBoard extends BaseEntity {
     private String eventTitle;
     private String eventContent;
     private Long readCount;
+
+
+    public void changeTitle(String eventTitle) { this.eventTitle = eventTitle;    }
+    public void changeContent(String eventContent) {
+        this.eventContent = eventContent;
+    }
 
 }

@@ -12,9 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+@Builder
 @Entity
 @Getter
 @AllArgsConstructor
@@ -33,5 +34,10 @@ public class EventWinner extends BaseEntity {
     private String winTitle;
     private String winContent;
     private Long readCount;
+
+    public void changeTitle(String winTitle) { this.winTitle = winTitle;    }
+    public void changeContent(String winContent) {
+        this.winContent = winContent;
+    }
 
 }

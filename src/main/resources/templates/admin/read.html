@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+
+        <h1 class="mt-4">admin Read Page</h1>
+
+        <div class="form-group">
+            <label >Idx</label>
+            <input type="text" class="form-control" name="idx" th:value="${dto.noticeIdx}" readonly >
+        </div>
+
+        <div class="form-group">
+            <label >adminId</label>>
+            <input type="text" class="form-control" name="adminId" th:value="${dto.adminId}" readonly >
+        </div>
+        <div class="form-group">
+            <label >noticeTitle</label>
+            <textarea class="form-control" rows="5" name="noticeTitle" readonly>[[${dto.noticeTitle}]]</textarea>
+        </div>
+        <div class="form-group">
+            <label >noticeContent</label>
+            <input type="text" class="form-control" name="noticeContent" th:value="${dto.noticeContent}" readonly>
+        </div>
+        <div class="form-group">
+            <label >readCount</label>
+            <input type="text" class="form-control" name="readCount" th:value="${dto.readCount}" readonly>
+        </div>
+        <div class="form-group">
+            <label >RegDate</label>
+            <input type="text" class="form-control" name="regDate" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div>
+        <div class="form-group">
+            <label >ModDate</label>
+            <input type="text" class="form-control" name="modDate" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        </div>
+
+<!--        <a th:href="@{/guestbook/modify(gno = ${dto.gno}, page=${requestDTO.page})}"><button type="button" class="btn btn-primary">Modify</button></a>-->
+
+<!--        <a th:href="@{/guestbook/list(page=${requestDTO.page})}"><button type="button" class="btn btn-info">List</button></a>-->
+
+        <a th:href="@{/admin/list(idx = ${dto.noticeIdx}, page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
+            <button type="button" class="btn btn-primary">Modify</button>
+        </a>
+
+        <a th:href="@{/admin/list(page=${requestDTO.page} , type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
+            <button type="button" class="btn btn-info">List</button>
+        </a>
+
+    </th:block>
+
+</th:block>
