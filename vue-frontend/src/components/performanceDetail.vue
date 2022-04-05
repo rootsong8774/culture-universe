@@ -84,20 +84,13 @@
 
 
 export default {
-  name: "schedual-detail",
+  name: "PerformanceDetail",
 
 }
 </script>
 
 <style scoped>
-.nav nav-tabs {
-  justify-content: center;
-  text-align: center;
-  word-break: keep-all;
-  background: #fff;
-  display: flex;
-  flex-wrap: wrap;
-}
+
 li {
   display: list-item;
   text-align: -webkit-match-parent;

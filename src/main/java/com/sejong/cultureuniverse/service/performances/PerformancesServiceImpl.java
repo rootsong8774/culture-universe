@@ -2,9 +2,11 @@ package com.sejong.cultureuniverse.service.performances;
 
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
+import com.sejong.cultureuniverse.dto.PerformanceDetailsDto;
 import com.sejong.cultureuniverse.dto.PerformanceListDto;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import com.sejong.cultureuniverse.repository.PerformanceDetailsRepository;
+import java.util.Optional;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -22,7 +24,7 @@ public class PerformancesServiceImpl implements PerformancesService {
     @Override
     public PageResultDTO<PerformanceListDto, PerformanceDetails> getList(PageRequestDTO pageRequestDTO) {
 
-        Function<PerformanceDetails, PerformanceListDto> fn = (en-> entityToDTO(
+        Function<PerformanceDetails, PerformanceListDto> fn = (en-> entityToListDTO(
             PerformanceDetails.builder()
                 .performId(en.getPerformId())
                 .title(en.getTitle())
@@ -38,4 +40,12 @@ public class PerformancesServiceImpl implements PerformancesService {
 
         return new PageResultDTO<>(result,fn);
     }
+    
+    @Override
+    public PerformanceDetailsDto getPerformanceDetail(String performCode) {
+        Optional<PerformanceDetails> result = performanceDetailsRepository.findByPerformCode(
+            performCode);
+        return result.map(this::entityToDetailsDTO).orElse(null);
+    }
+    
 }

@@ -57,7 +57,7 @@
           <div class="main-gallery main-model roomy-80">
             <div style="clear: both;"></div>
             <div class="grid models text-center">
-              <div class="grid-item model-item transition metal ium" v-for="result in resultList">
+              <div class="grid-item model-item transition metal ium" v-for="(result,index) in resultList" :key="index">
                 <img :src="result.fileUrlMi" :alt="result.title">
                 <strong class="result-title">{{ result.title }}</strong>
                 <span class="result-date">
@@ -201,12 +201,6 @@ export default {
   float: right;
 }
 
-.content_page, .img_item {
-  height: 400px;
-  float: left;
-  display: flex;
-}
-
 .content_page > a {
   padding: 5px;
 }
@@ -315,14 +309,6 @@ export default {
   cursor: pointer;
 }
 
-.nav1 {
-  margin: 5px;
-  display: flex;
-  justify-content: center;
-  line-height: 30px;
-  width: calc(1280px - 400px);
-
-}
 
 .nav1 > li {
   padding: 10px;
