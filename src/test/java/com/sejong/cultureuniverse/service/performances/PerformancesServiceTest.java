@@ -1,6 +1,7 @@
 package com.sejong.cultureuniverse.service.performances;
 
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.PerformanceDetailsDto;
 import com.sejong.cultureuniverse.dto.PerformanceListDto;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -21,5 +22,12 @@ class PerformancesServiceTest {
         for (PerformanceListDto performanceListDto : result) {
             System.out.println("performanceListDto = " + performanceListDto);
         }
+    }
+    
+    @Test
+    public void performanceDetailsTest() throws Exception {
+        PerformanceDetailsDto result = performancesService.getPerformanceDetail(
+            "acpm2203141110a01");
+        System.out.println("result = " + result);
     }
 }

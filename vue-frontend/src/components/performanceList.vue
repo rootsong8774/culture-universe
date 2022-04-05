@@ -57,8 +57,9 @@
           <div class="main-gallery main-model roomy-80">
             <div style="clear: both;"></div>
             <div class="grid models text-center">
-              <div class="grid-item model-item transition metal ium" v-for="result in resultList">
+              <div class="grid-item model-item transition metal ium" v-for="(result,index) in resultList" :key="index">
                 <img :src="result.fileUrlMi" :alt="result.title">
+                <input type="hidden" name="performCode" v-model:value="result.performCode">
                 <strong class="result-title">{{ result.title }}</strong>
                 <span class="result-date">
                   {{ result.startDate | yyyyMMdd }} - {{ result.endDate | yyyyMMdd }}
@@ -74,18 +75,18 @@
               <ul class="pagination h-100 justify-content-center align-items-center">
 
                 <li class="page-item " v-if="pageData.prev">
-                  <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1">Previous</a>
+                  <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1" style="cursor:pointer;">Previous</a>
                 </li>
 
                 <li  class="page-item" :class=" (pageData.page === page)? 'active' : '' "
                     v-for="page in pageData.pageList">
-                  <a class="page-link" @click="setPage(page)">
+                  <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
                     {{ page }}
                   </a>
                 </li>
                 <li class="page-item" v-if="pageData.next">
                   <a class="page-link"
-                     @click="setPage(pageData.end+1)">Next</a>
+                     @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
                 </li>
 
               </ul>
@@ -201,12 +202,6 @@ export default {
   float: right;
 }
 
-.content_page, .img_item {
-  height: 400px;
-  float: left;
-  display: flex;
-}
-
 .content_page > a {
   padding: 5px;
 }
@@ -315,14 +310,6 @@ export default {
   cursor: pointer;
 }
 
-.nav1 {
-  margin: 5px;
-  display: flex;
-  justify-content: center;
-  line-height: 30px;
-  width: calc(1280px - 400px);
-
-}
 
 .nav1 > li {
   padding: 10px;
