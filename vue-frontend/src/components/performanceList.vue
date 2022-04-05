@@ -65,36 +65,40 @@
                 </span>
                 <p class="result-genre">{{ result.genreName }}</p>
                 <router-link :to="{name: 'performanceDetail'}" class="btn btn-default m-top-20">
-                  View Details<i class="fa fa-long-arrow-right"></i>
+                  View Details <i class="fa fa-long-arrow-right"></i>
                 </router-link>
               </div><!-- End off grid item -->
+
+            </div>
+            <div class="grid models text-center" id="pagination-margin">
+              <ul class="pagination h-100 justify-content-center align-items-center">
+
+                <li class="page-item " v-if="pageData.prev">
+                  <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1">Previous</a>
+                </li>
+
+                <li  class="page-item" :class=" (pageData.page === page)? 'active' : '' "
+                    v-for="page in pageData.pageList">
+                  <a class="page-link" @click="setPage(page)">
+                    {{ page }}
+                  </a>
+                </li>
+                <li class="page-item" v-if="pageData.next">
+                  <a class="page-link"
+                     @click="setPage(pageData.end+1)">Next</a>
+                </li>
+
+              </ul>
             </div>
             <div style="clear: both;"></div>
           </div>
+
         </div>
+
+
       </div>
 
-      <ul class="pagination h-100 justify-content-center align-items-center">
 
-        <li class="page-item " th:if="${result.prev}">
-          <a class="page-link" th:href="@{/board/list(page= ${result.start -1},
-                    type=${pageRequestDTO.type} ,
-                    keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">Previous</a>
-        </li>
-
-        <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
-          <a class="page-link" th:href="@{/board/list(page = ${page} )}">
-            [[${page}]]
-          </a>
-        </li>
-
-        <li class="page-item" th:if="${result.next}">
-          <a class="page-link" th:href="@{/board/list(page= ${result.end + 1} ,
-                    type=${pageRequestDTO.type} ,
-                    keyword = ${pageRequestDTO.keyword} )}">Next</a>
-        </li>
-
-      </ul>
     </section>
   </div>
 </template>
@@ -107,22 +111,22 @@ export default {
   name: "PerformanceList",
   data() {
     return {
+      page: 1,
       resultList: [],
-      page: ''
+      pageData: {
+        dtoList: [],
+        totalPage: 13,
+        size: 12,
+        start: 1,
+        end: 10,
+        prev: false,
+        next: true,
+        pageList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      }
     }
   },
   created() {
-    axios({
-      url: '/api/performancesList',
-      params: {
-        page: this.page
-      },
-      method: 'get',
-    }).then(response => {
-      console.log(response.data);
-      this.resultList = response.data;
-    })
-
+    this.getList();
   },
   filters: {
     yyyyMMdd: function (value) {
@@ -130,13 +134,10 @@ export default {
         return '';
       }
 
-      // 현재 Date 혹은 DateTime 데이터를 javaScript date 타입화
-      let js_date = new Date(value);
-
       // 연도, 월, 일 추출
-      let year = js_date.getFullYear();
-      let month = js_date.getMonth() + 1;
-      let day = js_date.getDate();
+      let year = value[0];
+      let month = value[1];
+      let day = value[2];
 
       // 월, 일의 경우 한자리 수 값이 있기 때문에 공백에 0 처리
       if (month < 10) {
@@ -149,6 +150,32 @@ export default {
 
       // 최종 포맷 (ex - '2021.10.08')
       return year + '.' + month + '.' + day;
+    }
+  },
+  methods: {
+    getList: function () {
+      axios({
+        url: '/api/performancesList',
+        params: {
+          page: this.page,
+        },
+        method: 'get',
+      }).then(response => {
+        let jsonData = response.data;
+        this.resultList = jsonData.dtoList;
+        this.pageData = jsonData;
+        console.log(jsonData);
+
+      })
+    },
+    setPage: function (value) {
+      this.page = value;
+    },
+
+  },
+  watch: {
+    page: function () {
+      this.getList();
     }
   }
 
@@ -167,7 +194,9 @@ export default {
   overflow: hidden;
   text-align: left;
 }
-
+.result-date{
+  float: left;
+}
 .result-genre {
   float: right;
 }
@@ -304,5 +333,8 @@ export default {
 
 .nav1 > li > a {
   color: #fff;
+}
+#pagination-margin {
+  margin-top: 40px;
 }
 </style>

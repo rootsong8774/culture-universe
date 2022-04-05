@@ -258,7 +258,7 @@
 import axios from 'axios';
 
 export default {
-  name: "header",
+  name: "LayoutHeader",
   props: {
     currentClass: String
   },
@@ -313,7 +313,8 @@ export default {
 }
 
 .modal-open {
-  overflow: hidden
+  overflow: hidden;
+  padding-right: 0 !important;
 }
 
 .modal {
@@ -349,7 +350,9 @@ export default {
 
 .modal-open .modal {
   overflow-x: hidden;
-  overflow-y: auto
+  overflow-y: auto;
+
+
 }
 
 .modal-dialog {
