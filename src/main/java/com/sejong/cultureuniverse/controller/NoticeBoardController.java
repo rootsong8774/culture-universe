@@ -39,6 +39,7 @@ public class NoticeBoardController {
     public void register() {
         log.info("register get....");
     }
+
     @PostMapping("/register")
     public String registerPost(NoticeBoardDto dto, RedirectAttributes redirectAttributes) {
         log.info("dto...." + dto);
@@ -51,9 +52,9 @@ public class NoticeBoardController {
     }
 
     @GetMapping({"/read", "/modify"})
-    public void read(long noticeIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
+    public void read(Long noticeIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
         Model model) {
-        log.info("gno: " + noticeIdx);
+        log.info("noticeIdx : " + noticeIdx);
 
         NoticeBoardDto dto = service.read(noticeIdx);
 

@@ -16,9 +16,12 @@
 
 
       <div class="form-group">
+        <label>noticeIdx</label>
+        <input type="text" class="form-control" name="idx" th:value="${dto.noticeIdx}" readonly>
+      </div>
+      <div class="form-group">
         <label>adminIdx</label>
-        <input type="text" class="form-control" name="noticeIdx" th:value="${dto.noticeIdx}"
-               readonly>
+        <input type="text" class="form-control" name="adminId" th:value="${dto.adminId}"  readonly>
       </div>
 
       <div class="form-group">
@@ -36,13 +39,11 @@
       </div>
       <div class="form-group">
         <label>RegDate</label>
-        <input type="text" class="form-control"
-               th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
       </div>
       <div class="form-group">
         <label>ModDate</label>
-        <input type="text" class="form-control"
-               th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
       </div>
     </form>
 

@@ -13,27 +13,27 @@
         </div>
 
         <div class="form-group">
-            <label >adminId</label>>
+            <label >관리자 id</label>
             <input type="text" class="form-control" name="adminId" th:value="${dto.adminId}" readonly >
         </div>
         <div class="form-group">
-            <label >eventTitle</label>
-            <textarea class="form-control" rows="5" name="noticeTitle" readonly>[[${dto.eventTitle}]]</textarea>
+            <label >이벤트 제목</label>
+            <textarea class="form-control" rows="5" name="noticeTitle">[[${dto.eventTitle}]]</textarea>
         </div>
         <div class="form-group">
-            <label >eventContent</label>
-            <input type="text" class="form-control" name="noticeContent" th:value="${dto.eventContent}" readonly>
+            <label >이벤트 내용</label>
+            <input type="text" class="form-control" name="noticeContent" th:value="${dto.eventContent}">
         </div>
         <div class="form-group">
-            <label >readCount</label>
+            <label >조회수</label>
             <input type="text" class="form-control" name="readCount" th:value="${dto.readCount}" readonly>
         </div>
         <div class="form-group">
-            <label >RegDate</label>
+            <label >등록일자</label>
             <input type="text" class="form-control" name="regDate" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
         </div>
         <div class="form-group">
-            <label >ModDate</label>
+            <label >수정일자</label>
             <input type="text" class="form-control" name="modDate" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
         </div>
 

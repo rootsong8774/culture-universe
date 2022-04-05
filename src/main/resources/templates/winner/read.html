@@ -13,16 +13,16 @@
         </div>
 
         <div class="form-group">
-            <label >adminId</label>>
+            <label >관리자 id</label>
             <input type="text" class="form-control" name="adminId" th:value="${dto.adminId}" readonly >
         </div>
         <div class="form-group">
-            <label >winTitle</label>
-            <textarea class="form-control" rows="5" name="winTitle" readonly>[[${dto.winTitle}]]</textarea>
+            <label >당첨자 이벤트 제목</label>
+            <textarea class="form-control" rows="5" name="winTitle" >[[${dto.winTitle}]]</textarea>
         </div>
         <div class="form-group">
-            <label >winContent</label>
-            <input type="text" class="form-control" name="winContent" th:value="${dto.winContent}" readonly>
+            <label >이벤트 내용</label>
+            <input type="text" class="form-control" name="winContent" th:="${dto.winContent}" readonly>
         </div>
         <div class="form-group">
             <label >readCount</label>

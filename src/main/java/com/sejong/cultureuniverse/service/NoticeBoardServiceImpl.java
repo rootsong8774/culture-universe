@@ -19,12 +19,13 @@ import org.springframework.stereotype.Service;
 @Service
 @Log4j2
 @RequiredArgsConstructor
+@Transactional
 public class NoticeBoardServiceImpl implements NoticeBoardService {
 
     private final NoticeBoardRepository noticeBoardRepository;
 
     @Override
-    @Transactional
+
     public Long register(NoticeBoardDto dto) {
         log.info("DTO---------------------------");
         log.info(dto);
