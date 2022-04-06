@@ -4,6 +4,7 @@ import com.sejong.cultureuniverse.entity.admin.Admin;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import lombok.experimental.SuperBuilder;
 
 @Builder
 @Getter
@@ -16,7 +17,6 @@ public class NoticeBoardAndAdminDto {
 
     private String adminId;
     private String adminPw;
-
     private String noticeTitle;
     private String noticeContent;
     private Long readCount;

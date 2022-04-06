@@ -8,9 +8,10 @@ import java.time.LocalDateTime;
 import javax.persistence.*;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 
-@Builder
+@SuperBuilder
 @Entity
 @Getter
 @AllArgsConstructor
@@ -22,14 +23,14 @@ public class NoticeBoard extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notice_seq")
     private Long noticeIdx;
-
-    @OneToOne(fetch = LAZY, cascade = ALL)
-    @JoinColumn(name = "admin_id")
-    private Admin adminId;
     private String noticeTitle;
     private String noticeContent;
     private Long readCount;
 
+    @OneToOne(fetch = LAZY, cascade = ALL) //객체로 받는게 맞음
+    @JoinColumn(name = "admin_id")
+    private Admin adminId;
+   // private Admin adminPw;
 
     public void changeTitle(String noticeTitle) {
         this.noticeTitle = noticeTitle;

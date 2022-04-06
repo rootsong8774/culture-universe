@@ -1,14 +1,15 @@
 package com.sejong.cultureuniverse.Service;
 
-import com.sejong.cultureuniverse.dto.NoticeBoardDto;
+import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDto;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
-import com.sejong.cultureuniverse.dto.PageResultDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
-import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 import com.sejong.cultureuniverse.service.NoticeBoardService;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class NoticeBoardServiceTest {
     @Autowired
         private NoticeBoardService service;
@@ -16,12 +17,21 @@ public class NoticeBoardServiceTest {
     @Test
         public void testResister(){
         Admin Admin = null;
-        NoticeBoardDto noticeBoardDto = NoticeBoardDto.builder()
+        NoticeBoardAndAdminDto noticeBoardDto = NoticeBoardAndAdminDto.builder()
                 .adminId(null)
             .noticeIdx(10L)
             .noticeTitle("Sample title")
             .noticeContent("sample content")
             .build();
+    }
+
+    @Test
+    public void testList() {
+        PageRequestDTO pageRequestDTO =new PageRequestDTO();
+        List<NoticeBoardAndAdminDto> result = service.getList(pageRequestDTO).getDtoList();
+        for (NoticeBoardAndAdminDto dto : result) {
+            System.out.println("dto = " + dto);
+        }
     }
 
 
