@@ -8,10 +8,14 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AdminQnaBoardDTO {
+@ToString
+public class QnaBoardDTO {
     private Long questionIdx;
+    private Long userIdx;
+    private String content;
     private String title;
     private String type;
-    private String content;
-    private LocalDateTime regDate, modDate;
+    private LocalDateTime regDate;
+    private LocalDateTime modDate;
+    private int commentCount;
 }

@@ -6,21 +6,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
 @Entity
+@Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@SequenceGenerator(name = "admin_seq", sequenceName = "admin_seq", initialValue = 1, allocationSize = 1)
 public class Admin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "admin_seq")
     private String adminId;
-
     private String adminPw;
 
 }

@@ -16,7 +16,11 @@
             </thead>
             <tbody>
             <tr th:each="dto : ${result.dtoList}" >
-                <th scope="row"> [[${dto.questionIdx}]]  </th>
+                <th scope="row"><a th:href="@{/admin/qnaread(questionIdx=${dto.questionIdx},
+                    page= ${result.page},
+                    type=${pageRequestDTO.type} ,
+                    keyword = ${pageRequestDTO.keyword})}">
+                    [[${dto.questionIdx}]] </th>
                 <td>[[${dto.title}]]</td>
                 <td>[[${dto.type}]]</td>
                 <td>[[${dto.content}]]</td>

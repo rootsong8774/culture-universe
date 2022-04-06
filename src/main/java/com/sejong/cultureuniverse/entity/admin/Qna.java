@@ -31,21 +31,4 @@ public class Qna {
     @Exclude
     private Member member;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "comment_idx")
-    @Exclude
-    private AdminComment adminComment;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "admin_id")
-    @Exclude
-    private Admin admin;
-
-    public void changeTitle(String title) {
-        this.title =title ;
-    }
-    public void changeContent(String content) {
-        this.content =content ;
-    }
-
 }

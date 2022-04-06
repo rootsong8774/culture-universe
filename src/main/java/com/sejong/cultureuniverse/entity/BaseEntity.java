@@ -20,4 +20,16 @@ public abstract class BaseEntity {
     @LastModifiedDate
     @Column(name = "moddate")
     private LocalDateTime modDate;
+
+    @PrePersist
+    public void prePersist() {
+        this.regDate = LocalDateTime.now();
+        this.modDate = LocalDateTime.now();
+
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.modDate = LocalDateTime.now();
+    }
 }
