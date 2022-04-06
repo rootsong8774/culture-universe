@@ -1,9 +1,7 @@
 package com.sejong.cultureuniverse.controller;
 
-import com.sejong.cultureuniverse.dto.NoticeBoardDto;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.WinnerBoardDto;
-import com.sejong.cultureuniverse.service.NoticeBoardService;
 import com.sejong.cultureuniverse.service.WinnerBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

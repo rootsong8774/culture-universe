@@ -1,10 +1,8 @@
 package com.sejong.cultureuniverse.controller;
 
 import com.sejong.cultureuniverse.dto.EventBoardDto;
-import com.sejong.cultureuniverse.dto.NoticeBoardDto;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.service.EventBoardService;
-import com.sejong.cultureuniverse.service.NoticeBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
