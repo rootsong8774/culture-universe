@@ -55,10 +55,14 @@
             <!-- Tab이 선택되면 내용이 보여지는 영역이다. -->
             <div class="tab-content">
               <div class="tab-pane fade in active" id="introduce">
-                <div v-html="performData.detail"></div>
-                <div class="tab-pane fade" id="reservation">예매안내</div>
-                <div class="tab-pane fade" id="comment">후기평</div>
+                <div class="col-md-10 col-md-offset-1">
+                  <div v-if="performData.detail"  v-html="performData.detail"></div>
+                  <div v-else-if="performData.info" v-html="performData.info"></div>
+                  <p v-else>{{noInfo}}</p>
+                </div>
               </div>
+              <div class="tab-pane fade" id="reservation">예매안내</div>
+              <div class="tab-pane fade" id="comment">후기평</div>
             </div>
           </div>
         </div>
@@ -82,8 +86,14 @@ export default {
   name: "PerformanceDetail",
   data() {
     return {
-      performCode: 'smpk2202111723a01',
+      noInfo: '공연 정보가 아직 준비되지 않았습니다.',
       performData: {}
+    }
+  },
+  props: {
+    performCode: {
+      type: String,
+      default : ''
     }
   }
   ,
@@ -194,4 +204,8 @@ li {
 }
 
 /*dropdown -end*/
+
+#introduce {
+  padding: 20px 0;
+}
 </style>

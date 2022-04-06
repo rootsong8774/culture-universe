@@ -65,7 +65,7 @@
                   {{ result.startDate | yyyyMMdd }} - {{ result.endDate | yyyyMMdd }}
                 </span>
                 <p class="result-genre">{{ result.genreName }}</p>
-                <router-link :to="{name: 'performanceDetail'}" class="btn btn-default m-top-20">
+                <router-link :to="{name: 'performanceDetail', params: {performCode: result.performCode}}" class="btn btn-default m-top-20">
                   View Details <i class="fa fa-long-arrow-right"></i>
                 </router-link>
               </div><!-- End off grid item -->

@@ -44,6 +44,7 @@ public interface PerformancesService {
             .inquiryPhone(details.getInquiryPhone())
             .ticketInfo(details.getTicketInfo())
             .genreName(details.getGenreName())
+            .info(details.getInfo())
             .detail(details.getDetail())
             .fileUrlMi(details.getFileUrlMi())
             .build();

@@ -45,6 +45,8 @@ public class PerformanceDetailsDto implements Serializable {
     
     private String genreName;
     
+    private String info;
+    
     private String detail;
 
     private String fileUrlMi;
