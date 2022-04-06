@@ -169,7 +169,7 @@
                           Me</label>
                         <br>
                         <button type="button" class="btn btn-default pull-right">로그인</button>
-                        <button data-toggle="modal" data-target=".bs-example-modal-lg"
+                        <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg"
                                 class="btn btn-default pull-left">회원가입
                         </button>
                       </form>
@@ -198,7 +198,7 @@
                                v-model:name="name">
                         <label>비밀번호 :</label>
                         <input type="text" class="form-control" placeholder="Enter Password"
-                               v-model:name="pw">
+                               v-model:name="password">
                         <!--                        <label>생년월일 :</label>-->
                         <!--                        <input type="date" class="form-control" placeholder="Enter Birth" v-model:name="birth">-->
                         <!--                        <label>성별 :</label><br>-->
