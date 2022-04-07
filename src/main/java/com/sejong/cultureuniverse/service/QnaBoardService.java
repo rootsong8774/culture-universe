@@ -6,13 +6,16 @@ import com.sejong.cultureuniverse.dto.QnaBoardDTO;
 import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Qna;
 
-public interface QnaBoardService  {
+public interface QnaBoardService {
     Long register(QnaBoardDTO qnaBoardDTO);
-    PageResultDTO<QnaBoardDTO, Object[]> getList (PageRequestDTO pageRequestDTO);
 
-    QnaBoardDTO get (Long questionIdx);
-//    void modify (QnaBoardDTO dto);
-//    QnaBoardDTO read(Long questionIdx);
+    PageResultDTO<QnaBoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
+
+    QnaBoardDTO get(Long questionIdx);
+
+    QnaBoardDTO read(Long questionIdx);
+
+    //    void modify (QnaBoardDTO dto);
     default Qna dtoToEntity(QnaBoardDTO qnaBoardDTO) {
         Member member = Member.builder()
             .userIdx(qnaBoardDTO.getUserIdx()).build();
@@ -26,7 +29,8 @@ public interface QnaBoardService  {
         return qna;
 
     }
-    default QnaBoardDTO entityToDto(Qna qna,Member member, Long commentCount){
+
+    default QnaBoardDTO entityToDto(Qna qna, Member member, Long commentCount) {
         QnaBoardDTO qnaBoardDTO = QnaBoardDTO.builder()
             .questionIdx(qna.getQuestionIdx())
             .userIdx(member.getUserIdx())
@@ -38,6 +42,18 @@ public interface QnaBoardService  {
             .commentCount(commentCount.intValue())
             .build();
 
+        return qnaBoardDTO;
+    }
+
+    default  QnaBoardDTO readEntityToDto(Qna qna){
+        QnaBoardDTO qnaBoardDTO = QnaBoardDTO.builder()
+            .questionIdx(qna.getQuestionIdx())
+            .content(qna.getContent())
+            .title(qna.getTitle())
+            .type(qna.getType())
+            .regDate(qna.getRegDate())
+            .modDate(qna.getModDate())
+            .build();
         return qnaBoardDTO;
     }
 }

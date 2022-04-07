@@ -3,7 +3,7 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
 
     <th:block th:fragment="content">
-        <h1>관리자용 확인 문의 게시판</h1>
+        <h1>문의 게시판(관리자용)</h1>
 
         <table class="table table-striped">
             <thead>
@@ -19,8 +19,8 @@
                 <th scope="row"><a th:href="@{/admin/qnaread(questionIdx=${dto.questionIdx},
                     page= ${result.page},
                     type=${pageRequestDTO.type} ,
-                    keyword = ${pageRequestDTO.keyword})}">
-                    [[${dto.questionIdx}]] </th>
+                    keyword = ${pageRequestDTO.keyword})}"/>
+                    [[${dto.questionIdx}]]</th>
                 <td>[[${dto.title}]]</td>
                 <td>[[${dto.type}]]</td>
                 <td>[[${dto.content}]]</td>

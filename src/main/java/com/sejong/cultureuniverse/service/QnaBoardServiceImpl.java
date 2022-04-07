@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.function.Function;
 
 @Service
@@ -67,5 +68,14 @@ public class QnaBoardServiceImpl implements QnaBoardService{
             (Member) Member.builder().userIdx((Long) result[6]).build(),
             (Long) result[7]);
     }
+
+    @Override
+    public QnaBoardDTO read(Long questionIdx) {
+        Optional<Qna> result = qnaBoardRepository.findById(questionIdx);
+        return result.isPresent()? this.readEntityToDto(result.get()):null;
+    }
+
+
+
 
 }

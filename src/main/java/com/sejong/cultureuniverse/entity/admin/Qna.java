@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import lombok.ToString.Exclude;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 

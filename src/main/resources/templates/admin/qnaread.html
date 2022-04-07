@@ -7,10 +7,10 @@
             <label>번호</label>
             <input type="text" class="form-control" name="gno" th:value="${dto.questionIdx}" readonly>
         </div>
-<!--        <div class="form-group">-->
-<!--            <label>작성자</label>-->
-<!--            <input type="text" class="form-control" name="writer" th:value="${dto.userIdx}" readonly>-->
-<!--        </div>-->
+        <div class="form-group">
+            <label>작성자</label>
+            <input type="text" class="form-control" name="writer" th:value="${dto.userIdx}" readonly>
+        </div>
         <div class="form-group">
             <label>문의제목</label>
             <input type="text" class="form-control" name="title" th:value="${dto.title}" readonly>
@@ -39,28 +39,77 @@
         <a th:href="@{/admin/qnalist(page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
             <button type="button" class="btn btn-info">목록</button>
         </a>
-         <button th:onclick="" type="button" class="btn btn-primary modifyBtn">답변등록</button>
-             <!--문의 답글 화면 -->
-        <div class="form-group" th:action="hidden">
-            <div class="form-group">
-                <label>관리자ID</label>
-                <input type="text" class="form-control" name="adminIdx" readonly>
-            </div>
-            <div class="form-group">
-                <label>답변 내용</label>
-                <textarea rows="5" class="form-control" name="comment">[[${dto.comment}]]</textarea>
-            </div>
-            <div class="form-group">
-                <label>답변 등록일</label>
-                <input type="text" class="form-control" name="regDate"
-                       th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+        <button id="chkCommentBtn" th:onclick="dis()" type="button" class="btn btn-primary chkCommentBtn"> 답변확인 [[${dto.commentCount}]]
+        </button>
+        <button id="addCommentBtn" th:onclick="openComment()" type="button" class="btn btn-primary addCommentBtn">답변추가</button>
+        <div class="list-group commentList">
+
+        </div>
+        <!--관리자 답글 작성란 -->
+        <div th:id="adminComment">
+            <h1 class="mt-4" >문의내역 답변 </h1>
+            <div class="form-group" th:action="hidden">
+                <div class="form-group">
+                    <label>관리자ID</label>
+                    <input type="text" class="form-control" name="adminId" th:value="${dto.adminId}" readonly>
+                </div>
+                <div class="form-group">
+                    <label>답변 내용</label>
+                    <textarea rows="5" class="form-control" name="comment">[[${dto.comment}]]</textarea>
+                </div>
+                <div class="form-group">
+                    <label>답변 등록일</label>
+                    <input type="text" class="form-control" name="regDate"
+                           th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+                </div>
+                <div class="form-group">
+                    <label>답변 수정일</label>
+                    <input type="text" class="form-control" name="regDate"
+                           th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary commentSave">답변 등록</button>
+                    <button type="button" class="btn btn-warning commentModify">답변 수정</button>
+                    <button type="button" class="btn btn-danger commentRemove">답변 삭제</button>
+                    <button type="button" class="btn btn-outline-secondary commentClose">닫기</button>
+                </div>
             </div>
         </div>
-<script>
-    $("#setItemMove").show();
 
-    $("#setItemMove").hide();
+        <script th:inline="javascript">
+            // function openComment(){
+            //     if($('#adminComment').css('display') === 'block'){
+            //         $('#adminComment').show();
+            //     }else {
+            //         $('#adminComment').hide();
+            //     }
+            // }
 
-</script>
+
+            $(document).ready(function (){
+                $(document).ready(function (){
+                    $('#addCommentBtn').click(function (){
+                        $('#adminComment').fadeToggle('fast');
+                    });
+                });
+
+                /*<![CDATA[*/
+                var questionIdx = "[[${dto.questionIdx}]]";
+                /*]]>*/
+                // var listGrop =$(".commentList");
+                $(".chkCommentBtn").click(function (){
+                    $.getJSON('/admin/comments/'+questionIdx, function(arr){
+                        console.log(arr);
+                    })
+                })
+            });
+
+        </script>
+
+        <style>
+           /*css 조정하는게 버튼에 삽입되어있어야함.
+           버튼 화면 사라졌다 보였다 하는 */
+        </style>
+
     </th:block>
 </th:block>
