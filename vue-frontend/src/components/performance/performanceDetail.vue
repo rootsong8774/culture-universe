@@ -112,13 +112,13 @@ export default {
       noInfo: '공연 정보가 아직 준비되지 않았습니다.',
       performData: {}
     }
-  },
+  }/*,
   props: {
     performCode: {
       type: String,
       default: ''
     }
-  }
+  }*/
   ,
   created() {
     this.getDetails();
@@ -152,7 +152,7 @@ export default {
       axios({
         url: '/api/performancesDetails',
         params: {
-          performCode: this.performCode,
+          performCode: this.$route.query.performCode,
         },
         method: 'get',
       }).then(response => {

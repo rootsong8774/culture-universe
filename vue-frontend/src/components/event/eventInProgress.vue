@@ -22,7 +22,7 @@
                       <div class="single-news-box news-mb-20">
                         <div class="news-box-bg">
 
-                          <img src="../assets/images/SJ/event.jpg" alt="이벤트이미지">
+                          <img src="src/assets/images/SJ/event.jpg" alt="이벤트이미지">
                           <div class="isotope-overlay">
                             <a>
                               <span class="lnr lnr-link"></span>
@@ -42,55 +42,25 @@
                       </div><!--/.single-news-box-->
                     </router-link>
                   </div><!--.col-->
-
-                  <div class=" col-sm-6">
-                    <router-link :to="{name: 'eventInProgressDetails'}">
-                      <div class="single-news-box news-mb-20">
-                        <div class="news-box-bg">
-                          <img src="../assets/images/SJ/event.jpg" alt="두번째이미지">
-                          <div class="isotope-overlay">
-                            <a>
-                              <span class="lnr lnr-link"></span>
-                            </a>
-                          </div>
-
-                        </div><!--/.team-box-bg-->
-                        <div class="news-box-inner">
-                          <h3>
-                            <a>
-                              댓글 이벤트 2
-                            </a>
-                          </h3>
-                          <p class="news-meta">
-                            이벤트 기간:2022.02.03~2022.04.16
-                          </p>
-                          <!-- <a href="#" class="learn-btn">
-                            learn more
-                          </a> -->
-                        </div><!--/.news-box-inner-->
-                      </div><!--/.single-news-box-->
-                    </router-link>
-                  </div><!--.col-->
-
-                  <div class="pagination-part text-center">
-                    <ul class="pagination">
-                      <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a>
-                      </li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li>
-                        <a href="#">
-                          Next
-                          <span class="fa fa-angle-right">
-													</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div><!--/.pagination-part(&raquo;)-->
                 </div><!--/.blog-left-->
               </div><!--/.row-->
             </div><!--/.news-card-->
           </div><!--/news-details-->
+          <div class="pagination-part text-center">
+            <ul class="pagination">
+              <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a>
+              </li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li>
+                <a href="#">
+                  Next
+                  <span class="fa fa-angle-right">
+													</span>
+                </a>
+              </li>
+            </ul>
+          </div><!--/.pagination-part(&raquo;)-->
         </div><!--/.container-->
       </div>
     </section><!--/news-->

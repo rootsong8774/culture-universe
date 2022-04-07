@@ -1,20 +1,20 @@
 import Vue from "vue";
 import VueRouter from 'vue-router'
 import MainPage from "../components/mainPage";
-import performanceDetail from "../components/performanceDetail";
-import SjFacility from "../components/SjFacility";
-import SjIntroduction from "../components/SjIntroduction";
-import performanceReservation from "../components/performanceReservation";
-import performanceList from "../components/performanceList";
-import qna from "../components/qna";
-import SjDirections from "../components/SjDirections";
-import notice from "../components/notice";
-import faq from "../components/faq";
-import eventInProgress from "../components/eventInProgress";
-import eventInProgressDetails from "../components/eventInProgressDetails";
-import eventWinner from "../components/eventWinner";
-import eventClosed from "../components/eventClosed";
-import eventClosedDetails from "../components/eventClosedDetails";
+import performanceDetail from "../components/performance/performanceDetail";
+import SjFacility from "../components/introduction/SjFacility";
+import SjIntroduction from "../components/introduction/SjIntroduction";
+import performanceReservation from "../components/performance/performanceReservation";
+import performanceList from "../components/performance/performanceList";
+import qna from "../components/supports/qna";
+import SjDirections from "../components/introduction/SjDirections";
+import notice from "../components/supports/notice";
+import faq from "../components/supports/faq";
+import eventInProgress from "../components/event/eventInProgress";
+import eventInProgressDetails from "../components/event/eventInProgressDetails";
+import eventWinner from "../components/event/eventWinner";
+import eventClosed from "../components/event/eventClosed";
+import eventClosedDetails from "../components/event/eventClosedDetails";
 import myPage from "../components/myPage";
 
 Vue.use(VueRouter)
@@ -34,7 +34,9 @@ const router = new VueRouter({
       name: 'performanceDetail',
       path: '/performances/performanceDetail',
       component: performanceDetail,
-      props: true
+      props: (route) => ({
+        performCode: route.query.performCode
+      })
     },
     {
       name: 'performanceReservation',
@@ -47,8 +49,11 @@ const router = new VueRouter({
     },
     {
       name: 'performanceList',
-      path: '/performances/performanceList/:page',
+      path: '/performances/performanceList',
       component: performanceList,
+      props: (route) => ({
+        page: route.query.page
+      })
     },
     {
       name: 'eventInProgress',

@@ -73,7 +73,7 @@
 
                 <p class="result-genre">{{ result.genreName }}</p>
                 <router-link
-                  :to="{name: 'performanceDetail', params: {performCode: result.performCode}}"
+                  :to="{name: 'performanceDetail', query: {performCode: result.performCode}}"
                   class="btn btn-default m-top-20">
                   View Details <i class="fa fa-long-arrow-right"></i>
                 </router-link>
@@ -187,6 +187,10 @@ export default {
   watch: {
     page: function () {
       this.getList();
+      this.$router.push({
+        name: "performanceList",
+        query: {page: this.page},
+      })
     }
   }
 

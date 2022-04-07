@@ -79,7 +79,7 @@ hr {
 
 #tabs a {
   float: left;
-  background: url("../assets/images/SJ/tableft.gif") no-repeat left top;
+  background: url("../../assets/images/SJ/tableft.gif") no-repeat left top;
   margin: 0;
   padding: 0 0 0 7px;
   text-decoration: none;
@@ -88,7 +88,7 @@ hr {
 #tabs a span {
   float: left;
   display: block;
-  background: url("../assets/images/SJ/tabright.gif") no-repeat right top;
+  background: url("../../assets/images/SJ/tableft.gif") no-repeat right top;
   padding: 5px 15px 4px 6px;
   color: #6b78a9;
 }

@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import LayoutHeader from "../header";
-import LayoutFooter from "../footer";
+import LayoutHeader from "./header";
+import LayoutFooter from "./footer";
 
 
 export default {

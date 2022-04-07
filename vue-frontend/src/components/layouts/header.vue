@@ -85,7 +85,8 @@
               <i class="fa fa-bars"></i>
             </button>
             <router-link :to="{name:'main'}" class="navbar-brand">
-              <img src="../assets/images/logo.png" class="logo logo-display" alt="">
+              <img src="src/assets/images/logo.png" class="logo logo-display" alt="">
+              <img src="src/assets/images/logo.png" class="logo logo-scrolled" alt="">
             </router-link>
           </div>
           <!-- End Header Navigation -->
@@ -94,10 +95,10 @@
           <div class="collapse navbar-collapse" id="navbar-menu">
             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
               <li class="dropdown">
-                <router-link :to="{name:'performanceList'}">공연</router-link>
+                <router-link :to="{name:'performanceList', params: {page: 1}}">공연</router-link>
                 <ul class="dropdown-menu">
                   <li>
-                    <router-link :to="{name: 'performanceList'}">공연일정</router-link>
+                    <router-link :to="{name: 'performanceList', params: {page: 1}}">공연일정</router-link>
                   </li>
                   <li><a href="#">공연달력</a></li>
                   <li><a href="#">좌석배치도</a></li>
@@ -180,7 +181,7 @@
               <!-- register modal -->
               <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
                    aria-labelledby="myLargeModalLabel">
-                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -199,14 +200,6 @@
                         <label>비밀번호 :</label>
                         <input type="text" class="form-control" placeholder="Enter Password"
                                v-model:name="password">
-                        <!--                        <label>생년월일 :</label>-->
-                        <!--                        <input type="date" class="form-control" placeholder="Enter Birth" v-model:name="birth">-->
-                        <!--                        <label>성별 :</label><br>-->
-                        <!--                        <select name="gender">-->
-                        <!--                          <option value="none">=== 선택 ===</option>-->
-                        <!--                          <option value="men">남</option>-->
-                        <!--                          <option value="women">여</option>-->
-                        <!--                        </select><br>-->
                         <label>이메일 :</label>
                         <input type="email" class="form-control" placeholder="Enter Email"
                                v-model:name="email">
@@ -396,6 +389,10 @@ export default {
 .remember {
   padding: 1px;
   text-align: left;
+}
+
+form {
+  text-align: left !important;
 }
 
 /*modal box location*/

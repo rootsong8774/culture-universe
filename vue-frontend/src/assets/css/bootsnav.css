@@ -1274,7 +1274,7 @@ body.on-side .wrap-sticky nav.navbar.bootsnav.sticked {
   /* Navbar Sidebar
   =================================*/
   nav.navbar.bootsnav.navbar-sidebar .share {
-    padding: 30px 15px;
+    padding: 15px 15px;
     margin-bottom: 0;
   }
 
@@ -1426,7 +1426,7 @@ body.on-side .wrap-sticky nav.navbar.bootsnav.sticked {
   /* Navbar Sidebar
   =================================*/
   nav.navbar.bootsnav.navbar-sidebar .share {
-    padding: 30px 15px !important;
+    padding: 15px 15px !important;
   }
 
   /* Navbar Sidebar
@@ -1437,7 +1437,7 @@ body.on-side .wrap-sticky nav.navbar.bootsnav.sticked {
   }
 
   nav.navbar.bootsnav.navbar-mobile.navbar-sidebar .share {
-    padding: 30px 15px !important;
+    padding: 15px 15px !important;
     margin-bottom: 0;
   }
 
