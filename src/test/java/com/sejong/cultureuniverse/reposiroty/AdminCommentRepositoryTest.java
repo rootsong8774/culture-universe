@@ -55,7 +55,7 @@ public class AdminCommentRepositoryTest {
 
     @Test
     public void testListByQnaBoard(){
-        List<Object[]> commentList = adminCommentRepository.getCommentOrderByquestionIdx(18L);
+        List<Object[]> commentList = adminCommentRepository.getCommentOrderByQuestionIdx(18L);
         commentList.forEach(System.out::println);
     }
 

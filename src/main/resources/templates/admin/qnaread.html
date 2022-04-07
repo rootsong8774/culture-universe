@@ -39,77 +39,161 @@
         <a th:href="@{/admin/qnalist(page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
             <button type="button" class="btn btn-info">목록</button>
         </a>
-        <button id="chkCommentBtn" th:onclick="dis()" type="button" class="btn btn-primary chkCommentBtn"> 답변확인 [[${dto.commentCount}]]
+        <button id="chkCommentBtn" th:onclick="" type="button" class="btn btn-primary commentCount"> 답변확인 [[${dto.commentCount}]]
         </button>
-        <button id="addCommentBtn" th:onclick="openComment()" type="button" class="btn btn-primary addCommentBtn">답변추가</button>
+        <button id="closeCommentBtn" th:onclick="openComment()" type="button" class="btn btn-outline-secondary commentClose">닫기</button>
         <div class="list-group commentList">
 
         </div>
         <!--관리자 답글 작성란 -->
-        <div th:id="adminComment">
-            <h1 class="mt-4" >문의내역 답변 </h1>
-            <div class="form-group" th:action="hidden">
-                <div class="form-group">
+        <div th:id="adminCommentBox" class="adminCommentBox">
+            <h2 class="mt-4" >문의내역 답변 </h2>
+            <div class="form-group" th:each="adminComment :${adminCommentList}">
+                <div class="form-group"  th:id="'comment--' + ${adminComment.commentIdx}">
                     <label>관리자ID</label>
-                    <input type="text" class="form-control" name="adminId" th:value="${dto.adminId}" readonly>
+                    <input type="text" class="form-control" name="adminId" th:text="${adminComment.adminIdx}" readonly>
+<!--관리자 아이디 삽입되어야하는 부분  th:value="${dto.admin.adminId}"-->
                 </div>
                 <div class="form-group">
                     <label>답변 내용</label>
-                    <textarea rows="5" class="form-control" name="comment">[[${dto.comment}]]</textarea>
-                </div>
-                <div class="form-group">
-                    <label>답변 등록일</label>
-                    <input type="text" class="form-control" name="regDate"
-                           th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+                    <textarea rows="5" class="form-control" id="commentContent"  th:text="${adminComment.commentContent}"></textarea>
                 </div>
                 <div class="form-group">
                     <label>답변 수정일</label>
-                    <input type="text" class="form-control" name="regDate"
-                           th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+                    <input type="text" class="form-control" name="modDate" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+<!--                     th:value="${#temporals.format(dto.admin.modDate, 'yyyy/MM/dd HH:mm:ss') -->
+                </div>
+                <div class="form-group">
+                    <label>답변 등록일</label>
+                    <input type="text" class="form-control" name="regDate" th:text="${adminComment.regDate}" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd')}" readonly>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary commentSave">답변 등록</button>
-                    <button type="button" class="btn btn-warning commentModify">답변 수정</button>
-                    <button type="button" class="btn btn-danger commentRemove">답변 삭제</button>
-                    <button type="button" class="btn btn-outline-secondary commentClose">닫기</button>
+                    <button type="button" class="btn btn-primary commentSave" id="commentSave">답변 등록</button>
+                    <button type="button" class="btn btn-warning commentModify" id="commentModify">답변 수정</button>
+                    <button th:onclick="|adminCommentIndex.adminCommentDelete('${qna.questionIdx}', '${adminCommentIdx}')|"
+                            type="button" class="btn btn-danger commentRemove" id="commentRemove">답변 삭제</button>
+
                 </div>
             </div>
         </div>
 
         <script th:inline="javascript">
-            // function openComment(){
-            //     if($('#adminComment').css('display') === 'block'){
-            //         $('#adminComment').show();
-            //     }else {
-            //         $('#adminComment').hide();
-            //     }
-            // }
-
-
-            $(document).ready(function (){
-                $(document).ready(function (){
-                    $('#addCommentBtn').click(function (){
-                        $('#adminComment').fadeToggle('fast');
+            $(document).ready(function () {
+                $(document).ready(function () {
+                    $('#closeCommentBtn').click(function () {
+                        $('#adminCommentBox').fadeToggle('fast');
                     });
-                });
+                }); //closedBtn
+                let adminCommentIndex = {
+                    init: function () {
+                        $("#commentSave").on("click", () => {
+                            this.commentSave();
+                        });
+                    },
+
+                    commentSave: function () {
+                        let data = {
+                            content: $("#commentContent").val(),
+                        }
+                        let questionIdx = $("#questionIdx").val();
+                        console.log(data);
+                        console.log(questionIdx);
+                        $.ajax({
+                            type: "POST",
+                            url: `/qna/${questionIdx}/adminComment`,
+                            data: JSON.stringify(data),
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "text"
+                        }).done(function (res) {
+                            alert("댓글작성이 완료되었습니다.");
+                            location.href = `/qna/${questionIdx}`;
+                        }).fail(function (err) {
+                            alert(JSON.stringify(err));
+                        });
+                    },  commentRemove: function (questionIdx, commentIdx) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: `/qna/${questionIdx}/adminComment/${commentIdx}`,
+                            dataType: "text"
+                        }).done(function (res) {
+                            alert("댓글삭제가 완료되었습니다.");
+                            location.href = `/qna/${questionIdx}`;
+                        }).fail(function (err) {
+                            alert(JSON.stringify(err));
+                        });
+                    }
+                }
+
+                adminCommentIndex.init();
+
 
                 /*<![CDATA[*/
                 var questionIdx = "[[${dto.questionIdx}]]";
                 /*]]>*/
-                // var listGrop =$(".commentList");
-                $(".chkCommentBtn").click(function (){
-                    $.getJSON('/admin/comments/'+questionIdx, function(arr){
+                $(".commentCount").click(function (){
+                    $.getJSON('/admin/'+questionIdx, function(arr){
                         console.log(arr);
                     })
-                })
-            });
+                }) //json click
+
+                // var listGroup =$(".commentList");
+                // function formatTime(str){
+                //     var date = new Date(str);
+                //     return date.getFullYear()+'/'+
+                //         (date.getMonth()+1)+'/'+
+                //         date.getDate()+' '
+                // } //reg mod time
+                //
+                // function loadJsonData(){
+                //     $.getJSON('/admincomments/qna/' + questionIdx, function (arr) {
+                //         console.log(arr);
+                //
+                //         var str = "";
+                //         $('.commentCount').html("Comment Count" + arr.length);
+                //         $.each(arr, funtion(idx, comment){
+                //             console.log(comment);
+                //             str += '  <div class="form-group" data-questionIdx="' + comment.commentIdx + '"><b>' + comment.commentIdx + '</b>';
+                //             str += ' <h5 class="form-group"> ' + comment.comment + '</h5>';
+                //             str += '  <p class="form-group">' + formatTime(comment.regDate) + '</p>';
+                //             str += '  <p class="form-group">' + formatTime(comment.modDate) + '</p>';
+                //             str += '    </div>';
+                //         })
+                //         listGroup.html(str);
+                //     });
+                // }
+                // $(".commentCount").click(function (){
+                //     loadJsonData();
+                // })
+                //
+                // var commentCountBox = $('.commentCountBox');
+                //
+                // $(".commentSave").click(function (){
+                //    var comment = {
+                //        questionIdx: questionIdx,
+                //        adminId: adminId,
+                //        title: $('input[name="adminComment"]').val()
+                //    }
+                //    console.log(comment);
+                //    $.ajax({
+                //        url: '/admincomments/',
+                //        method: 'post',
+                //        data: JSON.stringify(comment),
+                //        contentType: 'application/json; charser=utf-8',
+                //        dataType:'json',
+                //        success: function (data){
+                //            console.log(data);
+                //
+                //            alert("답변이 등록되었습니다.")
+                //            commentCountBox.commentCountBox('hide');
+                //            loadJsonData();
+                //        }
+                //
+                //    })
+                // });
+
+            }); //main
 
         </script>
-
-        <style>
-           /*css 조정하는게 버튼에 삽입되어있어야함.
-           버튼 화면 사라졌다 보였다 하는 */
-        </style>
 
     </th:block>
 </th:block>

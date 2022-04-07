@@ -1,5 +1,6 @@
 package com.sejong.cultureuniverse.entity.admin;
 
+import com.sejong.cultureuniverse.entity.Member;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,6 +22,11 @@ public class AdminComment {
     private LocalDateTime modDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_idx")
+    @ToString.Exclude
+    private Member member; //회원
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_id")
     @ToString.Exclude
     private Admin admin; //작성자
@@ -30,4 +36,9 @@ public class AdminComment {
     @ToString.Exclude
     private Qna qna;    //문의번호
 
+
+    public void save(Qna qna, Member member) {
+        this.qna = qna;
+        this.member = member;
+    }
 }

@@ -10,8 +10,9 @@ import java.util.List;
 
 public interface AdminCommentRepository extends JpaRepository<AdminComment,Long> {
 //게시물로 댓글 가져오기
-    @Query("select ac,a,q from AdminComment ac left join Admin a on ac.admin = a left join Qna q " +
-        "on q = ac.qna where ac.qna.questionIdx =:questionIdx  ")
-    List<Object[]> getCommentOrderByquestionIdx(@Param("questionIdx") Long questionIdx);
+    @Query("select ac,a,q from AdminComment ac " +
+        " left join fetch Admin a on ac.admin = a left join fetch Qna q on q = ac.qna " +
+        " where ac.qna.questionIdx =:questionIdx " )
+    List<Object[]> getCommentOrderByQuestionIdx(@Param("questionIdx") Long questionIdx);
 
 }
