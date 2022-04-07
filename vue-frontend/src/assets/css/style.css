@@ -478,10 +478,16 @@ Button
   color: #fff;
 }
 
+
+
 .btn-success {
 }
 
 .btn-info {
+  border: 2px solid;
+  border-color: #333333;
+  padding: 0.8rem 1.5rem;
+  border-radius: 30px;
 }
 
 .btn-warning {

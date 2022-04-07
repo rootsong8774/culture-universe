@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Log4j2
 public class PerformancesServiceImpl implements PerformancesService {
-
+    
     private final PerformanceDetailsRepository performanceDetailsRepository;
 
     @Override
@@ -46,6 +46,7 @@ public class PerformancesServiceImpl implements PerformancesService {
     public PerformanceDetailsDto getPerformanceDetail(String performCode) {
         Optional<PerformanceDetails> result = performanceDetailsRepository.findByPerformCode(
             performCode);
+       
         return result.map(this::entityToDetailsDTO).orElse(null);
     }
     

@@ -47,7 +47,7 @@ const router = new VueRouter({
     },
     {
       name: 'performanceList',
-      path: '/performances/performanceList',
+      path: '/performances/performanceList/:page',
       component: performanceList,
     },
     {

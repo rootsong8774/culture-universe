@@ -57,15 +57,24 @@
           <div class="main-gallery main-model roomy-80">
             <div style="clear: both;"></div>
             <div class="grid models text-center">
-              <div class="grid-item model-item transition metal ium" v-for="(result,index) in resultList" :key="index">
+              <div class="grid-item model-item transition metal ium"
+                   v-for="(result,index) in resultList" :key="index">
                 <img :src="result.fileUrlMi" :alt="result.title">
                 <input type="hidden" name="performCode" v-model:value="result.performCode">
                 <strong class="result-title">{{ result.title }}</strong>
-                <span class="result-date">
-                  {{ result.startDate | yyyyMMdd }} - {{ result.endDate | yyyyMMdd }}
-                </span>
+
+                <span class="result-date"
+                      v-if="JSON.stringify(result.startDate)!==JSON.stringify(result.endDate)">
+                      {{ result.startDate | yyyyMMdd }} -
+                      {{ result.endDate | yyyyMMdd }} </span>
+                <span class="result-date" v-else>{{
+                    result.startDate | yyyyMMdd
+                  }}</span>
+
                 <p class="result-genre">{{ result.genreName }}</p>
-                <router-link :to="{name: 'performanceDetail', params: {performCode: result.performCode}}" class="btn btn-default m-top-20">
+                <router-link
+                  :to="{name: 'performanceDetail', params: {performCode: result.performCode}}"
+                  class="btn btn-default m-top-20">
                   View Details <i class="fa fa-long-arrow-right"></i>
                 </router-link>
               </div><!-- End off grid item -->
@@ -75,10 +84,11 @@
               <ul class="pagination h-100 justify-content-center align-items-center">
 
                 <li class="page-item " v-if="pageData.prev">
-                  <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1" style="cursor:pointer;">Previous</a>
+                  <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
+                     style="cursor:pointer;">Previous</a>
                 </li>
 
-                <li  class="page-item" :class=" (pageData.page === page)? 'active' : '' "
+                <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
                     v-for="page in pageData.pageList">
                   <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
                     {{ page }}
@@ -195,9 +205,11 @@ export default {
   overflow: hidden;
   text-align: left;
 }
-.result-date{
+
+.result-date {
   float: left;
 }
+
 .result-genre {
   float: right;
 }
@@ -321,6 +333,7 @@ export default {
 .nav1 > li > a {
   color: #fff;
 }
+
 #pagination-margin {
   margin-top: 40px;
 }

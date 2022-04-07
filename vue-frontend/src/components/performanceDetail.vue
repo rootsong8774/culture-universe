@@ -9,7 +9,7 @@
                 <img :src="performData.fileUrlMi" alt="" style="width: 350px"/>
               </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
               <div class="m_details_content m-bottom-40">
                 <h2>{{ performData.title }}</h2>
               </div>
@@ -24,9 +24,11 @@
                     <p>티켓</p>
                     <p>문의</p>
                   </div>
-                  <div class="col-md-10 text-left">
-                    <p> {{ performData.startDate | yyyyMMdd }} ({{ performData.dayOfStartDate }}) -
+                  <div class="col-md-8 text-left">
+                    <p v-if="JSON.stringify(performData.startDate)!==JSON.stringify(performData.endDate)">
+                      {{ performData.startDate | yyyyMMdd }} ({{ performData.dayOfStartDate }}) -
                       {{ performData.endDate | yyyyMMdd }} ({{ performData.dayOfEndDate }})</p>
+                    <p v-else>{{ performData.startDate | yyyyMMdd }} ({{ performData.dayOfStartDate }})</p>
                     <p>{{ performData.placeName }}</p>
                     <p>{{ performData.playTime }}</p>
                     <p>{{ performData.audienceAge }}</p>
@@ -34,7 +36,17 @@
                     <p>{{ performData.inquiryPhone }}</p>
                   </div>
                 </div>
+                <hr>
+
+                <div class="m-top-20">
+                  <div class="row">
+                    <button type="button" class="col-md-3 btn btn-default">⭐ 관심공연</button>
+                    <button type="button" class="col-md-3 btn btn-primary" @click="reservation">예매하기</button>
+                  </div>
+                </div>
               </div>
+
+
             </div>
           </div>
         </div>
@@ -48,7 +60,7 @@
             <div style="margin:10px;">
               <ul class="nav nav-tabs clearfix li3">
                 <li class="active"><a href="#introduce" data-toggle="tab">작품소개</a></li>
-                <li><a href="#reservation" data-toggle="tab">예매안내</a></li>
+                <li><a href="#reservation" data-toggle="tab">취소 및 환불안내</a></li>
                 <li><a href="#comment" data-toggle="tab">후기평</a></li>
               </ul>
             </div>
@@ -56,17 +68,28 @@
             <div class="tab-content">
               <div class="tab-pane fade in active" id="introduce">
                 <div class="col-md-10 col-md-offset-1">
-                  <div v-if="performData.detail"  v-html="performData.detail"></div>
+                  <div v-if="performData.detail" v-html="performData.detail"></div>
                   <div v-else-if="performData.info" v-html="performData.info"></div>
-                  <p v-else>{{noInfo}}</p>
+                  <p v-else>{{ noInfo }}</p>
                 </div>
               </div>
-              <div class="tab-pane fade" id="reservation">예매안내</div>
-              <div class="tab-pane fade" id="comment">후기평</div>
+
+              <div class="tab-pane fade" id="reservation">
+                <div class="col-md-10 col-md-offset-1">
+                  예매 안내
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="comment">
+                <div class="col-md-10 col-md-offset-1">
+                  후기
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>>
+      </div>
+      >
     </section>
 
 
@@ -93,7 +116,7 @@ export default {
   props: {
     performCode: {
       type: String,
-      default : ''
+      default: ''
     }
   }
   ,
@@ -136,6 +159,9 @@ export default {
         this.performData = response.data
 
       })
+    },
+    reservation: function () {
+      this.$router.push({name: 'performanceReservation'})
     },
 
   },
