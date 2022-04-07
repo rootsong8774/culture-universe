@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class PerformanceDetailsFeignDto implements Serializable {
+public class PerformanceDetailsFeignDTO implements Serializable {
 
     @JsonProperty("PERFORM_CODE")
     private String performCode;

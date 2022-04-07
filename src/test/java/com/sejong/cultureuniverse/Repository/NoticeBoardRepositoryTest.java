@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.Repository;
+package com.sejong.cultureuniverse.repository;
 
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
