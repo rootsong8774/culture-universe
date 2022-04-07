@@ -2,8 +2,8 @@ package com.sejong.cultureuniverse.service.performances;
 
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
-import com.sejong.cultureuniverse.dto.PerformanceDetailsDto;
-import com.sejong.cultureuniverse.dto.PerformanceListDto;
+import com.sejong.cultureuniverse.dto.PerformanceDetailsDTO;
+import com.sejong.cultureuniverse.dto.PerformanceListDTO;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import com.sejong.cultureuniverse.repository.PerformanceDetailsRepository;
 import java.util.Optional;
@@ -22,9 +22,9 @@ public class PerformancesServiceImpl implements PerformancesService {
     private final PerformanceDetailsRepository performanceDetailsRepository;
 
     @Override
-    public PageResultDTO<PerformanceListDto, PerformanceDetails> getList(PageRequestDTO pageRequestDTO) {
+    public PageResultDTO<PerformanceListDTO, PerformanceDetails> getList(PageRequestDTO pageRequestDTO) {
 
-        Function<PerformanceDetails, PerformanceListDto> fn = (en-> entityToListDTO(
+        Function<PerformanceDetails, PerformanceListDTO> fn = (en-> entityToListDTO(
             PerformanceDetails.builder()
                 .performId(en.getPerformId())
                 .performCode(en.getPerformCode())
@@ -43,7 +43,7 @@ public class PerformancesServiceImpl implements PerformancesService {
     }
     
     @Override
-    public PerformanceDetailsDto getPerformanceDetail(String performCode) {
+    public PerformanceDetailsDTO getPerformanceDetail(String performCode) {
         Optional<PerformanceDetails> result = performanceDetailsRepository.findByPerformCode(
             performCode);
        

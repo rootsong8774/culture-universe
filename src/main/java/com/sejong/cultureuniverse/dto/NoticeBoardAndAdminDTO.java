@@ -1,10 +1,8 @@
 package com.sejong.cultureuniverse.dto;
 
-import com.sejong.cultureuniverse.entity.admin.Admin;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import lombok.experimental.SuperBuilder;
 
 @Builder
 @Getter
@@ -12,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @ToString
 @Data
-public class NoticeBoardAndAdminDto {
+public class NoticeBoardAndAdminDTO {
     private Long noticeIdx;
 
     private String adminId;

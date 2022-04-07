@@ -1,30 +1,28 @@
 package com.sejong.cultureuniverse.service;
 
 
-import com.sejong.cultureuniverse.dto.EventBoardDto;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
-import com.sejong.cultureuniverse.dto.WinnerBoardDto;
+import com.sejong.cultureuniverse.dto.WinnerBoardDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventWinner;
-import org.springframework.stereotype.Service;
 
 
 public interface WinnerBoardService {
 
-    Long register(WinnerBoardDto dto);
+    Long register(WinnerBoardDTO dto);
 
-    PageResultDTO<WinnerBoardDto, Object[]> getList(PageRequestDTO requestDTO);
+    PageResultDTO<WinnerBoardDTO, Object[]> getList(PageRequestDTO requestDTO);
 
-    WinnerBoardDto read(Long winnerIdx);
+    WinnerBoardDTO read(Long winnerIdx);
 
-    void modify(WinnerBoardDto dto);
+    void modify(WinnerBoardDTO dto);
 
     void remove(Long winnerIdx);
 
 
-    default WinnerBoardDto entityToDto(EventWinner entity, Admin admin) {
-        return WinnerBoardDto.builder()
+    default WinnerBoardDTO entityToDto(EventWinner entity, Admin admin) {
+        return WinnerBoardDTO.builder()
             .winnerIdx(entity.getWinnerIdx())
             .winTitle(entity.getWinTitle())
             .winContent(entity.getWinContent())
@@ -35,7 +33,7 @@ public interface WinnerBoardService {
             .build();
     }
 
-    default EventWinner dtoToEntity(WinnerBoardDto dto) {
+    default EventWinner dtoToEntity(WinnerBoardDTO dto) {
         return EventWinner.builder()
             .winnerIdx(dto.getWinnerIdx())
             .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))

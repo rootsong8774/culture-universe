@@ -1,7 +1,7 @@
 package com.sejong.cultureuniverse.controller;
 
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
-import com.sejong.cultureuniverse.dto.WinnerBoardDto;
+import com.sejong.cultureuniverse.dto.WinnerBoardDTO;
 import com.sejong.cultureuniverse.service.WinnerBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -40,7 +40,7 @@ public class WinnerBoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(WinnerBoardDto dto, RedirectAttributes redirectAttributes) {
+    public String registerPost(WinnerBoardDTO dto, RedirectAttributes redirectAttributes) {
         log.info("dto...." + dto);
 
         Long winnerIdx = service.register(dto);
@@ -55,7 +55,7 @@ public class WinnerBoardController {
         Model model) {
         log.info("winnerIdx: " + winnerIdx);
 
-        WinnerBoardDto dto = service.read(winnerIdx);
+        WinnerBoardDTO dto = service.read(winnerIdx);
 
         model.addAttribute("dto", dto);
     }
@@ -72,7 +72,7 @@ public class WinnerBoardController {
     }
 
     @PostMapping("/modify")
-    public String modify(WinnerBoardDto dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+    public String modify(WinnerBoardDTO dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
         RedirectAttributes redirectAttributes) {
         log.info("post modify..............................");
         log.info("dto: " + dto);

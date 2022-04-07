@@ -1,11 +1,7 @@
 package com.sejong.cultureuniverse.dto;
 
 import java.io.Serializable;
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.time.format.TextStyle;
-import java.util.Locale;
-import javax.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,7 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class PerformanceDetailsDto implements Serializable {
+public class PerformanceDetailsDTO implements Serializable {
 
     private Long performId;
     

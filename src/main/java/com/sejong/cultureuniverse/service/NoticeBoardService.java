@@ -1,6 +1,6 @@
 package com.sejong.cultureuniverse.service;
 
-import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDto;
+import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDTO;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
@@ -9,19 +9,19 @@ import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 
 public interface NoticeBoardService {
 
-    Long register(NoticeBoardAndAdminDto dto);
+    Long register(NoticeBoardAndAdminDTO dto);
 
-    PageResultDTO<NoticeBoardAndAdminDto, Object[]> getList(PageRequestDTO requestDTO);
+    PageResultDTO<NoticeBoardAndAdminDTO, Object[]> getList(PageRequestDTO requestDTO);
 
-    NoticeBoardAndAdminDto read(Long noticeIdx);
+    NoticeBoardAndAdminDTO read(Long noticeIdx);
 
-    void modify(NoticeBoardAndAdminDto dto);
+    void modify(NoticeBoardAndAdminDTO dto);
 
     void remove(Long noticeIdx);
 //db->화면
-    default NoticeBoardAndAdminDto entityToDto(NoticeBoard entity, Admin admin) {
+    default NoticeBoardAndAdminDTO entityToDto(NoticeBoard entity, Admin admin) {
 
-        return NoticeBoardAndAdminDto.builder()
+        return NoticeBoardAndAdminDTO.builder()
             .noticeIdx(entity.getNoticeIdx())
             .noticeTitle(entity.getNoticeTitle())
             .noticeContent(entity.getNoticeContent())
@@ -33,7 +33,7 @@ public interface NoticeBoardService {
 
     }
 //화면->db
-    default NoticeBoard noticeAndAdminToEntity(NoticeBoardAndAdminDto dto) {
+    default NoticeBoard noticeAndAdminToEntity(NoticeBoardAndAdminDTO dto) {
         return NoticeBoard.builder()
             .noticeIdx(dto.getNoticeIdx())
             .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))

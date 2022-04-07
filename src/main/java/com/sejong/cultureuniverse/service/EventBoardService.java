@@ -1,29 +1,27 @@
 package com.sejong.cultureuniverse.service;
 
 
-import com.sejong.cultureuniverse.dto.EventBoardDto;
+import com.sejong.cultureuniverse.dto.EventBoardDTO;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
-import org.springframework.stereotype.Service;
-
 
 
 public interface EventBoardService {
-    Long register(EventBoardDto dto);
+    Long register(EventBoardDTO dto);
 
-    PageResultDTO<EventBoardDto, Object[]> getList(PageRequestDTO requestDTO);
+    PageResultDTO<EventBoardDTO, Object[]> getList(PageRequestDTO requestDTO);
 
-    EventBoardDto read(Long eventIdx);
+    EventBoardDTO read(Long eventIdx);
 
-    void modify(EventBoardDto dto);
+    void modify(EventBoardDTO dto);
 
     void remove(Long eventIdx);
 
-    default EventBoardDto entityToDto(EventBoard entity, Admin admin) {
+    default EventBoardDTO entityToDto(EventBoard entity, Admin admin) {
 
-        return EventBoardDto.builder()
+        return EventBoardDTO.builder()
             .eventIdx(entity.getEventIdx())
             .eventTitle(entity.getEventTitle())
             .eventContent(entity.getEventContent())
@@ -34,7 +32,7 @@ public interface EventBoardService {
             .build();
     }
 
-    default EventBoard dtoToEntity(EventBoardDto dto) {
+    default EventBoard dtoToEntity(EventBoardDTO dto) {
         return EventBoard.builder()
                 .eventIdx(dto.getEventIdx())
                 .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))

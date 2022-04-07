@@ -1,6 +1,6 @@
 package com.sejong.cultureuniverse.controller;
 
-import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDto;
+import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDTO;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.service.NoticeBoardService;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +41,7 @@ public class NoticeBoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(NoticeBoardAndAdminDto dto, RedirectAttributes redirectAttributes) {
+    public String registerPost(NoticeBoardAndAdminDTO dto, RedirectAttributes redirectAttributes) {
         log.info("dto...." + dto.toString());
 
         Long noticeIdx = service.register(dto);
@@ -56,7 +56,7 @@ public class NoticeBoardController {
         Model model) {
         log.info("noticeIdx : " + noticeIdx);
 
-        NoticeBoardAndAdminDto dto = service.read(noticeIdx);
+        NoticeBoardAndAdminDTO dto = service.read(noticeIdx);
 
         model.addAttribute("dto", dto);
     }
@@ -73,7 +73,7 @@ public class NoticeBoardController {
     }
 
     @PostMapping("/modify")
-    public String modify(NoticeBoardAndAdminDto dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+    public String modify(NoticeBoardAndAdminDTO dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
         RedirectAttributes redirectAttributes) {
         log.info("post modify..............................");
         log.info("dto: " + dto);

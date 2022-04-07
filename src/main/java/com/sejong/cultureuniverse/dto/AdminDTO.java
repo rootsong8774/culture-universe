@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AdminDto {
+public class AdminDTO {
     private String adminId;
    // private String adminPw;
 }

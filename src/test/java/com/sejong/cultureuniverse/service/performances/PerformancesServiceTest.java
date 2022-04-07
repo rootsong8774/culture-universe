@@ -1,8 +1,8 @@
 package com.sejong.cultureuniverse.service.performances;
 
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
-import com.sejong.cultureuniverse.dto.PerformanceDetailsDto;
-import com.sejong.cultureuniverse.dto.PerformanceListDto;
+import com.sejong.cultureuniverse.dto.PerformanceDetailsDTO;
+import com.sejong.cultureuniverse.dto.PerformanceListDTO;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +17,16 @@ class PerformancesServiceTest {
     @Test
     void getList() {
         PageRequestDTO pageRequestDTO = new PageRequestDTO();
-        List<PerformanceListDto> result = performancesService.getList(pageRequestDTO).getDtoList();
+        List<PerformanceListDTO> result = performancesService.getList(pageRequestDTO).getDtoList();
 
-        for (PerformanceListDto performanceListDto : result) {
+        for (PerformanceListDTO performanceListDto : result) {
             System.out.println("performanceListDto = " + performanceListDto);
         }
     }
     
     @Test
     public void performanceDetailsTest() throws Exception {
-        PerformanceDetailsDto result = performancesService.getPerformanceDetail(
+        PerformanceDetailsDTO result = performancesService.getPerformanceDetail(
             "acpm2203141110a01");
         System.out.println("result = " + result);
     }

@@ -1,9 +1,5 @@
 package com.sejong.cultureuniverse.dto;
 
-import com.sejong.cultureuniverse.entity.admin.Admin;
-
-import com.sejong.cultureuniverse.entity.event.EventWinner;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import lombok.*;
@@ -13,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class WinnerBoardDto {
+public class WinnerBoardDTO {
 
     private Long winnerIdx;
 

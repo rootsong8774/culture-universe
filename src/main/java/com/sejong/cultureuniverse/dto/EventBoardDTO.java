@@ -1,8 +1,5 @@
 package com.sejong.cultureuniverse.dto;
 
-import com.sejong.cultureuniverse.entity.admin.Admin;
-import com.sejong.cultureuniverse.entity.event.EventBoard;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import lombok.*;
@@ -13,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @Data
-public class EventBoardDto {
+public class EventBoardDTO {
     private Long eventIdx;
 
     private String adminId;

@@ -1,6 +1,6 @@
 package com.sejong.cultureuniverse.controller;
 
-import com.sejong.cultureuniverse.dto.EventBoardDto;
+import com.sejong.cultureuniverse.dto.EventBoardDTO;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.service.EventBoardService;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +40,7 @@ public class EventBoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(EventBoardDto dto, RedirectAttributes redirectAttributes) {
+    public String registerPost(EventBoardDTO dto, RedirectAttributes redirectAttributes) {
         log.info("dto...." + dto);
 
         Long eventIdx = service.register(dto);
@@ -55,7 +55,7 @@ public class EventBoardController {
         Model model) {
         log.info("eventIdx: " + eventIdx);
 
-        EventBoardDto dto = service.read(eventIdx);
+        EventBoardDTO dto = service.read(eventIdx);
 
         model.addAttribute("dto", dto);
     }
@@ -72,7 +72,7 @@ public class EventBoardController {
     }
 
     @PostMapping("/modify")
-    public String modify(EventBoardDto dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+    public String modify(EventBoardDTO dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
         RedirectAttributes redirectAttributes) {
         log.info("post modify..............................");
         log.info("dto: " + dto);

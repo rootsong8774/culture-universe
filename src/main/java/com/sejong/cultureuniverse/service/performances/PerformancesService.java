@@ -2,21 +2,20 @@ package com.sejong.cultureuniverse.service.performances;
 
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
-import com.sejong.cultureuniverse.dto.PerformanceDetailsDto;
-import com.sejong.cultureuniverse.dto.PerformanceListDto;
+import com.sejong.cultureuniverse.dto.PerformanceDetailsDTO;
+import com.sejong.cultureuniverse.dto.PerformanceListDTO;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import java.time.format.TextStyle;
 import java.util.Locale;
-import java.util.Optional;
 
 public interface PerformancesService {
 
-    PageResultDTO<PerformanceListDto, PerformanceDetails> getList(PageRequestDTO pageRequestDTO);
+    PageResultDTO<PerformanceListDTO, PerformanceDetails> getList(PageRequestDTO pageRequestDTO);
     
-    PerformanceDetailsDto getPerformanceDetail(String performCode);
+    PerformanceDetailsDTO getPerformanceDetail(String performCode);
 
-    default PerformanceListDto entityToListDTO(PerformanceDetails details) {
-        return PerformanceListDto.builder()
+    default PerformanceListDTO entityToListDTO(PerformanceDetails details) {
+        return PerformanceListDTO.builder()
             .performId(details.getPerformId())
             .performCode(details.getPerformCode())
             .title(details.getTitle())
@@ -27,8 +26,8 @@ public interface PerformancesService {
             .build();
     }
     
-    default PerformanceDetailsDto entityToDetailsDTO(PerformanceDetails details) {
-        return PerformanceDetailsDto.builder()
+    default PerformanceDetailsDTO entityToDetailsDTO(PerformanceDetails details) {
+        return PerformanceDetailsDTO.builder()
             .performId(details.getPerformId())
             .performCode(details.getPerformCode())
             .title(details.getTitle())

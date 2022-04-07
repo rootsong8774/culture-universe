@@ -13,7 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class PerformanceListDto implements Serializable {
+public class PerformanceListDTO implements Serializable {
 
     private Long performId;
     

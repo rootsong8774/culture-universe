@@ -1,16 +1,13 @@
 package com.sejong.cultureuniverse.service;
 
-import com.sejong.cultureuniverse.dto.EventBoardDto;
-import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDto;
+import com.sejong.cultureuniverse.dto.EventBoardDTO;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
 
 import com.sejong.cultureuniverse.entity.admin.Admin;
-import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
 import com.sejong.cultureuniverse.repository.EventBoardRepository;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -30,7 +27,7 @@ public class EventBoardServiceImpl implements EventBoardService {
     private final EventBoardRepository eventBoardRepository;
 
     @Override
-    public Long register(EventBoardDto dto) {
+    public Long register(EventBoardDTO dto) {
         log.info("DTO---------------------------");
         log.info(dto);
         EventBoard entity = dtoToEntity(dto);
@@ -42,7 +39,7 @@ public class EventBoardServiceImpl implements EventBoardService {
     }
 
     @Override
-    public PageResultDTO<EventBoardDto, Object[]> getList(PageRequestDTO requestDTO) {
+    public PageResultDTO<EventBoardDTO, Object[]> getList(PageRequestDTO requestDTO) {
 
         Pageable pageable = requestDTO.getPageable(Sort.by("eventIdx").descending());
 
@@ -50,7 +47,7 @@ public class EventBoardServiceImpl implements EventBoardService {
 
         Page<Object[]> result = eventBoardRepository.findAllWithAdminId(pageable);
 
-        Function<Object[], EventBoardDto> fn = (en -> entityToDto(
+        Function<Object[], EventBoardDTO> fn = (en -> entityToDto(
             EventBoard.builder()
                 .eventIdx((Long)en[0])
                 .eventTitle((String) en[1])
@@ -69,15 +66,15 @@ public class EventBoardServiceImpl implements EventBoardService {
     }
 
     @Override
-    public EventBoardDto read(Long eventIdx) {
+    public EventBoardDTO read(Long eventIdx) {
         return eventBoardRepository.findEventBoardByEventIdx(
             eventIdx);
     }
     //업데이트 하는 항목은 제목,내용
     @Override
-    public void modify(EventBoardDto dto) {
+    public void modify(EventBoardDTO dto) {
 
-        EventBoardDto result = eventBoardRepository.findEventBoardByEventIdx(
+        EventBoardDTO result = eventBoardRepository.findEventBoardByEventIdx(
             dto.getEventIdx());
 
         result.changeTitle(dto.getEventTitle());

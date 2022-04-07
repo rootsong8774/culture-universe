@@ -1,15 +1,12 @@
 package com.sejong.cultureuniverse.service;
 
-import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDto;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
-import com.sejong.cultureuniverse.dto.WinnerBoardDto;
+import com.sejong.cultureuniverse.dto.WinnerBoardDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
-import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 import com.sejong.cultureuniverse.entity.event.EventWinner;
 import com.sejong.cultureuniverse.repository.WinnerBoardRepository;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -29,7 +26,7 @@ public class WinnerBoardServiceImpl implements WinnerBoardService {
     private final WinnerBoardRepository winnerBoardRepository;
 
     @Override
-    public Long register(WinnerBoardDto dto) {
+    public Long register(WinnerBoardDTO dto) {
         log.info("DTO---------------------------");
         log.info(dto);
         EventWinner entity = dtoToEntity(dto);
@@ -41,7 +38,7 @@ public class WinnerBoardServiceImpl implements WinnerBoardService {
     }
 
     @Override
-    public PageResultDTO<WinnerBoardDto, Object[]> getList(PageRequestDTO requestDTO) {
+    public PageResultDTO<WinnerBoardDTO, Object[]> getList(PageRequestDTO requestDTO) {
 
         Pageable pageable = requestDTO.getPageable(Sort.by("winnerIdx").descending());
 
@@ -49,7 +46,7 @@ public class WinnerBoardServiceImpl implements WinnerBoardService {
 
         Page<Object[]> result = winnerBoardRepository.findAllWithAdminId(pageable);
 
-        Function<Object[], WinnerBoardDto> fn = (en -> entityToDto(
+        Function<Object[], WinnerBoardDTO> fn = (en -> entityToDto(
             EventWinner.builder()
                 .winnerIdx((Long)en[0])
                 .winTitle((String) en[1])
@@ -68,14 +65,14 @@ public class WinnerBoardServiceImpl implements WinnerBoardService {
     }
 
     @Override
-    public WinnerBoardDto read(Long winnerIdx) {
+    public WinnerBoardDTO read(Long winnerIdx) {
         return winnerBoardRepository.findEventWinnerByWinnerIdx(
             winnerIdx);
     }
     //업데이트 하는 항목은 제목,내용
     @Override
-    public void modify(WinnerBoardDto dto) {
-        WinnerBoardDto result = winnerBoardRepository.findEventWinnerByWinnerIdx(
+    public void modify(WinnerBoardDTO dto) {
+        WinnerBoardDTO result = winnerBoardRepository.findEventWinnerByWinnerIdx(
             dto.getWinnerIdx());
 
         result.changeTitle(dto.getWinTitle());
