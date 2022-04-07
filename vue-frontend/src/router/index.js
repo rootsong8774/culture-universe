@@ -34,6 +34,7 @@ const router = new VueRouter({
       name: 'performanceDetail',
       path: '/performances/performanceDetail',
       component: performanceDetail,
+      props: true
     },
     {
       name: 'performanceReservation',

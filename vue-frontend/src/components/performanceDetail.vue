@@ -1,34 +1,50 @@
 <template>
   <div>
-
-
-    <section id="wrap">
-      <div class="row">
-        <div class="poster">
-          <div>
-            <img src="../assets/images/item1.jpg" width="150px">
-          </div>
-          <div class="text">
-            <div class="tit">
-              <h2>뮤지컬{{ item - list - name }}</h2>
+    <section id="p_details_info" class="m_details roomy-100 fix">
+      <div class="container">
+        <div class="row">
+          <div class="main_details">
+            <div class="col-md-5">
+              <div class="m_details_img">
+                <img :src="performData.fileUrlMi" alt="" style="width: 350px"/>
+              </div>
             </div>
-            <ul>
-              <li><span>기간 : </span>item-date-list</li>
-              <li><span>장소 : </span>item-location</li>
-              <li><span>시간 : </span>item-time</li>
-              <li><span>연령 : </span>item-age</li>
-              <li><span>티켓 : </span>item-ticket</li>
-              <li><span>문의 : </span>item-tel</li>
-              <li><span>티켓 : </span>item-ticket</li>
-            </ul>
-            <button> 관심공연</button>
-            <button type="submit">티켓예매</button>
+            <div class="col-md-7">
+              <div class="m_details_content m-bottom-40">
+                <h2>{{ performData.title }}</h2>
+              </div>
+              <hr/>
+              <div class="person_details m-top-40">
+                <div class="row">
+                  <div class="col-md-2 text-left">
+                    <p>기간</p>
+                    <p>장소</p>
+                    <p>시간</p>
+                    <p>연령</p>
+                    <p>티켓</p>
+                    <p>문의</p>
+                  </div>
+                  <div class="col-md-10 text-left">
+                    <p> {{ performData.startDate | yyyyMMdd }} ({{ performData.dayOfStartDate }}) -
+                      {{ performData.endDate | yyyyMMdd }} ({{ performData.dayOfEndDate }})</p>
+                    <p>{{ performData.placeName }}</p>
+                    <p>{{ performData.playTime }}</p>
+                    <p>{{ performData.audienceAge }}</p>
+                    <p>{{ performData.ticketInfo }}</p>
+                    <p>{{ performData.inquiryPhone }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
-    <!--Portfolio Section-->
-    <section id="content" >
+    <section id="p_details" class="m_details roomy-20 fix">
+      <div class="container">
+        <div class="row">
+          <div class="main_details">
+            <!--          Tab Start  -->
             <div style="margin:10px;">
               <ul class="nav nav-tabs clearfix li3">
                 <li class="active"><a href="#introduce" data-toggle="tab">작품소개</a></li>
@@ -38,70 +54,101 @@
             </div>
             <!-- Tab이 선택되면 내용이 보여지는 영역이다. -->
             <div class="tab-content">
-              <div class="tab-pane fade in active" id="introduce">작품소개
-                <div>
-                  <button type="button">리뷰</button>
-                  관람객 평점 ★★★★★
-                </div>
-                <br>
-                <form action="">
-                  <input type="text" placeholder="감상평을 등록해주세요"><span>등록</span>
-                </form>
-                <br>
-                <br>
-                <div class="dropdown">
-                  <button class="dropbtn">
-                    <span class="dropbtn_icon">최신순</span>
-                  </button>
-                  <div class="dropdown-content">
-                    <a href="#">인기순</a>
-                  </div>
-                  <br>
-                  <br>
-                  <br>
-                  <div id="board_write">
-                    <h4>글을 작성하는 공간입니다.</h4>
-                    <div id="write_area">
-                      <form enctype="multipart/form-data"
-                            action="write_ok.php?board_id=<?echo $board_id;?>" method="post">
-                        <div id="in_title">
-                      <textarea name="title" id="utitle" rows="1" cols="55" placeholder="제목"
-                                maxlength="100" required></textarea>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
+              <div class="tab-pane fade in active" id="introduce">
+                <div class="col-md-10 col-md-offset-1">
+                  <div v-if="performData.detail"  v-html="performData.detail"></div>
+                  <div v-else-if="performData.info" v-html="performData.info"></div>
+                  <p v-else>{{noInfo}}</p>
                 </div>
               </div>
               <div class="tab-pane fade" id="reservation">예매안내</div>
               <div class="tab-pane fade" id="comment">후기평</div>
             </div>
-          </section>
+          </div>
+        </div>
+      </div>>
+    </section>
+
+
+    <!--Portfolio Section-->
+    <section id="content">
+
+    </section>
 
   </div>
 </template>
 <script>
 
 
-export default {
-  name: "schedual-detail",
+import axios from "axios";
 
+export default {
+  name: "PerformanceDetail",
+  data() {
+    return {
+      noInfo: '공연 정보가 아직 준비되지 않았습니다.',
+      performData: {}
+    }
+  },
+  props: {
+    performCode: {
+      type: String,
+      default : ''
+    }
+  }
+  ,
+  created() {
+    this.getDetails();
+  },
+  filters: {
+    yyyyMMdd: function (value) {
+      if (value === '') {
+        return '';
+      }
+
+      // 연도, 월, 일 추출
+      let year = value[0];
+      let month = value[1];
+      let day = value[2];
+
+      // 월, 일의 경우 한자리 수 값이 있기 때문에 공백에 0 처리
+      if (month < 10) {
+        month = '0' + month;
+      }
+
+      if (day < 10) {
+        day = '0' + day;
+      }
+
+      // 최종 포맷 (ex - '2021.10.08')
+      return year + '.' + month + '.' + day;
+    }
+  },
+  methods: {
+    getDetails: function () {
+      axios({
+        url: '/api/performancesDetails',
+        params: {
+          performCode: this.performCode,
+        },
+        method: 'get',
+      }).then(response => {
+        this.performData = response.data
+
+      })
+    },
+
+  },
 }
 </script>
 
 <style scoped>
-.nav nav-tabs {
-  justify-content: center;
-  text-align: center;
-  word-break: keep-all;
-  background: #fff;
-  display: flex;
-  flex-wrap: wrap;
-}
+
 li {
   display: list-item;
   text-align: -webkit-match-parent;
 }
+
 .poster {
   justify-content: center;
   padding: 10px;
@@ -157,4 +204,8 @@ li {
 }
 
 /*dropdown -end*/
+
+#introduce {
+  padding: 20px 0;
+}
 </style>

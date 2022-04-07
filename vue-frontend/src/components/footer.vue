@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  name: "footer"
+  name: "LayoutFooter"
 }
 </script>
 
