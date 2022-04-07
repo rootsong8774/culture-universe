@@ -1,6 +1,4 @@
-package com.sejong.cultureuniverse.dto;
-
-
+package com.sejong.cultureuniverse.dto.paging;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +22,6 @@ public class PageRequestDTO {
     private String type;
     private String keyword;
 
-   
 
     public PageRequestDTO() {
         this.page = 1;

@@ -1,9 +1,8 @@
 package com.sejong.cultureuniverse.entity;
 
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -25,4 +24,16 @@ public abstract class BaseEntity {
     @LastModifiedDate
     @Column(name = "moddate")
     private LocalDateTime modDate;
+
+    @PrePersist
+    public void prePersist() {
+        this.regDate = LocalDateTime.now();
+        this.modDate = LocalDateTime.now();
+
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.modDate = LocalDateTime.now();
+    }
 }

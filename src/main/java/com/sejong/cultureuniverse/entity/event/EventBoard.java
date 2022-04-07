@@ -37,5 +37,3 @@ public class EventBoard extends BaseEntity {
     @ManyToOne(fetch = LAZY, cascade= ALL)
     @JoinColumn(name="admin_idx")
     private Admin adminId;
-
-}
