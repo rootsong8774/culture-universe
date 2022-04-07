@@ -1,8 +1,8 @@
-package com.sejong.cultureuniverse.controller;
+package com.sejong.cultureuniverse.controller.performances;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sejong.cultureuniverse.dto.PerformanceDetailsFeignDTO;
+import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsFeignDTO;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import com.sejong.cultureuniverse.feign.MyFeignClient;
 import com.sejong.cultureuniverse.service.performances.PerformanceFeignService;

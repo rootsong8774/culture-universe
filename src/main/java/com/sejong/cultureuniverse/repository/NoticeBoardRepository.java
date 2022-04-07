@@ -1,6 +1,6 @@
 package com.sejong.cultureuniverse.repository;
 
-import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDTO;
+import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 
 import org.springframework.data.domain.Page;
@@ -14,7 +14,7 @@ public interface NoticeBoardRepository extends JpaRepository<NoticeBoard, Long> 
 // NoticeBoard findByNoticeIdx(Long noticeIdx);
 
     @Query(
-        "select new com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDTO(n.noticeIdx, a.adminId, a.adminPw,n.noticeTitle,"
+        "select new com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO(n.noticeIdx, a.adminId, a.adminPw,n.noticeTitle,"
             +" n.noticeContent, n.readCount, n.regDate, n.modDate) from NoticeBoard n join n.adminId a where n.noticeIdx=:noticeIdx")
     NoticeBoardAndAdminDTO findNoticeBoardAndAdminByNoticeIdx(Long noticeIdx);
 

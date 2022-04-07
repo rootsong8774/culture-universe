@@ -1,8 +1,8 @@
-package com.sejong.cultureuniverse.service;
+package com.sejong.cultureuniverse.service.admin;
 
-import com.sejong.cultureuniverse.dto.PageRequestDTO;
-import com.sejong.cultureuniverse.dto.PageResultDTO;
-import com.sejong.cultureuniverse.dto.WinnerBoardDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
+import com.sejong.cultureuniverse.dto.admin.WinnerBoardDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventWinner;
 import com.sejong.cultureuniverse.repository.WinnerBoardRepository;

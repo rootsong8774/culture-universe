@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.dto;
+package com.sejong.cultureuniverse.dto.paging;
 
 
 

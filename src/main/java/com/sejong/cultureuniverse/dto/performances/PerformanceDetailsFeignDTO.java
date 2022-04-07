@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.dto;
+package com.sejong.cultureuniverse.dto.performances;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;

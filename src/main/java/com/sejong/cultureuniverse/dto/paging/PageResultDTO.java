@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.dto;
+package com.sejong.cultureuniverse.dto.paging;
 
 import java.util.List;
 import java.util.function.Function;

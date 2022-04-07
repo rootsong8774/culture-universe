@@ -1,6 +1,6 @@
 package com.sejong.cultureuniverse.service.performances;
 
-import com.sejong.cultureuniverse.dto.PerformanceDetailsFeignDTO;
+import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsFeignDTO;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
