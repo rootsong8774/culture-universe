@@ -21,12 +21,20 @@ import org.springframework.data.util.Lazy;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@SequenceGenerator(name = "admin_seq", sequenceName = "admin_seq", initialValue = 1, allocationSize = 1)
 @ToString
 public class Admin  {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "admin_seq")
+    private Long adminIdx;
+
     private String adminId;
     private String adminPw;
+
+    public Admin(String adminId, String adminPw) {
+        this.adminId = adminId;
+        this.adminPw = adminPw;
+    }
 
     /*//오버로딩
     public Admin(){

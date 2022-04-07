@@ -38,6 +38,7 @@ public class EventBoardController {
     public void register() {
         log.info("register get....");
     }
+
     @PostMapping("/register")
     public String registerPost(EventBoardDto dto, RedirectAttributes redirectAttributes) {
         log.info("dto...." + dto);
@@ -77,10 +78,10 @@ public class EventBoardController {
         log.info("dto: " + dto);
 
         service.modify(dto);
+        redirectAttributes.addAttribute("eventIdx", dto.getEventIdx());
         redirectAttributes.addAttribute("page", requestDTO.getPage());
         redirectAttributes.addAttribute("type", requestDTO.getType());
         redirectAttributes.addAttribute("keyword", requestDTO.getKeyword());
-        redirectAttributes.addAttribute("gno", dto.getEventIdx());
 
         return "redirect:/event/read";
 

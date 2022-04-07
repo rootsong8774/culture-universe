@@ -4,6 +4,7 @@ package com.sejong.cultureuniverse.service;
 import com.sejong.cultureuniverse.dto.EventBoardDto;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
+import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 public interface EventBoardService {
     Long register(EventBoardDto dto);
 
-    PageResultDTO<EventBoardDto, EventBoard> getList(PageRequestDTO requestDTO);
+    PageResultDTO<EventBoardDto, Object[]> getList(PageRequestDTO requestDTO);
 
     EventBoardDto read(Long eventIdx);
 
@@ -20,28 +21,30 @@ public interface EventBoardService {
 
     void remove(Long eventIdx);
 
+    default EventBoardDto entityToDto(EventBoard entity, Admin admin) {
+
+        return EventBoardDto.builder()
+            .eventIdx(entity.getEventIdx())
+            .eventTitle(entity.getEventTitle())
+            .eventContent(entity.getEventContent())
+            .readCount(entity.getReadCount())
+            .regDate(entity.getRegDate())
+            .modDate(entity.getModDate())
+            .adminId(admin.getAdminId())
+            .build();
+    }
+
     default EventBoard dtoToEntity(EventBoardDto dto) {
         return EventBoard.builder()
                 .eventIdx(dto.getEventIdx())
-                .adminId(dto.getAdminId())
+                .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))
                 .eventTitle(dto.getEventTitle())
                 .eventContent(dto.getEventContent())
                 .readCount(dto.getReadCount())
                 .build();
     }
 
-    default EventBoardDto entityToDto(EventBoard entity) {
 
-        return EventBoardDto.builder()
-                .eventIdx(entity.getEventIdx())
-                .adminId(entity.getAdminId())
-                .eventTitle(entity.getEventTitle())
-                .eventContent(entity.getEventContent())
-                .readCount(entity.getReadCount())
-                .regDate(entity.getRegDate())
-                .modDate(entity.getModDate())
-                .build();
-    }
 }
 
 

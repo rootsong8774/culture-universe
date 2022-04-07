@@ -1,11 +1,15 @@
 package com.sejong.cultureuniverse.service;
 
 import com.sejong.cultureuniverse.dto.EventBoardDto;
+import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDto;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
 
+import com.sejong.cultureuniverse.entity.admin.Admin;
+import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
 import com.sejong.cultureuniverse.repository.EventBoardRepository;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
@@ -38,37 +42,50 @@ public class EventBoardServiceImpl implements EventBoardService {
     }
 
     @Override
-    public PageResultDTO<EventBoardDto, EventBoard> getList(PageRequestDTO requestDTO) {
+    public PageResultDTO<EventBoardDto, Object[]> getList(PageRequestDTO requestDTO) {
 
-        Pageable pageable = requestDTO.getPageable(Sort.by("EventIdx").descending());
+        Pageable pageable = requestDTO.getPageable(Sort.by("eventIdx").descending());
 
         //BooleanBuilder booleanBuilder = getSearch(requestDTO);
 
-        Page<EventBoard> result = eventBoardRepository.findAll(pageable);
+        Page<Object[]> result = eventBoardRepository.findAllWithAdminId(pageable);
 
-        Function<EventBoard, EventBoardDto> fn = (this::entityToDto);
+        Function<Object[], EventBoardDto> fn = (en -> entityToDto(
+            EventBoard.builder()
+                .eventIdx((Long)en[0])
+                .eventTitle((String) en[1])
+                .eventContent((String) en[2])
+                .readCount((Long) en[3])
+                .regDate((LocalDateTime) en[4])
+                .modDate((LocalDateTime) en[5])
+                .build(),
+            Admin.builder()
+                .adminId((String) en[6])
+                .adminPw((String) en[7])
+                .build())
+        );
         return new PageResultDTO<>(result, fn);
+
     }
 
     @Override
     public EventBoardDto read(Long eventIdx) {
-        Optional<EventBoard> result = Optional.ofNullable(
-            eventBoardRepository.findByEventIdx(eventIdx));
-        return result.map(this::entityToDto).orElse(null);
+        return eventBoardRepository.findEventBoardByEventIdx(
+            eventIdx);
     }
     //업데이트 하는 항목은 제목,내용
     @Override
     public void modify(EventBoardDto dto) {
-        Optional<EventBoard> result = Optional.ofNullable(
-            eventBoardRepository.findByEventIdx(dto.getEventIdx()));
-        if (result.isPresent()) {
-            EventBoard entity = result.get();
 
-            entity.changeTitle(dto.getEventTitle());
-            entity.changeContent(dto.getEventContent());
+        EventBoardDto result = eventBoardRepository.findEventBoardByEventIdx(
+            dto.getEventIdx());
 
-            eventBoardRepository.save(entity);
-        }
+        result.changeTitle(dto.getEventTitle());
+        result.changeContent(dto.getEventContent());
+        EventBoard entity = dtoToEntity(result);
+
+        eventBoardRepository.save(entity);
+
     }
 
     @Override

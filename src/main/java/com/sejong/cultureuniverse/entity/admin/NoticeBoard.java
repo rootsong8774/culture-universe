@@ -28,14 +28,8 @@ public class NoticeBoard extends BaseEntity {
     private Long readCount;
 
     @OneToOne(fetch = LAZY, cascade = ALL) //객체로 받는게 맞음
-    @JoinColumn(name = "admin_id")
+    @JoinColumn(name = "admin_idx")
     private Admin adminId;
    // private Admin adminPw;
 
-    public void changeTitle(String noticeTitle) {
-        this.noticeTitle = noticeTitle;
-    }
-    public void changeContent(String noticeContent) {
-        this.noticeContent = noticeContent;
-    }
 }

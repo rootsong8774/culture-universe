@@ -11,14 +11,23 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Data
 public class EventBoardDto {
-
     private Long eventIdx;
-    private Admin adminId;
+
+    private String adminId;
+    private String adminPw;
     private String eventTitle;
     private String eventContent;
     private Long readCount;
     private LocalDateTime regDate, modDate;
 
+    public void changeTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
+    }
+
+    public void changeContent(String eventContent) {
+        this.eventContent = eventContent;
+    }
 }

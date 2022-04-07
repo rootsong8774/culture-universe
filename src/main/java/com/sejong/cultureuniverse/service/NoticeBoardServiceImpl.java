@@ -27,8 +27,9 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 
     private final NoticeBoardRepository noticeBoardRepository;
 
-    @Override
+    //admin을 찾는단계필요
 
+    @Override
     public Long register(NoticeBoardAndAdminDto dto) {
         log.info("DTO---------------------------");
         log.info(dto);

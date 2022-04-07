@@ -18,11 +18,11 @@
         </div>
         <div class="form-group">
             <label >이벤트 제목</label>
-            <textarea class="form-control" rows="5" name="eventTitle">[[${dto.eventTitle}]]</textarea>
+            <input type="text" class="form-control" name="eventTitle" th:value="${dto.eventTitle}" readonly>
         </div>
         <div class="form-group">
             <label >이벤트 내용</label>
-            <input type="text" class="form-control" name="eventContent" th:value="${dto.eventContent}">
+            <textarea class="form-control" rows="5" name="eventContent" readonly>[[${dto.eventContent}]]</textarea>
         </div>
         <div class="form-group">
             <label >조회수</label>

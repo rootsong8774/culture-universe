@@ -18,12 +18,11 @@ public interface NoticeBoardRepository extends JpaRepository<NoticeBoard, Long> 
 
     @Query(
         "select new com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDto(n.noticeIdx, a.adminId, a.adminPw,n.noticeTitle,"
-            +
-            " n.noticeContent, n.readCount, n.regDate, n.modDate) from NoticeBoard n join n.adminId a where n.noticeIdx=:noticeIdx")
+            +" n.noticeContent, n.readCount, n.regDate, n.modDate) from NoticeBoard n join n.adminId a where n.noticeIdx=:noticeIdx")
     NoticeBoardAndAdminDto findNoticeBoardAndAdminByNoticeIdx(Long noticeIdx);
 
     @Query("select n.noticeIdx,n.noticeTitle, n.noticeContent, n.readCount,n.regDate, n.modDate, a.adminId, a.adminPw"
-        + " from NoticeBoard n left join Admin a on n.adminId = a ")
+        + " from NoticeBoard n join n.adminId a")
     Page<Object[]> findAllWithAdminId(Pageable pageable);
 
     void deleteByNoticeIdx(Long noticeIdx);

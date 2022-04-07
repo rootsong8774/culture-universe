@@ -1,10 +1,14 @@
 package com.sejong.cultureuniverse.service;
 
+import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDto;
 import com.sejong.cultureuniverse.dto.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.PageResultDTO;
 import com.sejong.cultureuniverse.dto.WinnerBoardDto;
+import com.sejong.cultureuniverse.entity.admin.Admin;
+import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 import com.sejong.cultureuniverse.entity.event.EventWinner;
 import com.sejong.cultureuniverse.repository.WinnerBoardRepository;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
@@ -37,37 +41,48 @@ public class WinnerBoardServiceImpl implements WinnerBoardService {
     }
 
     @Override
-    public PageResultDTO<WinnerBoardDto, EventWinner> getList(PageRequestDTO requestDTO) {
+    public PageResultDTO<WinnerBoardDto, Object[]> getList(PageRequestDTO requestDTO) {
 
-        Pageable pageable = requestDTO.getPageable(Sort.by("WinnerIdx").descending());
+        Pageable pageable = requestDTO.getPageable(Sort.by("winnerIdx").descending());
 
         //BooleanBuilder booleanBuilder = getSearch(requestDTO);
 
-        Page<EventWinner> result = winnerBoardRepository.findAll(pageable);
+        Page<Object[]> result = winnerBoardRepository.findAllWithAdminId(pageable);
 
-        Function<EventWinner, WinnerBoardDto> fn = (this::entityToDto);
+        Function<Object[], WinnerBoardDto> fn = (en -> entityToDto(
+            EventWinner.builder()
+                .winnerIdx((Long)en[0])
+                .winTitle((String) en[1])
+                .winContent((String) en[2])
+                .readCount((Long) en[3])
+                .regDate((LocalDateTime) en[4])
+                .modDate((LocalDateTime) en[5])
+                .build(),
+            Admin.builder()
+                .adminId((String) en[6])
+                .adminPw((String) en[7])
+                .build())
+        );
         return new PageResultDTO<>(result, fn);
+
     }
 
     @Override
     public WinnerBoardDto read(Long winnerIdx) {
-        Optional<EventWinner> result = Optional.ofNullable(
-            winnerBoardRepository.findByWinnerIdx(winnerIdx));
-        return result.map(this::entityToDto).orElse(null);
+        return winnerBoardRepository.findEventWinnerByWinnerIdx(
+            winnerIdx);
     }
     //업데이트 하는 항목은 제목,내용
     @Override
     public void modify(WinnerBoardDto dto) {
-        Optional<EventWinner> result = Optional.ofNullable(
-            winnerBoardRepository.findByWinnerIdx(dto.getWinnerIdx()));
-        if (result.isPresent()) {
-            EventWinner entity = result.get();
+        WinnerBoardDto result = winnerBoardRepository.findEventWinnerByWinnerIdx(
+            dto.getWinnerIdx());
 
-            entity.changeTitle(dto.getWinTitle());
-            entity.changeContent(dto.getWinContent());
+        result.changeTitle(dto.getWinTitle());
+        result.changeContent(dto.getWinContent());
+        EventWinner entity = dtoToEntity(result);
 
-            winnerBoardRepository.save(entity);
-        }
+        winnerBoardRepository.save(entity);
     }
 
     @Override

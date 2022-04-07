@@ -1,5 +1,6 @@
 package com.sejong.cultureuniverse.entity.event;
 
+import static javax.persistence.CascadeType.ALL;
 import static javax.persistence.FetchType.*;
 
 import com.sejong.cultureuniverse.entity.BaseEntity;
@@ -10,7 +11,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-@Builder
+import lombok.experimental.SuperBuilder;
+
+@SuperBuilder
 @Entity
 @Getter
 @AllArgsConstructor
@@ -21,17 +24,12 @@ public class EventWinner extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "winner_seq")
     private Long winnerIdx;
-
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name="admin_id")
-    private Admin adminId;
     private String winTitle;
     private String winContent;
     private Long readCount;
 
-    public void changeTitle(String winTitle) { this.winTitle = winTitle;    }
-    public void changeContent(String winContent) {
-        this.winContent = winContent;
-    }
+    @ManyToOne(fetch = LAZY, cascade = ALL)
+    @JoinColumn(name="admin_idx")
+    private Admin adminId;
 
 }

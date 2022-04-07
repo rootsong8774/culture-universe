@@ -78,6 +78,7 @@ public class WinnerBoardController {
         log.info("dto: " + dto);
 
         service.modify(dto);
+        redirectAttributes.addAttribute("winnerIdx", dto.getWinnerIdx());
         redirectAttributes.addAttribute("page", requestDTO.getPage());
         redirectAttributes.addAttribute("type", requestDTO.getType());
         redirectAttributes.addAttribute("keyword", requestDTO.getKeyword());
