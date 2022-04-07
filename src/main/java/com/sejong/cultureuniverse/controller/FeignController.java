@@ -2,10 +2,10 @@ package com.sejong.cultureuniverse.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sejong.cultureuniverse.dto.PerformanceDetailsFeignDto;
+import com.sejong.cultureuniverse.dto.PerformanceDetailsFeignDTO;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import com.sejong.cultureuniverse.feign.MyFeignClient;
-import com.sejong.cultureuniverse.service.PerformanceDetailsService;
+import com.sejong.cultureuniverse.service.performances.PerformanceFeignService;
 import java.io.IOException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -17,22 +17,22 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequiredArgsConstructor
-public class FeignRestController {
+public class FeignController {
 
     private final MyFeignClient feignClient;
-    private final PerformanceDetailsService service;
+    private final PerformanceFeignService service;
 
-    @GetMapping("performances/feign/{endIndex}")
+    @GetMapping("/feign/performances/{endIndex}")
     public void savePerformanceDetailsAPItoDB(@PathVariable("endIndex") Integer endIndex) {
-        List<PerformanceDetailsFeignDto> dtoList = feignClient.getDTO(endIndex);
-        for (PerformanceDetailsFeignDto dto : dtoList) {
+        List<PerformanceDetailsFeignDTO> dtoList = feignClient.getDTO(endIndex);
+        for (PerformanceDetailsFeignDTO dto : dtoList) {
             PerformanceDetails tempEntity = service.dtoToEntity(dto);
             service.register(tempEntity);
         }
 
     }
 
-    @GetMapping("performances/api/{endIndex}")
+    @GetMapping("/api/performances/{endIndex}")
     public JsonNode readJsonFromUrl(@PathVariable("endIndex") Integer endIndex) throws IOException {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> entity = restTemplate.getForEntity(

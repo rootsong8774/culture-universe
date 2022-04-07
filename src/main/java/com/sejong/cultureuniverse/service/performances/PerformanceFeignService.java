@@ -1,15 +1,15 @@
-package com.sejong.cultureuniverse.service;
+package com.sejong.cultureuniverse.service.performances;
 
-import com.sejong.cultureuniverse.dto.PerformanceDetailsFeignDto;
+import com.sejong.cultureuniverse.dto.PerformanceDetailsFeignDTO;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public interface PerformanceDetailsService {
+public interface PerformanceFeignService {
 
     void register(PerformanceDetails details);
 
-    default PerformanceDetails dtoToEntity(PerformanceDetailsFeignDto dto) {
+    default PerformanceDetails dtoToEntity(PerformanceDetailsFeignDTO dto) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         return PerformanceDetails.builder()
             .performCode(dto.getPerformCode())
@@ -33,4 +33,8 @@ public interface PerformanceDetailsService {
             .castInfo(dto.getCastInfo())
             .build();
     }
+
+
+
+
 }

@@ -18,7 +18,7 @@
                     <router-link :to="{name: 'eventClosedDetails'}">
                       <div class="single-news-box news-mb-20">
                         <div class="news-box-bg">
-                          <img src="" alt="종료된이벤트이미지 어둡게">
+                          <img src="../../assets/images/poster.jpg" alt="종료된이벤트이미지 어둡게">
                           <div class="isotope-overlay">
                             <a>
                               <span class="lnr lnr-link"></span>
@@ -37,27 +37,29 @@
                         </div><!--/.news-box-inner-->
                       </div><!--/.single-news-box-->
                     </router-link>
-                  </div><!--.col-->
 
-                  <div class="pagination-part text-center">
-                    <ul class="pagination">
-                      <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a>
-                      </li>
-                      <li><a href="#">2</a></li>
-                      <li><a href="#">3</a></li>
-                      <li>
-                        <a href="#">
-                          Next
-                          <span class="fa fa-angle-right">
-													</span>
-                        </a>
-                      </li>
-                    </ul>
+
                   </div><!--/.pagination-part(&raquo;)-->
                 </div><!--/.blog-left-->
               </div><!--/.row-->
             </div><!--/.news-card-->
           </div><!--/news-details-->
+          <div class="pagination-part text-center">
+            <ul class="pagination">
+              <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a>
+              </li>
+              <li><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+              <li>
+                <a href="#">
+                  Next
+                  <span class="fa fa-angle-right">
+													</span>
+                </a>
+              </li>
+            </ul>
+
+          </div><!--.col-->
         </div><!--/.container-->
       </div>
     </section><!--/news-->

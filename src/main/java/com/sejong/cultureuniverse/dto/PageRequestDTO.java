@@ -1,7 +1,5 @@
 package com.sejong.cultureuniverse.dto.paging;
 
-
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.AllArgsConstructor;
@@ -23,7 +21,6 @@ public class PageRequestDTO {
 
     private String type;
     private String keyword;
-
 
 
     public PageRequestDTO() {

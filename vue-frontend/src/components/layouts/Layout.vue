@@ -1,20 +1,20 @@
 <template>
   <div>
-    <Header current-class="home"/>
+    <LayoutHeader current-class="home"/>
     <slot/>
-    <Footer/>
+    <LayoutFooter/>
   </div>
 </template>
 
 <script>
-import Header from "../header";
-import Footer from "../footer";
+import LayoutHeader from "./header";
+import LayoutFooter from "./footer";
 
 
 export default {
   name: "Layout",
   components: {
-    Header,Footer
+    LayoutHeader,LayoutFooter
   }
 }
 </script>

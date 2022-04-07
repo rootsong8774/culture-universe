@@ -16,7 +16,7 @@
           <div class="tab-pane fade in active" id="program">program 메뉴
             <div class="item">
               <div>
-                <img src="../assets/images/item1.jpg" width="150px">
+                <img src="src/assets/images/item1.jpg" width="150px">
               </div>
               <table class="table-item">
                 <th>
@@ -49,7 +49,7 @@
           <!-- id는 고유한 이름으로 설정하고 tab의 href와 연결되어야 한다. -->
           <div class="tab-pane fade" id="place1">place 메뉴
             <div class="seat-picture">
-              <img src="../assets/images/seat.jpg" width="350px" height="350px">
+              <img src="src/assets/images/seat.jpg" width="350px" height="350px">
             </div>
             <div class="seat-text">
               <form>

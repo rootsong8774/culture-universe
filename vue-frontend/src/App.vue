@@ -14,11 +14,6 @@ export default {
   name: 'app',
   components: {
     Layout
-  },
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
   }
 }
 </script>

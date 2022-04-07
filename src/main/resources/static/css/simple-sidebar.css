@@ -6,9 +6,11 @@
 #sidebar-heading{
   text-decoration-line: none;
 }
-#wrapper {
-  overflow-x: hidden;
-}
+
+ #wrapper {
+    overflow-x: hidden;
+ }
+
 
 #sidebar-wrapper {
   min-height: 100vh;
