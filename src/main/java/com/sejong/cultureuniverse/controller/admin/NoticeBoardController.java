@@ -1,8 +1,8 @@
-package com.sejong.cultureuniverse.controller;
+package com.sejong.cultureuniverse.controller.admin;
 
-import com.sejong.cultureuniverse.dto.EventBoardDTO;
-import com.sejong.cultureuniverse.dto.PageRequestDTO;
-import com.sejong.cultureuniverse.service.EventBoardService;
+import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
+import com.sejong.cultureuniverse.service.admin.NoticeBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -11,20 +11,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
-@RequestMapping("/event")
+@RequestMapping("/admin")
 @Log4j2
 @RequiredArgsConstructor
-public class EventBoardController {
+public class NoticeBoardController {
 
-    private final EventBoardService service;
+    private final NoticeBoardService service;
 
     @GetMapping("/")
     public String index() {
-        return "redirect:/event/list";
+        return "redirect:/admin/list";
     }
 
     @GetMapping("/list")
@@ -40,50 +41,51 @@ public class EventBoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(EventBoardDTO dto, RedirectAttributes redirectAttributes) {
-        log.info("dto...." + dto);
+    public String registerPost(NoticeBoardAndAdminDTO dto, RedirectAttributes redirectAttributes) {
+        log.info("dto...." + dto.toString());
 
-        Long eventIdx = service.register(dto);
+        Long noticeIdx = service.register(dto);
 
-        redirectAttributes.addFlashAttribute("msg", eventIdx);
+        redirectAttributes.addFlashAttribute("msg", noticeIdx);
 
-        return "redirect:/event/list";
+        return "redirect:/admin/list";
     }
 
     @GetMapping({"/read", "/modify"})
-    public void read(Long eventIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
+    public void read(Long noticeIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
         Model model) {
-        log.info("eventIdx: " + eventIdx);
+        log.info("noticeIdx : " + noticeIdx);
 
-        EventBoardDTO dto = service.read(eventIdx);
+        NoticeBoardAndAdminDTO dto = service.read(noticeIdx);
 
         model.addAttribute("dto", dto);
     }
 
     @PostMapping("/remove")
-    public String remove(Long eventIdx, RedirectAttributes redirectAttributes) {
-        log.info("eventIdx: " + eventIdx);
+    public String remove(Long noticeIdx, RedirectAttributes redirectAttributes) {
+        log.info("noticeIdx: " + noticeIdx);
 
-        service.remove(eventIdx);
+        service.remove(noticeIdx);
 
-        redirectAttributes.addFlashAttribute("msg", eventIdx);
+        redirectAttributes.addFlashAttribute("msg", noticeIdx);
 
-        return "redirect:/event/list";
+        return "redirect:/admin/list";
     }
 
     @PostMapping("/modify")
-    public String modify(EventBoardDTO dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+    public String modify(NoticeBoardAndAdminDTO dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
         RedirectAttributes redirectAttributes) {
         log.info("post modify..............................");
         log.info("dto: " + dto);
 
         service.modify(dto);
-        redirectAttributes.addAttribute("eventIdx", dto.getEventIdx());
+        redirectAttributes.addAttribute("noticeIdx", dto.getNoticeIdx());
         redirectAttributes.addAttribute("page", requestDTO.getPage());
         redirectAttributes.addAttribute("type", requestDTO.getType());
         redirectAttributes.addAttribute("keyword", requestDTO.getKeyword());
 
-        return "redirect:/event/read";
+
+        return "redirect:/admin/read";
 
     }
 }

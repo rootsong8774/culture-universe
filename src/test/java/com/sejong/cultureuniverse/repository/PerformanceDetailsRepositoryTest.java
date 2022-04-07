@@ -1,8 +1,6 @@
 package com.sejong.cultureuniverse.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import com.sejong.cultureuniverse.dto.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,8 +1,8 @@
-package com.sejong.cultureuniverse.controller;
+package com.sejong.cultureuniverse.controller.admin;
 
-import com.sejong.cultureuniverse.dto.PageRequestDTO;
-import com.sejong.cultureuniverse.dto.WinnerBoardDTO;
-import com.sejong.cultureuniverse.service.WinnerBoardService;
+import com.sejong.cultureuniverse.dto.admin.EventBoardDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
+import com.sejong.cultureuniverse.service.admin.EventBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -15,16 +15,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
-@RequestMapping("/winner")
+@RequestMapping("/event")
 @Log4j2
 @RequiredArgsConstructor
-public class WinnerBoardController {
+public class EventBoardController {
 
-    private final WinnerBoardService service;
+    private final EventBoardService service;
 
     @GetMapping("/")
     public String index() {
-        return "redirect:/winner/list";
+        return "redirect:/event/list";
     }
 
     @GetMapping("/list")
@@ -40,51 +40,50 @@ public class WinnerBoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(WinnerBoardDTO dto, RedirectAttributes redirectAttributes) {
+    public String registerPost(EventBoardDTO dto, RedirectAttributes redirectAttributes) {
         log.info("dto...." + dto);
 
-        Long winnerIdx = service.register(dto);
+        Long eventIdx = service.register(dto);
 
-        redirectAttributes.addFlashAttribute("msg", winnerIdx);
+        redirectAttributes.addFlashAttribute("msg", eventIdx);
 
-        return "redirect:/winner/list";
+        return "redirect:/event/list";
     }
 
     @GetMapping({"/read", "/modify"})
-    public void read(Long winnerIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
+    public void read(Long eventIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO,
         Model model) {
-        log.info("winnerIdx: " + winnerIdx);
+        log.info("eventIdx: " + eventIdx);
 
-        WinnerBoardDTO dto = service.read(winnerIdx);
+        EventBoardDTO dto = service.read(eventIdx);
 
         model.addAttribute("dto", dto);
     }
 
     @PostMapping("/remove")
-    public String remove(Long winnerIdx, RedirectAttributes redirectAttributes) {
-        log.info("winnerIdx: " + winnerIdx);
+    public String remove(Long eventIdx, RedirectAttributes redirectAttributes) {
+        log.info("eventIdx: " + eventIdx);
 
-        service.remove(winnerIdx);
+        service.remove(eventIdx);
 
-        redirectAttributes.addFlashAttribute("msg", winnerIdx);
+        redirectAttributes.addFlashAttribute("msg", eventIdx);
 
-        return "redirect:/winner/list";
+        return "redirect:/event/list";
     }
 
     @PostMapping("/modify")
-    public String modify(WinnerBoardDTO dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+    public String modify(EventBoardDTO dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
         RedirectAttributes redirectAttributes) {
         log.info("post modify..............................");
         log.info("dto: " + dto);
 
         service.modify(dto);
-        redirectAttributes.addAttribute("winnerIdx", dto.getWinnerIdx());
+        redirectAttributes.addAttribute("eventIdx", dto.getEventIdx());
         redirectAttributes.addAttribute("page", requestDTO.getPage());
         redirectAttributes.addAttribute("type", requestDTO.getType());
         redirectAttributes.addAttribute("keyword", requestDTO.getKeyword());
-        redirectAttributes.addAttribute("WinnerIdx", dto.getWinnerIdx());
 
-        return "redirect:/winner/read";
+        return "redirect:/event/read";
 
     }
 }

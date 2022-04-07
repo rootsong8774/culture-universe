@@ -11,4 +11,6 @@ public interface PerformanceDetailsRepository extends JpaRepository<PerformanceD
     Page<PerformanceDetails> findAll(Pageable pageable);
     
     Optional<PerformanceDetails> findByPerformCode(String performCode);
+    
+    PerformanceDetails findByPerformId(Long id);
 }

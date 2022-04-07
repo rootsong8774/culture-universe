@@ -1,12 +1,9 @@
 package com.sejong.cultureuniverse.repository;
 
-import com.sejong.cultureuniverse.dto.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
-import com.sejong.cultureuniverse.repository.NoticeBoardRepository;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

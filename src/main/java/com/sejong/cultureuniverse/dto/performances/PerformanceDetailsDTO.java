@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.dto;
+package com.sejong.cultureuniverse.dto.performances;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

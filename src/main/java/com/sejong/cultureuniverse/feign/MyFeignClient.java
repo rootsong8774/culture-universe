@@ -1,6 +1,6 @@
 package com.sejong.cultureuniverse.feign;
 
-import com.sejong.cultureuniverse.dto.PerformanceDetailsFeignDTO;
+import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsFeignDTO;
 import java.util.List;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

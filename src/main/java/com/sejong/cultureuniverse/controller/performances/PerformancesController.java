@@ -1,10 +1,10 @@
-package com.sejong.cultureuniverse.controller;
+package com.sejong.cultureuniverse.controller.performances;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.sejong.cultureuniverse.dto.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.service.performances.PerformancesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;

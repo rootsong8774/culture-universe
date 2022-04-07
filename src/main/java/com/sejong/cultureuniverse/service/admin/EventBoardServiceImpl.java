@@ -1,16 +1,14 @@
-package com.sejong.cultureuniverse.service;
+package com.sejong.cultureuniverse.service.admin;
 
-import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDTO;
-import com.sejong.cultureuniverse.dto.PageRequestDTO;
-import com.sejong.cultureuniverse.dto.PageResultDTO;
+import com.sejong.cultureuniverse.dto.admin.EventBoardDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
+
 import com.sejong.cultureuniverse.entity.admin.Admin;
-import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
-import com.sejong.cultureuniverse.repository.NoticeBoardRepository;
-
+import com.sejong.cultureuniverse.entity.event.EventBoard;
+import com.sejong.cultureuniverse.repository.EventBoardRepository;
 import java.time.LocalDateTime;
 import java.util.function.Function;
-import javax.transaction.Transactional;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -18,42 +16,42 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 @Log4j2
 @RequiredArgsConstructor
 @Transactional
-public class NoticeBoardServiceImpl implements NoticeBoardService {
+public class EventBoardServiceImpl implements EventBoardService {
 
-    private final NoticeBoardRepository noticeBoardRepository;
-
-    //admin을 찾는단계필요
+    private final EventBoardRepository eventBoardRepository;
 
     @Override
-    public Long register(NoticeBoardAndAdminDTO dto) {
+    public Long register(EventBoardDTO dto) {
         log.info("DTO---------------------------");
         log.info(dto);
-        NoticeBoard entity = noticeAndAdminToEntity(dto);
+        EventBoard entity = dtoToEntity(dto);
 
         log.info(entity);
 
-        noticeBoardRepository.save(entity);
-        return entity.getNoticeIdx();
+        eventBoardRepository.save(entity);
+        return entity.getEventIdx();
     }
 
     @Override
-    public PageResultDTO<NoticeBoardAndAdminDTO, Object[]> getList(PageRequestDTO requestDTO) {
+    public PageResultDTO<EventBoardDTO, Object[]> getList(PageRequestDTO requestDTO) {
 
-        Pageable pageable = requestDTO.getPageable(Sort.by("noticeIdx").descending());
+        Pageable pageable = requestDTO.getPageable(Sort.by("eventIdx").descending());
 
         //BooleanBuilder booleanBuilder = getSearch(requestDTO);
 
-        Page<Object[]> result = noticeBoardRepository.findAllWithAdminId(pageable);
+        Page<Object[]> result = eventBoardRepository.findAllWithAdminId(pageable);
 
-        Function<Object[], NoticeBoardAndAdminDTO> fn = (en -> entityToDto(
-            NoticeBoard.builder()
-                .noticeIdx((Long)en[0])
-                .noticeTitle((String) en[1])
-                .noticeContent((String) en[2])
+        Function<Object[], EventBoardDTO> fn = (en -> entityToDto(
+            EventBoard.builder()
+                .eventIdx((Long)en[0])
+                .eventTitle((String) en[1])
+                .eventContent((String) en[2])
                 .readCount((Long) en[3])
                 .regDate((LocalDateTime) en[4])
                 .modDate((LocalDateTime) en[5])
@@ -68,29 +66,28 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
     }
 
     @Override
-    public NoticeBoardAndAdminDTO read(Long noticeIdx) {
-        return noticeBoardRepository.findNoticeBoardAndAdminByNoticeIdx(
-            noticeIdx);
+    public EventBoardDTO read(Long eventIdx) {
+        return eventBoardRepository.findEventBoardByEventIdx(
+            eventIdx);
     }
-
     //업데이트 하는 항목은 제목,내용
     @Override
-    public void modify(NoticeBoardAndAdminDTO dto) {
+    public void modify(EventBoardDTO dto) {
 
-        NoticeBoardAndAdminDTO result = noticeBoardRepository.findNoticeBoardAndAdminByNoticeIdx(
-            dto.getNoticeIdx());
+        EventBoardDTO result = eventBoardRepository.findEventBoardByEventIdx(
+            dto.getEventIdx());
 
-        result.changeTitle(dto.getNoticeTitle());
-        result.changeContent(dto.getNoticeContent());
-        NoticeBoard entity = noticeAndAdminToEntity(result);
+        result.changeTitle(dto.getEventTitle());
+        result.changeContent(dto.getEventContent());
+        EventBoard entity = dtoToEntity(result);
 
-        noticeBoardRepository.save(entity);
+        eventBoardRepository.save(entity);
+
     }
 
-
     @Override
-    public void remove(Long noticeIdx) {
-        noticeBoardRepository.deleteByNoticeIdx(noticeIdx);
+    public void remove(Long eventIdx) {
+        eventBoardRepository.deleteByEventIdx(eventIdx);
     }
    /* private BooleanBuilder getSearch(PageRequestDTO requestDTO) {
         String type = requestDTO.getType();

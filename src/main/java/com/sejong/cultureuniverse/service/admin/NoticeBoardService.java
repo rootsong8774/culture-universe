@@ -1,44 +1,44 @@
-package com.sejong.cultureuniverse.service;
+package com.sejong.cultureuniverse.service.admin;
 
-
-import com.sejong.cultureuniverse.dto.PageRequestDTO;
-import com.sejong.cultureuniverse.dto.PageResultDTO;
-import com.sejong.cultureuniverse.dto.WinnerBoardDTO;
+import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
-import com.sejong.cultureuniverse.entity.event.EventWinner;
+import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 
 
-public interface WinnerBoardService {
+public interface NoticeBoardService {
 
-    Long register(WinnerBoardDTO dto);
+    Long register(NoticeBoardAndAdminDTO dto);
 
-    PageResultDTO<WinnerBoardDTO, Object[]> getList(PageRequestDTO requestDTO);
+    PageResultDTO<NoticeBoardAndAdminDTO, Object[]> getList(PageRequestDTO requestDTO);
 
-    WinnerBoardDTO read(Long winnerIdx);
+    NoticeBoardAndAdminDTO read(Long noticeIdx);
 
-    void modify(WinnerBoardDTO dto);
+    void modify(NoticeBoardAndAdminDTO dto);
 
-    void remove(Long winnerIdx);
+    void remove(Long noticeIdx);
+//db->화면
+    default NoticeBoardAndAdminDTO entityToDto(NoticeBoard entity, Admin admin) {
 
-
-    default WinnerBoardDTO entityToDto(EventWinner entity, Admin admin) {
-        return WinnerBoardDTO.builder()
-            .winnerIdx(entity.getWinnerIdx())
-            .winTitle(entity.getWinTitle())
-            .winContent(entity.getWinContent())
+        return NoticeBoardAndAdminDTO.builder()
+            .noticeIdx(entity.getNoticeIdx())
+            .noticeTitle(entity.getNoticeTitle())
+            .noticeContent(entity.getNoticeContent())
             .readCount(entity.getReadCount())
             .regDate(entity.getRegDate())
             .modDate(entity.getModDate())
             .adminId(admin.getAdminId())
             .build();
-    }
 
-    default EventWinner dtoToEntity(WinnerBoardDTO dto) {
-        return EventWinner.builder()
-            .winnerIdx(dto.getWinnerIdx())
+    }
+//화면->db
+    default NoticeBoard noticeAndAdminToEntity(NoticeBoardAndAdminDTO dto) {
+        return NoticeBoard.builder()
+            .noticeIdx(dto.getNoticeIdx())
             .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))
-            .winTitle(dto.getWinTitle())
-            .winContent(dto.getWinContent())
+            .noticeTitle(dto.getNoticeTitle())
+            .noticeContent(dto.getNoticeContent())
             .readCount(dto.getReadCount())
             .build();
     }

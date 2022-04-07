@@ -1,8 +1,8 @@
 package com.sejong.cultureuniverse.service.performances;
 
-import com.sejong.cultureuniverse.dto.PageRequestDTO;
-import com.sejong.cultureuniverse.dto.PerformanceDetailsDTO;
-import com.sejong.cultureuniverse.dto.PerformanceListDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsDTO;
+import com.sejong.cultureuniverse.dto.performances.PerformanceListDTO;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
