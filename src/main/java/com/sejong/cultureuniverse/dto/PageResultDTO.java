@@ -8,12 +8,21 @@ import lombok.Getter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+
+
+/**
+ * @param <DTO> Generic Type of DTO
+ * @param <EN>  Generic Type of Entity
+ */
+
+
 @Getter
 public class PageResultDTO<DTO, EN> {
 
     private final List<DTO> dtoList;
 
     private final int totalPage;
+
 
     private int page;
     private int size;
