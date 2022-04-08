@@ -1,5 +1,6 @@
 package com.sejong.cultureuniverse.entity.admin;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sejong.cultureuniverse.entity.BaseEntity;
 import com.sejong.cultureuniverse.entity.Member;
@@ -36,7 +37,7 @@ public class Qna extends BaseEntity {
     private Member member;
 
     @OrderBy("commentIdx desc")
-    @JsonIgnoreProperties({"commentIdx"})
+    @JsonIgnore
     @OneToMany (mappedBy = "commentIdx",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 //    @JoinColumn(name = "admin_id")
     @Exclude

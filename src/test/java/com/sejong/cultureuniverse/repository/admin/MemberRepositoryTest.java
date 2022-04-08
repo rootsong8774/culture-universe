@@ -16,12 +16,12 @@ public class MemberRepositoryTest {
     @Test
     @DisplayName("회원 명단 추가")
     public void insertMembers(){
-        IntStream.range(1,20).forEach(i->{
+        IntStream.rangeClosed(1,20).forEach(i->{
             Member member = Member.builder()
                 .username("회원id"+i)
                 .pw("1111")
                 .name("회원이름"+i)
-                .email("email"+i+"email.com")
+                .email("email"+i+"@email.com")
                 .phoneNum("010-"+i+"-1234")
                 .build();
             memberRepository.save(member);

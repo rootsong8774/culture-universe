@@ -26,7 +26,7 @@ public class AdminCommentServiceImpl implements AdminCommentService {
     }
 
     @Override
-    public List<Object[]> getList(Long questionIdx) {
+    public List<AdminComment> getList(Long questionIdx) {
         return adminCommentRepository.getCommentOrderByQuestionIdx(questionIdx);
 //            result.stream().map(this::entityToDto)
 //            .collect(Collectors.toList());

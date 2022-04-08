@@ -48,31 +48,35 @@
         <!--관리자 답글 작성란 -->
         <div th:id="adminCommentBox" class="adminCommentBox">
             <h2 class="mt-4" >문의내역 답변 </h2>
-            <div class="form-group" th:each="adminComment :${adminCommentList}">
-                <div class="form-group"  th:id="'comment--' + ${adminComment.commentIdx}">
+            <div class="form-group" >
+<!--             th:each="adminComment :${adminCommentList}-->
+                <div class="form-group"  >
+<!--                    th:id="'comment--' + ${adminComment.commentIdx}"-->
                     <label>관리자ID</label>
-                    <input type="text" class="form-control" name="adminId" th:text="${adminComment.adminIdx}" readonly>
-<!--관리자 아이디 삽입되어야하는 부분  th:value="${dto.admin.adminId}"-->
+                    <input type="text" class="form-control" name="adminId" readonly>
+<!--관리자 아이디 삽입되어야하는 부분  th:value="${dto.admin.adminId}" th:text="${adminComment.adminIdx}" -->
                 </div>
                 <div class="form-group">
                     <label>답변 내용</label>
-                    <textarea rows="5" class="form-control" id="commentContent"  th:text="${adminComment.commentContent}"></textarea>
+                    <textarea rows="5" class="form-control" id="commentContent"  ></textarea>
+<!--                    th:text="${adminComment.commentContent}"-->
                 </div>
                 <div class="form-group">
                     <label>답변 수정일</label>
-                    <input type="text" class="form-control" name="modDate" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
-<!--                     th:value="${#temporals.format(dto.admin.modDate, 'yyyy/MM/dd HH:mm:ss') -->
+                    <input type="text" class="form-control" name="modDate" readonly>
+<!--                     th:value="${#temporals.format(dto.admin.modDate, 'yyyy/MM/dd HH:mm:ss')
+th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')-->
                 </div>
                 <div class="form-group">
                     <label>답변 등록일</label>
-                    <input type="text" class="form-control" name="regDate" th:text="${adminComment.regDate}" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd')}" readonly>
+                    <input type="text" class="form-control" name="regDate" readonly>
+<!--                     th:text="${adminComment.regDate}" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd')-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary commentSave" id="commentSave">답변 등록</button>
                     <button type="button" class="btn btn-warning commentModify" id="commentModify">답변 수정</button>
-                    <button th:onclick="|adminCommentIndex.adminCommentDelete('${qna.questionIdx}', '${adminCommentIdx}')|"
-                            type="button" class="btn btn-danger commentRemove" id="commentRemove">답변 삭제</button>
-
+                    <button  type="button" class="btn btn-danger commentRemove" id="commentRemove">답변 삭제</button>
+<!--th:onclick="|adminCommentIndex.adminCommentDelete('${qna.questionIdx}', '${adminCommentIdx}')|"-->
                 </div>
             </div>
         </div>
@@ -84,6 +88,7 @@
                         $('#adminCommentBox').fadeToggle('fast');
                     });
                 }); //closedBtn
+
                 let adminCommentIndex = {
                     init: function () {
                         $("#commentSave").on("click", () => {
@@ -105,6 +110,8 @@
                             contentType: "application/json; charset=utf-8",
                             dataType: "text"
                         }).done(function (res) {
+
+
                             alert("댓글작성이 완료되었습니다.");
                             location.href = `/qna/${questionIdx}`;
                         }).fail(function (err) {
@@ -120,6 +127,23 @@
                             location.href = `/qna/${questionIdx}`;
                         }).fail(function (err) {
                             alert(JSON.stringify(err));
+                        });
+                    },
+                     loadJsonData: function(){
+                        $.getJSON('/admin/' + questionIdx, function (arr) {
+                            console.log(arr);
+
+                            var str = "";
+                            $('.commentCount').html("Comment Count" + arr.length);
+                            $.each(arr, function (idx, comment){
+                                console.log(comment);
+                                str += '  <div class="form-group" data-commentIdx="' + comment.commentIdx + '"><b>' + comment.commentIdx + '</b>';
+                                str += ' <h5 class="form-group"> ' + comment.comment + '</h5>';
+                                str += '  <p class="form-group">' + formatTime(comment.regDate) + '</p>';
+                                str += '  <p class="form-group">' + formatTime(comment.modDate) + '</p>';
+                                str += '    </div>';
+                            })
+                            listGroup.html(str);
                         });
                     }
                 }
@@ -144,23 +168,7 @@
                 //         date.getDate()+' '
                 // } //reg mod time
                 //
-                // function loadJsonData(){
-                //     $.getJSON('/admincomments/qna/' + questionIdx, function (arr) {
-                //         console.log(arr);
-                //
-                //         var str = "";
-                //         $('.commentCount').html("Comment Count" + arr.length);
-                //         $.each(arr, funtion(idx, comment){
-                //             console.log(comment);
-                //             str += '  <div class="form-group" data-questionIdx="' + comment.commentIdx + '"><b>' + comment.commentIdx + '</b>';
-                //             str += ' <h5 class="form-group"> ' + comment.comment + '</h5>';
-                //             str += '  <p class="form-group">' + formatTime(comment.regDate) + '</p>';
-                //             str += '  <p class="form-group">' + formatTime(comment.modDate) + '</p>';
-                //             str += '    </div>';
-                //         })
-                //         listGroup.html(str);
-                //     });
-                // }
+
                 // $(".commentCount").click(function (){
                 //     loadJsonData();
                 // })

@@ -21,7 +21,7 @@ import java.util.List;
 public interface AdminCommentService {
 
     Long register(AdminCommentDTO adminCommentDTO);
-    List<Object[]> getList(Long commentIdx);
+    List<AdminComment> getList(Long commentIdx);
     void modify(AdminCommentDTO adminCommentDTO);
     void commentSave(Long questionIdx, AdminComment adminComment, Member member);
     void adminCommentDelete(Long commentIdx);

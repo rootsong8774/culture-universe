@@ -21,13 +21,10 @@ public class AdminCommentController {
     private final AdminCommentService adminCommentService;
 
     @GetMapping(value = "/admin/{questionIdx}",produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Object[]> getListByQna(@PathVariable("questionIdx") Long questionIdx) {
+    public List<AdminComment> getListByQna(@PathVariable("questionIdx") Long questionIdx) {
         return adminCommentService.getList(questionIdx);
     }
-//    @GetMapping(value = "admin/{questionIdx}",produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<List<Object[]>> getListByQna(@PathVariable("questionIdx") Long questionIdx){
-//        return new ResponseEntity<>(adminCommentService.getList(questionIdx), HttpStatus.OK);
-//    }
+
     @PostMapping("/qna/{questionIdx}/adminComment")
     public void save(@PathVariable ("questionIdx") Long questionIdx,
                      @RequestBody AdminComment adminComment, Member member){
