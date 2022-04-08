@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
 class PerformanceDetailsRepositoryTest {
-
+    
     @Autowired
     PerformanceDetailsRepository performanceDetailsRepository;
-
+    
     @Test
     @Transactional(readOnly = true)
     void findAllTest() {
