@@ -30,7 +30,7 @@ public class AdminCommentRepositoryTest {
 
     @Test
     public void insertComment (){
-        IntStream.rangeClosed(1,15).forEach(i->{
+        IntStream.rangeClosed(4,15).forEach(i->{
             long questionIdx = (long)(Math.random()*20)+1;
             Admin admin = Admin.builder().adminId("관리자1").build();
             Qna qna = Qna.builder().questionIdx(questionIdx).build();

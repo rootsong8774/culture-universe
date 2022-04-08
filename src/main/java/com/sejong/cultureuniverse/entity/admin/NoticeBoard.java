@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import javax.persistence.*;
 
 import lombok.*;
+import lombok.ToString.Exclude;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -29,7 +30,12 @@ public class NoticeBoard extends BaseEntity {
 
     @OneToOne(fetch = LAZY, cascade = ALL) //객체로 받는게 맞음
     @JoinColumn(name = "admin_idx")
+    @Exclude
     private Admin adminId;
-   // private Admin adminPw;
+    
+    public void setAdminId(Admin adminId) {
+        this.adminId = adminId;
+    }
+    // private Admin adminPw;
 
 }

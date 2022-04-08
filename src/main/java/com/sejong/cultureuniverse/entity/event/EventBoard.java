@@ -26,14 +26,16 @@ import net.bytebuddy.implementation.bind.annotation.Super;
 @NoArgsConstructor
 @SequenceGenerator(name = "event_seq", sequenceName = "event_seq", initialValue = 1, allocationSize = 1)
 public class EventBoard extends BaseEntity {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_seq")
     private Long eventIdx;
     private String eventTitle;
     private String eventContent;
     private Long readCount;
-
-    @ManyToOne(fetch = LAZY, cascade= ALL)
-    @JoinColumn(name="admin_idx")
+    
+    @ManyToOne(fetch = LAZY, cascade = ALL)
+    @JoinColumn(name = "admin_idx")
     private Admin adminId;
+    
+}
