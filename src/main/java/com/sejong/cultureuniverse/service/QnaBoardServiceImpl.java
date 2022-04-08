@@ -1,21 +1,20 @@
 package com.sejong.cultureuniverse.service;
 
 import com.sejong.cultureuniverse.dto.QnaBoardDTO;
-import com.sejong.cultureuniverse.dto.PageRequestDTO;
-import com.sejong.cultureuniverse.dto.PageResultDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Qna;
 import com.sejong.cultureuniverse.repository.QnaBoardRepository;
+import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.function.Function;
 
 @Service
 @Log4j2

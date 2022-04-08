@@ -1,7 +1,8 @@
-package com.sejong.cultureuniverse.service;
+package com.sejong.cultureuniverse.service.admin;
 
 import com.sejong.cultureuniverse.dto.AdminCommentDTO;
 import com.sejong.cultureuniverse.entity.admin.AdminComment;
+import com.sejong.cultureuniverse.service.AdminCommentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

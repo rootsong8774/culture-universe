@@ -1,8 +1,8 @@
 package com.sejong.cultureuniverse.service;
 
-import com.sejong.cultureuniverse.dto.PageRequestDTO;
-import com.sejong.cultureuniverse.dto.PageResultDTO;
 import com.sejong.cultureuniverse.dto.QnaBoardDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Qna;
 

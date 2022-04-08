@@ -1,8 +1,9 @@
-package com.sejong.cultureuniverse.service;
+package com.sejong.cultureuniverse.service.admin;
 
-import com.sejong.cultureuniverse.dto.NoticeBoardAndAdminDTO;
-import com.sejong.cultureuniverse.dto.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
+import com.sejong.cultureuniverse.service.admin.NoticeBoardService;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

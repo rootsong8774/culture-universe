@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.reposiroty;
+package com.sejong.cultureuniverse.repository.admin;
 
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.AdminComment;

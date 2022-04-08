@@ -1,13 +1,19 @@
-package com.sejong.cultureuniverse.repository;
+package com.sejong.cultureuniverse.repository.performances;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.sejong.cultureuniverse.dto.performances.PerformanceScheduleDTO;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import com.sejong.cultureuniverse.entity.performance.PerformanceSchedule;
+import com.sejong.cultureuniverse.mapper.PerformanceScheduleMapper;
+import com.sejong.cultureuniverse.repository.PerformanceDetailsRepository;
+import com.sejong.cultureuniverse.repository.PerformanceScheduleRepository;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,6 +50,25 @@ class PerformanceScheduleRepositoryTest {
             }
             
         }
+    }
+    
+    @Test
+    public void mapperTest() throws Exception {
+      //given
+        PerformanceDetails details = detailsRepository.findByPerformId(1L);
+    
+        PerformanceSchedule schedule = PerformanceSchedule.builder()
+            .performanceDetails(details)
+            .scheduleDate(details.getStartDate().toLocalDate())
+            .scheduleTime(LocalTime.of(13,0))
+            .build();
+        
+        PerformanceScheduleDTO result = PerformanceScheduleMapper.INSTANCE.scheduleToDto(schedule);
+        PerformanceSchedule result2 = PerformanceScheduleMapper.INSTANCE.dtoToSchedule(
+            result);
+        Assertions.assertThat(result.getPerformId()).isEqualTo(details.getPerformId());
+        Assertions.assertThat(result.getScheduleDate()).isEqualTo(details.getStartDate());
+        Assertions.assertThat(result.getScheduleTime()).isEqualTo(LocalTime.of(13,0));
     }
     
 }

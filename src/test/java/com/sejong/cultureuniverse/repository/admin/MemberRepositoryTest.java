@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.reposiroty;
+package com.sejong.cultureuniverse.repository.admin;
 
 import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.repository.MemberRepository;
@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.stream.IntStream;
 
 @SpringBootTest
-public class MeberRepositotyTest{
+public class MemberRepositoryTest {
 @Autowired
     MemberRepository memberRepository;
     @Test
