@@ -32,7 +32,7 @@ public class AdminComment extends BaseEntity {
     @ToString.Exclude
     private Member member; //회원
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "admin_idx")
 //    @JsonIgnore
     @ToString.Exclude
