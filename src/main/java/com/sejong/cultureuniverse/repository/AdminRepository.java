@@ -8,5 +8,7 @@ import java.util.Optional;
 public interface AdminRepository extends JpaRepository<Admin,String> {
    Optional<Admin> findByAdminIdx(Long adminIdx);
 
+   Optional<Admin> findByAdminId(String adminId);
+
 }
 

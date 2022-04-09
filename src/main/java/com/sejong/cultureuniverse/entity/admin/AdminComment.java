@@ -2,20 +2,24 @@ package com.sejong.cultureuniverse.entity.admin;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sejong.cultureuniverse.entity.BaseEntity;
 import com.sejong.cultureuniverse.entity.Member;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+import static javax.persistence.CascadeType.PERSIST;
+
 @Entity
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @ToString
-public class AdminComment {
+public class AdminComment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentIdx; //댓글 번호
@@ -28,7 +32,7 @@ public class AdminComment {
     @ToString.Exclude
     private Member member; //회원
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = PERSIST)
     @JoinColumn(name = "admin_idx")
 //    @JsonIgnore
     @ToString.Exclude

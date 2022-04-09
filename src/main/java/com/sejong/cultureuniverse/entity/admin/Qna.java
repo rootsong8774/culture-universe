@@ -8,6 +8,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import lombok.ToString.Exclude;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -15,7 +16,7 @@ import java.util.List;
 
 
 @Entity
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

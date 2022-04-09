@@ -36,8 +36,6 @@ public class AdminCommentRepositoryTest {
             Optional<Qna> qna = qnaBoardRepository.findById(questionIdx);
             AdminComment adminComment = AdminComment.builder()
                 .commentContent("문의답변"+i)
-                .modDate(LocalDateTime.now())
-                .regDate(LocalDateTime.now())
                 .qna(qna.get()) //questionidx
                 .admin(admin.get()) //관리자id
                 .build();
