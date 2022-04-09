@@ -26,7 +26,7 @@ public class AdminCommentServiceImpl implements AdminCommentService {
     }
 
     @Override
-    public List<Object[]> getList(Long questionIdx) {
+    public List<AdminComment> getList(Long questionIdx) {
         return adminCommentRepository.getCommentOrderByQuestionIdx(questionIdx);
 //            result.stream().map(this::entityToDto)
 //            .collect(Collectors.toList());
@@ -38,7 +38,7 @@ public class AdminCommentServiceImpl implements AdminCommentService {
     adminCommentRepository.save(adminComment);
     }
     @Transactional
-    public void commentSave(Long questionIdx, AdminComment adminComment, Member member) {
+    public void register(Long questionIdx, AdminComment adminComment, Member member) {
         Qna qna = qnaBoardRepository.findById(questionIdx).orElseThrow(() ->
                 new IllegalArgumentException("해당 questionIdx가 없습니다. id=" + questionIdx));
 
@@ -47,7 +47,7 @@ public class AdminCommentServiceImpl implements AdminCommentService {
         adminCommentRepository.save(adminComment);
     }
     @Transactional
-    public void adminCommentDelete(Long commentIdx) {
+    public void delete(Long commentIdx) {
         adminCommentRepository.deleteById(commentIdx);
     }
 }
