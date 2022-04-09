@@ -19,10 +19,9 @@ public class AdminCommentServiceTest {
     @Test
     public void getListComment() {
         Long questionIdx = 18L;
-        List<Object[]> adminCommentDTOList = adminCommentService.getList(questionIdx);
-        adminCommentDTOList.forEach(i -> {
-            System.out.println(Arrays.toString(i));
-        });
-
+        List<AdminComment> adminCommentDTOList = adminCommentService.getList(questionIdx);
+        for (AdminComment adminComment : adminCommentDTOList) {
+            System.out.println("adminComment.toString() = " + adminComment.toString());
+        }
     }
 }

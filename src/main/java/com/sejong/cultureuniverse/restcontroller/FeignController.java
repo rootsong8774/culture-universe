@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.controller.performances;
+package com.sejong.cultureuniverse.restcontroller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

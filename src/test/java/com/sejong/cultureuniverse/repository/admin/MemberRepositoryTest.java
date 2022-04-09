@@ -14,7 +14,6 @@ public class MemberRepositoryTest {
 @Autowired
     MemberRepository memberRepository;
     @Test
-    @DisplayName("회원 명단 추가")
     public void insertMembers(){
         IntStream.rangeClosed(1,20).forEach(i->{
             Member member = Member.builder()
