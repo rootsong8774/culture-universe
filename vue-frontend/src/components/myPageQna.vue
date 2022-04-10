@@ -128,7 +128,7 @@ export default {
 <style scoped>
 .table6_2 table {
   width: 100%;
-  margin: 15px 0;
+  margin: 15px auto;
   border: 0;
 }
 

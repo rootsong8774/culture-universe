@@ -33,7 +33,8 @@ public class QnaBoardRepositoryTest {
     @Commit
     @DisplayName("qna 질문 삽입")
     public void insertQnaBoard() {
-        LongStream.rangeClosed(21, 30).forEach(i -> {
+        List<Member> result = memberRepository.findAll();
+        LongStream.rangeClosed(1, result.size()).forEach(i -> {
             Optional<Member>  member = memberRepository.findById(i);
             Qna qna = Qna.builder()
                 .title("연극문의test" + i)

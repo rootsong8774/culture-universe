@@ -39,8 +39,9 @@ public class AdminCommentRepositoryTest {
     @Test
     @Commit
     public void insertComment (){
-        LongStream.rangeClosed(1,30).forEach(i->{
-            long questionIdx = (long)(Math.random()*30)+1;
+        List<Member> result = memberRepository.findAll();
+        LongStream.rangeClosed(1,result.size()).forEach(i->{
+            long questionIdx = (long)(Math.random()*result.size())+1;
             Optional<Admin> admin =adminRepository.findByAdminIdx(1L);
             Optional<Qna> qna = qnaBoardRepository.findById(questionIdx);
             Optional<Member> member = memberRepository.findById(i);
