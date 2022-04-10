@@ -27,7 +27,7 @@
             <th>조회수</th>
           </tr>
           <tr v-for="(result,index) in resultList" :key="index">
-            <td>{{ result.winnderIdx }}</td>
+            <td>{{ result.winnerIdx }}</td>
             <td>{{ result.winTitle }}</td>
             <td>{{ result.modDate | yyyyMMdd }}</td>
             <td>{{ result.readCount }}</td>
