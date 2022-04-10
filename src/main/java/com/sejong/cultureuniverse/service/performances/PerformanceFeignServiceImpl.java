@@ -1,7 +1,7 @@
 package com.sejong.cultureuniverse.service.performances;
 
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
-import com.sejong.cultureuniverse.repository.PerformanceDetailsRepository;
+import com.sejong.cultureuniverse.repository.performances.PerformanceDetailsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;

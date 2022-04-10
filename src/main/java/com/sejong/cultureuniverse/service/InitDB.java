@@ -1,6 +1,6 @@
 package com.sejong.cultureuniverse.service;
 
-import com.sejong.cultureuniverse.repository.PerformanceScheduleRepository;
+import com.sejong.cultureuniverse.repository.performances.PerformanceScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

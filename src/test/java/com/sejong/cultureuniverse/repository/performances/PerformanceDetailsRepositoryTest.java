@@ -2,7 +2,6 @@ package com.sejong.cultureuniverse.repository.performances;
 
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
-import com.sejong.cultureuniverse.repository.PerformanceDetailsRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

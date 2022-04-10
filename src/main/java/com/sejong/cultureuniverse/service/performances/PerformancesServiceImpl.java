@@ -5,7 +5,7 @@ import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsDTO;
 import com.sejong.cultureuniverse.dto.performances.PerformanceListDTO;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
-import com.sejong.cultureuniverse.repository.PerformanceDetailsRepository;
+import com.sejong.cultureuniverse.repository.performances.PerformanceDetailsRepository;
 import java.util.Optional;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;

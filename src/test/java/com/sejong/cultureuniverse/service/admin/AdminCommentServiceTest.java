@@ -25,6 +25,7 @@ public class AdminCommentServiceTest {
         }
     }
 
+
     @Test
     public void getMemberUserIdx() {
         Long userIdx = 3L;
