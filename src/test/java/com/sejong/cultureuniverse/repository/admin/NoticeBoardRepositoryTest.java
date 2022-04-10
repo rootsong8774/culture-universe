@@ -19,9 +19,8 @@ public class NoticeBoardRepositoryTest {
     private NoticeBoardRepository noticeBoardRepository;
     @Test
         public void insertDummies(){
-            IntStream.rangeClosed(1,10).forEach(i -> {
+            IntStream.rangeClosed(1,100).forEach(i -> {
                 NoticeBoard noticeBoard = NoticeBoard.builder()
-                    .noticeIdx(300L)
                     .noticeContent("test content" + i)
                     .noticeTitle("test title" + i)
                     .readCount(100L)
