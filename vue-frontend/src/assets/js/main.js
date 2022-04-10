@@ -37,7 +37,7 @@ jQuery(document).ready(function ($) {
     //=========================================
 
     var wow = new WOW({
-        mobile: false 
+        mobile: false
     });
     wow.init();
 
@@ -60,7 +60,7 @@ jQuery(document).ready(function ($) {
 
 // =========================================
 //      featured slider
-// =========================================       
+// =========================================
 
 
     $('.featured_slider').slick({
@@ -96,7 +96,7 @@ jQuery(document).ready(function ($) {
 
 // =========================================
 // Counter
-// =========================================   
+// =========================================
 
     $('.statistic-counter').counterUp({
         delay: 10,
@@ -107,7 +107,7 @@ jQuery(document).ready(function ($) {
 
 // =========================================
 // Scroll Up
-// =========================================   
+// =========================================
 
     $(window).scroll(function () {
         if ($(this).scrollTop() > 600) {
@@ -123,8 +123,8 @@ jQuery(document).ready(function ($) {
 
 
 // =========================================
-// About us accordion 
-// =========================================   
+// About us accordion
+// =========================================
 
     $("#faq_main_content").collapse({
         accordion: true,
@@ -140,7 +140,7 @@ jQuery(document).ready(function ($) {
 
 // =========================================
 // Team Skillbar active js
-// =========================================   
+// =========================================
 
 
     jQuery('.teamskillbar').each(function () {
@@ -159,7 +159,7 @@ jQuery(document).ready(function ($) {
 
 // =========================================
 //  Portfolio Isotop
-// =========================================   
+// =========================================
 
 $(function () {
     // Initialize Isotope
@@ -185,6 +185,7 @@ $(function () {
 
     });
 });
+
 
 
 

@@ -304,7 +304,7 @@ export default {
 .searchArea > form > input {
   border: 0;
   outline: none;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(238, 153, 123, 0.2);
   width: 220px;
   height: 40px;
   color: #fff;

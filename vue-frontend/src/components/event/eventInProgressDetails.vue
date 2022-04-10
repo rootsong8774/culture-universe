@@ -65,6 +65,7 @@
               </div><!-- .comment-body -->
             </li>
           </ol>
+
         </div><!--/.comments-area-->
       </div>
     </div><!--centerColumn   -->
@@ -73,10 +74,7 @@
 
 <script>
 
-export default {
-  name: "eventInProgressDetails",
 
-}
 </script>
 <style scoped>
 

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @Log4j2
-@RequestMapping("/api/winner")
+@RequestMapping("/api/event")
 @RequiredArgsConstructor
 public class WinnerBoardRestController {
     private final WinnerBoardService winnerBoardService;

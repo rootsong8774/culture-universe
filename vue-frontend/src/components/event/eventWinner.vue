@@ -1,31 +1,40 @@
 <template>
   <div>
-    <div id="centerColumn">
-      <h2>이벤트 당첨자 발표</h2>
-      <form>
-        <select name="language">
-          <option value="none">=== 전체 ===</option>
-          <option value="korean">번호</option>
-          <option value="english">제목</option>
-          <option value="chinese">등록일자</option>
-          <option value="spanish">번호+제목</option>
-        </select>
-        <input type="search"> 검색 아이콘 추가
-      </form>
-      <table border="1">
-        <tr>
-          <th>번호</th>
-          <th>제목</th>
-          <th>등록일(최종수정일)</th>
-          <th>조회수</th>
-        </tr>
-        <tr v-for="(result,index) in resultList" :key="index">
-          <td>{{result.winnerIdx}}</td>
-          <td>{{result.winTitle}}</td>
-          <td>{{result.modDate | yyyyMMdd}}</td>
-          <td>{{result.readCount}}</td>
-        </tr>
-        <div class="grid models text-center" id="pagination-margin">
+    <div id="table">
+      <div id="centerColumn">
+        <br>
+        <h2>이벤트 당첨자 현황</h2>
+        <form class="eventTitle">
+
+
+          <select name="language">
+            <option value="none">=== 전체 ===</option>
+            <option value="winNum">번호</option>
+            <option value="title">제목</option>
+            <option value="wregDate">등록일자</option>
+            <option value="noAndTitle">번호+제목</option>
+          </select>
+
+              <input type="search" placeholder="검색">
+
+
+        </form>
+        <table border="1">
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>등록일(최종수정일)</th>
+            <th>조회수</th>
+          </tr>
+          <tr v-for="(result,index) in resultList" :key="index">
+            <td>{{ result.winnderIdx }}</td>
+            <td>{{ result.winTitle }}</td>
+            <td>{{ result.modDate | yyyyMMdd }}</td>
+            <td>{{ result.readCount }}</td>
+          </tr>
+        </table>
+      </div>
+        <div class="pagination-part text-center">
           <ul class="pagination h-100 justify-content-center align-items-center">
 
             <li class="page-item " v-if="pageData.prev">
@@ -45,9 +54,9 @@
             </li>
 
           </ul>
-        </div>
+        </div><!--/.pagination-part(&raquo;)-->
 
-      </table>
+
     </div>
   </div>
 </template>
@@ -56,7 +65,7 @@
 import axios from "axios";
 
 export default {
-  name: "eventList",
+  name: "winnerList",
   data() {
     return {
       page: 1,
@@ -103,7 +112,7 @@ export default {
   methods: {
     getList: function () {
       axios({
-        url: '/api/event/eventList',
+        url: '/api/event/winnerList',
         params: {
           page: this.page,
         },
@@ -125,7 +134,7 @@ export default {
     page: function () {
       this.getList();
       this.$router.push({
-        name: "eventList",
+        name: "eventWinner",
         query: {page: this.page},
       })
     }
@@ -133,7 +142,6 @@ export default {
 
 }
 </script>
-
 <style>
 div {
   margin: 0;
@@ -144,7 +152,10 @@ h2 {
 }
 
 form {
-  text-align: right;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  display: flex;
 }
 
 table {
@@ -156,5 +167,43 @@ table, td, th {
   border-collapse: collapse;
   border: 1px solid black;
   font-size: larger;
+}
+.searchArea{
+  margin: 5px;
+  display: flex;
+  width: 300px;
+  height: 40px;
+  border:1px solid rgb(102, 103, 171);
+  background-color: rgba(238, 153, 123, 0.5);
+  padding-left: 5px;
+  border-radius: 5px;
+  margin-top: 24px;
+
+}
+.searchArea > form >input{
+  border: 0;
+  outline: none;
+  background-color: rgba(235, 150, 120, 0.2);
+  width: 250px;
+  height: 40px;
+  color: #fff;
+  padding-left: 10px;
+}
+.searchArea > form > input:focus{
+  outline: 2px solid white;
+  border-radius: 5px;
+}
+
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+.searchArea > form >span{
+  width: 50px;
+  color: rgba(0, 0, 0, 0);
+  background-repeat: no-repeat;
+  background-position: center;
+  font-weight: bold;
+  cursor: pointer;
 }
 </style>

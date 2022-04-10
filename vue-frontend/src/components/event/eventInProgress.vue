@@ -1,78 +1,144 @@
 <template>
   <div>
-    <!--nwes start -->
-    <section class="news">
-      <div class="container">
-        <div class="news-details">
-          <div class="section-header text-center">
-            <br/>
-            <h2>진행중인 이벤트</h2>
-            <p>
-              이벤트를 확인해 주세요
-            </p>
+    <div id="table">
+      <div id="centerColumn">
+        <br>
+        <h2>진행 이벤트</h2>
+        <form class="eventTitle">
 
-          </div><!--/.section-header-->
-          <div class="news-card">
-            <div class="row">
 
-              <div class="col-md-8">
-                <div class="blog-left">
-                  <div class="col-sm-6">
-                    <router-link :to="{name: 'eventInProgressDetails'}">
-                      <div class="single-news-box news-mb-20">
-                        <div class="news-box-bg">
+          <select name="language">
+            <option value="none">=== 전체 ===</option>
+            <option value="winNum">번호</option>
+            <option value="title">제목</option>
+            <option value="wregDate">등록일자</option>
+            <option value="noAndTitle">번호+제목</option>
+          </select>
 
-                          <img src="src/assets/images/SJ/event.jpg" alt="이벤트이미지">
-                          <div class="isotope-overlay">
-                            <a>
-                              <span class="lnr lnr-link"></span>
-                            </a>
-                          </div>
-                        </div><!--/.team-box-bg-->
-                        <div class="news-box-inner">
-                          <h3>
-                            <a>
-                              댓글이벤트
-                            </a>
-                          </h3>
-                          <p class="news-meta">
-                            이벤트 기간:2022.02.03~2022.04.16
-                          </p>
-                        </div><!--/.news-box-inner-->
-                      </div><!--/.single-news-box-->
-                    </router-link>
-                  </div><!--.col-->
-                </div><!--/.blog-left-->
-              </div><!--/.row-->
-            </div><!--/.news-card-->
-          </div><!--/news-details-->
+          <input type="search" placeholder="검색">
+
+
+        </form>
+        <table border="1">
+          <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>등록일(최종수정일)</th>
+            <th>조회수</th>
+          </tr>
+          <tr v-for="(result,index) in resultList" :key="index">
+            <td>{{ result.eventIdx }}</td>
+            <td>{{ result.eventTitle }}</td>
+            <td>{{ result.modDate | yyyyMMdd }}</td>
+            <td>{{ result.readCount }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
           <div class="pagination-part text-center">
-            <ul class="pagination">
-              <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a>
+            <ul class="pagination h-100 justify-content-center align-items-center">
+
+              <li class="page-item " v-if="pageData.prev">
+                <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
+                   style="cursor:pointer;">Previous</a>
               </li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li>
-                <a href="#">
-                  Next
-                  <span class="fa fa-angle-right">
-													</span>
+
+              <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
+                  v-for="page in pageData.pageList">
+                <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
+                  {{ page }}
                 </a>
               </li>
+              <li class="page-item" v-if="pageData.next">
+                <a class="page-link"
+                   @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
+              </li>
+
             </ul>
           </div><!--/.pagination-part(&raquo;)-->
         </div><!--/.container-->
-      </div>
-    </section><!--/news-->
-    <!--news end-->
-  </div>
 </template>
 
 <script>
-
+import axios from "axios";
 
 export default {
-  name: "eventInProgress",
+
+  name: "eventList",
+  data() {
+    return {
+      page: 1,
+      resultList: [],
+      pageData: {
+        dtoList: [],
+        totalPage: 13,
+        size: 12,
+        start: 1,
+        end: 10,
+        prev: false,
+        next: true,
+        pageList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      }
+    }
+  },
+  created() {
+    this.getList();
+  },
+  filters: {
+    yyyyMMdd: function (value) {
+      if (value === '') {
+        return '';
+      }
+
+      // 연도, 월, 일 추출
+      let year = value[0];
+      let month = value[1];
+      let day = value[2];
+
+      // 월, 일의 경우 한자리 수 값이 있기 때문에 공백에 0 처리
+      if (month < 10) {
+        month = '0' + month;
+      }
+
+      if (day < 10) {
+        day = '0' + day;
+      }
+
+      // 최종 포맷 (ex - '2021.10.08')
+      return year + '.' + month + '.' + day;
+    }
+  },
+  methods: {
+    getList: function () {
+      axios({
+        url: '/api/event/eventList',
+        params: {
+          page: this.page,
+        },
+        method: 'get',
+      }).then(response => {
+        let jsonData = response.data;
+        this.resultList = jsonData.dtoList;
+        this.pageData = jsonData;
+        console.log(jsonData);
+
+      })
+    },
+    setPage: function (value) {
+      this.page = value;
+    },
+
+  },
+  watch: {
+    page: function () {
+      this.getList();
+      this.$router.push({
+        name: "event",
+        query: {page: this.page},
+      })
+    }
+  }
+
 }
 </script>
 <style scoped>
