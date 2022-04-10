@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.repository;
+package com.sejong.cultureuniverse.repository.performances;
 
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import java.util.Optional;

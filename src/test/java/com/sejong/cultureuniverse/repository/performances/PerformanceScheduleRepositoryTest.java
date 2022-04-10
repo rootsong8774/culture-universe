@@ -6,8 +6,6 @@ import com.sejong.cultureuniverse.dto.performances.PerformanceScheduleDTO;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import com.sejong.cultureuniverse.entity.performance.PerformanceSchedule;
 import com.sejong.cultureuniverse.mapper.PerformanceScheduleMapper;
-import com.sejong.cultureuniverse.repository.PerformanceDetailsRepository;
-import com.sejong.cultureuniverse.repository.PerformanceScheduleRepository;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
