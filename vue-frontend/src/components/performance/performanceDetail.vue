@@ -101,10 +101,7 @@
   </div>
 </template>
 <script>
-
-
 import axios from "axios";
-
 export default {
   name: "PerformanceDetail",
   data() {
@@ -128,21 +125,17 @@ export default {
       if (value === '') {
         return '';
       }
-
       // 연도, 월, 일 추출
       let year = value[0];
       let month = value[1];
       let day = value[2];
-
       // 월, 일의 경우 한자리 수 값이 있기 때문에 공백에 0 처리
       if (month < 10) {
         month = '0' + month;
       }
-
       if (day < 10) {
         day = '0' + day;
       }
-
       // 최종 포맷 (ex - '2021.10.08')
       return year + '.' + month + '.' + day;
     }
@@ -157,40 +150,33 @@ export default {
         method: 'get',
       }).then(response => {
         this.performData = response.data
-
       })
     },
     reservation: function () {
       this.$router.push({name: 'performanceReservation'})
     },
-
   },
 }
 </script>
 
 <style scoped>
-
 li {
   display: list-item;
   text-align: -webkit-match-parent;
 }
-
 .poster {
   justify-content: center;
   padding: 10px;
   margin: 5px;
   display: flex;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;
 }
-
 .dropbtn_icon {
   font-family: 'Material Icons';
 }
-
 .dropbtn {
   border: 1px solid rgb(37, 37, 37);
   border-radius: 4px;
@@ -203,7 +189,6 @@ li {
   cursor: pointer;
   font-size: 12px;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -212,7 +197,6 @@ li {
   background-color: #f9f9f9;
   min-width: 200px;
 }
-
 .dropdown-content a {
   display: block;
   text-decoration: none;
@@ -220,17 +204,13 @@ li {
   font-size: 12px;
   padding: 12px 20px;
 }
-
 .dropdown-content a:hover {
   background-color: #ececec
 }
-
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
 /*dropdown -end*/
-
 #introduce {
   padding: 20px 0;
 }

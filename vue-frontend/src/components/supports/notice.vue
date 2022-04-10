@@ -21,7 +21,7 @@
                 </div>
           </form>
         </div>
-        <!--<table border="1">
+        <table border="1">
           <tr>
             <th>번호</th>
             <th>제목</th>
@@ -34,7 +34,7 @@
             <td>{{ result.modDate | yyyyMMdd }}</td>
             <td>{{ result.readCount }}</td>
           </tr>
-        </table>-->
+        </table>
 
       </div>
       <div class="pagination-part text-center">

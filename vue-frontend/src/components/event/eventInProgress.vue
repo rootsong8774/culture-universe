@@ -34,29 +34,30 @@
           </tr>
         </table>
       </div>
-    </div>
-          <div class="pagination-part text-center">
-            <ul class="pagination h-100 justify-content-center align-items-center">
 
-              <li class="page-item " v-if="pageData.prev">
-                <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
-                   style="cursor:pointer;">Previous</a>
-              </li>
+      <div class="pagination-part text-center">
+        <ul class="pagination h-100 justify-content-center align-items-center">
 
-              <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
-                  v-for="page in pageData.pageList">
-                <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
-                  {{ page }}
-                </a>
-              </li>
-              <li class="page-item" v-if="pageData.next">
-                <a class="page-link"
-                   @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
-              </li>
+          <li class="page-item " v-if="pageData.prev">
+            <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
+               style="cursor:pointer;">Previous</a>
+          </li>
 
-            </ul>
-          </div><!--/.pagination-part(&raquo;)-->
-        </div><!--/.container-->
+          <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
+              v-for="page in pageData.pageList">
+            <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
+              {{ page }}
+            </a>
+          </li>
+          <li class="page-item" v-if="pageData.next">
+            <a class="page-link"
+               @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
+          </li>
+
+        </ul>
+      </div><!--/.pagination-part(&raquo;)-->
+    </div><!--/.container-->
+  </div>
 </template>
 
 <script>
@@ -133,7 +134,7 @@ export default {
     page: function () {
       this.getList();
       this.$router.push({
-        name: "event",
+        name: "eventInProgress",
         query: {page: this.page},
       })
     }
@@ -142,6 +143,10 @@ export default {
 }
 </script>
 <style scoped>
+table{
+  margin-left: auto;
+  margin-right: auto;
+}
 .news {
   padding: 114px 0 95px;
 }

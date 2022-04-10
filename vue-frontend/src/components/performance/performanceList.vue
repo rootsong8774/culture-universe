@@ -115,9 +115,7 @@
 </template>
 
 <script>
-
 import axios from "axios";
-
 export default {
   name: "PerformanceList",
   data() {
@@ -144,21 +142,17 @@ export default {
       if (value === '') {
         return '';
       }
-
       // 연도, 월, 일 추출
       let year = value[0];
       let month = value[1];
       let day = value[2];
-
       // 월, 일의 경우 한자리 수 값이 있기 때문에 공백에 0 처리
       if (month < 10) {
         month = '0' + month;
       }
-
       if (day < 10) {
         day = '0' + day;
       }
-
       // 최종 포맷 (ex - '2021.10.08')
       return year + '.' + month + '.' + day;
     }
@@ -176,13 +170,11 @@ export default {
         this.resultList = jsonData.dtoList;
         this.pageData = jsonData;
         console.log(jsonData);
-
       })
     },
     setPage: function (value) {
       this.page = value;
     },
-
   },
   watch: {
     page: function () {
@@ -193,7 +185,6 @@ export default {
       })
     }
   }
-
 }
 </script>
 
@@ -209,48 +200,38 @@ export default {
   overflow: hidden;
   text-align: left;
 }
-
 .result-date {
   float: left;
 }
-
 .result-genre {
   float: right;
 }
-
 .content_page > a {
   padding: 5px;
 }
-
 .clearfix {
   padding: 30px;
 }
-
 .schedule_w .item {
   padding: 0 10px 0 10px;
   position: relative;
 }
-
 .schedule_w .item {
   float: left;
   width: 25%;
   position: relative;
 }
-
 .date_select {
   justify-content: center;
   display: flex;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;
 }
-
 .dropbtn_icon {
   font-family: 'Material Icons';
 }
-
 .dropbtn {
   border: 1px solid rgb(37, 37, 37);
   border-radius: 4px;
@@ -263,7 +244,6 @@ export default {
   cursor: pointer;
   font-size: 12px;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -272,7 +252,6 @@ export default {
   background-color: #f9f9f9;
   min-width: 200px;
 }
-
 .dropdown-content a {
   display: block;
   text-decoration: none;
@@ -280,15 +259,12 @@ export default {
   font-size: 12px;
   padding: 12px 20px;
 }
-
 .dropdown-content a:hover {
   background-color: #ececec
 }
-
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
 /*dropdown -end*/
 .searchArea {
   display: flex;
@@ -297,26 +273,21 @@ export default {
   border: 1px solid rgb(102, 103, 171);
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-
-
 }
-
 .searchArea > form > input {
   border: 0;
   outline: none;
-  background-color: rgba(238, 153, 123, 0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   width: 220px;
   height: 40px;
   color: #fff;
   padding-left: 10px;
   border-radius: 5px;
 }
-
 .searchArea > form > input:focus {
   outline: 2px solid black;
   border-radius: 5px;
 }
-
 .searchArea > form > span {
   width: 20px;
   color: rgba(0, 0, 0, 0);
@@ -325,19 +296,15 @@ export default {
   font-weight: bold;
   cursor: pointer;
 }
-
-
 .nav1 > li {
   padding: 10px;
   justify-items: center;
   margin-left: 50px;
   font-weight: bold;
 }
-
 .nav1 > li > a {
   color: #fff;
 }
-
 #pagination-margin {
   margin-top: 40px;
 }
