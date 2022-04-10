@@ -130,6 +130,10 @@
                   <li>
                     <router-link :to="{name: 'qna'}">고객 문의</router-link>
                   </li>
+<!--                  04/10 추가 확인용-->
+                  <li>
+                    <router-link :to="{name: 'myPageQna'}">1:1 문의확인</router-link>
+                  </li>
                 </ul>
               </li>
               <li class="dropdown">

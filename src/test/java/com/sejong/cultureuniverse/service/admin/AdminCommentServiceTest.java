@@ -18,11 +18,20 @@ public class AdminCommentServiceTest {
 
     @Test
     public void getListComment() {
-        Long questionIdx = 18L;
+        Long questionIdx = 21L;
         List<AdminComment> adminCommentDTOList = adminCommentService.getList(questionIdx);
         for (AdminComment adminComment : adminCommentDTOList) {
-            System.out.println("adminComment = " + adminComment.toString());
+            System.out.println("adminComment.toString() = " + adminComment.toString());
         }
+    }
 
+
+    @Test
+    public void getMemberUserIdx() {
+        Long userIdx = 3L;
+        List<AdminComment> userIdxDTOList = adminCommentService.getList(userIdx);
+        for (AdminComment adminComment : userIdxDTOList) {
+            System.out.println("adminComment.toString() = " + adminComment.toString());
+        }
     }
 }

@@ -6,10 +6,9 @@
         <input type="hidden" name="is_member" value="N"/>
         <input type="hidden" name="logout">
         <fieldset>
-          <legend>1:1문의 작성 폼</legend>
           <div class="table-w">
             <table summary="고객명, 비밀번호, 아이디, 문의자, 연락처, 핸드폰, 문의유형, 파일첨부, 제목, 내용">
-              <caption>1:1문의</caption>
+              <caption id="maintitle"><h3>1:1문의 게시판</h3></caption>
               <colgroup>
                 <col width="85"/>
                 <col width="*"/>
@@ -17,22 +16,6 @@
                 <col width="*"/>
               </colgroup>
               <tbody>
-              <tr>
-                <th scope="col">
-                  <div class="tb-l">고객명 *</div>
-                </th>
-                <td>
-                  <div class="tb-l"><input type="text" name="name" value="" class="txt-input"
-                                           style="width: 195px"/></div>
-                </td>
-                <th scope="col">
-                  <div class="tb-l">비밀번호 *</div>
-                </th>
-                <td>
-                  <div class="tb-l"><input type="password" name="passwd" class="txt-input"
-                                           style="width: 195px"/></div>
-                </td>
-              </tr>
               <tr>
                 <th scope="col">
                   <div class="tb-l">이메일 *</div>
@@ -48,32 +31,17 @@
                 </th>
                 <td colspan="3">
                   <div class="tb-l">
-                    <input type="text" name="phone1" id="phone1" value="" class="txt-input"
-                           style="width: 45px" maxlength="3"/>
-                    <img src="" alt="-"/>
+                    <select v-model="selected">
+                      <option :value="{name: '010'}">010</option>
+                      <option :value="{name: '011'}">011</option>
+                      <option :value="{name: '02'}">02</option>
+                    </select>
+                    -
                     <input type="text" name="phone2" id="phone2" value="" class="txt-input"
                            style="width: 60px" maxlength="4"/>
-                    <img src="" alt="-"/>
+                    -
                     <input type="text" name="phone3" id="phone3" value="" class="txt-input"
                            style="width: 60px" maxlength="4"/>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="col">
-                  <div class="tb-l">핸드폰</div>
-                </th>
-                <td colspan="3">
-                  <div class="tb-l">
-                    <input type="text" name="mobile1" id="mobile1" value="" class="txt-input"
-                           style="width: 45px" maxlength="3"/>
-                    <img src="" alt="-"/>
-                    <input type="text" name="mobile2" id="mobile2" value="" class="txt-input"
-                           style="width: 60px" maxlength="4"/>
-                    <img src="" alt="-"/>
-                    <input type="text" name="mobile3" id="mobile3" value="" class="txt-input"
-                           style="width: 60px" maxlength="4"/>
-                    <label class="html">&nbsp;* 핸드폰 입력하시면 답변시 SMS가 발송됩니다.</label>
                   </div>
                 </td>
               </tr>
@@ -87,7 +55,6 @@
                       <option value="">문의 유형을 선택해주세요.</option>
                       <option value="3">환불문의</option>
                       <option value="27">공연문의</option>
-                      <option value="">-----------------------</option>
                       <option value="9999">기타</option>
                     </select>
                   </div>
@@ -110,9 +77,8 @@
                 </th>
                 <td colspan="3">
                   <div class="tb-l">
-                    <p>평일 업무시간 : AM 09:30 ~ PM 18:00 (주말 , 공휴일 휴무)</p><br/>
-                    <b>정확하고 빠른 문의파악을 위해 문의사항과 관련된 필수입력정보 확인하여 내용 기재해 주시기 바랍니다. <br/></b>
-                    <font color=blue><b>* 강조할만한 글?<br/></b></font>
+                    <p>평일 업무시간 : AM 09:30 ~ PM 18:00 (주말 , 공휴일 휴무)</p>
+                    <font color=blue><b>* 정확하고 빠른 문의파악을 위해 문의사항과 관련된 필수입력정보를 확인하여<br/>내용 기재해 주시기 바랍니다.<br/></b></font>
                     <textarea name="contents" cols="70" rows="10" onchange=""></textarea>
                   </div>
                 </td>
@@ -130,9 +96,9 @@
                 <td colspan="4">
                   <div class="agree">
                     <div class="tb-l" style='text-align:center;padding:10px;font-size:15px;'>
-                      <b>2018년 10월 18일 부터 산업안전보건법에 의거 고객응대근로자 보호 조치가 시행되었습니다.<br/>
+                      <h6><b>2018년 10월 18일 부터 산업안전보건법에 의거 고객응대근로자 보호 조치가 시행되었습니다.<br/>
                         고객만족을 위한 응대를 준비하고 있으니, <br/>
-                        폭언이나 욕설은 삼가해 주시고, 따뜻한 마음으로 문의 접수 부탁드립니다.</b>
+                        폭언이나 욕설은 삼가해 주시고, 따뜻한 마음으로 문의 접수 부탁드립니다.</b></h6>
                     </div>
                   </div>
                 </td>
@@ -141,12 +107,6 @@
                 <td colspan="4">
                   <div class="tb-c">
                     <h3 class="box-tit">개인정보 수집,이용동의 (필수)
-                      <div class="agreement_choice">
-                        <label><input type="checkbox" id="privacy_agree_yes" name="privacy_agree"
-                                      value="Y" class="chk-rdo"
-                                      onclick=""/> 모두
-                          동의합니다.</label>
-                      </div>
                     </h3>
                     <table border="0" summary="목적, 항목, 보유기간, 동의여부" class="tbl">
                       <caption>개인정보 수집/이용 동의</caption>
@@ -187,27 +147,23 @@
                           <div>
                             <ul>
                               <li><label><input type="radio" name="privacy_type_A"
-                                                value="Y" class="chk-rdo"/> 동의</label></li>
+                                                value="Y" class="chk-rdo"  checked="checked"/> 동의</label></li>
                               <li><label><input type="radio" name="privacy_type_A"
-                                                value="N" checked="checked"/> 미동의</label></li>
+                                                value="N" /> 미동의</label></li>
                             </ul>
                           </div>
                         </td>
                       </tr>
                       </tbody>
                     </table>
-                    <div class="btm-txt">* 수집하는 개인정보는 그 목적에 맞게 사용되며, 미동의 시 서비스 이용이 어렵습니다.</div>
+                    <div class="btm-txt">* 수집하는 개인정보는 그 목적에 맞게 사용되며, 미동의 시 서비스 이용이 어렵습니다.
+                 <button id="qnaregister" type="submit" onclick="submitForm();">문의등록</button>
+                    </div>
                   </div>
                 </td>
               </tr>
               </tbody>
             </table>
-            <div class="btn-foot">
-                    <span class="btn-sp btn-dbh48"><a href="#" onclick="submitForm();">문의하기</a><span
-                      class="raw-db"></span></span>
-              <span class="btn-sp btn-wh46"><a
-                href="#">목록보기</a></span>
-            </div>
           </div>
         </fieldset>
       </form>
@@ -216,8 +172,33 @@
 </template>
 <script>
 
+import axios from "axios";
+
 export default {
   name: "qna",
+  data(){
+    return{
+      noInfo: '질문 목록이 없습니다.',
+      performData:{}
+    }
+  },
+  created() {
+    this.getDetails(); //methods fc받음
+  },
+  methods:{
+    getDetails:function (){
+      axios({
+        url: 'api/qnaRead/{questionIdx}'
+      })
+    }
+  }
+  // props:{
+  //
+  // },
+  // filters:{
+  //
+  // }
+
 }
 </script>
 
@@ -225,13 +206,7 @@ export default {
 #contactWrite {
   min-height: 675px;
   _height: 675px;
-  background-color: #eeeff4;
 }
-
-#contactWrite .table-w {
-  padding: 10px;
-}
-
 #contactWrite th,
 #contactWrite td {
   border: 1px solid #d6e2e9;
@@ -426,4 +401,19 @@ export default {
   color: #666;
   text-align: left;
 }
+/*custom*/
+#contactWrite .table-w {
+  padding: 10px;
+  padding-left: 25%;
+  margin-left: auto;
+}
+#maintitle{
+  text-align: center;
+}
+h6{
+  font-size: small;
+}
+#qnaregister{
+
+  }
 </style>

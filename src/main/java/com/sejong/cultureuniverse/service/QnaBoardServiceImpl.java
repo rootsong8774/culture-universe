@@ -74,7 +74,10 @@ public class QnaBoardServiceImpl implements QnaBoardService{
         return result.isPresent()? this.readEntityToDto(result.get()):null;
     }
 
-
+    @Override
+    public QnaBoardDTO findByComment(String comment) {
+        return null;
+    }
 
 
 }
