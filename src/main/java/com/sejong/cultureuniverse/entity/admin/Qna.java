@@ -1,5 +1,6 @@
 package com.sejong.cultureuniverse.entity.admin;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sejong.cultureuniverse.entity.BaseEntity;
 import com.sejong.cultureuniverse.entity.Member;
@@ -7,6 +8,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import lombok.ToString.Exclude;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -14,7 +16,7 @@ import java.util.List;
 
 
 @Entity
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -36,7 +38,7 @@ public class Qna extends BaseEntity {
     private Member member;
 
     @OrderBy("commentIdx desc")
-    @JsonIgnoreProperties({"commentIdx"})
+    @JsonIgnore
     @OneToMany (mappedBy = "commentIdx",fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 //    @JoinColumn(name = "admin_id")
     @Exclude
