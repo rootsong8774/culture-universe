@@ -1,7 +1,7 @@
 package com.sejong.cultureuniverse.dto.performances;
 
-import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,9 +11,10 @@ public class PerformanceScheduleDTO {
     
     
     private Long performId;
+    private Long scheduleCode;
     
-    private LocalDateTime scheduleDate;
-    private LocalDateTime scheduleTime;
+    private LocalDate scheduleDate;
+    private LocalTime scheduleTime;
     
     
     

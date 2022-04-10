@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.controller.performances;
+package com.sejong.cultureuniverse.restController.performances;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +8,8 @@ import com.sejong.cultureuniverse.feign.MyFeignClient;
 import com.sejong.cultureuniverse.service.performances.PerformanceFeignService;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,8 @@ public class FeignController {
 
     @GetMapping("/feign/performances/{endIndex}")
     public void savePerformanceDetailsAPItoDB(@PathVariable("endIndex") Integer endIndex) {
-        List<PerformanceDetailsFeignDTO> dtoList = feignClient.getDTO(endIndex);
+        List<PerformanceDetailsFeignDTO> dtoList = feignClient.getDTO(endIndex).stream()
+            .filter(i -> i.getAge().matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")).collect(Collectors.toList());
         for (PerformanceDetailsFeignDTO dto : dtoList) {
             PerformanceDetails tempEntity = service.dtoToEntity(dto);
             service.register(tempEntity);
