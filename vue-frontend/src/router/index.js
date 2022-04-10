@@ -16,6 +16,7 @@ import eventWinner from "../components/event/eventWinner";
 import eventClosed from "../components/event/eventClosed";
 import eventClosedDetails from "../components/event/eventClosedDetails";
 import myPage from "../components/myPage";
+import myPageQna from "../components/myPageQna";
 
 Vue.use(VueRouter)
 
@@ -122,6 +123,12 @@ const router = new VueRouter({
       name: 'myPage',
       path: '/myPage/list',
       component: myPage
+    },
+    //확인용 추가
+    {
+      name: 'myPageQna',
+      path: '/myPageQna/list',
+      component: myPageQna
     },
     {
       path: '/myPage',

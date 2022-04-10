@@ -31,8 +31,9 @@ public class QnaBoardRepositoryTest {
 
     @Test
     @Commit
+    @DisplayName("qna 질문 삽입")
     public void insertQnaBoard() {
-        LongStream.rangeClosed(1, 20).forEach(i -> {
+        LongStream.rangeClosed(21, 30).forEach(i -> {
             Optional<Member>  member = memberRepository.findById(i);
             Qna qna = Qna.builder()
                 .title("연극문의test" + i)

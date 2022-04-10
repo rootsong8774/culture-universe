@@ -6,6 +6,8 @@ import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Qna;
 
+import java.util.List;
+
 public interface QnaBoardService {
     Long register(QnaBoardDTO qnaBoardDTO);
 
@@ -14,8 +16,9 @@ public interface QnaBoardService {
     QnaBoardDTO get(Long questionIdx);
 
     QnaBoardDTO read(Long questionIdx);
+    QnaBoardDTO findByComment(String comment);
 
-    //    void modify (QnaBoardDTO dto);
+
     default Qna dtoToEntity(QnaBoardDTO qnaBoardDTO) {
         Member member = Member.builder()
             .userIdx(qnaBoardDTO.getUserIdx()).build();

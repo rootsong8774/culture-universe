@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.restcontroller;
+package com.sejong.cultureuniverse.controller.performances;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
