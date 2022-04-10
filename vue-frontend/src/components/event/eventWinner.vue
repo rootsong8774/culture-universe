@@ -16,34 +16,121 @@
         <tr>
           <th>번호</th>
           <th>제목</th>
-          <th>등록일</th>
-          <th>조회</th>
+          <th>등록일(최종수정일)</th>
+          <th>조회수</th>
         </tr>
-        <tr>
-          <td>3</td>
-          <td> '따뜻한 봄 날 연극 보러 가자!' 당첨자 발표</td>
-          <td>2022.03.30</td>
-          <td>30</td>
+        <tr v-for="(result,index) in resultList" :key="index">
+          <td>{{result.winnerIdx}}</td>
+          <td>{{result.winTitle}}</td>
+          <td>{{result.modDate | yyyyMMdd}}</td>
+          <td>{{result.readCount}}</td>
         </tr>
-        <tr>
-          <td colspan="6">
-            <center>
-              <a href="#">1</a>
-              <a href="#">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <a href="#">다음▶</a>
-            </center>
-          </td>
-        </tr>
+        <div class="grid models text-center" id="pagination-margin">
+          <ul class="pagination h-100 justify-content-center align-items-center">
+
+            <li class="page-item " v-if="pageData.prev">
+              <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
+                 style="cursor:pointer;">Previous</a>
+            </li>
+
+            <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
+                v-for="page in pageData.pageList">
+              <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
+                {{ page }}
+              </a>
+            </li>
+            <li class="page-item" v-if="pageData.next">
+              <a class="page-link"
+                 @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
+            </li>
+
+          </ul>
+        </div>
 
       </table>
     </div>
   </div>
 </template>
 <script>
+
+import axios from "axios";
+
 export default {
-  name: "eventWinner",
+  name: "eventList",
+  data() {
+    return {
+      page: 1,
+      resultList: [],
+      pageData: {
+        dtoList: [],
+        totalPage: 13,
+        size: 12,
+        start: 1,
+        end: 10,
+        prev: false,
+        next: true,
+        pageList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      }
+    }
+  },
+  created() {
+    this.getList();
+  },
+  filters: {
+    yyyyMMdd: function (value) {
+      if (value === '') {
+        return '';
+      }
+
+      // 연도, 월, 일 추출
+      let year = value[0];
+      let month = value[1];
+      let day = value[2];
+
+      // 월, 일의 경우 한자리 수 값이 있기 때문에 공백에 0 처리
+      if (month < 10) {
+        month = '0' + month;
+      }
+
+      if (day < 10) {
+        day = '0' + day;
+      }
+
+      // 최종 포맷 (ex - '2021.10.08')
+      return year + '.' + month + '.' + day;
+    }
+  },
+  methods: {
+    getList: function () {
+      axios({
+        url: '/api/event/eventList',
+        params: {
+          page: this.page,
+        },
+        method: 'get',
+      }).then(response => {
+        let jsonData = response.data;
+        this.resultList = jsonData.dtoList;
+        this.pageData = jsonData;
+        console.log(jsonData);
+
+      })
+    },
+    setPage: function (value) {
+      this.page = value;
+    },
+
+  },
+  watch: {
+    page: function () {
+      this.getList();
+      this.$router.push({
+        name: "eventList",
+        query: {page: this.page},
+      })
+    }
+  }
+
 }
 </script>
 
