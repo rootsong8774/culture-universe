@@ -56,9 +56,10 @@ const router = new VueRouter({
         page: route.query.page
       })
     },
+
     {
       name: 'eventInProgress',
-      path: '/event/progress',
+      path: '/event/eventList',
       component: eventInProgress
     },
     {
@@ -68,7 +69,7 @@ const router = new VueRouter({
     },
     {
       name: 'eventWinner',
-      path: '/event/winner',
+      path: '/event/winnerList',
       component: eventWinner
     },
     {
@@ -106,7 +107,7 @@ const router = new VueRouter({
     },
     {
       name: 'notice',
-      path: '/support/notice',
+      path: '/support/noticeList',
       component: notice
     },
     {
