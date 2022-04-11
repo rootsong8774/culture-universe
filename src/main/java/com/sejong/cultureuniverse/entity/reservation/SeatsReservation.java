@@ -1,10 +1,12 @@
-package com.sejong.cultureuniverse.entity.performance;
+package com.sejong.cultureuniverse.entity.reservation;
 
 import static javax.persistence.FetchType.LAZY;
+import static javax.persistence.GenerationType.SEQUENCE;
 
-import com.sejong.cultureuniverse.entity.Reservation;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,25 +23,20 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@SequenceGenerator(name = "seats_seq", sequenceName = "seats_seq", allocationSize = 1,initialValue = 1)
-public class Seats {
-
+@SequenceGenerator(name = "seats_reservation_seq", sequenceName = "seats_reservation_seq", allocationSize = 1, initialValue = 1)
+public class SeatsReservation {
+    
     @Id
-    @GeneratedValue(generator = "seats_seq")
-    private Long seatNo;
-
+    @GeneratedValue(strategy = SEQUENCE, generator = "seats_reservation_seq")
+    private Long sr_no;
+    
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
-
+    
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "schedule_code")
-    private PerformanceSchedule schedule;
-
-    private Integer rowNo;
-    private Integer colNo;
-
-    private Boolean isBooked;
-    private Integer price;
-
+    @JoinColumn(name = "seat_no")
+    private Seats seats;
+    
+    private Integer totalPrice;
 }
