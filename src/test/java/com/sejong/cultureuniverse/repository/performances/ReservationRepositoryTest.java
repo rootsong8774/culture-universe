@@ -77,5 +77,6 @@ class ReservationRepositoryTest {
             System.out.println("seatsNo = " + seatsNo);
         }
         
+        
     }
 }

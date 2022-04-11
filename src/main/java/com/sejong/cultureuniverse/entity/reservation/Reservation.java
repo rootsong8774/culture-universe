@@ -23,14 +23,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.ToString.Exclude;
 
 @Entity
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 public class Reservation {
     @Id
@@ -51,11 +52,6 @@ public class Reservation {
     @Exclude
     private Member member;
     
-    public void setSeatsReservations(
-        List<SeatsReservation> seatsReservations) {
-        this.seatsReservations = seatsReservations;
-    }
-    
     public void setMember(Member member) {
         this.member= member;
     }
@@ -67,11 +63,10 @@ public class Reservation {
     
     public static Reservation createReservation(Member member,
         SeatsReservation... seatsReservations) {
-        Reservation reservation = Reservation.builder()
-            .member(member)
-            .reservationStatus(BOOKED)
-            .reservationDate(LocalDate.now())
-            .build();
+        Reservation reservation = new Reservation();
+        reservation.setMember(member);
+        reservation.reservationStatus = BOOKED;
+        reservation.reservationDate = LocalDate.now();
         for (SeatsReservation seatsReservation : seatsReservations) {
             reservation.addSeatsReservation(seatsReservation);
         }
@@ -81,9 +76,12 @@ public class Reservation {
     
     
     public void cancel() {
-        this.reservationStatus = CANCEL;
+        this.setReservationStatus(CANCEL);
+        for (SeatsReservation seatsReservation : seatsReservations) {
+            seatsReservation.cancel();
+        }
+        
     }
-    
     public int getTotalPrice() {
         return seatsReservations.stream().mapToInt(SeatsReservation::getPrice).sum();
     }

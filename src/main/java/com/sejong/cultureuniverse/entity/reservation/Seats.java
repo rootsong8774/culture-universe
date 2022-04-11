@@ -43,11 +43,11 @@ public class Seats {
         if (this.isBooked) {
             throw new AlreadyBookException("이미 예약되어있는 좌석입니다.");
         }
-        this.isBooked = true;
+        this.isBooked=true;
     }
     
     public void cancelSeats() {
-        this.isBooked = false;
+        this.isBooked=false;
     }
 
 }

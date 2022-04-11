@@ -50,7 +50,7 @@ public class SeatsReservation {
     }
     
     public void cancel() {
-        getSeats().cancelSeats();
+        this.getSeats().cancelSeats();
     }
     
    
