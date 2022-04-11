@@ -41,17 +41,6 @@ class ReservationRepositoryTest {
     @Test
     @Transactional
     public void reservationTest() throws Exception {
-//        Optional<Member> member = memberRepository.findById(1L);
-//        Optional<PerformanceDetails> details = detailsRepository.findByPerformCode(
-//            "acpm2203141110a01");
-//        if (member.isPresent() & details.isPresent()) {
-//            Member member1 = member.get();
-//            PerformanceDetails details1 = details.get();
-//            List<LocalDate> scheduleDateList = scheduleRepository.findScheduleDateByPerformCode(
-//                "acpm2203141110a01");
-//
-//            List<PerformanceSchedule> scheduleTime = scheduleRepository.findAllByScheduleDateAndPerformanceDetails(
-//                scheduleDateList.get(1), details1);
     
             queryFactory = new JPAQueryFactory(em);
     
@@ -87,8 +76,6 @@ class ReservationRepositoryTest {
         for (Long seatsNo : seatsNos) {
             System.out.println("seatsNo = " + seatsNo);
         }
-    
-    
-    
+        
     }
 }

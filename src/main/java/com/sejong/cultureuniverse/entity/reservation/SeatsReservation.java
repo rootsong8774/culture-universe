@@ -38,5 +38,22 @@ public class SeatsReservation {
     @JoinColumn(name = "seat_no")
     private Seats seats;
     
-    private Integer totalPrice;
+    private Integer price;
+    
+    public static SeatsReservation createSeatsReservation(Seats seats, int price) {
+        SeatsReservation seatsReservation = SeatsReservation.builder()
+            .seats(seats)
+            .price(price)
+            .build();
+        seats.reserveSeats();
+        return seatsReservation;
+    }
+    
+    public void cancel() {
+        getSeats().cancelSeats();
+    }
+    
+   
+    
+    
 }
