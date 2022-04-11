@@ -157,7 +157,7 @@
                       </tbody>
                     </table>
                     <div class="btm-txt">* 수집하는 개인정보는 그 목적에 맞게 사용되며, 미동의 시 서비스 이용이 어렵습니다.
-                 <button id="qnaregister" type="submit" onclick="submitForm();">문의등록</button>
+                 <button id="qnaregister" type="submit" @click="postBtn();">문의등록</button>
                     </div>
                   </div>
                 </td>
@@ -176,20 +176,34 @@ import axios from "axios";
 
 export default {
   name: "qna",
-  data(){
-    return{
-      noInfo: '질문 목록이 없습니다.',
-      performData:{}
+  data(){ //변수생성
+    return {
+      email: '',
+      type: '',
+      title: '',
+      phoneNum: '',
+      content: ''
     }
-  },
-  created() {
-    this.getDetails(); //methods fc받음
   },
   methods:{
     getDetails:function (){
       axios({
-        url: 'api/qnaRead/{questionIdx}'
-      })
+        url: 'api/privateqna',
+        method: 'post',
+        data: {
+          email: this.email,
+          type: this.type,
+          title: this.title,
+          phoneNum: this.phoneNum,
+          content: this.content
+        },
+      }).then(function (response) {
+        console.log(response);
+        alert('문의가 등록되었습니다.');
+        $('.bs-example-modal-lg').modal('hide');
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
   }
   // props:{

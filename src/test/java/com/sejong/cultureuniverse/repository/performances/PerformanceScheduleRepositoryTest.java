@@ -20,32 +20,8 @@ class PerformanceScheduleRepositoryTest {
     @Autowired
     private PerformanceDetailsRepository detailsRepository;
     @Autowired
-    private PerformanceScheduleRepository scheduleRepository;
-    @Autowired
     EntityManager em;
     
-    @Test
-    public void registerTest() throws Exception {
-        List<PerformanceDetails> detailsList = detailsRepository.findAll();
-        for (PerformanceDetails performanceDetails : detailsList) {
-            LocalDate startDate = performanceDetails.getStartDate().toLocalDate();
-            LocalDate endDate = performanceDetails.getEndDate().toLocalDate();
-            LocalTime[] scheduleTime = {LocalTime.of(13, 0), LocalTime.of(19, 0)};
-
-            for (LocalDate date = startDate; date.isBefore(endDate.plusDays(1)); date = date.plusDays(1)) {
-                
-                for (int j = 0; j <= 1; j++) {
-                    PerformanceSchedule schedule = PerformanceSchedule.builder()
-                        .performanceDetails(performanceDetails)
-                        .scheduleDate(date)
-                        .scheduleTime(scheduleTime[j])
-                        .build();
-                    scheduleRepository.save(schedule);
-                }
-            }
-        }
-        
-    }
     
     @Test
     public void mapperTest() throws Exception {

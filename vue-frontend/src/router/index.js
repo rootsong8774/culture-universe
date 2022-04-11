@@ -24,6 +24,7 @@ import eventClosed from "../components/event/eventClosed";
 import eventClosedDetails from "../components/event/eventClosedDetails";
 import myPage from "../components/myPage";
 import myPageQna from "../components/myPageQna";
+import myPageQnaDetails from "../components/myPageQnaDetails";
 
 Vue.use(VueRouter)
 
@@ -173,6 +174,14 @@ const router = new VueRouter({
       name: 'myPageQna',
       path: '/myPageQna/list',
       component: myPageQna
+    },
+    {
+      name: 'myPageQnaDetails',
+      path: '/myPageQna/myPageQnaDetails',
+      component: myPageQnaDetails,
+      props: (route) => ({
+        questionIdx: route.query.questionIdx
+      })
     },
     {
       path: '/myPage',

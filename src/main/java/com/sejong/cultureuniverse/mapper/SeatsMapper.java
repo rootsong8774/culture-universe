@@ -1,10 +1,6 @@
 package com.sejong.cultureuniverse.mapper;
 
-import com.sejong.cultureuniverse.dto.performances.SeatsDTO;
-import com.sejong.cultureuniverse.entity.performance.Seats;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 @Mapper
 public interface SeatsMapper {
