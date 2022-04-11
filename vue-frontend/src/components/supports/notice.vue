@@ -17,7 +17,7 @@
                 </select>
 
                 <div class="searchArea">
-                  <input type="search"> <span id="searchicon"></span>
+                  <input type="search"> <span class="fa-search"></span>
                 </div>
           </form>
         </div>
@@ -29,13 +29,12 @@
             <th>조회수</th>
           </tr>
           <tr v-for="(result,index) in resultList" :key="index">
-            <td>{{ result.noticeIdx }}</td>
-            <td>{{ result.noticeTitle }}</td>
+            <td><router-link :to = "{name:'noticeDetails', query:{noticeIdx: result.noticeIdx}}">{{ result.noticeIdx }}</router-link></td>
+            <td><router-link :to = "{name:'noticeDetails', query:{noticeIdx: result.noticeIdx}}">{{ result.noticeTitle }}</router-link></td>
             <td>{{ result.modDate | yyyyMMdd }}</td>
             <td>{{ result.readCount }}</td>
           </tr>
         </table>
-
       </div>
       <div class="pagination-part text-center">
         <ul class="pagination h-100 justify-content-center align-items-center">
@@ -63,10 +62,10 @@
 </template>
 
 <script>
-
 import axios from "axios";
 
 export default {
+
   name: "noticeList",
   data() {
     return {
@@ -81,16 +80,8 @@ export default {
         prev: false,
         next: true,
         pageList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        ,nowDomAboutCstmTr: null
       }
     }
-  },
-  clickTr: function (event) {
-
-    this.nowDomAboutCstmTr = event.target.parentNode
-    this.nowDomAboutCstmTr.parentNode.firstChild.classList.remove('on') // 초기 선택된 첫번째라인 css 삭제
-    this.nowDomAboutCstmTr.setAttribute('class', 'on')
-
   },
   created() {
     this.getList();
@@ -138,7 +129,6 @@ export default {
     setPage: function (value) {
       this.page = value;
     },
-
   },
   watch: {
     page: function () {
@@ -149,8 +139,8 @@ export default {
       })
     }
   }
-}
 
+}
 </script>
 
 
@@ -183,12 +173,10 @@ table, td, th {
 }
 
 .searchArea {
-
-  width: 290px;
+  width: 300px;
   height: 40px;
   border: 1px solid rgb(102, 103, 171);
   background-color: rgba(255 , 255, 255, 0.2);
-  padding-left: 5px;
   border-radius: 5px;
 
 }
@@ -199,9 +187,7 @@ table, td, th {
   width: 250px;
   height: 38px;
   color: #fff;
-  padding-left: 10px;
 }
-
 .searchArea > input:focus {
   outline: 2px solid rgba(238, 153, 123, 0.5);;
   border-radius: 5px;

@@ -34,8 +34,8 @@ public class NoticeBoardRestController {
 
     }
 
-    @GetMapping("/noticeDetails/{noticeIdx}")
-    public String noticeDetail(@PathVariable("noticeIdx") @ModelAttribute("noticeIdx") Long noticeIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO)
+    @GetMapping("/noticeDetails")
+    public String noticeDetail(@ModelAttribute("noticeIdx") Long noticeIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO)
         throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.registerModule(new JavaTimeModule()).writeValueAsString(noticeBoardService.read(noticeIdx));
