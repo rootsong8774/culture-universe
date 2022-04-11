@@ -1,17 +1,24 @@
 <template>
   <div>
   <div>
-    <h3 id="maintitle">나의 문의내역</h3>
+    <h3 id="maintitle">나의 문의내역 </h3>
     <div>
       <div>
         <table class=table6_2>
           <tr>
+            <th>문의번호</th>
             <th>문의유형</th>
             <th>문의내용</th>
             <th>문의등록일</th>
             <th>문의답변</th>
           </tr>
           <tr class="result-date"  v-for="(result,index) in resultList" :key="index">
+            <td>
+              <router-link
+              :to="{name: 'myPageQnaDetails',query:{questionIdx: result.questionIdx}}">
+              {{ result.questionIdx }}
+                </router-link>
+            </td>
             <td>{{ result.type }}</td>
             <td>{{ result.content }}</td>
             <td>{{ result.regDate  | yyyyMMdd }}</td>
@@ -19,7 +26,8 @@
           </tr>
         </table>
       </div>
-      <div class="grid models text-center" id="pagination-margin">
+<!--     페이지 처리-->
+      <div class="pagination-part text-center">
         <ul class="pagination h-100 justify-content-center align-items-center">
 
           <li class="page-item " v-if="pageData.prev">
@@ -39,7 +47,7 @@
           </li>
 
         </ul>
-      </div><!--end page-->
+      </div><!--/.pagination-part(&raquo;)-->
     </div>
   </div>
   <div style="clear: both;"></div>
@@ -68,7 +76,7 @@ export default {
     }
   },
   created() {
-    this.getDetails(); //methods fc받음
+    this.getList(); //methods fc받음
   },
   filters: {
     yyyyMMdd: function (value) {
@@ -95,9 +103,9 @@ export default {
     }
   },
   methods: {
-    getDetails: function () {
+    getList: function () {
       axios({
-        url: 'api/qnaList',
+        url: '/api/qnaList',
         params: {
           page: this.page
         },
@@ -117,7 +125,7 @@ export default {
     page: function () {
       this.getList();
       this.$router.push({
-        name: "performanceList",
+        name: "myPageQna",
         query: {page: this.page},
       })
     }
@@ -163,6 +171,7 @@ export default {
 /*custom css */
 table{
   width: 700px;
+  margin-left: 20%;
 }
 #maintitle{
   text-align: center;

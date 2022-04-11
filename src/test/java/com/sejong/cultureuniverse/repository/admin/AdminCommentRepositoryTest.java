@@ -66,15 +66,12 @@ public class AdminCommentRepositoryTest {
         System.out.println(adminComment.getCommentIdx());
     }
 
-    @Test
-    public void testListByQnaBoard(){
-        List<AdminComment> commentList = adminCommentRepository.getCommentOrderByQuestionIdx(18L);
-        commentList.forEach(System.out::println);
-    }
 
+//    userIdx로 adminComment 찾기
     @Test
     public void testUserIdx(){
-        List<AdminComment> userIdxList = adminCommentRepository.getAdminCommentByMember_UserIdx(10L);
+        List<AdminComment> userIdxList = adminCommentRepository.getAdminCommentByMember_UserIdx(4L);
         userIdxList.forEach(System.out::println);
     }
+
 }
