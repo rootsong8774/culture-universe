@@ -35,8 +35,8 @@ public class WinnerBoardRestController {
 
     }
 
-    @GetMapping("/winnerDetails/{winnerIdx}")
-    public String winnerDetail(@PathVariable("winnerIdx") @ModelAttribute("winnerIdx") Long winnerIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO)
+    @GetMapping("/winnerDetails")
+    public String winnerDetail(@ModelAttribute("winnerIdx") Long winnerIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO)
         throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.registerModule(new JavaTimeModule()).writeValueAsString(winnerBoardService.read(winnerIdx));

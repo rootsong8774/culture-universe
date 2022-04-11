@@ -8,11 +8,18 @@ import performanceReservation from "../components/performance/performanceReserva
 import performanceList from "../components/performance/performanceList";
 import qna from "../components/supports/qna";
 import SjDirections from "../components/introduction/SjDirections";
+
 import notice from "../components/supports/notice";
+import noticeDetails from "../components/supports/noticeDetails";
+
 import faq from "../components/supports/faq";
+
 import eventInProgress from "../components/event/eventInProgress";
 import eventInProgressDetails from "../components/event/eventInProgressDetails";
+
 import eventWinner from "../components/event/eventWinner";
+import winnerDetails from "../components/event/winnerDetails";
+
 import eventClosed from "../components/event/eventClosed";
 import eventClosedDetails from "../components/event/eventClosedDetails";
 import myPage from "../components/myPage";
@@ -56,6 +63,34 @@ const router = new VueRouter({
         page: route.query.page
       })
     },
+    {
+      name: 'noticeDetails',
+      path: '/notice/noticeDetails',
+      component: noticeDetails,
+      props: (route) => ({
+        noticeIdx: route.query.noticeIdx
+      })
+    },
+    {
+      name: 'winnerDetails',
+      path: '/event/winnerDetails',
+      component: winnerDetails,
+      props: (route) => ({
+        winnerIdx: route.query.winnerIdx
+      })
+    },
+    {
+      name: 'eventInProgressDetails',
+      path: '/event/eventInProgressDetails',
+      component: eventInProgressDetails,
+      props: (route) => ({
+        eventIdx: route.query.eventIdx
+      })
+    },
+    {
+      path: '/eventInProgress',
+      redirect: {name: eventInProgress}
+    },
 
     {
       name: 'eventInProgress',
@@ -64,13 +99,18 @@ const router = new VueRouter({
     },
     {
       name: 'eventInProgressDetails',
-      path: '/event/progressDetails',
+      path: '/event/eventInProgressDetails',
       component: eventInProgressDetails
     },
     {
       name: 'eventWinner',
       path: '/event/winnerList',
       component: eventWinner
+    },
+    {
+      name: 'winnerDetails',
+      path: '/event/winnerDetails',
+      component: winnerDetails
     },
     {
       name: 'eventClosed',
@@ -82,10 +122,8 @@ const router = new VueRouter({
       path: '/event/closedDetails',
       component: eventClosedDetails
     },
-    {
-      path: '/event',
-      redirect: {name: eventInProgress}
-    },
+
+
     {
       name: 'organization',
       path: '/organization/introduction',
@@ -109,6 +147,11 @@ const router = new VueRouter({
       name: 'notice',
       path: '/support/noticeList',
       component: notice
+    },
+    {
+      name: 'noticeDetails',
+      path: '/support/noticeDetails',
+      component: noticeDetails
     },
     {
       name: 'faq',

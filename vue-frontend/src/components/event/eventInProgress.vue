@@ -4,20 +4,15 @@
       <div id="centerColumn">
         <br>
         <h2>진행 이벤트</h2>
-        <form class="eventTitle">
-
-
+        <form>
           <select name="language">
             <option value="none">=== 전체 ===</option>
-            <option value="winNum">번호</option>
+            <option value="evtNum">번호</option>
             <option value="title">제목</option>
             <option value="wregDate">등록일자</option>
             <option value="noAndTitle">번호+제목</option>
           </select>
-
           <input type="search" placeholder="검색">
-
-
         </form>
         <table border="1">
           <tr>
@@ -27,14 +22,13 @@
             <th>조회수</th>
           </tr>
           <tr v-for="(result,index) in resultList" :key="index">
-            <td>{{ result.eventIdx }}</td>
-            <td>{{ result.eventTitle }}</td>
+            <td><router-link :to = "{name:'eventInProgressDetails', query:{eventIdx: result.eventIdx}}">{{ result.eventIdx }}</router-link></td>
+            <td><router-link :to = "{name:'eventInProgressDetails', query:{eventIdx: result.eventIdx}}">{{ result.eventTitle }}</router-link></td>
             <td>{{ result.modDate | yyyyMMdd }}</td>
             <td>{{ result.readCount }}</td>
           </tr>
         </table>
       </div>
-
       <div class="pagination-part text-center">
         <ul class="pagination h-100 justify-content-center align-items-center">
 
@@ -128,7 +122,6 @@ export default {
     setPage: function (value) {
       this.page = value;
     },
-
   },
   watch: {
     page: function () {

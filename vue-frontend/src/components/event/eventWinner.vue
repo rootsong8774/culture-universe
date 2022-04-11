@@ -5,8 +5,6 @@
         <br>
         <h2>이벤트 당첨자 현황</h2>
         <form class="eventTitle">
-
-
           <select name="language">
             <option value="none">=== 전체 ===</option>
             <option value="winNum">번호</option>
@@ -27,8 +25,9 @@
             <th>조회수</th>
           </tr>
           <tr v-for="(result,index) in resultList" :key="index">
-            <td>{{ result.winnerIdx }}</td>
-            <td>{{ result.winTitle }}</td>
+            <td><router-link :to = "{name:'winnerDetails', query:{winnerIdx: result.winnerIdx}}">{{ result.winnerIdx }}</router-link></td>
+            <!--detail창없음-->
+            <td><router-link :to = "{name:'winnerDetails', query:{winnerIdx: result.winnerIdx}}">{{ result.winTitle }}</router-link></td>
             <td>{{ result.modDate | yyyyMMdd }}</td>
             <td>{{ result.readCount }}</td>
           </tr>
@@ -52,11 +51,8 @@
               <a class="page-link"
                  @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
             </li>
-
           </ul>
         </div><!--/.pagination-part(&raquo;)-->
-
-
     </div>
   </div>
 </template>

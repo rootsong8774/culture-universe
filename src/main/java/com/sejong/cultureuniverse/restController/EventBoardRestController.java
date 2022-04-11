@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.service.admin.EventBoardService;
+import com.sejong.cultureuniverse.service.admin.NoticeBoardService;
 import com.sejong.cultureuniverse.service.performances.PerformancesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -34,8 +35,8 @@ public class EventBoardRestController {
 
     }
 
-    @GetMapping("/eventDetails/{eventIdx}")
-    public String eventDetail(@PathVariable("eventIdx") @ModelAttribute("eventIdx") Long eventIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO)
+    @GetMapping("/eventInProgressDetails")
+    public String eventDetail(@ModelAttribute("eventIdx") Long eventIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO)
         throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.registerModule(new JavaTimeModule()).writeValueAsString(eventBoardService.read(eventIdx));
