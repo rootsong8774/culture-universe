@@ -18,5 +18,5 @@ public class QnaBoardDTO {
     private LocalDateTime regDate;
     private LocalDateTime modDate;
     private int commentCount;
-    private String comment;
+    private String commentContent;
 }

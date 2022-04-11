@@ -17,7 +17,6 @@ public class AdminTest {
     @Autowired
     AdminRepository adminRepository;
     @Test
-    @DisplayName("관리자 추가")
     public void insertAdmin(){
             Admin admin = Admin.builder()
                 .adminId("관리자1")
