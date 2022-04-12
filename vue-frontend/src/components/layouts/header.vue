@@ -415,7 +415,7 @@ form {
   }
 
   .modal-sm {
-    width: 350px;
+    width: 400px;
 
   }
 }

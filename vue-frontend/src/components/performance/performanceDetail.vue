@@ -9,14 +9,14 @@
                 <img :src="performData.fileUrlMi" alt="" style="width: 350px"/>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-7">
               <div class="m_details_content m-bottom-40">
                 <h2>{{ performData.title }}</h2>
               </div>
               <hr/>
               <div class="person_details m-top-40">
                 <div class="row">
-                  <div class="col-md-2 text-left">
+                  <div class="col-md-2 text-left col-md-offset-1">
                     <p>기간</p>
                     <p>장소</p>
                     <p>시간</p>
@@ -40,8 +40,8 @@
 
                 <div class="m-top-20">
                   <div class="row">
-                    <button type="button" class="col-md-3 btn btn-default">⭐ 관심공연</button>
-                    <button type="button" class="col-md-3 btn btn-primary" @click="reservation">예매하기</button>
+                    <button type="button" class="col-md-offset-1 col-md-3 btn btn-default">⭐ 관심공연</button>
+                    <button type="button" class="col-md-offset-1 col-md-3 btn btn-primary" @click="reservation">예매하기</button>
                   </div>
                 </div>
               </div>

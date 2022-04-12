@@ -27,7 +27,7 @@ public class FeignController {
     @GetMapping("/feign/performances/{endIndex}")
     public void savePerformanceDetailsAPItoDB(@PathVariable("endIndex") Integer endIndex) {
         List<PerformanceDetailsFeignDTO> dtoList = feignClient.getDTO(endIndex).stream()
-            .filter(i -> i.getAge().matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")).collect(Collectors.toList());
+            .filter(i -> i.getAge().matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")&& i.getFileUrlMi()!=null).collect(Collectors.toList());
         for (PerformanceDetailsFeignDTO dto : dtoList) {
             PerformanceDetails tempEntity = service.dtoToEntity(dto);
             service.register(tempEntity);

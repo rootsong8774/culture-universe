@@ -40,7 +40,7 @@ export default {
 
 #details {
   position: absolute;
-  left: 32%;
+  left: 35%;
   top : 620px;
 }
 </style>
