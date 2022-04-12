@@ -18,35 +18,6 @@
               <tbody>
               <tr>
                 <th scope="col">
-                  <div class="tb-l">이메일 *</div>
-                </th>
-                <td colspan="3">
-                  <div class="tb-l"><input type="text" name="email" value="" class="txt-input"
-                                           style="width: 405px"/></div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="col">
-                  <div class="tb-l">연락처 *</div>
-                </th>
-                <td colspan="3">
-                  <div class="tb-l">
-                    <select v-model="selected">
-                      <option :value="{name: '010'}">010</option>
-                      <option :value="{name: '011'}">011</option>
-                      <option :value="{name: '02'}">02</option>
-                    </select>
-                    -
-                    <input type="text" name="phone2" id="phone2" value="" class="txt-input"
-                           style="width: 60px" maxlength="4"/>
-                    -
-                    <input type="text" name="phone3" id="phone3" value="" class="txt-input"
-                           style="width: 60px" maxlength="4"/>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <th scope="col">
                   <div class="tb-l">문의유형 *</div>
                 </th>
                 <td colspan="3">
@@ -157,8 +128,10 @@
                       </tbody>
                     </table>
                     <div class="btm-txt">* 수집하는 개인정보는 그 목적에 맞게 사용되며, 미동의 시 서비스 이용이 어렵습니다.
-                 <button id="qnaregister" type="submit" @click="postBtn();">문의등록</button>
-                    </div>
+                      <button type="submit" class="btn btn-default pull-right" @click="register" >
+                        문의등록
+                      </button>
+                       </div>
                   </div>
                 </td>
               </tr>
@@ -176,6 +149,9 @@ import axios from "axios";
 
 export default {
   name: "qna",
+  props: {
+    currentClass: String
+  },
   data(){ //변수생성
     return {
       email: '',
@@ -186,7 +162,7 @@ export default {
     }
   },
   methods:{
-    getDetails:function (){
+    register:function (){
       axios({
         url: 'api/privateqna',
         method: 'post',

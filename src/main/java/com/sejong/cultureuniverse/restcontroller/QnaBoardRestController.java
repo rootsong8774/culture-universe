@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
+import com.sejong.cultureuniverse.entity.admin.Qna;
 import com.sejong.cultureuniverse.repository.AdminRepository;
 import com.sejong.cultureuniverse.repository.QnaBoardRepository;
 import com.sejong.cultureuniverse.service.AdminCommentService;
@@ -12,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @Log4j2
@@ -19,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class QnaBoardRestController {
     private final QnaBoardService qnaBoardService;
-
+    private final QnaBoardRepository qnaBoardRepository;
 
     @GetMapping(value = "/qnaList")
     public String qnalist(PageRequestDTO pageRequestDTO)
@@ -38,4 +41,27 @@ public class QnaBoardRestController {
 
     }
 
+//    qna post
+    @PostMapping("/privateqna")
+    public void registerNewQna(@RequestBody HashMap<String, String> map){
+        HashMap<String, String> newQna = new HashMap<>();
+
+        newQna.put("email", map.get("email"));
+        newQna.put("type", map.get("type"));
+        newQna.put("title", map.get("title"));
+        newQna.put("phoneNum", map.get("phoneNum"));
+        newQna.put("content", map.get("content"));
+
+        Qna qna = Qna.builder()
+            .title(newQna.get("title"))
+            .type(newQna.get("type"))
+            .content(newQna.get("content"))
+            .build();
+        qnaBoardRepository.save(qna);
+
+
+
+
+
+    }
 }
