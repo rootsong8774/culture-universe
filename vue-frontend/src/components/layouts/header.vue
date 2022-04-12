@@ -203,7 +203,7 @@
                                v-model:name="name">
                         <label>비밀번호 :</label>
                         <input type="text" class="form-control" placeholder="Enter Password"
-                               v-model:name="password">
+                               v-model:name="pw">
                         <label>이메일 :</label>
                         <input type="email" class="form-control" placeholder="Enter Email"
                                v-model:name="email">

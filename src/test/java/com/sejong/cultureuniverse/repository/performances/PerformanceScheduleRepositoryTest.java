@@ -19,6 +19,9 @@ class PerformanceScheduleRepositoryTest {
     
     @Autowired
     private PerformanceDetailsRepository detailsRepository;
+    
+    @Autowired
+    private PerformanceScheduleRepository scheduleRepository;
     @Autowired
     EntityManager em;
     
@@ -36,7 +39,7 @@ class PerformanceScheduleRepositoryTest {
         PerformanceScheduleDTO result = PerformanceScheduleMapper.INSTANCE.scheduleToDto(schedule);
         PerformanceSchedule result2 = PerformanceScheduleMapper.INSTANCE.dtoToSchedule(
             result);
-        assertThat(result.getPerformId()).isEqualTo(details.getPerformId());
+        assertThat(result.getPerformCode()).isEqualTo(details.getPerformCode());
         assertThat(result.getScheduleCode()).isEqualTo(schedule.getScheduleCode());
         assertThat(result.getScheduleDate()).isEqualTo(details.getStartDate().toLocalDate());
         assertThat(result.getScheduleTime()).isEqualTo(LocalTime.of(13, 0));
@@ -45,7 +48,18 @@ class PerformanceScheduleRepositoryTest {
         assertThat(result2.getScheduleDate()).isEqualTo(schedule.getScheduleDate());
         assertThat(result2.getScheduleTime()).isEqualTo(schedule.getScheduleTime());
         
-        
+    }
+    
+    @Test
+    public void findScheduleTest() throws Exception {
+      //given
+        List<PerformanceSchedule> schedules = scheduleRepository.findByPerformanceDetails_PerformCode(
+            "chpi2202151923a01");
+        //when
+        for (PerformanceSchedule schedule : schedules) {
+            System.out.println("schedule.getScheduleDate() = " + schedule.getScheduleDate());
+        }
+      //then
     }
     
 }

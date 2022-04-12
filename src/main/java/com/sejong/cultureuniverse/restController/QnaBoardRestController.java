@@ -30,8 +30,8 @@ public class QnaBoardRestController {
         return mapper.registerModule(new JavaTimeModule())
             .writeValueAsString(qnaBoardService.getList(pageRequestDTO));
     }
-    @GetMapping("/qnaRead/{questionIdx}")
-    public String qnaRead(@PathVariable @ModelAttribute("questionIdx") Long questionIdx)
+    @GetMapping("/qnaRead")
+    public String qnaRead(@ModelAttribute("questionIdx") Long questionIdx)
         throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.registerModule(new JavaTimeModule()).writeValueAsString(qnaBoardService.read(questionIdx));

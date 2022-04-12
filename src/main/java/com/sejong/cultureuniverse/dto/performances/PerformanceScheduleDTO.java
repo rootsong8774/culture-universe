@@ -10,7 +10,7 @@ import lombok.Setter;
 public class PerformanceScheduleDTO {
     
     
-    private Long performId;
+    private String performCode;
     private Long scheduleCode;
     
     private LocalDate scheduleDate;

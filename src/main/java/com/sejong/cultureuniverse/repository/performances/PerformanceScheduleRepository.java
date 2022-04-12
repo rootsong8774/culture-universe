@@ -9,8 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface PerformanceScheduleRepository extends JpaRepository<PerformanceSchedule, Long> {
     
-    @Query("select distinct s.scheduleDate from PerformanceSchedule s order by s.scheduleDate asc ")
-    List<LocalDate> findScheduleDateByPerformanceDetails(PerformanceDetails performanceDetails);
+    List<PerformanceSchedule> findByPerformanceDetails_PerformCode(String performanceCode);
     
    
 }

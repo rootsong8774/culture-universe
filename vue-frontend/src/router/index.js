@@ -51,6 +51,9 @@ const router = new VueRouter({
       name: 'performanceReservation',
       path: '/performances/performanceReservation',
       component: performanceReservation,
+      props: (route) => ({
+        performCode: route.query.performCode
+      })
     },
     {
       path: '/performances',
@@ -99,19 +102,9 @@ const router = new VueRouter({
       component: eventInProgress
     },
     {
-      name: 'eventInProgressDetails',
-      path: '/event/eventInProgressDetails',
-      component: eventInProgressDetails
-    },
-    {
       name: 'eventWinner',
       path: '/event/winnerList',
       component: eventWinner
-    },
-    {
-      name: 'winnerDetails',
-      path: '/event/winnerDetails',
-      component: winnerDetails
     },
     {
       name: 'eventClosed',
@@ -148,11 +141,6 @@ const router = new VueRouter({
       name: 'notice',
       path: '/support/noticeList',
       component: notice
-    },
-    {
-      name: 'noticeDetails',
-      path: '/support/noticeDetails',
-      component: noticeDetails
     },
     {
       name: 'faq',

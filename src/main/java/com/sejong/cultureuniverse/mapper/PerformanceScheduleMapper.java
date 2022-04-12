@@ -10,14 +10,14 @@ import org.mapstruct.factory.Mappers;
 public interface PerformanceScheduleMapper {
     PerformanceScheduleMapper INSTANCE = Mappers.getMapper(PerformanceScheduleMapper.class);
     
-    @Mapping(target = "performanceDetails.performId", expression = "java(performanceScheduleDTO.getPerformId())")
+    @Mapping(target = "performanceDetails.performCode", expression = "java(performanceScheduleDTO.getPerformCode())")
     @Mapping(target = "scheduleCode", expression = "java(performanceScheduleDTO.getScheduleCode())")
     @Mapping(target = "scheduleDate", expression = "java(performanceScheduleDTO.getScheduleDate())")
     @Mapping(target = "scheduleTime", expression = "java(performanceScheduleDTO.getScheduleTime())")
     PerformanceSchedule dtoToSchedule(PerformanceScheduleDTO performanceScheduleDTO);
     
     
-    @Mapping(target = "performId", expression = "java(performanceSchedule.getPerformanceDetails().getPerformId())")
+    @Mapping(target = "performCode", expression = "java(performanceSchedule.getPerformanceDetails().getPerformCode())")
     @Mapping(target = "scheduleCode", expression = "java(performanceSchedule.getScheduleCode())")
     @Mapping(target ="scheduleDate", expression = "java(performanceSchedule.getScheduleDate())")
     @Mapping(target ="scheduleTime", expression = "java(performanceSchedule.getScheduleTime())")
