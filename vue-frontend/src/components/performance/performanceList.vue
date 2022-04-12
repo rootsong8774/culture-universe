@@ -2,11 +2,12 @@
   <div>
     <!--About Sections-->
     <section id="gallery" class="gallery margin-top-120 bg-white">
+      <div>
       <div class="schedule_w item5">
-        <ul class="clearfix">
+        <ul class="clearfix" style="text-align: center;display: flex;  margin-left: 20px" >
           <li class="item s1" tabindex="0">
             <div class="date_select">
-              <input type="date" name="sdate"> ~
+              <input type="date" name="sdate">&nbsp;&nbsp;<span>&sim;</span>&nbsp;&nbsp;
               <input type="date" name="edate">
             </div>
           </li>
@@ -43,15 +44,13 @@
             </div>
           </li>
           <li class="item s3" tabindex="0">
-            <div class="searchArea">
-              <form action="">
-                <input type="search" placeholder="검색"><span>?</span>
-              </form>
+            <div class="search">
+              <input type="text" placeholder="검색어 입력">
+              <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
             </div>
           </li>
         </ul>
       </div>
-
       <div class="container">
         <div class="row">
           <div class="main-gallery main-model roomy-80">
@@ -105,7 +104,7 @@
           </div>
 
         </div>
-
+      </div>
 
       </div>
 
@@ -113,7 +112,6 @@
     </section>
   </div>
 </template>
-
 <script>
 import axios from "axios";
 export default {

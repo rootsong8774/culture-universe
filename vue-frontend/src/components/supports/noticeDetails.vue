@@ -13,7 +13,7 @@
             <th>제목</th>
             <td>{{noticeData.noticeTitle}}</td>
             <th style="text-align: right; padding-right: 5px">최종 수정일</th>
-            <td>{{noticeData.modDate | yyyyMMdd}}</td>
+            <td style="text-align: right; padding-right: 5px">{{noticeData.modDate | yyyyMMdd}}</td>
           </tr>
           <tr>
             <th>내용</th>
@@ -21,8 +21,7 @@
           </tr>
           <tr>
             <th style="width: 100px">작성자</th>
-            <td colspan="2">{{noticeData.adminId}}</td>
-            <td></td>
+            <td colspan="3">{{noticeData.adminId}}</td>
           </tr>
         </table>
       </form>
@@ -104,6 +103,13 @@ export default {
 }
 </script>
 <style scoped>
+h2{
+  font-size: 30px;
+  padding: 10px;
+}
+*{
+  font-size: 20px;
+}
 .noticeBoardSt {
   padding: 50px;
   text-align: center;

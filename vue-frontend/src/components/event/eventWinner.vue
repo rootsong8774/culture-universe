@@ -1,39 +1,68 @@
 <template>
   <div>
-    <div id="table">
-      <div id="centerColumn">
-        <br>
-        <h2>이벤트 당첨자 현황</h2>
-        <form class="eventTitle">
-          <select name="language">
-            <option value="none">=== 전체 ===</option>
-            <option value="winNum">번호</option>
-            <option value="title">제목</option>
-            <option value="wregDate">등록일자</option>
-            <option value="noAndTitle">번호+제목</option>
-          </select>
-
-              <input type="search" placeholder="검색">
-
-
-        </form>
-        <table border="1">
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>등록일(최종수정일)</th>
-            <th>조회수</th>
-          </tr>
-          <tr v-for="(result,index) in resultList" :key="index">
-            <td><router-link :to = "{name:'winnerDetails', query:{winnerIdx: result.winnerIdx}}">{{ result.winnerIdx }}</router-link></td>
-            <!--detail창없음-->
-            <td><router-link :to = "{name:'winnerDetails', query:{winnerIdx: result.winnerIdx}}">{{ result.winTitle }}</router-link></td>
-            <td>{{ result.modDate | yyyyMMdd }}</td>
-            <td>{{ result.readCount }}</td>
-          </tr>
-        </table>
+    <div>
+      <div class="container">
+        <div class="sub-t">
+          <h2 class="t" style="font-size: 2.5rem; margin-block-start: 0.83em; margin-block-end: 0.83em;margin-inline-start: 0.83em;
+            margin-inline-end: 0.83em; font-weight: bold;text-align: center; line-height: 1.15; letter-spacing: -0.03em;">
+            당첨자 발표</h2>
+        </div>
+        <div>
+          <form>
+            <ul style="text-align: center">
+              <li>
+            <select name="language">
+              <option value="none">=== 전체 ===</option>
+              <option value="Num">번호</option>
+              <option value="title">제목</option>
+              <option value="wregDate">등록일자</option>
+              <option value="noAndTitle">번호+제목</option>
+            </select>
+              </li>
+              <li>
+            <div class="search">
+              <input type="text" placeholder="검색어 입력">
+              <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+            </div>
+              </li>
+            </ul>
+          </form>
+          <br>
+          <table class=table6_2>
+            <tr>
+              <th>번호</th>
+              <th>제목</th>
+              <th>공지내용</th>
+              <th>등록일(최종수정일)</th>
+              <th>조회수</th>
+            </tr>
+            <tr class="result-date" v-for="(result,index) in resultList" :key="index">
+              <td>
+                <router-link
+                  :to="{name: 'winnerDetails',query:{winnerIdx: result.winnerIdx}}">
+                  {{ result.winnerIdx }}
+                </router-link>
+              </td>
+              <td>
+                <router-link
+                  :to="{name:'winnerDetails', query:{winnerIdx: result.winnerIdx}}">
+                  {{ result.winTitle }}
+                </router-link>
+              </td>
+              <td>
+                <router-link
+                  :to="{name:'winnerDetails', query:{winnerIdx: result.winnerIdx}}">
+                  {{ result.winContent }}
+                </router-link>
+              </td>
+              <td>{{ result.regDate  | yyyyMMdd }}</td>
+              <td>{{ result.commentCount }}</td>
+            </tr>
+          </table>
+        </div>
       </div>
-        <div class="pagination-part text-center">
+    </div>
+        <div class="pagination-part text-center" >
           <ul class="pagination h-100 justify-content-center align-items-center">
 
             <li class="page-item " v-if="pageData.prev">
@@ -54,7 +83,6 @@
           </ul>
         </div><!--/.pagination-part(&raquo;)-->
     </div>
-  </div>
 </template>
 <script>
 
@@ -139,55 +167,75 @@ export default {
 }
 </script>
 <style>
-div {
-  margin: 0;
-}
-
-h2 {
-  text-align: center
-}
-
-form {
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-  display: flex;
-}
-
 table {
-  margin-left: auto;
-  margin-right: auto;
+  width: 700px;
+  margin-left: 20%;
 }
 
-table, td, th {
-  border-collapse: collapse;
-  border: 1px solid black;
-  font-size: larger;
-}
-.searchArea{
-  margin: 5px;
-  display: flex;
-  width: 300px;
-  height: 40px;
-  border:1px solid rgb(102, 103, 171);
-  background-color: rgba(238, 153, 123, 0.5);
-  padding-left: 5px;
-  border-radius: 5px;
-  margin-top: 24px;
-
-}
-.searchArea > form >input{
+.table6_2 table {
+  width: 100%;
+  margin: 15px auto;
   border: 0;
-  outline: none;
-  background-color: rgba(235, 150, 120, 0.2);
-  width: 250px;
-  height: 40px;
-  color: #fff;
-  padding-left: 10px;
 }
-.searchArea > form > input:focus{
-  outline: 2px solid white;
-  border-radius: 5px;
+
+.table6_2 th {
+  background-color: #505050;
+  color: #FFFFFF
+}
+
+.table6_2, .table6_2 th, .table6_2 td {
+  font-size: 0.95em;
+  text-align: center;
+  padding: 4px;
+  border-collapse: collapse;
+}
+
+.table6_2 th, .table6_2 td {
+  border: 1px solid #202020;
+  border-width: 1px 0 1px 0
+}
+
+.table6_2 tr {
+  border: 1px solid #ffffff;
+}
+
+.table6_2 tr:nth-child(odd) {
+  background-color: #c4c4c4;
+}
+
+.table6_2 tr:nth-child(even) {
+  background-color: #ffffff;
+}
+select {
+  width:300px;
+  padding:5px;
+  border:1px solid #999;
+  font-family:'Nanumgothic';
+  border-radius:3px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance : none;
+}
+[출처] html css select 셀렉트 박스 디자인 변경하기|작성자 반짝이는 와이프
+.search {
+  position: relative;
+  width: 300px;
+}
+
+input {
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+img {
+  position : absolute;
+  width: 17px;
+  top: 10px;
+  right: 12px;
+  margin: 0;
 }
 
 li {

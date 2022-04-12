@@ -1,8 +1,6 @@
 <template>
   <div class="eventTableSt">
-
     <h2>진행중인 이벤트</h2>
-
     <div class="AddWrap">
       <form class="form">
         <table class="tbAdd">
@@ -13,18 +11,19 @@
           <tr>
             <th>제목</th>
             <td>{{ eventData.eventTitle }}</td>
-            <th>최종 수정일</th>
-            <td>{{ eventData.modDate | yyyyMMdd }}</td>
+            <th style="text-align: right; padding-right: 5px">최종 수정일</th>
+            <td style="text-align: right; padding-right: 5px">{{
+                eventData.modDate | yyyyMMdd
+              }}
+            </td>
           </tr>
           <tr>
             <th>내용</th>
-            <td>{{ eventData.eventContent }}</td>
-            <td class="txt_cont" v-html="cont"></td>
+            <td colspan="3" style="height: 250px">{{ eventData.eventContent }}</td>
           </tr>
           <tr>
-            <th>작성자</th>
-            <td>{{ eventData.adminId }}</td>
-            <td></td><td></td><td></td>
+            <th style="width: 100px">작성자</th>
+            <td colspan="3">{{ eventData.adminId }}</td>
           </tr>
         </table>
       </form>
@@ -34,43 +33,42 @@
         <a @click="reservation" class="btn">목록</a>
       </div>
     </div>
-    <div class="comments-area">
-      <div class="contact-form blog-single-form">
+    <div class="comments-area" style="position: center; justify-content: center; text-align: center">
+      <div class="contact-form blog-single-form" >
         <h3>댓글이벤트 참여</h3>
-        <form class="replySt">
-          <div class="row">
-            <div class="col-sm-6 col-xs-12">
-              <div class="form-group">
-                <span>
+        <div class="rplyform" >
+          <form class="replySt" >
+            <div class="" >
+              <div class="col-sm-6 col-xs-12" >
                 <input type="text" class="form-control" id="firstname" placeholder="id"
-                       name="firstname">
-                  </span>
-              </div><!--/.form-group-->
-            </div><!--/.col-->
-          </div><!--/.row-->
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
+                       name="firstname"><br>
+              </div><!--/.col-->
+            </div><!--/.row-->
+            <div class="row" style="max-width: 1000px">
+              <div class="col-sm-12">
                     <textarea class="form-control" rows="5" id="comment"
-                              placeholder="댓글입력" style="width: 50%; height: 50%"></textarea>
-              </div><!--/.form-group-->
-            </div><!--/.col-->
-          </div><!--/.row-->
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="single-contact-btn">
-                <button class="contact-btn" href="#" role="button">댓글 등록</button>
-              </div><!--/.single-single-contact-btn-->
-            </div><!--/.col-->
-          </div><!--/.row-->
-        </form><!--/form-->
-      </div><!--/.contact-form-->
-      <ol class="comment-list">
-        <li class="comment"><img src="" alt="사람이미지"/></li>
-        <li>ID</li>
-        <li><p>당첨돼서 연극보고싶어요!</p></li>
-        <li><span>댓글등록일자</span></li>
-      </ol>
+                              placeholder="댓글입력" style="width: 50%; height: 50%"></textarea><br>
+              </div><!--/.col-->
+            </div><!--/.row-->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="single-contact-btn">
+                  <button class="contact-btn" href="#" role="button">댓글 등록</button>
+                  <br>
+                </div><!--/.single-single-contact-btn-->
+              </div><!--/.col-->
+            </div><!--/.row-->
+          </form><!--/form-->
+        </div><!--/.contact-form-->
+        <div style="padding-top: 15px">
+          <ol class="comment-list" style="justify-content: center">
+            <li class="comment"><img src="" alt="사람이미지"/></li>
+            <li>ID</li>
+            <li><span>당첨돼서 연극보고싶어요!</span></li>
+            <li><span>댓글등록일자</span></li>
+          </ol>
+        </div>
+      </div>
     </div><!--/.comments-area-->
   </div>
 </template>
@@ -135,6 +133,17 @@ export default {
 }
 </script>
 <style scoped>
+h2 {
+  font-size: 30px;
+  padding: 10px;
+}
+
+* {
+  margin: 0.1rem;
+  padding: 0.1rem;
+  font-size: 20px;
+}
+
 .eventTableSt {
   padding: 50px;
   text-align: center;
@@ -148,19 +157,30 @@ table {
 table, td, th {
   border-collapse: collapse;
 }
+
 .comment-list {
   display: flex;
 }
+
 .comment-list > li {
   padding-left: 50px;
-  list-style:none
+  list-style: none
 }
-.form-group{
+
+.form-group {
   text-align: center;
 }
-.comments-area{
+
+.comments-area {
   text-align: center;
+  justify-content: center;
 }
+
+rplyform {
+  text-align: center;
+  justify-content: center;
+}
+
 .form-control {
   resize: none; /* 사용자 임의 변경 불가 */
   resize: both; /* 사용자 변경이 모두 가능 */

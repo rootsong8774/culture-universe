@@ -1,56 +1,87 @@
 <template>
   <div>
-    <div id="table">
-      <div id="centerColumn">
-        <br>
-        <h2>진행 이벤트</h2>
+    <div>
+    <div class="container">
+      <div class="sub-t">
+        <h2 class="t" style="font-size: 2.5rem; margin-block-start: 0.83em; margin-block-end: 0.83em;margin-inline-start: 0.83em;
+            margin-inline-end: 0.83em; font-weight: bold;text-align: center; line-height: 1.15; letter-spacing: -0.03em;">
+          진행중인 이벤트</h2>
+      </div>
+      <div>
         <form>
-          <select name="language">
-            <option value="none">=== 전체 ===</option>
-            <option value="evtNum">번호</option>
-            <option value="title">제목</option>
-            <option value="wregDate">등록일자</option>
-            <option value="noAndTitle">번호+제목</option>
-          </select>
-          <input type="search" placeholder="검색">
+          <ul style="text-align: center">
+            <li>
+              <select name="language">
+                <option value="none">=== 전체 ===</option>
+                <option value="Num">번호</option>
+                <option value="title">제목</option>
+                <option value="wregDate">등록일자</option>
+                <option value="noAndTitle">번호+제목</option>
+              </select>
+            </li>
+            <li>
+              <div class="search">
+                <input type="text" placeholder="검색어 입력">
+                <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+              </div>
+            </li>
+          </ul>
         </form>
-        <table border="1">
+        <br>
+        <table class=table6_2>
           <tr>
             <th>번호</th>
             <th>제목</th>
+            <th>이벤트 내용</th>
             <th>등록일(최종수정일)</th>
             <th>조회수</th>
           </tr>
-          <tr v-for="(result,index) in resultList" :key="index">
-            <td><router-link :to = "{name:'eventInProgressDetails', query:{eventIdx: result.eventIdx}}">{{ result.eventIdx }}</router-link></td>
-            <td><router-link :to = "{name:'eventInProgressDetails', query:{eventIdx: result.eventIdx}}">{{ result.eventTitle }}</router-link></td>
-            <td>{{ result.modDate | yyyyMMdd }}</td>
-            <td>{{ result.readCount }}</td>
+          <tr class="result-date" v-for="(result,index) in resultList" :key="index">
+            <td>
+              <router-link
+                :to="{name: 'eventInProgressDetails',query:{eventIdx: result.eventIdx}}">
+                {{ result.eventIdx }}
+              </router-link>
+            </td>
+            <td>
+              <router-link
+                :to="{name:'eventInProgressDetails', query:{eventIdx: result.eventIdx}}">
+                {{ result.eventTitle }}
+              </router-link>
+            </td>
+            <td>
+              <router-link
+                :to="{name:'eventInProgressDetails', query:{eventIdx: result.eventIdx}}">
+                {{ result.eventContent }}
+              </router-link>
+            </td>
+            <td>{{ result.regDate  | yyyyMMdd }}</td>
+            <td>{{ result.commentCount }}</td>
           </tr>
         </table>
       </div>
-      <div class="pagination-part text-center">
-        <ul class="pagination h-100 justify-content-center align-items-center">
+    </div>
+  </div>
+  <div class="pagination-part text-center">
+    <ul class="pagination h-100 justify-content-center align-items-center">
 
-          <li class="page-item " v-if="pageData.prev">
-            <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
-               style="cursor:pointer;">Previous</a>
-          </li>
+      <li class="page-item " v-if="pageData.prev">
+        <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
+           style="cursor:pointer;">Previous</a>
+      </li>
 
-          <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
-              v-for="page in pageData.pageList">
-            <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
-              {{ page }}
-            </a>
-          </li>
-          <li class="page-item" v-if="pageData.next">
-            <a class="page-link"
-               @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
-          </li>
-
-        </ul>
-      </div><!--/.pagination-part(&raquo;)-->
-    </div><!--/.container-->
+      <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
+          v-for="page in pageData.pageList">
+        <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
+          {{ page }}
+        </a>
+      </li>
+      <li class="page-item" v-if="pageData.next">
+        <a class="page-link"
+           @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
+      </li>
+    </ul>
+  </div><!--/.pagination-part(&raquo;)-->
   </div>
 </template>
 
@@ -136,146 +167,70 @@ export default {
 }
 </script>
 <style scoped>
-table{
-  margin-left: auto;
-  margin-right: auto;
-}
-.news {
-  padding: 114px 0 95px;
+.eventTable {
+  text-align: center;
 }
 
-.news-card {
-  margin-top: 70px;
+table {
+  width: 700px;
+  margin-left: 20%;
 }
 
-.news-card-pb-25 {
-  padding-bottom: 25px;
+.table6_2 table {
+  width: 100%;
+  margin: 15px auto;
+  border: 0;
 }
 
-/*single-news-box*/
-.single-news-box {
-  box-shadow: 0 5px 30px 0px rgba(115, 112, 215, .2);
-  min-height: 504px;
-  margin-bottom: 13px;
-  -webkit-transition: .5s;
-  -moz-transition: .5s;
-  -ms-transition: .5s;
-  -o-transition: .5s;
-  transition: .5s;
-
+.table6_2 th {
+  background-color: #505050;
+  color: #FFFFFF
 }
 
-.single-news-box.news-mb-20 {
-  margin-bottom: 20px;
+.table6_2, .table6_2 th, .table6_2 td {
+  font-size: 0.95em;
+  text-align: center;
+  padding: 4px;
+  border-collapse: collapse;
 }
 
-/*single-news-box*/
-
-/*news-box-bg*/
-.news-box-bg {
-  position: relative;
-  overflow: hidden;
-  -webkit-transform: scale(1);
-  -moz-transform: scale(1);
-  -ms-transform: scale(1);
-  -o-transform: scale(1);
-  transform: scale(1);
-  -webkit-transition: .5s;
-  -moz-transition: .5s;
-  -ms-transition: .5s;
-  -o-transition: .5s;
-  transition: .5s;
+.table6_2 th, .table6_2 td {
+  border: 1px solid #202020;
+  border-width: 1px 0 1px 0
 }
 
-.single-news-box:hover .isotope-overlay {
-  -webkit-transform: scaleY(1);
-  -moz-transform: scaleY(1);
-  -ms-transform: scaleY(1);
-  -o-transform: scaleY(1);
-  transform: scaleY(1);
-  top: 0;
+.table6_2 tr {
+  border: 1px solid #ffffff;
 }
 
-/*news-box-bg*/
-
-/*news-box-inner*/
-.news-box-inner {
-  padding: 30px 0px 30px 20px;
-  -webkit-transition: .5s;
-  -moz-transition: .5s;
-  -ms-transition: .5s;
-  -o-transition: .5s;
-  transition: .5s;
+.table6_2 tr:nth-child(odd) {
+  background-color: #c4c4c4;
 }
 
-.news-box-inner h3 a {
-  color: #4d4e54;
-  display: block;
-  font-size: 16px;
-  margin-bottom: 17px;
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  max-width: 350px;
-  font-weight: 600;
-  line-height: 1.4;
+.table6_2 tr:nth-child(even) {
+  background-color: #ffffff;
 }
 
-.news-box-inner .team-meta {
-  display: block;
-  color: #4d4e54;
-  font-size: 12px;
-  font-family: 'Poppins', sans-serif;
+.searchArea > input {
+  border: 0;
+  outline: none;
+  width: 250px;
+  height: 38px;
+  color: #fff;
 }
 
-.news-box-inner span {
-  color: #908edf;
-
+.searchArea > input:focus {
+  outline: 2px solid rgba(238, 153, 123, 0.5);;
+  border-radius: 5px;
 }
 
-a.learn-btn,
-a:hover.learn-btn,
-a:focus.learn-btn,
-a:active.learn-btn {
-  color: #7086e6;
-  font-size: 12px;
-  font-family: 'Lato', sans-serif;
-  font-weight: 700;
-  text-transform: capitalize;
-  margin-top: 8px;
-  padding-bottom: 18px;
-  opacity: 0;
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  -ms-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
+.searchArea > span {
+  width: 50px;
+  background-image: url(../../assets/images/searchIcon.png);
+  color: rgba(0, 0, 0, 0);
+  background-repeat: no-repeat;
+  background-position: center;
+  font-weight: bold;
+  cursor: pointer;
 }
-
-.single-news-box:hover .news-box-inner {
-  background: #f9faff;
-
-}
-
-/*team-box-inner*/
-.single-news-box:hover {
-  box-shadow: 0 5px 35px 0px rgba(115, 112, 215, .2);
-}
-
-.single-news-box:hover .news-box-bg {
-  -webkit-transform: scaleY(1.05);
-  -moz-transform: scaleY(1.05);
-  -ms-transform: scaleY(1.05);
-  -o-transform: scaleY(1.05);
-  transform: scaleY(1.05);
-}
-
-.isotope .item:hover img {
-  -webkit-transform: scale(1.5);
-  -moz-transform: scale(1.5);
-  -ms-transform: scale(1.5);
-  -o-transform: scale(1.5);
-  transform: scale(1.5);
-}
-
-/*.item img*/
 </style>
