@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.repository.performances;
+package com.sejong.cultureuniverse.repository.reservation;
 
 import com.sejong.cultureuniverse.entity.reservation.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -75,12 +75,12 @@
                       <th scope="col" class="text-center col-md-1">남은 좌석</th>
                     </tr>
                     <tbody>
-                    <tr v-for="(scheduleData, index) in scheduleList.dtoList" :key="index" @click="findSeats">
+                    <tr v-for="(scheduleData, index) in scheduleList.dtoList" :key="index" @click="chooseSeats">
                       <input type="hidden" name="scheduleCode" value="scheduleData.scheduleCode">
-                      <td class="text-center">{{ scheduleData.scheduleDate| yyyyMMdd }}</td>
+                      <td class="text-center">{{ scheduleData.scheduleDate| yyyyMMdd }} ({{scheduleData.dayOfWeek}})</td>
                       <td class="text-center">{{ index % 2 + 1 }} 회차</td>
                       <td class="text-center">{{ scheduleData.scheduleTime| hhMM }}</td>
-                      <td class="text-center"></td>
+                      <td class="text-center">{{scheduleData.countSeats}}</td>
                     </tr>
                     </tbody>
                   </table>

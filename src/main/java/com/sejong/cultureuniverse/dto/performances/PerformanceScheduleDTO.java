@@ -16,6 +16,9 @@ public class PerformanceScheduleDTO {
     private LocalDate scheduleDate;
     private LocalTime scheduleTime;
     
+    private String dayOfWeek;
+    private Integer countSeats;
+    
     
     
     

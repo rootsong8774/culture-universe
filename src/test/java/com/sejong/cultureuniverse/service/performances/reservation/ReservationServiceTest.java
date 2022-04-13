@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.service.reservation;
+package com.sejong.cultureuniverse.service.performances.reservation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -6,14 +6,14 @@ import com.sejong.cultureuniverse.entity.reservation.Reservation;
 import com.sejong.cultureuniverse.entity.reservation.ReservationStatus;
 import com.sejong.cultureuniverse.entity.reservation.Seats;
 import com.sejong.cultureuniverse.repository.MemberRepository;
-import com.sejong.cultureuniverse.repository.performances.ReservationRepository;
-import com.sejong.cultureuniverse.repository.performances.SeatsRepository;
+import com.sejong.cultureuniverse.repository.reservation.ReservationRepository;
+import com.sejong.cultureuniverse.repository.reservation.SeatsRepository;
+import com.sejong.cultureuniverse.service.reservation.ReservationService;
 import java.util.Optional;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
