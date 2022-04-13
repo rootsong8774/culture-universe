@@ -5,7 +5,11 @@
         <div class="row">
           <div class="col-md-12 ">
             <h1>예약</h1>
+
+
             <hr>
+
+            <!-- Top of the Tab -->
             <nav>
               <div class="nav nav-tabs nav-fill col-md-12" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active show" id="nav-program-tab" data-toggle="tab"
@@ -18,6 +22,9 @@
                    role="tab" aria-controls="nav-seats" aria-selected="false">좌석 선택</a>
               </div>
             </nav>
+
+
+            <!-- Program Details -->
             <div class="tab-content py-3 px-3 px-sm-0 col-md-12" id="nav-tabContent">
               <div class="tab-pane fade active in" id="nav-program" role="tabpanel"
                    aria-labelledby="nav-program-tab">
@@ -62,11 +69,18 @@
                           href="#nav-schedule" @click="chooseSchedule">일정 선택
                   </button>
                 </div>
-
               </div>
+
+
+
+
+
+              <!-- Schedule table -->
               <div class="tab-pane fade" id="nav-schedule" role="tabpanel"
                    aria-labelledby="nav-schedule-tab">
                 <div class="table-responsive">
+                  <h3>프로그램 일정 및 잔여 좌석</h3>
+                  <hr>
                   <table class="table table-striped table-bordered">
                     <tr>
                       <th scope="col" class="text-center col-md-3">날짜</th>
@@ -75,7 +89,8 @@
                       <th scope="col" class="text-center col-md-1">남은 좌석</th>
                     </tr>
                     <tbody>
-                    <tr v-for="(scheduleData, index) in scheduleList.dtoList" :key="index" @click="chooseSeats">
+                    <tr v-for="(scheduleData, index) in scheduleList.dtoList" class="scheduleRow" :key="index"
+                        @click="getSeatsList(scheduleData.scheduleCode)" >
                       <input type="hidden" name="scheduleCode" value="scheduleData.scheduleCode">
                       <td class="text-center">{{ scheduleData.scheduleDate| yyyyMMdd }} ({{scheduleData.dayOfWeek}})</td>
                       <td class="text-center">{{ index % 2 + 1 }} 회차</td>
@@ -85,6 +100,9 @@
                     </tbody>
                   </table>
                 </div>
+
+
+                <!-- pagination -->
                 <div class="grid models text-center" id="pagination-margin">
                   <ul class="pagination h-100 justify-content-center align-items-center">
 
@@ -93,7 +111,7 @@
                          style="cursor:pointer;">Previous</a>
                     </li>
 
-                    <li class="page-item" :class=" (scheduleList.page === page)? 'active' : '' "
+                    <li class="page-item" :class=" (scheduleList.page === page) ? 'active' : '' "
                         v-for="page in scheduleList.pageList">
                       <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
                         {{ page }}
@@ -109,9 +127,30 @@
                 <div style="clear: both;"></div>
 
               </div>
+
+
+
+              <!-- Choose Seats -->
               <div class="tab-pane fade" id="nav-seats" role="tabpanel"
                    aria-labelledby="nav-seats-tab">
-                좌석 선택
+                <h3>좌석 배치</h3>
+                <hr>
+                <div>
+                  <div class="wrap">
+
+                    {{seatNo}}
+                    {{debug}}
+                    <ol class="seat" v-for="(seat, index) in seatsList" :key="index" >
+                      <div  v-if="seat.colNo===0" style="clear: both" >
+                        <li @click="chooseSeats(seat.seatNo, $event)" v-model="seatNo">{{seat.rowNo | nToABC}} - {{seat.colNo+1}}</li>
+                      </div>
+                      <div v-else>
+                        <li @click="chooseSeats(seat.seatNo, $event)" v-model="seatNo">{{seat.rowNo | nToABC}} - {{seat.colNo+1}}</li>
+                      </div>
+                    </ol>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
@@ -124,14 +163,15 @@
 </template>
 
 <script>
-
-
 import axios from "axios";
 
 export default {
   name: "seat",
   data() {
     return {
+      seatNo: [],
+      reserve: false,
+      seatsList: [],
       page: 1,
       resultList: [],
       performData: {},
@@ -144,7 +184,8 @@ export default {
         prev: false,
         next: true,
         pageList: []
-      }
+      },
+      debug: []
     }
   },
   created() {
@@ -186,6 +227,9 @@ export default {
 
       return hour + '시 ' + minute + '분';
     },
+    nToABC: function (value) {
+      return String.fromCharCode(value + 65);
+    },
   },
   methods: {
     getDetails: function () {
@@ -193,7 +237,6 @@ export default {
         url: '/api/performancesDetails',
         params: {
           performCode: this.$route.query.performCode,
-
         },
         method: 'get',
       }).then(response => {
@@ -214,9 +257,26 @@ export default {
       })
 
     },
+    getSeatsList: function (value) {
+      $('a[href="#nav-seats"]').tab('show');
+      axios({
+        url: '/api/reservation/seats',
+        params: {
+          scheduleCode: value,
+        },
+        method: 'get',
+      }).then(response => {
+        this.seatsList = response.data
+      })
+    },
     setPage: function (value) {
       this.page = value;
     },
+    chooseSeats: function (t,e) {
+      this.seatNo = !this.seatNo.includes(t) ? [...this.seatNo, t] : this.seatNo.filter(x => x!=t);
+      e.target.classList.toggle('reserve');
+    },
+
   },
   watch: {
     page: function () {
@@ -286,5 +346,51 @@ nav > div a.nav-item.nav-link:focus {
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
   text-align: center
+}
+.scheduleRow {
+  cursor: pointer;
+}
+.scheduleRow:hover {
+  border: none;
+  background: #ee997b;
+  color: #fff;
+  border-radius: 0;
+  transition: background 0.20s linear;
+}
+
+.wrap {
+  width: 100%;
+  overflow: hidden;
+}
+
+.wrap ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+
+.wrap li {
+  width: 50px;
+  height: 50px;
+  border: 1px;
+  text-align: center;
+  line-height: 30px;
+  padding-top: 10px;
+  float: left;
+  border: 1px solid black;
+  cursor: pointer;
+  color: black;
+}
+
+
+.reserve {
+  background-color: #ee997b;
+}
+.alreadyReserved {
+  background-color: g;
+}
+#pagination-margin {
+  margin-top: 20px;
 }
 </style>

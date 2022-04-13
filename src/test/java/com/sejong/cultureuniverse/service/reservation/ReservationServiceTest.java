@@ -1,7 +1,8 @@
-package com.sejong.cultureuniverse.service.performances.reservation;
+package com.sejong.cultureuniverse.service.reservation;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.reservation.Reservation;
 import com.sejong.cultureuniverse.entity.reservation.ReservationStatus;
 import com.sejong.cultureuniverse.entity.reservation.Seats;
@@ -9,11 +10,13 @@ import com.sejong.cultureuniverse.repository.MemberRepository;
 import com.sejong.cultureuniverse.repository.reservation.ReservationRepository;
 import com.sejong.cultureuniverse.repository.reservation.SeatsRepository;
 import com.sejong.cultureuniverse.service.reservation.ReservationService;
+import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
@@ -27,6 +30,8 @@ class ReservationServiceTest {
     ReservationService reservationService;
     @Autowired
     ReservationRepository reservationRepository;
+    @Autowired
+    ReservationService reservationServices;
     @Autowired
     EntityManager em;
 
@@ -86,9 +91,31 @@ class ReservationServiceTest {
 
     }
     
+    @Test
+    @Transactional
+    @Commit
+    public void seatsReservationTest() throws Exception {
+        List<Seats> seats = seatsRepository.findSeatsByScheduleScheduleCode(
+            100L);
+        Optional<Member> findMember = memberRepository.findById(1L);
+        if (findMember.isEmpty()) {
+            return;
+        }
+        Member member = findMember.get();
+        for (Seats seat : seats) {
+            System.out.println("seat = " + seat.getSeatNo());
+        }
+        Long[] seatNosArray ={seats.get(0).getSeatNo(), seats.get(1).getSeatNo()};
+        reservationServices.reservation(member.getUserIdx(),
+            seatNosArray);
+        
+    }
+    
     private void emClear() {
         em.flush();
         em.clear();
     }
+    
+    
     
 }

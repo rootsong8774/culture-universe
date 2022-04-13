@@ -9,6 +9,7 @@ import com.sejong.cultureuniverse.mapper.SeatsMapper;
 import com.sejong.cultureuniverse.repository.MemberRepository;
 import com.sejong.cultureuniverse.repository.reservation.ReservationRepository;
 import com.sejong.cultureuniverse.repository.reservation.SeatsRepository;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,22 +33,27 @@ public class ReservationService {
             .collect(Collectors.toList());
         
     }
-    
+    //SeatsNo Array 로 입력값을 받아야 함.
     @Transactional
-    public Long reservation(Long userIdx, Long seatsNo) {
+    public Long reservation(Long userIdx, Long... seatsNos) {
         Optional<Member> findMember = memberRepository.findById(userIdx);
-        Optional<Seats> findSeats = seatsRepository.findById(seatsNo);
-        if (findMember.isEmpty() || findSeats.isEmpty()) {
+        if (findMember.isEmpty()) {
             return null;
         }
         Member member = findMember.get();
-        Seats seat = findSeats.get();
-    
-        SeatsReservation seatsReservation = SeatsReservation.createSeatsReservation(seat,
-            seat.getPrice());
-    
-        Reservation reservation = Reservation.createReservation(member, seatsReservation);
-    
+        SeatsReservation[] seatsReservations = Arrays.stream(seatsNos).map(seatsNo -> {
+            Optional<Seats> findSeats = seatsRepository.findById(seatsNo);
+            if (findSeats.isEmpty()) {
+                return null;
+            }
+        
+            Seats seat = findSeats.get();
+            return SeatsReservation.createSeatsReservation(seat,
+                seat.getPrice());
+        
+        }).toArray(SeatsReservation[]::new);
+        Reservation reservation = Reservation.createReservation(member, seatsReservations);
+        
         reservationRepository.save(reservation);
         return reservation.getReservationId();
         
