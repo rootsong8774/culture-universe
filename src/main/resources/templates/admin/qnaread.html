@@ -29,82 +29,107 @@
             <input type="text" class="form-control" name="regDate"
                    th:value="${#temporals.format(qnadto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
         </div>
-        <div class="form-group">
-            <label>수정일</label>
-            <input type="text" class="form-control" name="modDate"
-                   th:value="${#temporals.format(qnadto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
-        </div>
         <hr>
+        <!-- 댓글영역 -->
+        <div>
+            <div class="mt-4">
+                <h5><span class="badge badge-secondary commentCount"> 관리자답변 [[${qnadto.commentCount}]]</span></h5>
+            </div>
 
-        <!--        <a th:href="@{/admin/qnalist(page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">-->
-        <!--            <button type="button" class="btn btn-info">목록</button>-->
-        <!--        </a>-->
-        <!--        <button id="chkCommentBtn" th:onclick="" type="button" class="btn btn-primary commentCount"> 답변확인-->
-        <!--        </button>-->
-        <!--        <button id="closeCommentBtn" th:onclick="openComment()" type="button" class="btn btn-outline-secondary commentClose">닫기</button>-->
-        <!--        <div class="list-group commentList">        </div>-->
+            <!--관리자 답글 작성란 -->
+            <div th:id="adminCommentBox" class="adminCommentBox">
+                <h2 class="mt-4">문의내역 답변
+                    <span>
+                    <button id="addComment" type="button" class="btn btn-info">답변작성</button>
+            </span>
+                </h2>
+                <!--관리자 답변 목록 -->
+                <div class="form-group">
+                    <table class="type09">
+                        <tr class="cols">
+                            <th th:name="adminId" th:width="80px">관리자ID</th>
+                            <th th:name="commentContent" th:width="850px">댓글</th>
+                            <th th:name="regDate" th:width="100px">등록일</th>
+                            <th th:name="button" th:width="80px"></th>
+                        </tr>
+                        <tr th:each="comment: ${commentlist}" class="rows" id="removeDetail">
+                            <form th:action="@{/admin/commentdelete/{type}(type=${comment.commentIdx})}"
+                                  th:name="commentIdx" th:method="post">
+                                <td><p th:text="${comment.adminId}"></p></td>
+                                <td><p  th:text="${comment.commentContent}" ></p></td>
+                                <td><p th:text="${#temporals.format(comment.regDate, 'yyyy/MM/dd')}">
+                                    formatTime(reply.regDate)
+                                </p></td>
+                                <td>
 
-
-        <!--관리자 답글 작성란 -->
-        <div th:id="adminCommentBox" class="adminCommentBox">
-            <h2 class="mt-4">문의내역 답변
-                <span>
-                <a th:href="@{/admin/qnalist}">
-                    <button type="button" class="btn btn-info">목록</button>
-                </a>
-            </span></h2>
-            <div class="form-group">
-                <table class="type09">
-                    <tr class="cols">
-                        <th th:width="80px" >관리자ID</th>
-                        <th th:width="850px" >댓글</th>
-                        <th th:width="100px">등록일</th>
-                        <th th:width="80px"></th>
-                    </tr>
-                    <tr th:each="comment: ${commentlist}" class="rows">
-                        <form th:action="@{/admin/commentdelete/{type}(type=${comment.commentIdx})}"
-                              th:name="commentIdx" th:method="post">
-                            <td ><p th:text="${comment.admin.adminId}"></p></td>
-                            <td ><p th:text="${comment.commentContent}"></p></td>
-                            <td ><p th:text="${#temporals.format(comment.regDate, 'yyyy/MM/dd')}"></p></td>
-                            <td >
-                                <button type="submit" class="btn btn-danger commentRemove" id="commentRemove">X</button>
-                            </td>
-                        </form>
-                    </tr>
-                    <tr>
-                        <form th:action="@{/admin/qnaregister/{type}(type=${qnadto.questionIdx}) }" th:method="post">
-                            <td><input th:name="adminId" placeholder="관리자id"/></td>
-                            <td><textarea th:name="commentContent" th:width="500px" placeholder="답변작성란"
-                                          id="textarea"></textarea></td>
-                            <td th:name="regDate"></td>
-                            <td>
-                                <button type="submit" class="btn btn-primary commentSave" id="commentSave">답변 등록
-                                </button>
-                            </td>
-                        </form>
-                    </tr>
-                </table>
+                                    <button type="submit" class="btn btn-danger commentRemove" id="commentRemove">X
+                                    </button>
+                                </td>
+                            </form>
+                        </tr>
+                        <!--                        관리자 답변 작성 -->
+                        <tr style="display: none" id="detailComment">
+                            <form th:action="@{/admin/qnaread{type}(type=${qnadto.questionIdx})}" th:method="post">
+<!--                            @{/admin/qnaread(questionIdx=${dto.questionIdx})}-->
+                                <!--                                th:action="@{/admin/qnaregister/{type}(type=${qnadto.questionIdx}) }" th:method="post">-->
+                                <div>
+                                    <td><input placeholder="관리자id"/></td>
+                                    <td><textarea th:name="commentContent" th:width="500px" placeholder="답변작성란"
+                                                  id="textarea"></textarea></td>
+                                    <td th:name="regDate"></td>
+                                    <td>
+                                        <button type="submit" class="btn btn-primary commentSave" id="commentSave">답변 등록
+                                        </button>
+                                    </td>
+                                </div>
+                            </form>
+                        </tr>
+                    </table>
+                </div>
             </div>
         </div>
-
         <script th:inline="javascript">
+            //toggle
+            $(document).ready(function () {
+                $('#addComment').click(function () {
+                    $('#detailComment').toggle('slow');
+                });
+            });
+            //remove alter
+            var removeForm = $("#removeDetail");
+
+            $(".commentRemove").click(function () {
+                if (!confirm("삭제하시겠습니까?")) {
+                    return;
+                }
+                removeForm
+                    .attr("action", "/admin/qnaread")
+                    .attr("method", "post");
+
+                removeForm.submit();
+
+            });
+          //addComment
+
 
         </script>
+        <!--        comment table custom style-->
         <style>
             .type09 {
                 border-collapse: collapse;
                 text-align: center;
                 line-height: 1.5;
             }
+
             .cols {
-                  padding: 10px;
-                  font-weight: bold;
-                  vertical-align: top;
-                  color: #369;
-                  border-bottom: 3px solid #036;
-              }
-            .rows{
+                padding: 10px;
+                font-weight: bold;
+                vertical-align: top;
+                color: #369;
+                border-bottom: 3px solid #036;
+            }
+
+            .rows {
                 width: 150px;
                 padding: 10px;
                 vertical-align: top;
@@ -113,13 +138,15 @@
                 text-align: left;
 
             }
-            .commentRemove{
+
+            .commentRemove {
                 padding-left: 20px;
             }
-           #textarea {
-               width: 100%;
-               height: 10%;
-           }
+
+            #textarea {
+                width: 100%;
+                height: 10%;
+            }
         </style>
     </th:block>
 </th:block>
