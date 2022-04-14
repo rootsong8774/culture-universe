@@ -4,8 +4,7 @@
       <div class="container">
         <div class="sub-t">
           <h2 class="t" style="font-size: 2.5rem; margin-block-start: 0.83em; margin-block-end: 0.83em;margin-inline-start: 0.83em;
-            margin-inline-end: 0.83em; font-weight: bold;text-align: center; line-height: 1.15; letter-spacing: -0.03em;">
-            공지사항</h2>
+            margin-inline-end: 0.83em; font-weight: bold;text-align: center; line-height: 1.15; letter-spacing: -0.03em;">공지사항</h2>
         </div>
         <div>
           <form>
@@ -22,20 +21,23 @@
               <li>
                 <div class="search">
                   <input type="text" placeholder="검색어 입력">
-                  <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
                 </div>
               </li>
             </ul>
           </form>
+
           <br>
           <table class=table6_2>
             <tr>
-              <th>번호</th>
-              <th>제목</th>
-              <th>공지내용</th>
-              <th>등록일(최종수정일)</th>
+              <th style="width: 10%">번호</th>
+              <th style="width: 18%">제목</th>
+              <th style="width: 32%">공지내용</th>
+              <th style="width: 30%">등록일(최종수정일)</th>
               <th>조회수</th>
             </tr>
+          </table>
+          <table class="table table-hover">
+            <tbody>
             <tr class="result-date" v-for="(result,index) in resultList" :key="index">
               <td>
                 <router-link
@@ -56,8 +58,9 @@
                 </router-link>
               </td>
               <td>{{ result.regDate  | yyyyMMdd }}</td>
-              <td>{{ result.commentCount }}</td>
+              <td>{{ result.readCount }}</td>
             </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -84,6 +87,7 @@
     </div><!--/.pagination-part(&raquo;)-->
   </div>
 </template>
+
 <script>
 import axios from "axios";
 
@@ -108,6 +112,7 @@ export default {
   },
   created() {
     this.getList();
+    this.getSearch();
   },
   filters: {
     yyyyMMdd: function (value) {
@@ -146,18 +151,20 @@ export default {
         this.resultList = jsonData.dtoList;
         this.pageData = jsonData;
         console.log(jsonData);
-
       })
     },
     setPage: function (value) {
       this.page = value;
     },
+    search: function (){
+      this.getList()
+    }
   },
   watch: {
     page: function () {
       this.getList();
       this.$router.push({
-        name: "notice",
+        name: "noticeDetails",
         query: {page: this.page},
       })
     }
@@ -165,12 +172,7 @@ export default {
 
 }
 </script>
-<style>
-.container {
-  max-width: 1800px;
-  text-align: center;
-  justify-content: center;
-}
+<style scoped>
 
 table {
   width: 700px;
@@ -195,10 +197,6 @@ table {
   border-collapse: collapse;
 }
 
-.table6_2 th, .table6_2 td {
-  border: 1px solid #202020;
-  border-width: 1px 0 1px 0
-}
 
 .table6_2 tr {
   border: 1px solid #ffffff;
@@ -211,6 +209,7 @@ table {
 .table6_2 tr:nth-child(even) {
   background-color: #ffffff;
 }
+
 .searchArea > input {
   border: 0;
   outline: none;

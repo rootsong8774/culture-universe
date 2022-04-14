@@ -2,14 +2,17 @@ package com.sejong.cultureuniverse.repository;
 
 
 import com.sejong.cultureuniverse.dto.admin.WinnerBoardDTO;
+import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 import com.sejong.cultureuniverse.entity.event.EventWinner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 
-public interface WinnerBoardRepository extends JpaRepository<EventWinner, Long> {
+public interface WinnerBoardRepository extends JpaRepository<EventWinner, Long> ,
+    QuerydslPredicateExecutor<EventWinner> {
 
     @Query(
         "select new com.sejong.cultureuniverse.dto.admin.WinnerBoardDTO(w.winnerIdx, a.adminId, a.adminPw, w.winTitle,"

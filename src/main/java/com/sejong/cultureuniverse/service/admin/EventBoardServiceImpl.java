@@ -1,11 +1,14 @@
 package com.sejong.cultureuniverse.service.admin;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.sejong.cultureuniverse.dto.admin.EventBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
+import com.sejong.cultureuniverse.entity.event.QEventBoard;
 import com.sejong.cultureuniverse.repository.EventBoardRepository;
 import java.time.LocalDateTime;
 import java.util.function.Function;
@@ -43,7 +46,7 @@ public class EventBoardServiceImpl implements EventBoardService {
 
         Pageable pageable = requestDTO.getPageable(Sort.by("eventIdx").descending());
 
-        //BooleanBuilder booleanBuilder = getSearch(requestDTO);
+        BooleanBuilder booleanBuilder = getSearch(requestDTO);
 
         Page<Object[]> result = eventBoardRepository.findAllWithAdminId(pageable);
 
@@ -89,13 +92,14 @@ public class EventBoardServiceImpl implements EventBoardService {
     public void remove(Long eventIdx) {
         eventBoardRepository.deleteByEventIdx(eventIdx);
     }
-   /* private BooleanBuilder getSearch(PageRequestDTO requestDTO) {
+
+    private BooleanBuilder getSearch(PageRequestDTO requestDTO) {
         String type = requestDTO.getType();
         String keyword = requestDTO.getKeyword();
         BooleanBuilder builder = new BooleanBuilder();
-        QGuestbook qGuestbook = QGuestbook.guestbook;
+        QEventBoard qEventBoard = QEventBoard.eventBoard;
 
-        BooleanExpression expression = qGuestbook.gno.gt(0L);
+        BooleanExpression expression = qEventBoard.eventIdx.gt(0L);
 
         builder.and(expression);
 
@@ -106,21 +110,21 @@ public class EventBoardServiceImpl implements EventBoardService {
         BooleanBuilder conditionBuilder = new BooleanBuilder();
 
         if (type.contains("t")) {
-            conditionBuilder.or(qGuestbook.title.contains(keyword));
+            conditionBuilder.or(qEventBoard.eventTitle.contains(keyword));
         }
 
         if (type.contains("c")) {
-            conditionBuilder.or(qGuestbook.content.contains(keyword));
+            conditionBuilder.or(qEventBoard.eventContent.contains(keyword));
         }
 
-        if (type.contains("w")) {
+       /* if (type.contains("w")) {
             conditionBuilder.or(qGuestbook.writer.contains(keyword));
-        }
+        }*/
 
         builder.and(conditionBuilder);
 
         return builder;
 
-    }*/
+    }
 }
 

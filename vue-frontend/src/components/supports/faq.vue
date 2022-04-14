@@ -156,6 +156,7 @@
 </template>
 
 <script>
+
 export default {
   name: "faq",
 

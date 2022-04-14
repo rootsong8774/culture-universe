@@ -25,9 +25,7 @@ public class EventComment extends BaseEntity {
     @Exclude
     private Member member;
 
-
-
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(fetch = FetchType.LAZY ,cascade = CascadeType.REMOVE)
     @JoinColumn(name ="event_idx")
     @Exclude
     private EventBoard eventBoard;

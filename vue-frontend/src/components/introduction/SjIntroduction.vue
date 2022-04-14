@@ -389,7 +389,12 @@
         <div>
           <div v-show="currentTab2 == 4" class="tab-cont">
             <div class="contents">
-              <button href="http://sjartgroups.or.kr/sjartgroups/main/main.do" value="바로가기"> <a href="http://naver.com" ></a></button>
+              <div class="rows" style="margin:90px; padding:0px;width: 1200px;text-align: center; justify-content: center; display: grid">
+                <div >
+                  <a href="http://sjartgroups.or.kr/sjartgroups/main/main.do" value="바로가기">
+                    <img src="src/assets/images/bg_08.jpg"></a >
+                </div>
+              </div>
             </div>
           </div>
         </div>

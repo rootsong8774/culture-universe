@@ -2,11 +2,13 @@ package com.sejong.cultureuniverse.repository;
 
 
 import com.sejong.cultureuniverse.dto.admin.EventBoardDTO;
+import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 
 public interface EventBoardRepository extends JpaRepository<EventBoard, Long> {

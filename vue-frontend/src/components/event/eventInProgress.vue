@@ -1,87 +1,90 @@
 <template>
   <div>
     <div>
-    <div class="container">
-      <div class="sub-t">
-        <h2 class="t" style="font-size: 2.5rem; margin-block-start: 0.83em; margin-block-end: 0.83em;margin-inline-start: 0.83em;
+      <div class="container">
+        <div class="sub-t">
+          <h2 class="t" style="font-size: 2.5rem; margin-block-start: 0.83em; margin-block-end: 0.83em;margin-inline-start: 0.83em;
             margin-inline-end: 0.83em; font-weight: bold;text-align: center; line-height: 1.15; letter-spacing: -0.03em;">
-          진행중인 이벤트</h2>
-      </div>
-      <div>
-        <form>
-          <ul style="text-align: center">
-            <li>
-              <select name="language">
-                <option value="none">=== 전체 ===</option>
-                <option value="Num">번호</option>
-                <option value="title">제목</option>
-                <option value="wregDate">등록일자</option>
-                <option value="noAndTitle">번호+제목</option>
-              </select>
-            </li>
-            <li>
-              <div class="search">
-                <input type="text" placeholder="검색어 입력">
-                <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-              </div>
-            </li>
-          </ul>
-        </form>
-        <br>
-        <table class=table6_2>
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>이벤트 내용</th>
-            <th>등록일(최종수정일)</th>
-            <th>조회수</th>
-          </tr>
-          <tr class="result-date" v-for="(result,index) in resultList" :key="index">
-            <td>
-              <router-link
-                :to="{name: 'eventInProgressDetails',query:{eventIdx: result.eventIdx}}">
-                {{ result.eventIdx }}
-              </router-link>
-            </td>
-            <td>
-              <router-link
-                :to="{name:'eventInProgressDetails', query:{eventIdx: result.eventIdx}}">
-                {{ result.eventTitle }}
-              </router-link>
-            </td>
-            <td>
-              <router-link
-                :to="{name:'eventInProgressDetails', query:{eventIdx: result.eventIdx}}">
-                {{ result.eventContent }}
-              </router-link>
-            </td>
-            <td>{{ result.regDate  | yyyyMMdd }}</td>
-            <td>{{ result.commentCount }}</td>
-          </tr>
-        </table>
+            진행중인 이벤트</h2>
+        </div>
+        <div>
+          <form>
+            <ul style="text-align: center">
+              <li>
+                <select name="language">
+                  <option value="none">=== 전체 ===</option>
+                  <option value="Num">번호</option>
+                  <option value="title">제목</option>
+                  <option value="wregDate">등록일자</option>
+                  <option value="noAndTitle">번호+제목</option>
+                </select>
+              </li>
+              <li>
+                <div class="search">
+                  <input type="text" placeholder="검색어 입력">
+                </div>
+              </li>
+            </ul>
+          </form>
+          <br>
+          <table class=table6_2>
+            <tr>
+              <th style="width: 10%">번호</th>
+              <th style="width: 18%">제목</th>
+              <th style="width: 32%">이벤트 내용</th>
+              <th style="width: 30%">등록일(최종수정일)</th>
+              <th>조회수</th>
+            </tr>
+          </table>
+          <table class="table table-hover">
+            <tbody>
+            <tr class="result-date" v-for="(result,index) in resultList" :key="index">
+              <td>
+                <router-link
+                  :to="{name: 'eventInProgressDetails',query:{eventIdx: result.eventIdx}}">
+                  {{ result.eventIdx }}
+                </router-link>
+              </td>
+              <td>
+                <router-link
+                  :to="{name:'eventInProgressDetails', query:{eventIdx: result.eventIdx}}">
+                  {{ result.eventTitle }}
+                </router-link>
+              </td>
+              <td>
+                <router-link
+                  :to="{name:'eventInProgressDetails', query:{eventIdx: result.eventIdx}}">
+                  {{ result.eventContent }}
+                </router-link>
+              </td>
+              <td>{{ result.regDate  | yyyyMMdd }}</td>
+              <td>{{ result.readCount }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="pagination-part text-center">
-    <ul class="pagination h-100 justify-content-center align-items-center">
+    <div class="pagination-part text-center">
+      <ul class="pagination h-100 justify-content-center align-items-center">
 
-      <li class="page-item " v-if="pageData.prev">
-        <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
-           style="cursor:pointer;">Previous</a>
-      </li>
+        <li class="page-item " v-if="pageData.prev">
+          <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
+             style="cursor:pointer;">Previous</a>
+        </li>
 
-      <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
-          v-for="page in pageData.pageList">
-        <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
-          {{ page }}
-        </a>
-      </li>
-      <li class="page-item" v-if="pageData.next">
-        <a class="page-link"
-           @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
-      </li>
-    </ul>
-  </div><!--/.pagination-part(&raquo;)-->
+        <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
+            v-for="page in pageData.pageList">
+          <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
+            {{ page }}
+          </a>
+        </li>
+        <li class="page-item" v-if="pageData.next">
+          <a class="page-link"
+             @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
+        </li>
+      </ul>
+    </div><!--/.pagination-part(&raquo;)-->
   </div>
 </template>
 
@@ -194,10 +197,6 @@ table {
   border-collapse: collapse;
 }
 
-.table6_2 th, .table6_2 td {
-  border: 1px solid #202020;
-  border-width: 1px 0 1px 0
-}
 
 .table6_2 tr {
   border: 1px solid #ffffff;

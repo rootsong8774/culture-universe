@@ -4,38 +4,41 @@
       <div class="container">
         <div class="sub-t">
           <h2 class="t" style="font-size: 2.5rem; margin-block-start: 0.83em; margin-block-end: 0.83em;margin-inline-start: 0.83em;
-            margin-inline-end: 0.83em; font-weight: bold;text-align: center; line-height: 1.15; letter-spacing: -0.03em;">
-            당첨자 발표</h2>
+            margin-inline-end: 0.83em; font-weight: bold;text-align: center; line-height: 1.15; letter-spacing: -0.03em;">이벤트 당첨자</h2>
         </div>
         <div>
           <form>
             <ul style="text-align: center">
               <li>
-            <select name="language">
-              <option value="none">=== 전체 ===</option>
-              <option value="Num">번호</option>
-              <option value="title">제목</option>
-              <option value="wregDate">등록일자</option>
-              <option value="noAndTitle">번호+제목</option>
-            </select>
+                <select name="language">
+                  <option value="none">=== 전체 ===</option>
+                  <option value="Num">번호</option>
+                  <option value="title">제목</option>
+                  <option value="wregDate">등록일자</option>
+                  <option value="noAndTitle">번호+제목</option>
+                </select>
               </li>
               <li>
-            <div class="search">
-              <input type="text" placeholder="검색어 입력">
-              <img src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-            </div>
+                <div class="search">
+                  <input type="text" placeholder="검색어 입력">
+                  <img
+                    src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                </div>
               </li>
             </ul>
           </form>
           <br>
           <table class=table6_2>
             <tr>
-              <th>번호</th>
-              <th>제목</th>
-              <th>공지내용</th>
-              <th>등록일(최종수정일)</th>
+              <th style="width: 10%">번호</th>
+              <th style="width: 18%">제목</th>
+              <th style="width: 32%">이벤트 당첨자</th>
+              <th style="width: 30%">등록일(최종수정일)</th>
               <th>조회수</th>
             </tr>
+          </table>
+          <table class="table table-hover">
+            <tbody>
             <tr class="result-date" v-for="(result,index) in resultList" :key="index">
               <td>
                 <router-link
@@ -56,39 +59,41 @@
                 </router-link>
               </td>
               <td>{{ result.regDate  | yyyyMMdd }}</td>
-              <td>{{ result.commentCount }}</td>
+              <td>{{ result.readCount }}</td>
             </tr>
+            </tbody>
           </table>
         </div>
       </div>
     </div>
-        <div class="pagination-part text-center" >
-          <ul class="pagination h-100 justify-content-center align-items-center">
+    <div class="pagination-part text-center">
+      <ul class="pagination h-100 justify-content-center align-items-center">
 
-            <li class="page-item " v-if="pageData.prev">
-              <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
-                 style="cursor:pointer;">Previous</a>
-            </li>
+        <li class="page-item " v-if="pageData.prev">
+          <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
+             style="cursor:pointer;">Previous</a>
+        </li>
 
-            <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
-                v-for="page in pageData.pageList">
-              <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
-                {{ page }}
-              </a>
-            </li>
-            <li class="page-item" v-if="pageData.next">
-              <a class="page-link"
-                 @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
-            </li>
-          </ul>
-        </div><!--/.pagination-part(&raquo;)-->
-    </div>
+        <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
+            v-for="page in pageData.pageList">
+          <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
+            {{ page }}
+          </a>
+        </li>
+        <li class="page-item" v-if="pageData.next">
+          <a class="page-link"
+             @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
+        </li>
+      </ul>
+    </div><!--/.pagination-part(&raquo;)-->
+  </div>
 </template>
-<script>
 
+<script>
 import axios from "axios";
 
 export default {
+
   name: "winnerList",
   data() {
     return {
@@ -152,13 +157,12 @@ export default {
     setPage: function (value) {
       this.page = value;
     },
-
   },
   watch: {
     page: function () {
       this.getList();
       this.$router.push({
-        name: "eventWinner",
+        name: "winnerDetails",
         query: {page: this.page},
       })
     }
@@ -166,7 +170,11 @@ export default {
 
 }
 </script>
-<style>
+<style scoped>
+.eventTable {
+  text-align: center;
+}
+
 table {
   width: 700px;
   margin-left: 20%;
@@ -190,10 +198,6 @@ table {
   border-collapse: collapse;
 }
 
-.table6_2 th, .table6_2 td {
-  border: 1px solid #202020;
-  border-width: 1px 0 1px 0
-}
 
 .table6_2 tr {
   border: 1px solid #ffffff;
@@ -206,44 +210,23 @@ table {
 .table6_2 tr:nth-child(even) {
   background-color: #ffffff;
 }
-select {
-  width:300px;
-  padding:5px;
-  border:1px solid #999;
-  font-family:'Nanumgothic';
-  border-radius:3px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance : none;
-}
-[출처] html css select 셀렉트 박스 디자인 변경하기|작성자 반짝이는 와이프
-.search {
-  position: relative;
-  width: 300px;
+
+.searchArea > input {
+  border: 0;
+  outline: none;
+  width: 250px;
+  height: 38px;
+  color: #fff;
 }
 
-input {
-  width: 100%;
-  border: 1px solid #bbb;
-  border-radius: 8px;
-  padding: 10px 12px;
-  font-size: 14px;
+.searchArea > input:focus {
+  outline: 2px solid rgba(238, 153, 123, 0.5);;
+  border-radius: 5px;
 }
 
-img {
-  position : absolute;
-  width: 17px;
-  top: 10px;
-  right: 12px;
-  margin: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-.searchArea > form >span{
+.searchArea > span {
   width: 50px;
+  background-image: url(../../assets/images/searchIcon.png);
   color: rgba(0, 0, 0, 0);
   background-repeat: no-repeat;
   background-position: center;

@@ -1,6 +1,7 @@
 package com.sejong.cultureuniverse.controller.admin;
 
 import com.sejong.cultureuniverse.dto.admin.EventBoardDTO;
+import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.service.admin.EventBoardService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class EventBoardController {
 
     private final EventBoardService service;
 
+
     @GetMapping("/")
     public String index() {
         return "redirect:/event/list";
@@ -32,7 +34,22 @@ public class EventBoardController {
         log.info("list..............." + pageRequestDTO);
 
         model.addAttribute("result", service.getList(pageRequestDTO));
+    }/*
+    @GetMapping("/register")
+    public void register() {
+        log.info("register get....");
     }
+
+    @PostMapping("/register")
+    public String registerPost(NoticeBoardAndAdminDTO dto, RedirectAttributes redirectAttributes) {
+        log.info("dto...." + dto.toString());
+
+        Long noticeIdx = service.register(dto);
+
+        redirectAttributes.addFlashAttribute("msg", noticeIdx);
+
+        return "redirect:/admin/list";
+    }*/
 
     @GetMapping("/register")
     public void register() {

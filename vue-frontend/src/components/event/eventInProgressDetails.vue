@@ -35,39 +35,28 @@
     </div>
     <div class="comments-area" style="position: center; justify-content: center; text-align: center">
       <div class="contact-form blog-single-form" >
+        <br>
         <h3>댓글이벤트 참여</h3>
-        <div class="rplyform" >
-          <form class="replySt" >
-            <div class="" >
-              <div class="col-sm-6 col-xs-12" >
-                <input type="text" class="form-control" id="firstname" placeholder="id"
-                       name="firstname"><br>
-              </div><!--/.col-->
-            </div><!--/.row-->
-            <div class="row" style="max-width: 1000px">
-              <div class="col-sm-12">
-                    <textarea class="form-control" rows="5" id="comment"
-                              placeholder="댓글입력" style="width: 50%; height: 50%"></textarea><br>
-              </div><!--/.col-->
-            </div><!--/.row-->
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="single-contact-btn">
-                  <button class="contact-btn" href="#" role="button">댓글 등록</button>
-                  <br>
-                </div><!--/.single-single-contact-btn-->
-              </div><!--/.col-->
-            </div><!--/.row-->
-          </form><!--/form-->
-        </div><!--/.contact-form-->
+        <div id="disqus_thread"></div>
+<!--        <form class="form-inline">
+          <div class="form-group">
+            <label for="exampleInputName2" id="postsId">ID</label>
+            <input type="text" class="form-control" id="exampleInputName2" placeholder="ID">
+          </div>
+          <div class="form-group">
+            <label for="comment">내용</label>
+            <input type="text" class="form-control" id="comment" placeholder="내용">
+          </div>
+          <button type="submit" class="btn btn-default" style="width: 75px" @click="commentSave">입력</button>
+        </form>
         <div style="padding-top: 15px">
           <ol class="comment-list" style="justify-content: center">
-            <li class="comment"><img src="" alt="사람이미지"/></li>
-            <li>ID</li>
-            <li><span>당첨돼서 연극보고싶어요!</span></li>
-            <li><span>댓글등록일자</span></li>
+            <li class="comment"></li>
+            <li>{{nickname}}</li>
+            <li><span>{{comment}}</span></li>
+            <li><span>{{mod.date}}</span></li>
           </ol>
-        </div>
+        </div>-->
       </div>
     </div><!--/.comments-area-->
   </div>
@@ -80,16 +69,17 @@ export default {
   name: "eventInProgressDetails",
   data() {
     return {
+      comment:'',
       eventData: {}
     }
-  }
+  },
   /*  props: {
       performCode: {
         type: String,
         default: ''
       }
     }*/
-  ,
+
   created() {
     this.getDetails();
   },
@@ -129,8 +119,16 @@ export default {
     reservation: function () {
       this.$router.push({name: 'eventInProgress'})
     },
+    save:function () {
+      const doc = {
+        createdAt: new Date(),
+        comment: this.comment,
+        id: this.id
+      }
+    }
   },
 }
+
 </script>
 <style scoped>
 h2 {
