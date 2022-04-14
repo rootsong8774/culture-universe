@@ -12,13 +12,15 @@
             <!-- Top of the Tab -->
             <nav>
               <div class="nav nav-tabs nav-fill col-md-12" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active show" id="nav-program-tab" data-toggle="tab"
+                <a class="nav-item nav-link show disabled-tab active" id="nav-program-tab"
+                   data-toggle="tab"
                    href="#nav-program" role="tab" aria-controls="nav-program" aria-selected="true">프로그램
                   정보</a>
-                <a class="nav-item nav-link" id="nav-schedule-tab" data-toggle="tab"
+                <a class="nav-item nav-link disabled-tab" id="nav-schedule-tab" data-toggle="tab"
                    href="#nav-schedule" role="tab" aria-controls="nav-schedule"
-                   aria-selected="false" @click="chooseSchedule">일정 선택</a>
-                <a class="nav-item nav-link" id="nav-seats-tab" data-toggle="tab" href="#nav-seats"
+                   aria-selected="false">일정 선택</a>
+                <a class="nav-item nav-link disabled-tab" id="nav-seats-tab" data-toggle="tab"
+                   href="#nav-seats"
                    role="tab" aria-controls="nav-seats" aria-selected="false">좌석 선택</a>
               </div>
             </nav>
@@ -43,9 +45,6 @@
                       <div class="col-md-2 text-left">
                         <p>기간</p>
                         <p>장소</p>
-                        <p>시간</p>
-                        <p>연령</p>
-                        <p>티켓</p>
                         <p>문의</p>
                       </div>
                       <div class="col-md-8 text-left">
@@ -57,9 +56,6 @@
                         <p v-else>{{ performData.startDate | yyyyMMdd }}
                           ({{ performData.dayOfStartDate }})</p>
                         <p>{{ performData.placeName }}</p>
-                        <p>{{ performData.playTime }}</p>
-                        <p>{{ performData.audienceAge }}</p>
-                        <p>{{ performData.ticketInfo }}</p>
                         <p>{{ performData.inquiryPhone }}</p>
                       </div>
                     </div>
@@ -72,15 +68,15 @@
               </div>
 
 
-
-
-
               <!-- Schedule table -->
               <div class="tab-pane fade" id="nav-schedule" role="tabpanel"
                    aria-labelledby="nav-schedule-tab">
                 <div class="table-responsive">
-                  <h3>프로그램 일정 및 잔여 좌석</h3>
-                  <hr>
+                  <h3 class="float-left">프로그램 일정 및 잔여 좌석</h3>
+                  <button class="btn btn-default float-right m-bottom-20"
+                          @click="backToProgramInfo">뒤로가기
+                  </button>
+                  <hr class="clear">
                   <table class="table table-striped table-bordered">
                     <tr>
                       <th scope="col" class="text-center col-md-3">날짜</th>
@@ -89,13 +85,16 @@
                       <th scope="col" class="text-center col-md-1">남은 좌석</th>
                     </tr>
                     <tbody>
-                    <tr v-for="(scheduleData, index) in scheduleList.dtoList" class="scheduleRow" :key="index"
-                        @click="getSeatsList(scheduleData.scheduleCode)" >
+                    <tr v-for="(scheduleData, index) in scheduleList.dtoList" class="scheduleRow"
+                        :key="index"
+                        @click="getSeatsList(scheduleData.scheduleCode)">
                       <input type="hidden" name="scheduleCode" value="scheduleData.scheduleCode">
-                      <td class="text-center">{{ scheduleData.scheduleDate| yyyyMMdd }} ({{scheduleData.dayOfWeek}})</td>
+                      <td class="text-center">{{ scheduleData.scheduleDate| yyyyMMdd }}
+                        ({{ scheduleData.dayOfWeek }})
+                      </td>
                       <td class="text-center">{{ index % 2 + 1 }} 회차</td>
                       <td class="text-center">{{ scheduleData.scheduleTime| hhMM }}</td>
-                      <td class="text-center">{{scheduleData.countSeats}}</td>
+                      <td class="text-center">{{ scheduleData.countSeats }}</td>
                     </tr>
                     </tbody>
                   </table>
@@ -129,25 +128,73 @@
               </div>
 
 
-
               <!-- Choose Seats -->
               <div class="tab-pane fade" id="nav-seats" role="tabpanel"
                    aria-labelledby="nav-seats-tab">
-                <h3>좌석 배치</h3>
-                <hr>
+                <h3 class="float-left">좌석 배치</h3>
+                <button class="btn btn-default float-right m-bottom-20" @click="backToSchedule">
+                  뒤로가기
+                </button>
+                <hr class="clear">
                 <div>
                   <div class="wrap">
+                    <div class="col-md-7 roomy-40">
+                      <ol class="seat" v-for="(seat,index) in seatsList" :key="seat.seatNo">
+                        <div v-if="seat.isBooked">
+                          <li class="alreadyReserved bg-black">{{ seat.rowNo | nToABC }} -
+                            {{ seat.colNo + 1 }}
+                          </li>
+                        </div>
+                        <div v-else-if="seat.colNo===0" style="clear: both">
+                          <li @click="chooseSeats(seat, $event)" v-model:value="seatNo">
+                            {{ seat.rowNo | nToABC }} - {{ seat.colNo + 1 }}
+                          </li>
+                        </div>
+                        <div v-else>
+                          <li @click="chooseSeats(seat, $event)" v-model:value="seatNo">
+                            {{ seat.rowNo | nToABC }} - {{ seat.colNo + 1 }}
+                          </li>
+                        </div>
+                      </ol>
+                    </div>
+                    <div class="col-md-4 m-top-80 m-bottom-80 table-bordered p-top-10 p-bottom-20">
+                      <div class="m_details_content m-bottom-20">
+                        <h3>{{ performData.title }}</h3>
 
-                    {{seatNo}}
-                    {{debug}}
-                    <ol class="seat" v-for="(seat, index) in seatsList" :key="index" >
-                      <div  v-if="seat.colNo===0" style="clear: both" >
-                        <li @click="chooseSeats(seat.seatNo, $event)" v-model="seatNo">{{seat.rowNo | nToABC}} - {{seat.colNo+1}}</li>
                       </div>
-                      <div v-else>
-                        <li @click="chooseSeats(seat.seatNo, $event)" v-model="seatNo">{{seat.rowNo | nToABC}} - {{seat.colNo+1}}</li>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-2 text-left col-md-offset-2">
+                          <p>일정</p>
+                          <p>장소</p>
+                          <p>시간</p>
+                          <p>좌석</p>
+                        </div>
+                        <div class="col-md-8 text-left">
+                          <p>{{ scheduleDate|yyyyMMdd }} ({{ dayOfWeek }})</p>
+                          <p>{{ performData.placeName }}</p>
+                          <p>{{ scheduleTime |hhMM }}</p>
+                          <p>{{ seatNo | listToText }}</p>
+                        </div>
                       </div>
-                    </ol>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-4 text-left col-md-offset-1">
+                          <h5>총 결제 금액 : </h5>
+                        </div>
+                        <div class="col-md-6 text-left">
+                          <h5 class="text-right">{{ totalPrice }} 원</h5>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-11 ">
+                          <button type="submit" class="float-right btn-primary m-top-40"
+                                  @click="reservation">예약 완료
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                 </div>
 
@@ -172,6 +219,10 @@ export default {
       seatNo: [],
       reserve: false,
       seatsList: [],
+      totalPrice: 0,
+      scheduleDate: [],
+      scheduleTime: [],
+      dayOfWeek: '',
       page: 1,
       resultList: [],
       performData: {},
@@ -185,12 +236,14 @@ export default {
         next: true,
         pageList: []
       },
-      debug: []
+      debug: [],
+
     }
   },
   created() {
     this.getDetails();
   },
+
   filters: {
     yyyyMMdd: function (value) {
       if (value === '') {
@@ -230,6 +283,22 @@ export default {
     nToABC: function (value) {
       return String.fromCharCode(value + 65);
     },
+    listToText: function (value) {
+      let array = [];
+      for (let ele of [...value]) {
+        array.push(ele);
+      }
+      let str = '';
+      let rowNum = '';
+      let colNum = '';
+      for (let i of array) {
+        let twoDigitNum = i % 100 - 1;
+        colNum = twoDigitNum % 10 + 1;
+        rowNum = (twoDigitNum - colNum) / 10 + 1;
+        str += String.fromCharCode(rowNum + 65) + '-' + colNum + '  ';
+      }
+      return str;
+    },
   },
   methods: {
     getDetails: function () {
@@ -244,7 +313,9 @@ export default {
       })
     },
     chooseSchedule: function () {
-      $('a[href="#nav-schedule"]').tab('show');
+      $('#nav-schedule-tab').tab('show');
+      $('#nav-program-tab').removeClass('active');
+      $('#nav-schedule-tab').addClass('active');
       axios({
         url: '/api/reservation/schedule',
         params: {
@@ -258,7 +329,9 @@ export default {
 
     },
     getSeatsList: function (value) {
-      $('a[href="#nav-seats"]').tab('show');
+      $('#nav-schedule-tab').removeClass('active');
+      $('#nav-seats-tab').addClass('active');
+      $('#nav-seats-tab').tab('show');
       axios({
         url: '/api/reservation/seats',
         params: {
@@ -267,15 +340,54 @@ export default {
         method: 'get',
       }).then(response => {
         this.seatsList = response.data
+        this.scheduleDate = response.data[0].scheduleDate;
+        this.scheduleTime = response.data[0].scheduleTime;
+        this.dayOfWeek = response.data[0].dayOfWeek;
       })
     },
     setPage: function (value) {
       this.page = value;
     },
-    chooseSeats: function (t,e) {
-      this.seatNo = !this.seatNo.includes(t) ? [...this.seatNo, t] : this.seatNo.filter(x => x!=t);
+    chooseSeats: function (t, e) {
+      this.seatNo = !this.seatNo.includes(t.seatNo) ? [...this.seatNo, t.seatNo]
+        : this.seatNo.filter(
+          x => x != t.seatNo);
+      this.totalPrice = this.seatNo.includes(t.seatNo) ? this.totalPrice + t.price : this.totalPrice
+        - t.price;
       e.target.classList.toggle('reserve');
     },
+    backToProgramInfo: function () {
+      $('#nav-schedule-tab').removeClass('active');
+      $('#nav-program-tab').addClass('active');
+      $('#nav-program-tab').tab('show');
+    },
+    backToSchedule: function () {
+      $('#nav-seats-tab').removeClass('active');
+      $('#nav-schedule-tab').addClass('active');
+      $('#nav-schedule-tab').tab('show');
+      this.seatNo = [];
+      this.seatsList = [];
+      this.priceList = [];
+    },
+    reservation: function () {
+      axios({
+        url: '/api/reservation/reservation',
+        headers: {
+          "Content-Type": 'application/json'
+        },
+        data: {
+          name: "sgh8774",
+          seatNos: [...Array.from(this.seatNo)]
+        },
+        dataType: 'json',
+        method: 'post'
+      }).then(
+        console.log(Array.from(this.seatNo)),
+        alert('예약에 성공하였습니다.'),
+        this.$router.replace({name: "main"})
+      )
+
+    }
 
   },
   watch: {
@@ -333,8 +445,7 @@ nav > div a.nav-item.nav-link.active:after {
   padding: 50px;
 }
 
-nav > div a.nav-item.nav-link:hover,
-nav > div a.nav-item.nav-link:focus {
+nav > div a.nav-item.nav-link.active {
   border: none;
   background: #ee997b;
   color: #fff;
@@ -347,9 +458,11 @@ nav > div a.nav-item.nav-link:focus {
   flex: 1 1 auto;
   text-align: center
 }
+
 .scheduleRow {
   cursor: pointer;
 }
+
 .scheduleRow:hover {
   border: none;
   background: #ee997b;
@@ -383,13 +496,20 @@ nav > div a.nav-item.nav-link:focus {
   color: black;
 }
 
+.disabled-tab {
+  pointer-events: none;
+  cursor: default;
+}
 
 .reserve {
   background-color: #ee997b;
 }
+
 .alreadyReserved {
-  background-color: g;
+  pointer-events: none;
+  background-color: black;
 }
+
 #pagination-margin {
   margin-top: 20px;
 }

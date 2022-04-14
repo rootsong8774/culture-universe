@@ -15,4 +15,7 @@ public class SeatsDTO implements Serializable {
     private Integer colNo;
     private Boolean isBooked;
     private Integer price;
+    private String dayOfWeek;
+    private LocalDate scheduleDate;
+    private LocalTime scheduleTime;
 }

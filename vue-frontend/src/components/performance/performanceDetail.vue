@@ -19,9 +19,9 @@
                   <div class="col-md-2 text-left col-md-offset-1">
                     <p>기간</p>
                     <p>장소</p>
-                    <p>시간</p>
-                    <p>연령</p>
-                    <p>티켓</p>
+<!--                    <p>시간</p>-->
+<!--                    <p>연령</p>-->
+<!--                    <p>티켓</p>-->
                     <p>문의</p>
                   </div>
                   <div class="col-md-8 text-left">
@@ -30,9 +30,9 @@
                       {{ performData.endDate | yyyyMMdd }} ({{ performData.dayOfEndDate }})</p>
                     <p v-else>{{ performData.startDate | yyyyMMdd }} ({{ performData.dayOfStartDate }})</p>
                     <p>{{ performData.placeName }}</p>
-                    <p>{{ performData.playTime }}</p>
-                    <p>{{ performData.audienceAge }}</p>
-                    <p>{{ performData.ticketInfo }}</p>
+<!--                    <p>{{ performData.playTime }}</p>-->
+<!--                    <p>{{ performData.audienceAge }}</p>-->
+<!--                    <p>{{ performData.ticketInfo }}</p>-->
                     <p>{{ performData.inquiryPhone }}</p>
                   </div>
                 </div>
@@ -156,25 +156,7 @@ nav > .nav.nav-tabs{
   border-radius:0;
 
 }
-nav > div a.nav-item.nav-link,
-nav > div a.nav-item.nav-link.active
-{
-  border: none;
-  padding: 18px 25px;
-  color:#fff;
-  background:#272e38;
-  border-radius:0;
-}
 
-nav > div a.nav-item.nav-link.active:after
-{
-  content: "";
-  position: relative;
-  bottom: -60px;
-  left: -10%;
-  border: 15px solid transparent;
-  border-top-color: #ee997b ;
-}
 .tab-content{
   background: #fdfdfd;
   line-height: 25px;

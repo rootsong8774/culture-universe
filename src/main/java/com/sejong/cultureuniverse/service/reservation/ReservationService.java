@@ -35,8 +35,8 @@ public class ReservationService {
     }
     //SeatsNo Array 로 입력값을 받아야 함.
     @Transactional
-    public Long reservation(Long userIdx, Long... seatsNos) {
-        Optional<Member> findMember = memberRepository.findById(userIdx);
+    public Long reservation(String name, Long... seatsNos) {
+        Optional<Member> findMember = memberRepository.findByName(name);
         if (findMember.isEmpty()) {
             return null;
         }
