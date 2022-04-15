@@ -2,63 +2,123 @@
   <div>
     <!--About Sections-->
     <section id="gallery" class="gallery margin-top-120 bg-white">
-      <div class="schedule_w item5">
-        <ul class="clearfix">
-          <li class="item s1" tabindex="0">
-            <div class="date_select">
-              <input type="date" name="sdate"> ~
-              <input type="date" name="edate">
-            </div>
-          </li>
-          <li class="item s2" tabindex="0">
-            <div class="dropdown">
-              <button class="dropbtn">
-                <span class="dropbtn_icon">장르</span>
-              </button>
-              <div class="dropdown-content">
-                <a href="#">기타공연</a>
-                <a href="#">오케스트라</a>
-                <a href="#">클래식</a>
-                <a href="#">뮤지컬</a>
-                <a href="#">국악</a>
-                <a href="#">오페라</a>
-                <a href="#">공연</a>
+      <div class="container">
+        <div class="schedule_w item5 row">
+          <ul class="clearfix ">
+            <li class="item s1" tabindex="0">
+              <div class="date_select">
+                <input type="date" name="startDate" v-model="dateRangeStart">-
+                <input type="date" name="endDate" v-model:value="dateRangeEnd">
               </div>
-            </div>
-          </li>
-          <li class="item s2" tabindex="0">
-            <div class="dropdown">
-              <button class="dropbtn">
-                <span class="dropbtn_icon">장소</span>
-              </button>
-              <div class="dropdown-content">
-                <a href="#">전체</a>
-                <a href="#">세종M씨어터</a>
-                <a href="#">세종S씨어터</a>
-                <a href="#">세종체임버홀</a>
-                <a href="#">야외공연</a>
-                <a href="#">삼청각</a>
-                <a href="#">꿈의숲 콘서트홀</a>
+            </li>
+            <li class="item s2" tabindex="0">
+              <div class="dropdown">
+                <button class="dropbtn">
+                  <span class="dropbtn_icon">장르</span>
+                </button>
+                <div class="dropdown-content genreFilter">
+                  <table border="solid 2px black">
+                    <tr>
+                      <td><label><input type="checkbox" class="filter" name="genre" value="연극"  v-model="genreList">
+                        연극</label>
+                      </td>
+                      <td>
+                        <label><input type="checkbox" class="filter" name="genre"
+                                      value="뮤지컬"  v-model="genreList"> 뮤지컬</label>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><label><input type="checkbox" class="filter" name="genre" value="합창" v-model="genreList">
+                        합창</label></td>
+                      <td><label><input type="checkbox" class="filter" name="genre" value="성악" v-model="genreList">
+                        성악</label></td>
+                    </tr>
+                    <tr>
+                      <td><label><input type="checkbox" class="filter" name="genre" value="무용" v-model="genreList">
+                        무용</label></td>
+                      <td><label><input type="checkbox" class="filter" name="genre"
+                                        value="대중음악" v-model="genreList"> 대중음악</label></td>
+                    </tr>
+                    <tr>
+                      <td><label><input type="checkbox" class="filter" name="genre"
+                                        value="오페라" v-model="genreList"> 오페라</label></td>
+                      <td><label><input type="checkbox" class="filter" name="genre" value="기악">
+                        기악</label></td>
+                    </tr>
+                    <tr>
+                      <td><label><input type="checkbox" class="filter" name="genre" value="국악" v-model="genreList">
+                        국악</label></td>
+                      <td><label><input type="checkbox" class="filter" name="genre"
+                                        value="공연기타" v-model="genreList"> 기타공연</label></td>
+                    </tr>
+                  </table>
+
+
+                  <!--                <a href="#">오케스트라</a>-->
+                  <!--                <a href="#">클래식</a>-->
+                  <!--                <a href="#">뮤지컬</a>-->
+                  <!--                <a href="#">국악</a>-->
+                  <!--                <a href="#">오페라</a>-->
+                  <!--                <a href="#">공연</a>-->
+                </div>
               </div>
-            </div>
-          </li>
-          <li class="item s3" tabindex="0">
-            <div class="searchArea">
-              <form action="">
-                <input type="search" placeholder="검색"><span>?</span>
-              </form>
-            </div>
-          </li>
-        </ul>
+            </li>
+            <li class="item s2" tabindex="0">
+              <div class="dropdown">
+                <button class="dropbtn">
+                  <span class="dropbtn_icon">장소</span>
+                </button>
+                <div class="dropdown-content placeFilter">
+
+                  <table border="solid 2px black">
+                    <tr>
+                      <td><label><input type="checkbox" class="filter" name="place" value="세종대극장" v-model="placeList">
+                        세종대극장</label>
+                      </td>
+                      <td>
+                        <label><input type="checkbox" class="filter" name="place"
+                                      value="세종M씨어터" v-model="placeList"> 세종M씨어터</label>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><label><input type="checkbox" class="filter" name="place" value="세종S씨어터" v-model="placeList">
+                        세종S씨어터</label></td>
+                      <td><label><input type="checkbox" class="filter" name="place" value="세종체임버홀" v-model="placeList">
+                        세종체임버홀</label></td>
+                    </tr>
+                    <tr>
+                      <td><label><input type="checkbox" class="filter" name="place" value="세종예술아카데미" v-model="placeList">
+                        세종예술아카데미</label></td>
+                      <td><label><input type="checkbox" class="filter" name="place"
+                                        value="꿈의숲 드림갤러리" v-model="placeList"> 꿈의숲 드림갤러리</label></td>
+                    </tr>
+                    <tr>
+                      <td><label><input type="checkbox" class="filter" name="place"
+                                        value="꿈의숲 콘서트홀" v-model="placeList"> 꿈의숲 콘서트홀</label></td>
+                      <td><label><input type="checkbox" class="filter" name="place" value="꿈의숲 상상톡톡미술관" v-model="placeList">
+                        꿈의숲 상상톡톡미술관</label></td>
+                    </tr>
+
+                  </table>
+                </div>
+              </div>
+            </li>
+            <li class="item s3" tabindex="0">
+              <div class="searchArea">
+                  <input type="search" placeholder="검색" name="title" v-model="title" @change="getList">
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div class="container">
         <div class="row">
           <div class="main-gallery main-model roomy-80">
             <div style="clear: both;"></div>
-            <div class="grid models text-center">
+            <div class="grid models text-center" >
               <div class="grid-item model-item transition metal ium"
-                   v-for="(result,index) in resultList" :key="index">
+                   v-for="(result,index) in resultList" :key="index" >
                 <img :src="result.fileUrlMi" :alt="result.title">
                 <input type="hidden" name="performCode" v-model:value="result.performCode">
                 <strong class="result-title">{{ result.title }}</strong>
@@ -77,7 +137,9 @@
                   class="btn btn-default m-top-20">
                   View Details <i class="fa fa-long-arrow-right"></i>
                 </router-link>
-              </div><!-- End off grid item -->
+              </div>
+
+              <!-- End off grid item -->
 
             </div>
             <div class="grid models text-center" id="pagination-margin">
@@ -116,11 +178,21 @@
 
 <script>
 import axios from "axios";
+import qs from "qs";
+axios.defaults.paramsSerializer = (params) => {
+  return qs.stringify(params, { arrayFormat: 'repeat' })
+}
+
 export default {
   name: "PerformanceList",
   data() {
     return {
       page: 1,
+      dateRangeStart: '',
+      dateRangeEnd: '',
+      genreList: [],
+      placeList: [],
+      title: '',
       resultList: [],
       pageData: {
         dtoList: [],
@@ -163,6 +235,12 @@ export default {
         url: '/api/performancesList',
         params: {
           page: this.page,
+          dateRangeStart: this.dateRangeStart,
+          dateRangeEnd: this.dateRangeEnd,
+          genreList: this.genreList,
+          placeList: this.placeList,
+          title: this.title,
+
         },
         method: 'get',
       }).then(response => {
@@ -170,6 +248,7 @@ export default {
         this.resultList = jsonData.dtoList;
         this.pageData = jsonData;
         console.log(jsonData);
+        console.log(Array.from(this.resultList));
       })
     },
     setPage: function (value) {
@@ -200,38 +279,51 @@ export default {
   overflow: hidden;
   text-align: left;
 }
+
 .result-date {
   float: left;
 }
+
 .result-genre {
   float: right;
 }
+
 .content_page > a {
   padding: 5px;
 }
+
 .clearfix {
   padding: 30px;
 }
+
 .schedule_w .item {
-  padding: 0 10px 0 10px;
+  /*padding: 0 10px 0 10px;*/
   position: relative;
 }
+
 .schedule_w .item {
   float: left;
   width: 25%;
   position: relative;
 }
+
 .date_select {
+  width: 220px;
+  height: 40px;
+
   justify-content: center;
   display: flex;
 }
+
 .dropdown {
   position: relative;
   display: inline-block;
 }
+
 .dropbtn_icon {
   font-family: 'Material Icons';
 }
+
 .dropbtn {
   border: 1px solid rgb(37, 37, 37);
   border-radius: 4px;
@@ -239,32 +331,59 @@ export default {
   font-weight: 400;
   color: rgb(37, 37, 37);
   padding: 12px;
-  width: 200px;
+  width: 220px;
+  height: 40px;
   text-align: left;
   cursor: pointer;
   font-size: 12px;
 }
-.dropdown-content {
+
+.dropdown-content{
   display: none;
   position: absolute;
-  z-index: 1;
   font-weight: 400;
-  background-color: #f9f9f9;
+  color: black;
+  background-color: white;
   min-width: 200px;
+  padding: 10px;
+  border: solid 1px black;
 }
-.dropdown-content a {
-  display: block;
+.genreFilter {
+
+  width: 220px;
+  z-index: 1;
+
+}
+.placeFilter {
+  left: -25%;
+  width: 350px;
+  z-index: 1;
+}
+
+.dropdown-content table {
+  margin: auto;
+}
+
+.dropdown-content td {
+  padding: 0 5px;
+}
+
+.dropdown-content label {
+  margin-top: 5px;
+}
+
+.dropdown-content .filter {
   text-decoration: none;
   color: rgb(37, 37, 37);
   font-size: 12px;
   padding: 12px 20px;
 }
-.dropdown-content a:hover {
-  background-color: #ececec
-}
+
+
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
 /*dropdown -end*/
 .searchArea {
   display: flex;
@@ -274,7 +393,8 @@ export default {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
-.searchArea > form > input {
+
+.searchArea > input {
   border: 0;
   outline: none;
   background-color: rgba(0, 0, 0, 0.2);
@@ -284,10 +404,12 @@ export default {
   padding-left: 10px;
   border-radius: 5px;
 }
+
 .searchArea > form > input:focus {
   outline: 2px solid black;
   border-radius: 5px;
 }
+
 .searchArea > form > span {
   width: 20px;
   color: rgba(0, 0, 0, 0);
@@ -296,15 +418,18 @@ export default {
   font-weight: bold;
   cursor: pointer;
 }
+
 .nav1 > li {
   padding: 10px;
   justify-items: center;
   margin-left: 50px;
   font-weight: bold;
 }
+
 .nav1 > li > a {
   color: #fff;
 }
+
 #pagination-margin {
   margin-top: 40px;
 }
