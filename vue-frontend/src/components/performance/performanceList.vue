@@ -119,7 +119,7 @@
             <div class="grid models text-center" >
               <div class="grid-item model-item transition metal ium"
                    v-for="(result,index) in resultList" :key="index" >
-                <img :src="result.fileUrlMi" :alt="result.title">
+                <img :src="result.fileUrlMi" loading="lazy" :alt="result.title">
                 <input type="hidden" name="performCode" v-model:value="result.performCode">
                 <strong class="result-title">{{ result.title }}</strong>
 

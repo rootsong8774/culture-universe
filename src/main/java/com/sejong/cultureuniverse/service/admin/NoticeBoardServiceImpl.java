@@ -5,7 +5,7 @@ import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
-import com.sejong.cultureuniverse.repository.NoticeBoardRepository;
+import com.sejong.cultureuniverse.repository.admin.NoticeBoardRepository;
 
 import java.time.LocalDateTime;
 import java.util.function.Function;

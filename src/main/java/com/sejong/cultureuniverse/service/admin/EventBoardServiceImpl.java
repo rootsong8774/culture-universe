@@ -6,7 +6,7 @@ import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
-import com.sejong.cultureuniverse.repository.EventBoardRepository;
+import com.sejong.cultureuniverse.repository.event.EventBoardRepository;
 import java.time.LocalDateTime;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;

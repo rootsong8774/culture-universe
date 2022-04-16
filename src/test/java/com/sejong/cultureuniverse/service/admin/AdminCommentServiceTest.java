@@ -5,10 +5,10 @@ import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.AdminComment;
 import com.sejong.cultureuniverse.entity.admin.Qna;
-import com.sejong.cultureuniverse.repository.AdminCommentRepository;
-import com.sejong.cultureuniverse.repository.AdminRepository;
+import com.sejong.cultureuniverse.repository.admin.AdminCommentRepository;
+import com.sejong.cultureuniverse.repository.admin.AdminRepository;
 import com.sejong.cultureuniverse.repository.MemberRepository;
-import com.sejong.cultureuniverse.repository.QnaBoardRepository;
+import com.sejong.cultureuniverse.repository.admin.QnaBoardRepository;
 import com.sejong.cultureuniverse.service.AdminCommentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,6 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.LongStream;
@@ -59,13 +58,7 @@ public class AdminCommentServiceTest {
     }
 
     //questionIdx 조회시 나오는 AdminCommentDTO
-    @Test
-    @Transactional
-    public void getListComment() {
-        Long questionIdx = 21L;
-        List<AdminCommentDTO> result = adminCommentService.getList(questionIdx);
-       result.forEach(System.out::println);
-    }
+   
 
 //    @Test
 //    public void getMemberUserIdx() {

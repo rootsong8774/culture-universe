@@ -4,16 +4,12 @@ import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.AdminComment;
 import com.sejong.cultureuniverse.entity.admin.Qna;
-import com.sejong.cultureuniverse.repository.AdminCommentRepository;
-import com.sejong.cultureuniverse.repository.AdminRepository;
 import com.sejong.cultureuniverse.repository.MemberRepository;
-import com.sejong.cultureuniverse.repository.QnaBoardRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 
-import javax.transaction.TransactionScoped;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -64,10 +60,5 @@ public class AdminCommentRepositoryTest {
 
 //questionIdx에 따른 AdminComment
 // AdminComment(commentIdx=20, commentContent=문의답변20, regDate=2022-04-11T20:40:30.224110, modDate=2022-04-11T20:40:30.224110)
-    @Test
-    public void testUserIdx(){
-        List<AdminComment> userIdxList = adminCommentRepository.getCommentOrderByQuestionIdx(21L);
-        userIdxList.forEach(System.out::println);
-    }
 
 }

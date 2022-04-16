@@ -1,17 +1,12 @@
 package com.sejong.cultureuniverse.service;
 
-import com.sejong.cultureuniverse.dto.AdminCommentDTO;
 import com.sejong.cultureuniverse.dto.QnaBoardDTO;
-import com.sejong.cultureuniverse.dto.admin.WinnerBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.Member;
-import com.sejong.cultureuniverse.entity.admin.AdminComment;
 import com.sejong.cultureuniverse.entity.admin.Qna;
-import com.sejong.cultureuniverse.repository.AdminRepository;
-import com.sejong.cultureuniverse.repository.QnaBoardRepository;
+import com.sejong.cultureuniverse.repository.admin.QnaBoardRepository;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;

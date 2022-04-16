@@ -54,7 +54,8 @@
                     <tr th:each="comment: ${commentlist}" class="rows" id="removeDetail">
                         <form th:action="@{/admin/commentdelete/{type}(type=${comment.commentIdx})}"
                               th:name="commentIdx" th:method="post">
-                            <td ><p th:text="${comment.admin.adminId}"></p></td>
+                            <input type="hidden" th:name="questionIdx" th:value="${comment.questionIdx}">
+                            <td ><p th:text="${comment.adminId}"></p></td>
                             <td ><p th:text="${comment.commentContent}"></p></td>
                             <td ><p th:text="${#temporals.format(comment.regDate, 'yyyy/MM/dd')}"></p></td>
                             <td >
@@ -65,7 +66,9 @@
                     <!--                        관리자 답글 작성 위치 -->
                     <tr style="display: none" id="detailComment">
                         <form th:action="@{/admin/qnaregister/{type}(type=${qnadto.questionIdx}) }" th:method="post">
-                            <input type="hidden" th:name="page" th:value="${page}">
+<!--                            <input type="hidden" th:name="page" th:value="${page}">-->
+                            <input type="hidden" th:name="questionIdx" th:value="${qnadto.questionIdx}">
+                            <input type="hidden" th:name="userIdx" th:value="${qnadto.userIdx}">
                             <td><input th:name="adminId" placeholder="관리자id"/></td>
                             <td><textarea th:name="commentContent" th:width="500px" placeholder="답변작성란"
                                           id="textarea"></textarea></td>

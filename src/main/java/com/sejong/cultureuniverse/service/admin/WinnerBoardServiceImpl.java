@@ -5,7 +5,7 @@ import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.dto.admin.WinnerBoardDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventWinner;
-import com.sejong.cultureuniverse.repository.WinnerBoardRepository;
+import com.sejong.cultureuniverse.repository.event.WinnerBoardRepository;
 import java.time.LocalDateTime;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;

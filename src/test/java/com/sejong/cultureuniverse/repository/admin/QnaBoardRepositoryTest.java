@@ -1,7 +1,6 @@
 package com.sejong.cultureuniverse.repository.admin;
 import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Qna;
-import com.sejong.cultureuniverse.repository.QnaBoardRepository;
 import com.sejong.cultureuniverse.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.processing.SupportedOptions;
 import java.util.Arrays;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -85,12 +83,6 @@ public class QnaBoardRepositoryTest {
 // AdminComment(commentIdx=20, commentContent=문의답변20, regDate=2022-04-11T20:40:30.224110,
 // modDate=2022-04-11T20:40:30.224110)]
 //member+qna+admincommentList
-    @Test
-    public void testFindAll(){
-        Object allByQuestionIdx = qnaBoardRepository.findAllByQuestionIdx(20L);
-        Object[] arr = (Object[]) allByQuestionIdx;
-        System.out.println(Arrays.toString(arr));
-    }
 
 //5번 메인 화면 노출 용
     //10번에 대한 질문 + 어드민 번호 +  댓글 갯수

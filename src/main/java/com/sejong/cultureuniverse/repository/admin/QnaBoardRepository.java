@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.repository;
+package com.sejong.cultureuniverse.repository.admin;
 
 import com.sejong.cultureuniverse.dto.QnaBoardDTO;
 import com.sejong.cultureuniverse.dto.admin.WinnerBoardDTO;

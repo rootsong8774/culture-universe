@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.repository;
+package com.sejong.cultureuniverse.repository.event;
 
 
 import com.sejong.cultureuniverse.dto.admin.EventBoardDTO;
