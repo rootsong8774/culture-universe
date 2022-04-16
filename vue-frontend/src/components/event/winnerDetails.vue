@@ -10,16 +10,18 @@
             <col width="*" />
           </colgroup>
           <tr>
-            <th>제목</th><td>{{winnerData.winTitle}}</td>
-            <td>{{winnerData.modDate | yyyyMMdd}}</td>
+            <th>제목</th>
+            <td>{{winnerData.winTitle}}</td>
+            <th style="text-align: right; padding-right: 5px">최종 수정일</th>
+            <td style="text-align: right; padding-right: 5px">{{winnerData.modDate | yyyyMMdd}}</td>
           </tr>
           <tr>
-            <th>내용</th><td>{{winnerData.winContent}}</td>
-            <td class="txt_cont" v-html="cont"></td>
+            <th>내용</th>
+            <td colspan="3" style="height: 250px">{{winnerData.winContent}}</td>
           </tr>
           <tr>
-            <th>작성자</th><td>{{winnerData.adminId}}</td>
-            <td></td>
+            <th>작성자</th>
+            <td colspan="3">{{winnerData.adminId}}</td>
           </tr>
         </table>
       </form>
@@ -90,6 +92,13 @@ export default {
 }
 </script>
 <style scoped>
+h2{
+  font-size: 30px;
+  padding: 10px;
+}
+*{
+  font-size: 20px;
+}
 .winnerBoardStyle {
   padding: 50px;
   text-align: center;

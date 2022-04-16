@@ -1,96 +1,145 @@
 <template>
-  <div>
-    <div class="container-fluid py-5">
-      <div class="container py-5">
-        <div class="row justify-content-center">
-          <div class="col-lg-6 col-md-8 col text-center mb-4">
-            <h1 class="mb-4">세종문화회관 오시는 길 </h1>
-
-            <div class="tabmenu">
-              <ul>
-                <li id="tab1" class="btnCon"><input type="radio" checked name="tabmenu"
-                                                    id="tabmenu1">
-                  <label for="tabmenu1">자동차</label>
-                  <div class="tabCon"><img id="car"> 자동차 안내 이미지</div>
-                  <br><br><br><br><br>
-                </li>
-                <li id="tab2" class="btnCon"><input type="radio" name="tabmenu" id="tabmenu2">
-                  <label for="tabmenu2">대중교통</label>
-                  <div class="tabCon"><img id="transport"> 대중교통 안내 이미지</div>
-                </li>
-                <li id="tab3" class="btnCon"><input type="radio" name="tabmenu" id="tabmenu3">
-                  <label for="tabmenu3">도보</label>
-                  <div class="tabCon"><img id="walk"> 도보 안내 이미지</div>
-                </li>
-              </ul>
-            </div>
-          </div>
+  <div class="">
+    <div class="container">
+      <div class="container-fluid py-5">
+        <div class="sub-t">
+          <h2 class="t" style="font-size: 2.5rem; margin-block-start: 0.83em; margin-block-end: 0.83em;margin-inline-start: 0.83em;
+            margin-inline-end: 0.83em; font-weight: bold;text-align: center; line-height: 1.15; letter-spacing: -0.03em;">
+            오시는 길</h2>
         </div>
       </div>
+      <div class="content-round">
+        <ul class="tabMenu">
+          <li class="tabItem" v-for="(tab, index) in tabList" :key="index"
+              :class="{active:currentTab === index}">
+            <div class="tabContent">
+              <a href="#" @click.prevent="currentTab = index">{{ tab }}</a>
+            </div>
+          </li>
+        </ul>
+        <br>
+        <br>
+        <div>
+          <div v-show="currentTab == 0" class="tab-cont">
+            <br>
+            <img src="src/assets/images/p1.jpg" alt=""><br><br>
+          </div>
+          <div v-show="currentTab == 1" class="tab-cont">
+            <br>
+            <img src="src/assets/images/p2.jpg" alt=""><br><br>
+          </div>
+          <div v-show="currentTab == 2" class="tab-cont">
+            <img src="src/assets/images/p3.jpg" alt="지하철" ><br>
+          </div>
+        </div>
+        <br>
+      </div>
     </div>
+
   </div>
 </template>
 
+
 <script>
 export default {
-  name: "SjDirections",
+  name: "SjFacilty",
+  data() {
+    return {
+      currentTab: 0,
+      tabList: ['주차장가는길', '주차장에서 공연장 가는길', '대중교통 이용시']
+    }
+  }
 }
 </script>
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  font-size: 15px;
-  line-height: 1.3;
+<style scoped>
+button {
+  color: white;
 }
 
-ul {
+img {
+  width: 70%;
+  height: 70%;
+}
+
+body {
+  font: bold 11px/1.5em Verdana;
+}
+
+.content-round {
+  max-width: 1800px;
+  text-align: center;
+}
+
+h1 {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #cccccc;
+  height: 1px;
+  margin-bottom: 25px;
+}
+
+.tab-cont {
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
   list-style: none;
 }
 
-.tabmenu {
-  max-width: 600px;
-  margin: 0 auto;
+.tabMenu {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  list-style: none;
+  border-bottom: 1px solid #ffa594;
+}
+
+.tabItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  flex-basis: 20%;
+  flex-shrink: 0;
+  border-left: 1px solid #ffa594;
+  border-right: 1px solid #ffa594;
+  border-top: 1px solid #ffa594;
+  border-radius: 10px 10px 0 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.tabItem.active {
+  background-color: #ffa594;
+}
+
+.tabContent {
   position: relative;
 }
 
-.tabmenu ul li {
-  display: inline-block;
-  width: 33.33%;
-  float: left;
-  text-align: center;
-  background: #f9f9f9;
-  line-height: 40px;
+.tabContent > a {
+  color: #ce8483;
 }
 
-.tabmenu label {
-  display: block;
-  width: 100%;
-  height: 40px;
-  line-height: 40px;
+.tabMenu {
+  display: flex;
+  justify-content:left;
+  list-style: none;
+  border-bottom: 1px solid #ffa594;
 }
 
-.tabmenu input {
-  display: none;
-}
-
-.tabCon {
-  display: none;
-  text-align: left;
-  padding: 20px;
-  position: absolute;
-  left: 0;
-  top: 40px;
-  box-sizing: border-box;
-  border: 5px solid #f9f9f9;
-}
-
-.tabmenu input:checked ~ label {
-  background: #ccc;
-}
-
-.tabmenu input:checked ~ .tabCon {
-  display: block;
-}
 </style>

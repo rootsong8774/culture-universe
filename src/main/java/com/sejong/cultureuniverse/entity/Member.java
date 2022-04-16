@@ -27,4 +27,5 @@ public class Member {
     private String phoneNum;
     private Date signDate;
 
+
 }

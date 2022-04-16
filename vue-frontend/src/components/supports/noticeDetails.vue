@@ -13,7 +13,7 @@
             <th>제목</th>
             <td>{{noticeData.noticeTitle}}</td>
             <th style="text-align: right; padding-right: 5px">최종 수정일</th>
-            <td>{{noticeData.modDate | yyyyMMdd}}</td>
+            <td style="text-align: right; padding-right: 5px">{{noticeData.modDate | yyyyMMdd}}</td>
           </tr>
           <tr>
             <th>내용</th>
@@ -21,8 +21,7 @@
           </tr>
           <tr>
             <th style="width: 100px">작성자</th>
-            <td colspan="2">{{noticeData.adminId}}</td>
-            <td></td>
+            <td colspan="3">{{noticeData.adminId}}</td>
           </tr>
         </table>
       </form>
@@ -30,16 +29,13 @@
   <br>
     <div class="prev_next">
       <dl class="prev">
-        <dt><span>이전글</span></dt>
-        <dd>
-        </dd>
+        <dt><a @click="setList" style="cursor: pointer">이전글</a></dt>
       </dl>
       <dl class="next">
         <dt><span>다음글</span></dt>
-        <dd>
-        </dd>
       </dl>
     </div>
+
     <div class="btn-list_w">
       <button class="btn-list" @click="reservation"><span>목록</span></button>
     </div>
@@ -52,6 +48,7 @@ export default {
   name: "noticeDetails",
   data() {
     return {
+
       noticeData: {}
     }
   }
@@ -100,10 +97,20 @@ export default {
     reservation: function () {
       this.$router.push({name: 'notice'})
     },
+    setList:function (value){
+      this.list = value-1;
+    }
   },
 }
 </script>
 <style scoped>
+h2{
+  font-size: 30px;
+  padding: 10px;
+}
+*{
+  font-size: 20px;
+}
 .noticeBoardSt {
   padding: 50px;
   text-align: center;
