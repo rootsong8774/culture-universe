@@ -1,5 +1,6 @@
 package com.sejong.cultureuniverse.dto;
 
+import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.Qna;
 import lombok.*;
@@ -15,10 +16,9 @@ public class AdminCommentDTO implements Serializable {
     private Long commentIdx;
     private String commentContent;
     private LocalDateTime regDate, modDate;
-    private Admin admin; //기준으로 삭제돼야함
-    private Qna qna;
-    private Long userIdx;
+    private Qna qna; // member 게시글 전부 필요
+    private Admin admin; //adminId 필요
+    private Member member; //userIdx 필요
 
- //데이터 다 갖고 오기 위해서 한개만 선언하는것이 아닌 전체로 선언해야함.
 }
 

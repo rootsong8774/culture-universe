@@ -9,14 +9,14 @@ import com.sejong.cultureuniverse.entity.admin.Qna;
 import java.util.List;
 
 public interface QnaBoardService {
+    //고객 1:1 문의 등록
     Long register(QnaBoardDTO qnaBoardDTO);
-
+    //list 페이지 만들기
     PageResultDTO<QnaBoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
-
+    //db에서 꺼내오기
     QnaBoardDTO get(Long questionIdx);
-
+    //번호로 읽어오기
     QnaBoardDTO read(Long questionIdx);
-    QnaBoardDTO findByComment(String comment);
 
 
     default Qna dtoToEntity(QnaBoardDTO qnaBoardDTO) {

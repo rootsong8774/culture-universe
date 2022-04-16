@@ -3,10 +3,9 @@ package com.sejong.cultureuniverse.controller;
 
 import com.sejong.cultureuniverse.dto.AdminCommentDTO;
 import com.sejong.cultureuniverse.dto.QnaBoardDTO;
+import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
-import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Admin;
-import com.sejong.cultureuniverse.entity.admin.AdminComment;
 import com.sejong.cultureuniverse.entity.admin.Qna;
 import com.sejong.cultureuniverse.repository.AdminRepository;
 import com.sejong.cultureuniverse.repository.QnaBoardRepository;
@@ -43,7 +42,7 @@ public class QnaBoardController {
     public void read(long questionIdx, Model model, AdminCommentDTO adminCommentDTO,
                      PageRequestDTO pageRequestDTO) {
         QnaBoardDTO qnaBoardDTO = qnaBoardService.get(questionIdx);
-        List<AdminComment> list = adminCommentService.getList(questionIdx);
+        List<AdminCommentDTO> list = adminCommentService.getList(questionIdx);
         model.addAttribute("qnadto", qnaBoardDTO);
         model.addAttribute("commentlist", list);
 
@@ -53,20 +52,27 @@ public class QnaBoardController {
 
     @PostMapping("/qnaregister/{questionIdx}")
     public String commentRegister(@PathVariable("questionIdx") Long questionIdx,
-                                  AdminCommentDTO adminCommentDTO, Model model, String adminId,
+                                  AdminCommentDTO adminCommentDTO, String adminId,
                                   RedirectAttributes redirectAttributes) {
-        Optional<Admin> admin = adminRepository.findByAdminId(adminId);
+        log.info("=================="+adminId);
+        log.info("=================="+questionIdx);
+
+        List<Admin> admin = adminRepository.findByAdminId(adminId);
         Optional<Qna> qna = qnaBoardRepository.findById(questionIdx);
-        if (admin.isPresent() && qna.isPresent()) {
-            adminCommentDTO.setAdmin(admin.get());
+        if (admin.size() > 0 && qna.isPresent()) {
+            log.info("=================="+admin);
+            log.info("=================="+qna);
+            adminCommentDTO.setAdmin(admin.get(0));
             adminCommentDTO.setQna(qna.get());
         } else {
+            log.info("****************************************************");
             return "redirect:/admin/qnaread";
         }
         System.out.println(adminCommentDTO);
         adminCommentService.register(adminCommentDTO);
         redirectAttributes.addAttribute(
             "questionIdx", adminCommentDTO.getQna().getQuestionIdx());
+        log.info("*********");
         return "redirect:/admin/qnaread";
     }
 
@@ -77,3 +83,5 @@ public class QnaBoardController {
     }
 
 }
+
+

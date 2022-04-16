@@ -9,19 +9,20 @@
             <thead>
             <tr>
                 <th scope="col">번호</th>
+                <th scope="col">답변처리</th>
                 <th scope="col">문의유형</th>
                 <th scope="col">문의제목</th>
                 <th scope="col">내용</th>
                 <th scope="col">등록일자</th>
+
             </tr>
             </thead>
             <tbody>
             <tr th:each="dto : ${result.dtoList}" >
                 <th scope="row"><a th:href="@{/admin/qnaread(questionIdx=${dto.questionIdx},
-                    page= ${result.page},
-                    type=${pageRequestDTO.type} ,
-                    keyword = ${pageRequestDTO.keyword})}">  [[${dto.questionIdx}]]</a>
-                  </th>
+                    page= ${result.page})}">  [[${dto.questionIdx}]]</a>
+                </th>
+                <td>---[[${dto.commentCount}]]</td>
                 <td>[[${dto.type}]]</td>
                 <td>[[${dto.title}]]</td>
                 <td>[[${dto.content}]]</td>
