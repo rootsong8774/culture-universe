@@ -48,11 +48,6 @@ public class AdminCommentServiceImpl implements AdminCommentService {
             return  save.getCommentIdx();
         }
         return null;
-    
-        
-    
-       
-    
     }
 
     @Override

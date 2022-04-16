@@ -105,7 +105,7 @@ export default {
   methods: {
     getList: function () {
       axios({
-        url: '/api/qnaList',
+        url: '/api/qna/list',
         params: {
           page: this.page
         },
