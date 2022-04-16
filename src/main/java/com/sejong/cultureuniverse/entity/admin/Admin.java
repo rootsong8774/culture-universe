@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,8 +29,14 @@ public class Admin  {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "admin_seq")
     private Long adminIdx;
-
+    
+    
+    @NotBlank
+    @Size(min = 4, max = 16)
     private String adminId;
+    
+    @NotBlank
+    @Size(min=8, max = 16)
     private String adminPw;
 
     public Admin(String adminId, String adminPw) {
