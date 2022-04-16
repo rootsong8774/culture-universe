@@ -15,6 +15,7 @@ public class NoticeBoardAndAdminDTO {
 
     private String adminId;
     private String adminPw;
+
     private String noticeTitle;
     private String noticeContent;
     private Long readCount;

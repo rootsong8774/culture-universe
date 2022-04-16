@@ -7,9 +7,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 import lombok.ToString.Exclude;
+import lombok.experimental.SuperBuilder;
 
 @Entity
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -20,14 +21,12 @@ public class EventComment extends BaseEntity {
     private Long commentIdx;
     private String eventComment;
 
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
     @JoinColumn(name = "user_idx")
     @Exclude
     private Member member;
 
-
-
-    @ManyToOne(fetch = FetchType.LAZY )
+    @ManyToOne(fetch = FetchType.LAZY ,cascade = CascadeType.REMOVE)
     @JoinColumn(name ="event_idx")
     @Exclude
     private EventBoard eventBoard;

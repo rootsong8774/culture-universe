@@ -1,63 +1,90 @@
 <template>
   <div>
-    <div id="table">
-      <div id="centerColumn">
-        <br>
-        <h2>공지사항</h2>
+    <div>
+      <div class="container">
+        <div class="sub-t">
+          <h2 class="t" style="font-size: 2.5rem; margin-block-start: 0.83em; margin-block-end: 0.83em;margin-inline-start: 0.83em;
+            margin-inline-end: 0.83em; font-weight: bold;text-align: center; line-height: 1.15; letter-spacing: -0.03em;">공지사항</h2>
+        </div>
         <div>
-
-          <form class="noticeTitle">
-
+          <form>
+            <ul style="text-align: center">
+              <li>
                 <select name="language">
                   <option value="none">=== 전체 ===</option>
-                  <option value="idxNum">번호</option>
+                  <option value="Num">번호</option>
                   <option value="title">제목</option>
-                  <option value="nregDate">등록일자</option>
+                  <option value="wregDate">등록일자</option>
                   <option value="noAndTitle">번호+제목</option>
                 </select>
-
-                <div class="searchArea">
-                  <input type="search"> <span class="fa-search"></span>
+              </li>
+              <li>
+                <div class="search">
+                  <input type="text" placeholder="검색어 입력">
                 </div>
+              </li>
+            </ul>
           </form>
+
+          <br>
+          <table class=table6_2>
+            <tr>
+              <th style="width: 10%">번호</th>
+              <th style="width: 18%">제목</th>
+              <th style="width: 32%">공지내용</th>
+              <th style="width: 30%">등록일(최종수정일)</th>
+              <th>조회수</th>
+            </tr>
+          </table>
+          <table class="table table-hover">
+            <tbody>
+            <tr class="result-date" v-for="(result,index) in resultList" :key="index">
+              <td>
+                <router-link
+                  :to="{name: 'noticeDetails',query:{noticeIdx: result.noticeIdx}}">
+                  {{ result.noticeIdx }}
+                </router-link>
+              </td>
+              <td>
+                <router-link
+                  :to="{name:'noticeDetails', query:{noticeIdx: result.noticeIdx}}">
+                  {{ result.noticeTitle }}
+                </router-link>
+              </td>
+              <td>
+                <router-link
+                  :to="{name:'noticeDetails', query:{noticeIdx: result.noticeIdx}}">
+                  {{ result.noticeContent }}
+                </router-link>
+              </td>
+              <td>{{ result.regDate  | yyyyMMdd }}</td>
+              <td>{{ result.readCount }}</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
-        <table border="1">
-          <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>등록일(최종수정일)</th>
-            <th>조회수</th>
-          </tr>
-          <tr v-for="(result,index) in resultList" :key="index">
-            <td><router-link :to = "{name:'noticeDetails', query:{noticeIdx: result.noticeIdx}}">{{ result.noticeIdx }}</router-link></td>
-            <td><router-link :to = "{name:'noticeDetails', query:{noticeIdx: result.noticeIdx}}">{{ result.noticeTitle }}</router-link></td>
-            <td>{{ result.modDate | yyyyMMdd }}</td>
-            <td>{{ result.readCount }}</td>
-          </tr>
-        </table>
       </div>
-      <div class="pagination-part text-center">
-        <ul class="pagination h-100 justify-content-center align-items-center">
-
-          <li class="page-item " v-if="pageData.prev">
-            <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
-               style="cursor:pointer;">Previous</a>
-          </li>
-
-          <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
-              v-for="page in pageData.pageList">
-            <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
-              {{ page }}
-            </a>
-          </li>
-          <li class="page-item" v-if="pageData.next">
-            <a class="page-link"
-               @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
-          </li>
-
-        </ul>
-      </div><!--/.pagination-part(&raquo;)-->
     </div>
+    <div class="pagination-part text-center">
+      <ul class="pagination h-100 justify-content-center align-items-center">
+
+        <li class="page-item " v-if="pageData.prev">
+          <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
+             style="cursor:pointer;">Previous</a>
+        </li>
+
+        <li class="page-item" :class=" (pageData.page === page)? 'active' : '' "
+            v-for="page in pageData.pageList">
+          <a class="page-link" @click="setPage(page)" style="cursor:pointer;">
+            {{ page }}
+          </a>
+        </li>
+        <li class="page-item" v-if="pageData.next">
+          <a class="page-link"
+             @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
+        </li>
+      </ul>
+    </div><!--/.pagination-part(&raquo;)-->
   </div>
 </template>
 
@@ -123,18 +150,20 @@ export default {
         this.resultList = jsonData.dtoList;
         this.pageData = jsonData;
         console.log(jsonData);
-
       })
     },
     setPage: function (value) {
       this.page = value;
     },
+    search: function (){
+      this.getList()
+    }
   },
   watch: {
     page: function () {
       this.getList();
       this.$router.push({
-        name: "notice",
+        name: "noticeDetails",
         query: {page: this.page},
       })
     }
@@ -142,43 +171,42 @@ export default {
 
 }
 </script>
-
-
-<style>
-
-div {
-  margin: 0;
-}
-
-h2 {
-  text-align: center
-}
-
-form {
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-  display: flex;
-}
+<style scoped>
 
 table {
-  margin-left: auto;
-  margin-right: auto;
+  width: 700px;
+  margin-left: 20%;
 }
 
-table, td, th {
+.table6_2 table {
+  width: 100%;
+  margin: 15px auto;
+  border: 0;
+}
+
+.table6_2 th {
+  background-color: #505050;
+  color: #FFFFFF
+}
+
+.table6_2, .table6_2 th, .table6_2 td {
+  font-size: 0.95em;
+  text-align: center;
+  padding: 4px;
   border-collapse: collapse;
-  border: 1px solid black;
-  font-size: larger;
 }
 
-.searchArea {
-  width: 300px;
-  height: 40px;
-  border: 1px solid rgb(102, 103, 171);
-  background-color: rgba(255 , 255, 255, 0.2);
-  border-radius: 5px;
 
+.table6_2 tr {
+  border: 1px solid #ffffff;
+}
+
+.table6_2 tr:nth-child(odd) {
+  background-color: #c4c4c4;
+}
+
+.table6_2 tr:nth-child(even) {
+  background-color: #ffffff;
 }
 
 .searchArea > input {
@@ -188,6 +216,7 @@ table, td, th {
   height: 38px;
   color: #fff;
 }
+
 .searchArea > input:focus {
   outline: 2px solid rgba(238, 153, 123, 0.5);;
   border-radius: 5px;
@@ -202,5 +231,4 @@ table, td, th {
   font-weight: bold;
   cursor: pointer;
 }
-
 </style>

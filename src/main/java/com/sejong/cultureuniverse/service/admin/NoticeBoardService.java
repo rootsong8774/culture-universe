@@ -1,5 +1,6 @@
 package com.sejong.cultureuniverse.service.admin;
 
+import com.querydsl.core.BooleanBuilder;
 import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
@@ -18,6 +19,7 @@ public interface NoticeBoardService {
     void modify(NoticeBoardAndAdminDTO dto);
 
     void remove(Long noticeIdx);
+    BooleanBuilder getSearch(PageRequestDTO requestDTO);
 //db->화면
     default NoticeBoardAndAdminDTO entityToDto(NoticeBoard entity, Admin admin) {
 

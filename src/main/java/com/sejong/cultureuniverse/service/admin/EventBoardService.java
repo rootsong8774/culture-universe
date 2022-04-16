@@ -7,6 +7,7 @@ import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
+import com.sejong.cultureuniverse.entity.event.EventComment;
 
 
 public interface EventBoardService {
@@ -42,8 +43,6 @@ public interface EventBoardService {
                 .readCount(dto.getReadCount())
                 .build();
     }
-
-
 }
 
 

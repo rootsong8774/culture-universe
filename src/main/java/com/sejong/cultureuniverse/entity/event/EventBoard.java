@@ -5,12 +5,16 @@ import static javax.persistence.FetchType.LAZY;
 
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.BaseEntity;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,5 +41,8 @@ public class EventBoard extends BaseEntity {
     @ManyToOne(fetch = LAZY, cascade = ALL)
     @JoinColumn(name = "admin_idx")
     private Admin adminId;
+
+    @OneToMany(mappedBy = "eventBoard", fetch = LAZY, cascade = CascadeType.ALL)
+    private List<EventComment> comments;
     
 }
