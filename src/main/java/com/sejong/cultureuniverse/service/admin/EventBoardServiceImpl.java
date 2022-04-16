@@ -2,12 +2,15 @@ package com.sejong.cultureuniverse.service.admin;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.sejong.cultureuniverse.dto.EventCommentDto;
 import com.sejong.cultureuniverse.dto.admin.EventBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 
+import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
+import com.sejong.cultureuniverse.entity.event.EventComment;
 import com.sejong.cultureuniverse.entity.event.QEventBoard;
 import com.sejong.cultureuniverse.repository.EventBoardRepository;
 import java.time.LocalDateTime;
@@ -28,6 +31,14 @@ import javax.transaction.Transactional;
 public class EventBoardServiceImpl implements EventBoardService {
 
     private final EventBoardRepository eventBoardRepository;
+
+    EventComment dtoToEntity(EventCommentDto dto){
+        return EventComment.builder()
+            .commentIdx(dto.getCommentIdx())
+            .eventComment(dto.getEventComment())
+            .       //???왜안잡히는걸까
+            .build();
+    }
 
     @Override
     public Long register(EventBoardDTO dto) {
@@ -68,7 +79,7 @@ public class EventBoardServiceImpl implements EventBoardService {
 
     }
 
-    @Override
+    @Override               //댓글까지 보이게 쿼리문 수정
     public EventBoardDTO read(Long eventIdx) {
         return eventBoardRepository.findEventBoardByEventIdx(
             eventIdx);

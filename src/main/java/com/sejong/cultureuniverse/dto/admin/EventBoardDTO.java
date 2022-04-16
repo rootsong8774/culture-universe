@@ -15,8 +15,13 @@ public class EventBoardDTO {
 
     private String adminId;
     private String adminPw;
+
     private String eventTitle;
     private String eventContent;
+
+   /* private Long commentIdx;
+    private String eventComment;*/
+
     private Long readCount;
     private LocalDateTime regDate, modDate;
 

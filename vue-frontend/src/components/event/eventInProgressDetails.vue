@@ -33,12 +33,13 @@
         <a @click="reservation" class="btn">목록</a>
       </div>
     </div>
-    <div class="comments-area" style="position: center; justify-content: center; text-align: center">
-      <div class="contact-form blog-single-form" >
+    <div class="comments-area"
+         style="position: center; justify-content: center; text-align: center">
+      <div class="contact-form blog-single-form">
         <br>
         <h3>댓글이벤트 참여</h3>
         <div id="disqus_thread"></div>
-<!--        <form class="form-inline">
+        <form class="form-inline">
           <div class="form-group">
             <label for="exampleInputName2" id="postsId">ID</label>
             <input type="text" class="form-control" id="exampleInputName2" placeholder="ID">
@@ -47,16 +48,20 @@
             <label for="comment">내용</label>
             <input type="text" class="form-control" id="comment" placeholder="내용">
           </div>
-          <button type="submit" class="btn btn-default" style="width: 75px" @click="commentSave">입력</button>
+          <button type="submit" class="btn btn-default" style="width: 75px" @click="postList">
+            입력
+          </button>
         </form>
-        <div style="padding-top: 15px">
-          <ol class="comment-list" style="justify-content: center">
-            <li class="comment"></li>
-            <li>{{nickname}}</li>
-            <li><span>{{comment}}</span></li>
-            <li><span>{{mod.date}}</span></li>
-          </ol>
-        </div>-->
+        <div class="" v-for="(result,index) in commentList" :key="index">
+          <div style="padding-top: 15px">
+            <ol class="comment-list" style="justify-content: center">
+              <li class="comment"></li>
+              <li>{{ result.commentIdx }}</li>
+              <li><span>{{ result.comment }}</span></li>
+              <button @click="clearAll"></button>
+            </ol>
+          </div>
+        </div>
       </div>
     </div><!--/.comments-area-->
   </div>
@@ -69,7 +74,7 @@ export default {
   name: "eventInProgressDetails",
   data() {
     return {
-      comment:'',
+      commentList: [],
       eventData: {}
     }
   },
@@ -81,6 +86,8 @@ export default {
     }*/
 
   created() {
+    this.postList();
+    this.getList();
     this.getDetails();
   },
   filters: {
@@ -104,29 +111,51 @@ export default {
     }
   },
   methods: {
+    postList: function () {
+      axios.post({
+        url: '/api/event/eventInProgressDetails',
+        data:{
+          id: this.id,
+          comment: this.comment
+        }
+      }).then(response => {
+        this.commentData = response.data
+      }).catch(function (error) {
+        console.log(error);
+      })
+    },
+    getList: function () {
+      this.axios.get('/api/event/eventDetails', {
+      })
+      .then((response) => {
+        let jsonData = response.data;
+        this.commentList = jsonData.dtoList;
+        console.log(jsonData);
+      })
+      .catch((error) => {
+        this.output = error
+      })
+    },
     getDetails: function () {
       axios({
-        url: '/api/event/eventInProgressDetails',
+        url: '/api/event/eventDetails',
         params: {
           eventIdx: this.$route.query.eventIdx,
+          commentIdx: this.$route.query.commentIdx
         },
         method: 'get',
       }).then(response => {
         this.eventData = response.data
-
+        this.commentData = response.data
+      }).catch((error) =>{
+        this.output  = error
       })
     },
+
     reservation: function () {
       this.$router.push({name: 'eventInProgress'})
-    },
-    save:function () {
-      const doc = {
-        createdAt: new Date(),
-        comment: this.comment,
-        id: this.id
-      }
     }
-  },
+  }
 }
 
 </script>

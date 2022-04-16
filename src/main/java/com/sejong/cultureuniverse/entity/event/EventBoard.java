@@ -42,7 +42,7 @@ public class EventBoard extends BaseEntity {
     @JoinColumn(name = "admin_idx")
     private Admin adminId;
 
-    @OneToMany(mappedBy = "eventBoard", fetch = LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "eventBoard", fetch = LAZY, cascade = CascadeType.ALL)
     private List<EventComment> comments;
     
 }

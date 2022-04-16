@@ -112,7 +112,6 @@ export default {
   },
   created() {
     this.getList();
-    this.getSearch();
   },
   filters: {
     yyyyMMdd: function (value) {
