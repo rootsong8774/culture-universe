@@ -1,5 +1,6 @@
 package com.sejong.cultureuniverse.dto;
 
+import com.sejong.cultureuniverse.entity.admin.AdminComment;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -18,5 +19,9 @@ public class QnaBoardDTO {
     private LocalDateTime regDate;
     private LocalDateTime modDate;
     private int commentCount;
-    private String commentContent;
+
+    //기존 private String commentContent;
+    //추가 adminComment 자료 전부 가져오기 위해
+    private AdminComment adminComment;
 }
+

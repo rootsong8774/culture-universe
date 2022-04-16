@@ -1,31 +1,23 @@
 package com.sejong.cultureuniverse.repository.admin;
 
+import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.AdminComment;
 import com.sejong.cultureuniverse.entity.admin.Qna;
-import com.sejong.cultureuniverse.entity.Member;
-
-import com.sejong.cultureuniverse.repository.AdminCommentRepository;
-import com.sejong.cultureuniverse.repository.AdminRepository;
 import com.sejong.cultureuniverse.repository.MemberRepository;
-import com.sejong.cultureuniverse.repository.QnaBoardRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
-import static org.bouncycastle.asn1.x500.style.RFC4519Style.member;
-import static org.bouncycastle.asn1.x500.style.RFC4519Style.userPassword;
-
 @SpringBootTest
-
+@Transactional
 public class AdminCommentRepositoryTest {
     @Autowired
     AdminRepository adminRepository;
@@ -57,21 +49,16 @@ public class AdminCommentRepositoryTest {
             adminCommentRepository.save(adminComment);
         });
     }
-
+//commentIdx read
     @Test
     public void readComment(){
-        Optional<AdminComment> result = adminCommentRepository.findById(20L);
+        Optional<AdminComment> result = adminCommentRepository.findById(6L);
         AdminComment adminComment = result.get();
         System.out.println(adminComment);
-        System.out.println(adminComment.getCommentIdx());
+        System.out.println(adminComment.getQna());
     }
 
-
-//    userIdx로 adminComment 찾기
-    @Test
-    public void testUserIdx(){
-        List<AdminComment> userIdxList = adminCommentRepository.getAdminCommentByMember_UserIdx(4L);
-        userIdxList.forEach(System.out::println);
-    }
+//questionIdx에 따른 AdminComment
+// AdminComment(commentIdx=20, commentContent=문의답변20, regDate=2022-04-11T20:40:30.224110, modDate=2022-04-11T20:40:30.224110)
 
 }

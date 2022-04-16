@@ -203,7 +203,7 @@
                                v-model:name="name">
                         <label>비밀번호 :</label>
                         <input type="text" class="form-control" placeholder="Enter Password"
-                               v-model:name="password">
+                               v-model:name="pw">
                         <label>이메일 :</label>
                         <input type="email" class="form-control" placeholder="Enter Email"
                                v-model:name="email">
@@ -233,14 +233,14 @@
           <div class="row">
             <div class="main_home text-center">
               <div class="home_text">
-                <h4 class="text-white text-uppercase">a new creative studio</h4>
-                <h1 class="text-white text-uppercase">good design is always in season</h1>
+<!--                <h4 class="text-white text-uppercase">a new creative studio</h4>-->
+<!--                <h1 class="text-white text-uppercase">good design is always in season</h1>-->
 
-                <div class="separator"></div>
+<!--                <div class="separator"></div>-->
 
-                <h5 class=" text-uppercase text-white"><em>One day, the dream will come true with
-                  lorem ipsum dolor sit amet,
-                  consectetuer adipiscing elit, nummy nibh euismod tincidunt laoreet.</em></h5>
+<!--                <h5 class=" text-uppercase text-white"><em>One day, the dream will come true with-->
+<!--                  lorem ipsum dolor sit amet,-->
+<!--                  consectetuer adipiscing elit, nummy nibh euismod tincidunt laoreet.</em></h5>-->
               </div>
             </div>
           </div><!--End off row-->
@@ -415,7 +415,7 @@ form {
   }
 
   .modal-sm {
-    width: 350px;
+    width: 400px;
 
   }
 }

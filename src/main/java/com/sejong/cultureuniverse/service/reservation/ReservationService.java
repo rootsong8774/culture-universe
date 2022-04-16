@@ -1,13 +1,18 @@
 package com.sejong.cultureuniverse.service.reservation;
 
+import com.sejong.cultureuniverse.dto.performances.SeatsDTO;
 import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.reservation.Reservation;
 import com.sejong.cultureuniverse.entity.reservation.Seats;
 import com.sejong.cultureuniverse.entity.reservation.SeatsReservation;
+import com.sejong.cultureuniverse.mapper.SeatsMapper;
 import com.sejong.cultureuniverse.repository.MemberRepository;
-import com.sejong.cultureuniverse.repository.performances.ReservationRepository;
-import com.sejong.cultureuniverse.repository.performances.SeatsRepository;
+import com.sejong.cultureuniverse.repository.reservation.ReservationRepository;
+import com.sejong.cultureuniverse.repository.reservation.SeatsRepository;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,21 +26,34 @@ public class ReservationService {
     private final MemberRepository memberRepository;
     private final SeatsRepository seatsRepository;
     
+    public List<SeatsDTO> getSeatsList(Long scheduleCode) {
+        List<Seats> seatsList = seatsRepository.findSeatsByScheduleScheduleCode(
+            scheduleCode);
+        return seatsList.stream().map(SeatsMapper.INSTANCE::seatsToDto)
+            .collect(Collectors.toList());
+        
+    }
+    //SeatsNo Array 로 입력값을 받아야 함.
     @Transactional
-    public Long reservation(Long userIdx, Long seatsNo) {
-        Optional<Member> findMember = memberRepository.findById(userIdx);
-        Optional<Seats> findSeats = seatsRepository.findById(seatsNo);
-        if (findMember.isEmpty() || findSeats.isEmpty()) {
+    public Long reservation(String name, Long... seatsNos) {
+        Optional<Member> findMember = memberRepository.findByName(name);
+        if (findMember.isEmpty()) {
             return null;
         }
         Member member = findMember.get();
-        Seats seat = findSeats.get();
-    
-        SeatsReservation seatsReservation = SeatsReservation.createSeatsReservation(seat,
-            seat.getPrice());
-    
-        Reservation reservation = Reservation.createReservation(member, seatsReservation);
-    
+        SeatsReservation[] seatsReservations = Arrays.stream(seatsNos).map(seatsNo -> {
+            Optional<Seats> findSeats = seatsRepository.findById(seatsNo);
+            if (findSeats.isEmpty()) {
+                return null;
+            }
+        
+            Seats seat = findSeats.get();
+            return SeatsReservation.createSeatsReservation(seat,
+                seat.getPrice());
+        
+        }).toArray(SeatsReservation[]::new);
+        Reservation reservation = Reservation.createReservation(member, seatsReservations);
+        
         reservationRepository.save(reservation);
         return reservation.getReservationId();
         

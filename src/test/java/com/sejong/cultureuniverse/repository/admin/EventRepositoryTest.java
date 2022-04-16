@@ -2,9 +2,7 @@ package com.sejong.cultureuniverse.repository.admin;
 
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
-import com.sejong.cultureuniverse.entity.event.EventWinner;
-import com.sejong.cultureuniverse.repository.EventBoardRepository;
-import com.sejong.cultureuniverse.repository.WinnerBoardRepository;
+import com.sejong.cultureuniverse.repository.event.EventBoardRepository;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

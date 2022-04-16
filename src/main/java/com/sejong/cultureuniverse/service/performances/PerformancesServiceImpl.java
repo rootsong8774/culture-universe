@@ -3,6 +3,7 @@ package com.sejong.cultureuniverse.service.performances;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsDTO;
+import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsSearchCondition;
 import com.sejong.cultureuniverse.dto.performances.PerformanceListDTO;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import com.sejong.cultureuniverse.repository.performances.PerformanceDetailsRepository;
@@ -23,23 +24,25 @@ public class PerformancesServiceImpl implements PerformancesService {
 
     @Override
     public PageResultDTO<PerformanceListDTO, PerformanceDetails> getList(PageRequestDTO pageRequestDTO) {
-
-        Function<PerformanceDetails, PerformanceListDTO> fn = (en-> entityToListDTO(
-            PerformanceDetails.builder()
-                .performId(en.getPerformId())
-                .performCode(en.getPerformCode())
-                .title(en.getTitle())
-                .startDate(en.getStartDate())
-                .endDate(en.getEndDate())
-                .genreName(en.getGenreName())
-                .fileUrlMi(en.getFileUrlMi())
-                .build()
-        ));
-
+    
+        Function<PerformanceDetails, PerformanceListDTO> fn = convertFromDetailsToDTO();
+    
         Page<PerformanceDetails> result = performanceDetailsRepository.findAll(
             pageRequestDTO.getPageable(Sort.by("performId").ascending()));
 
         return new PageResultDTO<>(result,fn);
+    }
+    
+    
+    @Override
+    public PageResultDTO<PerformanceListDTO, PerformanceDetails> getSearch(
+        
+        PageRequestDTO pageRequestDTO, PerformanceDetailsSearchCondition condition) {
+    
+        Function<PerformanceDetails, PerformanceListDTO> fn = convertFromDetailsToDTO();
+        Page<PerformanceDetails> result = performanceDetailsRepository.search(condition,
+            pageRequestDTO.getPageable(Sort.by("startDate").ascending()));
+        return  new PageResultDTO<>(result,fn);
     }
     
     @Override
@@ -48,6 +51,22 @@ public class PerformancesServiceImpl implements PerformancesService {
             performCode);
        
         return result.map(this::entityToDetailsDTO).orElse(null);
+    }
+    
+    private Function<PerformanceDetails, PerformanceListDTO> convertFromDetailsToDTO() {
+        
+        return (en-> entityToListDTO(
+            PerformanceDetails.builder()
+                .performId(en.getPerformId())
+                .performCode(en.getPerformCode())
+                .title(en.getTitle())
+                .startDate(en.getStartDate())
+                .endDate(en.getEndDate())
+                .placeName(en.getPlaceName())
+                .genreName(en.getGenreName())
+                .fileUrlMi(en.getFileUrlMi())
+                .build()
+        ));
     }
     
 }

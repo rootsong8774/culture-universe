@@ -1,14 +1,12 @@
 package com.sejong.cultureuniverse.service.admin;
 
 import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
-import com.sejong.cultureuniverse.entity.admin.QNoticeBoard;
-import com.sejong.cultureuniverse.repository.NoticeBoardRepository;
+import com.sejong.cultureuniverse.repository.admin.NoticeBoardRepository;
 
 import java.time.LocalDateTime;
 import java.util.function.Function;
@@ -48,9 +46,9 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
 
         Pageable pageable = requestDTO.getPageable(Sort.by("noticeIdx").descending());
 
-        BooleanBuilder builder = getSearch(requestDTO);
+        //BooleanBuilder booleanBuilder = getSearch(requestDTO);
 
-        Page<Object[]> result = noticeBoardRepository.findAllWithAdminId(pageable, builder);
+        Page<Object[]> result = noticeBoardRepository.findAllWithAdminId(pageable);
 
         Function<Object[], NoticeBoardAndAdminDTO> fn = (en -> entityToDto(
             NoticeBoard.builder()
@@ -95,15 +93,18 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
     public void remove(Long noticeIdx) {
         noticeBoardRepository.deleteByNoticeIdx(noticeIdx);
     }
-
+    
     @Override
     public BooleanBuilder getSearch(PageRequestDTO requestDTO) {
-
+        return null;
+    }
+   /* private BooleanBuilder getSearch(PageRequestDTO requestDTO) {
         String type = requestDTO.getType();
-        BooleanBuilder builder = new BooleanBuilder();
-        QNoticeBoard qNoticeBoard = QNoticeBoard.noticeBoard;
         String keyword = requestDTO.getKeyword();
-        BooleanExpression expression = qNoticeBoard.noticeIdx.gt(0L);
+        BooleanBuilder builder = new BooleanBuilder();
+        QGuestbook qGuestbook = QGuestbook.guestbook;
+
+        BooleanExpression expression = qGuestbook.gno.gt(0L);
 
         builder.and(expression);
 
@@ -114,21 +115,21 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
         BooleanBuilder conditionBuilder = new BooleanBuilder();
 
         if (type.contains("t")) {
-            conditionBuilder.or(qNoticeBoard.noticeTitle.contains(keyword));
+            conditionBuilder.or(qGuestbook.title.contains(keyword));
         }
 
         if (type.contains("c")) {
-            conditionBuilder.or(qNoticeBoard.noticeContent.contains(keyword));
+            conditionBuilder.or(qGuestbook.content.contains(keyword));
         }
 
-       /* if (type.contains("w")) {
-            conditionBuilder.or(qNoticeBoard.writer.contains(keyword));
-        }*/
+        if (type.contains("w")) {
+            conditionBuilder.or(qGuestbook.writer.contains(keyword));
+        }
 
         builder.and(conditionBuilder);
 
         return builder;
 
-    }
+    }*/
 }
 

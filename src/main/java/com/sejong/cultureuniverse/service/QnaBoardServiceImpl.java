@@ -5,7 +5,7 @@ import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Qna;
-import com.sejong.cultureuniverse.repository.QnaBoardRepository;
+import com.sejong.cultureuniverse.repository.admin.QnaBoardRepository;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.function.Function;
@@ -25,10 +25,35 @@ public class QnaBoardServiceImpl implements QnaBoardService{
     @Override
     @Transactional
     public Long register(QnaBoardDTO qnaBoardDTO) {
-        log.info(qnaBoardDTO);
+        log.info("======qna등록"+qnaBoardDTO);
         Qna qna = dtoToEntity(qnaBoardDTO);
         qnaBoardRepository.save(qna);
         return qna.getQuestionIdx();
+    }
+
+    @Override
+    public QnaBoardDTO read(Long questionIdx) {
+        log.info("======qna read"+questionIdx);
+        Optional<Qna> result = qnaBoardRepository.findById(questionIdx);
+        return result.isPresent()? this.readEntityToDto(result.get()):null;
+    }
+
+    @Override
+    public QnaBoardDTO get(Long questionIdx) {
+        Object[] result = (Object[]) qnaBoardRepository.getQnaBoardByQuestionIdx(questionIdx);
+        log.info("==========QnaBoardServiceImpl QnaBoardDTO get");
+        log.info(questionIdx);
+        return  entityToDto(
+            Qna.builder()
+                .questionIdx((Long)result[0])
+                .content((String)result[1])
+                .modDate((LocalDateTime) result[2])
+                .regDate((LocalDateTime) result[3])
+                .title((String)result[4])
+                .type((String)result[5])
+                .build(),
+            (Member) Member.builder().userIdx((Long) result[6]).build(),
+            (Long) result[7]);
     }
 
     @Override
@@ -51,33 +76,4 @@ public class QnaBoardServiceImpl implements QnaBoardService{
         return new PageResultDTO<>(result,fn);
 
     }
-
-    @Override
-    public QnaBoardDTO get(Long questionIdx) {
-        Object[] result = (Object[]) qnaBoardRepository.getQnaBoardByQuestionIdx(questionIdx);
-        return  entityToDto(
-            Qna.builder()
-                .questionIdx(Long.valueOf((Long)result[0]))
-                .content((String)result[1])
-                .modDate((LocalDateTime) result[2])
-                .regDate((LocalDateTime) result[3])
-                .title((String)result[4])
-                .type((String)result[5])
-                .build(),
-            (Member) Member.builder().userIdx((Long) result[6]).build(),
-            (Long) result[7]);
-    }
-
-    @Override
-    public QnaBoardDTO read(Long questionIdx) {
-        Optional<Qna> result = qnaBoardRepository.findById(questionIdx);
-        return result.isPresent()? this.readEntityToDto(result.get()):null;
-    }
-
-    @Override
-    public QnaBoardDTO findByComment(String comment) {
-        return null;
-    }
-
-
 }

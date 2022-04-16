@@ -1,14 +1,11 @@
 package com.sejong.cultureuniverse.service.admin;
 
-import com.querydsl.core.BooleanBuilder;
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.dto.admin.WinnerBoardDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventWinner;
-import com.sejong.cultureuniverse.entity.event.QEventWinner;
-import com.sejong.cultureuniverse.repository.WinnerBoardRepository;
+import com.sejong.cultureuniverse.repository.event.WinnerBoardRepository;
 import java.time.LocalDateTime;
 import java.util.function.Function;
 import lombok.RequiredArgsConstructor;
@@ -45,7 +42,7 @@ public class WinnerBoardServiceImpl implements WinnerBoardService {
 
         Pageable pageable = requestDTO.getPageable(Sort.by("winnerIdx").descending());
 
-        BooleanBuilder booleanBuilder = getSearch(requestDTO);
+        //BooleanBuilder booleanBuilder = getSearch(requestDTO);
 
         Page<Object[]> result = winnerBoardRepository.findAllWithAdminId(pageable);
 
@@ -89,13 +86,13 @@ public class WinnerBoardServiceImpl implements WinnerBoardService {
     public void remove(Long winnerIdx) {
         winnerBoardRepository.deleteByWinnerIdx(winnerIdx);
     }
-    private BooleanBuilder getSearch(PageRequestDTO requestDTO) {
+   /* private BooleanBuilder getSearch(PageRequestDTO requestDTO) {
         String type = requestDTO.getType();
         String keyword = requestDTO.getKeyword();
         BooleanBuilder builder = new BooleanBuilder();
-        QEventWinner qEventWinner = QEventWinner.eventWinner;
+        QGuestbook qGuestbook = QGuestbook.guestbook;
 
-        BooleanExpression expression = qEventWinner.winnerIdx.gt(0L);
+        BooleanExpression expression = qGuestbook.gno.gt(0L);
 
         builder.and(expression);
 
@@ -106,21 +103,21 @@ public class WinnerBoardServiceImpl implements WinnerBoardService {
         BooleanBuilder conditionBuilder = new BooleanBuilder();
 
         if (type.contains("t")) {
-            conditionBuilder.or(qEventWinner.winTitle.contains(keyword));
+            conditionBuilder.or(qGuestbook.title.contains(keyword));
         }
 
         if (type.contains("c")) {
-            conditionBuilder.or(qEventWinner.winContent.contains(keyword));
+            conditionBuilder.or(qGuestbook.content.contains(keyword));
         }
-/*
+
         if (type.contains("w")) {
             conditionBuilder.or(qGuestbook.writer.contains(keyword));
-        }*/
+        }
 
         builder.and(conditionBuilder);
 
         return builder;
 
-    }
+    }*/
 }
 

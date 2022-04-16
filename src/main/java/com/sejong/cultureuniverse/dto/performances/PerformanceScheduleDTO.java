@@ -10,11 +10,15 @@ import lombok.Setter;
 public class PerformanceScheduleDTO {
     
     
-    private Long performId;
+    private String performCode;
     private Long scheduleCode;
     
     private LocalDate scheduleDate;
     private LocalTime scheduleTime;
+    
+    private String dayOfWeek;
+    private Integer countSeats;
+    
     
     
     

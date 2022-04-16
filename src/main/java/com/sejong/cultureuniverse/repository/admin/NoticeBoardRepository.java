@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.repository;
+package com.sejong.cultureuniverse.repository.admin;
 
 import com.querydsl.core.BooleanBuilder;
 import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
@@ -23,7 +23,7 @@ public interface NoticeBoardRepository extends JpaRepository<NoticeBoard, Long> 
 
     @Query("select n.noticeIdx,n.noticeTitle, n.noticeContent, n.readCount,n.regDate, n.modDate, a.adminId, a.adminPw"
         + " from NoticeBoard n join n.adminId a")
-    Page<Object[]> findAllWithAdminId(Pageable pageable, BooleanBuilder builder);
+    Page<Object[]> findAllWithAdminId(Pageable pageable);
 
     void deleteByNoticeIdx(Long noticeIdx);
 }

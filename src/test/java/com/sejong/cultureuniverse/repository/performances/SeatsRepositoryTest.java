@@ -3,10 +3,10 @@ package com.sejong.cultureuniverse.repository.performances;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import com.sejong.cultureuniverse.entity.performance.PerformanceSchedule;
 import com.sejong.cultureuniverse.entity.reservation.Seats;
+import com.sejong.cultureuniverse.repository.reservation.SeatsRepository;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,11 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 class SeatsRepositoryTest {
     
     @Autowired
-    private  PerformanceScheduleRepository scheduleRepository;
+    private PerformanceScheduleRepository scheduleRepository;
     @Autowired
-    private  PerformanceDetailsRepository detailsRepository;
+    private PerformanceDetailsRepository detailsRepository;
     @Autowired
-    private  SeatsRepository seatsRepository;
+    private SeatsRepository seatsRepository;
     
     
     @Test
@@ -71,6 +71,12 @@ class SeatsRepositoryTest {
         }
     }
     
+    @Test
+    public void countTest() throws Exception {
+        Integer count = seatsRepository.getCountByScheduleCode(360L);
+        System.out.println(count);
+    }
+    
     private Integer priceByRow(int row) {
         if (row < 2) {
             return 100000;
@@ -82,6 +88,15 @@ class SeatsRepositoryTest {
             return 40000;
         }
         
+    }
+    
+    @Test
+    public void findSeatsTest() throws Exception {
+        List<Seats> findSeats = seatsRepository.findSeatsByScheduleScheduleCode(
+            371L);
+        for (Seats findSeat : findSeats) {
+            System.out.println("findSeat = " + "("+findSeat.getColNo()+","+findSeat.getRowNo()+"), price = "+ findSeat.getPrice());
+        }
     }
     
 }

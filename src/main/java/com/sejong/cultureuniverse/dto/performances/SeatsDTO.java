@@ -11,11 +11,11 @@ import lombok.Setter;
 public class SeatsDTO implements Serializable {
     
     private Long seatNo;
-    private Long scheduleCode;
-    private LocalDate scheduleDate;
-    private LocalTime scheduleTime;
     private Integer rowNo;
     private Integer colNo;
     private Boolean isBooked;
     private Integer price;
+    private String dayOfWeek;
+    private LocalDate scheduleDate;
+    private LocalTime scheduleTime;
 }

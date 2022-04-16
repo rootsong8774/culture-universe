@@ -1,17 +1,15 @@
 package com.sejong.cultureuniverse.entity.admin;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sejong.cultureuniverse.entity.BaseEntity;
 import com.sejong.cultureuniverse.entity.Member;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
-
-import static javax.persistence.CascadeType.PERSIST;
 
 @Entity
 @SuperBuilder

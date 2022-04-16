@@ -23,17 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 class ReservationRepositoryTest {
     
-    @Autowired
-    MemberRepository memberRepository;
-    @Autowired
-    ReservationRepository reservationRepository;
-    @Autowired
-    SeatsRepository seatsRepository;
-    @Autowired
-    PerformanceScheduleRepository scheduleRepository;
-    @Autowired
-    PerformanceDetailsRepository detailsRepository;
-    
     JPAQueryFactory queryFactory;
     @Autowired
     EntityManager em;
