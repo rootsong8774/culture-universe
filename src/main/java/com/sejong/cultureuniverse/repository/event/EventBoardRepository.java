@@ -15,15 +15,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface EventBoardRepository extends JpaRepository<EventComment, Long> {
-        //쿼리문앞에 축약은 어디서 정하는지 단점은 paging이 안된다
-    @Query("select ec.id"
-    EventBoardDTO findEventCommentByCommentIdx(Long commentIdx);
-
-    /*@Query("select new com.sejong.cultureuniverse.dto.admin.EventBoardDTO(e.eventIdx, a.adminId, a.adminPw,e.eventTitle,"
+public interface EventBoardRepository extends JpaRepository<EventBoard, Long> {
+    
+    @Query("select new com.sejong.cultureuniverse.dto.admin.EventBoardDTO(e.eventIdx, a.adminId, a.adminPw,e.eventTitle,"
          +
-        " e.eventContent, e.readCount, e.regDate, e.modDate) from EventComment e join e.adminId a join ec. where e.eventIdx=:eventIdx")
-    EventBoardDTO findEventBoardByEventIdx(Long eventIdx);*/
+        " e.eventContent, e.readCount, e.regDate, e.modDate) from EventBoard e join e.adminId a where e.eventIdx=:eventIdx")
+    EventBoardDTO findEventBoardByEventIdx(Long eventIdx);
 
     @Query("select e.eventIdx,e.eventTitle, e.eventContent, e.readCount,e.regDate, e.modDate, a.adminId, a.adminPw"
         + " from EventBoard e left join Admin a on e.adminId = a ")

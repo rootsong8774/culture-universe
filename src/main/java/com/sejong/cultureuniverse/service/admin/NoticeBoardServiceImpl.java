@@ -1,5 +1,6 @@
 package com.sejong.cultureuniverse.service.admin;
 
+import com.querydsl.core.BooleanBuilder;
 import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
@@ -91,6 +92,11 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
     @Override
     public void remove(Long noticeIdx) {
         noticeBoardRepository.deleteByNoticeIdx(noticeIdx);
+    }
+    
+    @Override
+    public BooleanBuilder getSearch(PageRequestDTO requestDTO) {
+        return null;
     }
    /* private BooleanBuilder getSearch(PageRequestDTO requestDTO) {
         String type = requestDTO.getType();
