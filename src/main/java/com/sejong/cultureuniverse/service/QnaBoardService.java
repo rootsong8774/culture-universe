@@ -15,8 +15,7 @@ public interface QnaBoardService {
     PageResultDTO<QnaBoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
     //db에서 꺼내오기
     QnaBoardDTO get(Long questionIdx);
-    //번호로 읽어오기
-    QnaBoardDTO read(Long questionIdx);
+
 
 
     default Qna dtoToEntity(QnaBoardDTO qnaBoardDTO) {
@@ -45,18 +44,6 @@ public interface QnaBoardService {
             .commentCount(commentCount.intValue())
             .build();
 
-        return qnaBoardDTO;
-    }
-
-    default  QnaBoardDTO readEntityToDto(Qna qna){
-        QnaBoardDTO qnaBoardDTO = QnaBoardDTO.builder()
-            .questionIdx(qna.getQuestionIdx())
-            .content(qna.getContent())
-            .title(qna.getTitle())
-            .type(qna.getType())
-            .regDate(qna.getRegDate())
-            .modDate(qna.getModDate())
-            .build();
         return qnaBoardDTO;
     }
 }

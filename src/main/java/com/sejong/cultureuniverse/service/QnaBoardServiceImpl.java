@@ -32,13 +32,6 @@ public class QnaBoardServiceImpl implements QnaBoardService{
     }
 
     @Override
-    public QnaBoardDTO read(Long questionIdx) {
-        log.info("======qna read"+questionIdx);
-        Optional<Qna> result = qnaBoardRepository.findById(questionIdx);
-        return result.isPresent()? this.readEntityToDto(result.get()):null;
-    }
-
-    @Override
     public QnaBoardDTO get(Long questionIdx) {
         Object[] result = (Object[]) qnaBoardRepository.getQnaBoardByQuestionIdx(questionIdx);
         log.info("==========QnaBoardServiceImpl QnaBoardDTO get");
