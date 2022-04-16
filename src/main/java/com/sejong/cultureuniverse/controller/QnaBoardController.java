@@ -25,8 +25,6 @@ import java.util.List;
 public class QnaBoardController {
     private final QnaBoardService qnaBoardService;
     private final AdminCommentService adminCommentService;
-    private final AdminRepository adminRepository;
-    private final QnaBoardRepository qnaBoardRepository;
 
 
     @GetMapping("/qnalist")
@@ -41,11 +39,9 @@ public class QnaBoardController {
         List<AdminCommentListDTO> list = adminCommentService.getList(questionIdx);
         model.addAttribute("qnadto", qnaBoardDTO);
         model.addAttribute("commentlist", list);
-
     }
 
     //    댓글 controller
-
     @PostMapping("/qnaregister/{questionIdx}")
     public String commentRegister(@PathVariable("questionIdx") Long questionIdx,
                                   AdminCommentDTO adminCommentDTO,PageRequestDTO pageRequestDTO,
@@ -61,7 +57,6 @@ public class QnaBoardController {
         redirectAttributes.addAttribute("questionIdx",questionIdx);
         return "redirect:/admin/qnaread";
     }
-
 }
 
 
