@@ -22,16 +22,16 @@
                 <th>문의등록일</th>
               </tr>
               <tr >
-                <td><a href="#qnadetails">{{ qna.type }}</a></td>
+                <td>{{ qnaDetailData.type }}</td>
                 <td>{{ qnaDetailData.title }}</td>
                 <td>{{ qnaDetailData.content }}</td>
-                <td>{{ qnaDetailData.regDate }}</td>
+                <td>{{ qnaDetailData.regDate  | yyyyMMdd  }}</td>
               </tr>
             </table>
           </div>
           <br>
           <!--          관리자 답변 테이블-->
-          <div class="comment">
+          <div class="comment" >
             <table class=table6_2>
               <h6 class="adminComment">관리자 답변</h6>
               <tr>
@@ -39,13 +39,14 @@
                 <th>답변</th>
                 <th>답변등록일</th>
               </tr>
-              <tr class="result-date" >
-                <td>{{ commentDetailData.adminId }}</td>
-                <td>{{ commentDetailData.commentContent }}</td>
-                <td>{{ commentDetailData.regDate }}</td>
+              <tr class="result-date" v-for="(comment,index) in commentDetailData" :key="index">
+                <td>{{ comment.adminId }}</td>
+                <td>{{ comment.commentContent }}</td>
+                <td>{{ comment.regDate | yyyyMMdd }}</td>
               </tr>
             </table>
           </div>
+          <br><br>
         </div>
 <!--        목록처리-->
         <div class="btnWrap">
@@ -65,15 +66,35 @@ export default {
     return {
       noInfo: '문의 내역이 없습니다.',
       qnaDetailData: {},
-      commentDetailData: {}
+      commentDetailData: []
     }
   },
   created() {
     this.getDetails();
     this.getComments();
   },
+  filters: {
+    yyyyMMdd: function (value) {
+      if (value === '') {
+        return '';
+      }
+      // 연도, 월, 일 추출
+      let year = value[0];
+      let month = value[1];
+      let day = value[2];
+      // 월, 일의 경우 한자리 수 값이 있기 때문에 공백에 0 처리
+      if (month < 10) {
+        month = '0' + month;
+      }
+      if (day < 10) {
+        day = '0' + day;
+      }
+      // 최종 포맷 (ex - '2021.10.08')
+      return year + '.' + month + '.' + day;
+    }
+  },
   methods: {
-    getDetails: function () {
+    getDetails:  function () {
       axios({
         url: 'api/qna/read',
         params: {
@@ -99,12 +120,11 @@ export default {
       this.$router.push({name: 'myPageQna'})
     }
   },
-  watch: {
-    page: function () {
-      this.getComments();
-
-    }
-  }
+  // watch: {
+  //   page: function () {
+  //     this.getComments();
+  //   }
+  // }
 }
 </script>
 

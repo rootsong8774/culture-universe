@@ -41,6 +41,4 @@ public class QnaBoardRestController {
         return mapper.registerModule(new JavaTimeModule())
             .writeValueAsString(adminCommentService.getList(questionIdx));
     }
-//클라이언트 post adminCommentDto 추가
-    //get getmapping으로 새로 만들어서 댓글
 }
