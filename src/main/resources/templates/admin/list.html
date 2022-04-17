@@ -4,93 +4,110 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
 
     <th:block th:fragment="content">
-
-        <h1 class="mt-4">관리자 공지 페이지
-            <span>
-                <a th:href="@{/admin/register}">
-                    <button type="button" class="btn btn-outline-primary">REGISTER
-                    </button>
-                </a>
-            </span>
-        </h1>
-
-
-        <form action="/admin/list" method="get" id="searchForm">
-            <div class="input-group">
-                <input type="hidden" name="page" value = "1">
-                <div class="input-group-prepend">
-                    <select class="custom-select" name="type">
-                        <option th:selected="${pageRequestDTO.type == null}">-------</option>
-                        <option value="t" th:selected="${pageRequestDTO.type =='t'}" >제목</option>
-                        <option value="c" th:selected="${pageRequestDTO.type =='c'}"  >내용</option>
-                        <!--                        <option value="w"  th:selected="${pageRequestDTO.type =='w'}" >작성자</option>
-                                              <option value="tc"  th:selected="${pageRequestDTO.type =='tc'}" >제목 + 내용</option>
-                                               <option value="tcw"  th:selected="${pageRequestDTO.type =='tcw'}" >제목 + 내용 + 작성자</option>-->
-                    </select>
-                </div>
-                <input class="form-control" name="keyword" th:value="${pageRequestDTO.keyword}">
-                <div class="input-group-append" id="button-addon4">
-                    <button class="btn btn-outline-secondary btn-search" type="button">Search</button>
-                    <button class="btn btn-outline-secondary btn-clear" type="button">Clear</button>
-                </div>
-            </div>
-        </form>
+        <div class="container">
+            <div class="row">
+                <div class="md-col-10">
+                    <h1 class="mt-4">관리자 공지 페이지
+                        <span>
+                        <a th:href="@{/admin/register}" class="pl-2">
+                            <button type="button" class="btn btn-outline-primary">REGISTER
+                            </button>
+                        </a>
+                    </span>
+                    </h1>
 
 
+                    <form action="/admin/list" method="get" id="searchForm" class="p-5">
+                        <div class="input-group">
+                            <input type="hidden" name="page" value="1">
+                            <div class="input-group-prepend">
+                                <select class="custom-select" name="type">
+                                    <option th:selected="${pageRequestDTO.type == null}">-------
+                                    </option>
+                                    <option value="t" th:selected="${pageRequestDTO.type =='t'}">
+                                        제목
+                                    </option>
+                                    <option value="c" th:selected="${pageRequestDTO.type =='c'}">
+                                        내용
+                                    </option>
+                                    <!--                        <option value="w"  th:selected="${pageRequestDTO.type =='w'}" >작성자</option>
+                                                          <option value="tc"  th:selected="${pageRequestDTO.type =='tc'}" >제목 + 내용</option>
+                                                           <option value="tcw"  th:selected="${pageRequestDTO.type =='tcw'}" >제목 + 내용 + 작성자</option>-->
+                                </select>
+                            </div>
+                            <input class="form-control" name="keyword"
+                                   th:value="${pageRequestDTO.keyword}">
+                            <div class="input-group-append" id="button-addon4">
+                                <button class="btn btn-outline-secondary btn-search" type="button">
+                                    Search
+                                </button>
+                                <button class="btn btn-outline-secondary btn-clear" type="button">
+                                    Clear
+                                </button>
+                            </div>
+                        </div>
+                    </form>
 
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">Idx</th>
-                <th scope="col">공지사항</th>
-                <th scope="col">공지내용</th>
-                <th scope="col">등록일자</th>
-                <th scope="col">수정일자</th>
-            </tr>
-            </thead>
-            <tbody>
 
-            <tr th:each="dto : ${result.dtoList}" >
-                <th scope="row">
-                    <a th:href="@{/admin/read(noticeIdx = ${dto.noticeIdx},
-                    page= ${result.page},
-                    type=${pageRequestDTO.type} ,
-                    keyword = ${pageRequestDTO.keyword})}">
-                        [[${dto.noticeIdx}]]
-                    </a>
-                </th>
-                <td>[[${dto.noticeTitle}]]</td>
-                <td>[[${dto.noticeContent}]]</td>
-                <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
-                <td>[[${#temporals.format(dto.modDate, 'yyyy/MM/dd')}]]</td>
-            </tr>
-            </tbody>
-        </table>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="noticeIdx">공지번호</th>
+                            <th scope="col" class="noticeTitle">제목</th>
+                            <th scope="col" class="noticeDate">등록일자</th>
+                            <th scope="col" class="noticeDate">수정일자</th>
+                        </tr>
+                        </thead>
+                        <tbody>
 
-        <ul class="pagination h-100 justify-content-center align-items-center">
+                        <tr th:each="dto : ${result.dtoList}">
+                            <td class="noticeIdx font-weight-bold">
+                                <a th:href="@{/admin/read(noticeIdx = ${dto.noticeIdx},
+                                    page= ${result.page},
+                                    type=${pageRequestDTO.type} ,
+                                    keyword = ${pageRequestDTO.keyword})}">
+                                    [[${dto.noticeIdx}]]
+                                </a>
+                            </td>
+                            <td>[[${dto.noticeTitle}]]</td>
+                            <td class="noticeDate">[[${#temporals.format(dto.regDate,
+                                'yyyy/MM/dd')}]]
+                            </td>
+                            <td class="noticeDate">[[${#temporals.format(dto.modDate,
+                                'yyyy/MM/dd')}]]
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-            <li class="page-item " th:if="${result.prev}">
-                <!--/*@thymesVar id="type" type=""*/-->
-                <a class="page-link" th:href="@{/admin/list(page= ${result.start -1},
+                    <ul class="pagination justify-content-center align-items-center p-4">
+
+                        <li class="page-item " th:if="${result.prev}">
+                            <!--/*@thymesVar id="type" type=""*/-->
+                            <a class="page-link" th:href="@{/admin/list(page= ${result.start -1},
                     type=${pageRequestDTO.type} ,
                     keyword = ${pageRequestDTO.keyword} ) }" tabindex="-1">Previous</a>
-            </li>
+                        </li>
 
-            <li th:class=" 'page-item ' + ${result.page == page?'active':''} " th:each="page: ${result.pageList}">
-                <a class="page-link" th:href="@{/admin/list(page = ${page} ,
+                        <li th:class=" 'page-item ' + ${result.page == page?'active':''} "
+                            th:each="page: ${result.pageList}">
+                            <a class="page-link" th:href="@{/admin/list(page = ${page} ,
                    type=${pageRequestDTO.type} ,
                    keyword = ${pageRequestDTO.keyword}  )}">
-                    [[${page}]]
-                </a>
-            </li>
+                                [[${page}]]
+                            </a>
+                        </li>
 
-            <li class="page-item" th:if="${result.next}">
-                <a class="page-link" th:href="@{/admin/list(page= ${result.end + 1} ,
+                        <li class="page-item" th:if="${result.next}">
+                            <a class="page-link" th:href="@{/admin/list(page= ${result.end + 1} ,
                     type=${pageRequestDTO.type} ,
                     keyword = ${pageRequestDTO.keyword} )}">Next</a>
-            </li>
+                        </li>
 
-        </ul>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
 
         <!--<div class="modal" tabindex="-1" role="dialog">
@@ -119,18 +136,18 @@
 
             console.log(msg);
 
-            if(msg){
+            if (msg) {
                 $(".modal").modal();
             }
             let searchForm = $("#searchForm");
 
-            $('.btn-search').click(function(e){
+            $('.btn-search').click(function (e) {
 
                 searchForm.submit();
 
             });
 
-            $('.btn-clear').click(function(e){
+            $('.btn-clear').click(function (e) {
 
                 searchForm.empty().submit();
 
@@ -138,7 +155,22 @@
 
 
         </script>
+        <style>
+            .noticeIdx {
+                width: 100px;
+                text-align: center;
+            }
 
+            .noticeTitle {
+                width: 700px;
+                text-align: center;
+            }
+
+            .noticeDate {
+                width: 200px;
+                text-align: center;
+            }
+        </style>
 
 
     </th:block>

@@ -127,7 +127,7 @@ public class InitDB {
                     .noticeContent("test content" + i)
                     .noticeTitle("test title" + i)
                     .readCount(100L)
-                    .adminId(new Admin("admin" + i, "1234"))
+                    .admin(new Admin("admin" + i, "1234"))
                     .build();
                 System.out.println(noticeBoardRepository.save(noticeBoard));
             });

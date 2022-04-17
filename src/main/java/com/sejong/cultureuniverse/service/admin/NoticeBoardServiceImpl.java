@@ -1,15 +1,18 @@
 package com.sejong.cultureuniverse.service.admin;
 
 import com.querydsl.core.BooleanBuilder;
+import com.sejong.cultureuniverse.SessionConst;
 import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
+import com.sejong.cultureuniverse.repository.admin.AdminRepository;
 import com.sejong.cultureuniverse.repository.admin.NoticeBoardRepository;
 
-import java.time.LocalDateTime;
 import java.util.function.Function;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import lombok.RequiredArgsConstructor;
@@ -24,71 +27,73 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Transactional
 public class NoticeBoardServiceImpl implements NoticeBoardService {
-
+    
+    private final AdminRepository adminRepository;
     private final NoticeBoardRepository noticeBoardRepository;
-
+    
     //admin을 찾는단계필요
-
+    
     @Override
-    public Long register(NoticeBoardAndAdminDTO dto) {
-        log.info("DTO---------------------------");
-        log.info(dto);
-        NoticeBoard entity = noticeAndAdminToEntity(dto);
-
-        log.info(entity);
-
-        noticeBoardRepository.save(entity);
-        return entity.getNoticeIdx();
+    public Long register(NoticeBoardAndAdminDTO dto, HttpServletRequest request) {
+    
+        HttpSession session = request.getSession();
+        if (session == null) {
+            return null;
+        }
+        Admin admin = (Admin) session.getAttribute(SessionConst.LOGIN_ADMIN);
+        NoticeBoard noticeBoard = NoticeBoard.builder()
+            .noticeTitle(dto.getNoticeTitle())
+            .noticeContent(dto.getNoticeContent())
+            .readCount(0L)
+            .admin(admin)
+            .build();
+        
+        noticeBoardRepository.save(noticeBoard);
+        return noticeBoard.getNoticeIdx();
     }
-
+    
     @Override
-    public PageResultDTO<NoticeBoardAndAdminDTO, Object[]> getList(PageRequestDTO requestDTO) {
-
+    public PageResultDTO<NoticeBoardAndAdminDTO, NoticeBoard> getList(PageRequestDTO requestDTO) {
+        
         Pageable pageable = requestDTO.getPageable(Sort.by("noticeIdx").descending());
-
-        //BooleanBuilder booleanBuilder = getSearch(requestDTO);
-
-        Page<Object[]> result = noticeBoardRepository.findAllWithAdminId(pageable);
-
-        Function<Object[], NoticeBoardAndAdminDTO> fn = (en -> entityToDto(
-            NoticeBoard.builder()
-                .noticeIdx((Long)en[0])
-                .noticeTitle((String) en[1])
-                .noticeContent((String) en[2])
-                .readCount((Long) en[3])
-                .regDate((LocalDateTime) en[4])
-                .modDate((LocalDateTime) en[5])
-                .build(),
-            Admin.builder()
-                .adminId((String) en[6])
-                .adminPw((String) en[7])
-                .build())
-        );
+        
+        Page<NoticeBoard> result = noticeBoardRepository.findAllWithAdminId(pageable);
+        
+        Function<NoticeBoard, NoticeBoardAndAdminDTO> fn = (this::entityToDto);
         return new PageResultDTO<>(result, fn);
-
+        
     }
-
+    
     @Override
     public NoticeBoardAndAdminDTO read(Long noticeIdx) {
-        return noticeBoardRepository.findNoticeBoardAndAdminByNoticeIdx(
+        NoticeBoard noticeBoard = noticeBoardRepository.findNoticeBoardAndAdminByNoticeIdx(
             noticeIdx);
+        return NoticeBoardAndAdminDTO.builder()
+            .noticeIdx(noticeBoard.getNoticeIdx())
+            .admin(noticeBoard.getAdmin())
+            .noticeTitle(noticeBoard.getNoticeTitle())
+            .noticeContent(noticeBoard.getNoticeContent())
+            .readCount(noticeBoard.getReadCount())
+            .regDate(noticeBoard.getRegDate())
+            .modDate(noticeBoard.getModDate())
+            .build();
+        
     }
-
+    
     //업데이트 하는 항목은 제목,내용
     @Override
     public void modify(NoticeBoardAndAdminDTO dto) {
-
-        NoticeBoardAndAdminDTO result = noticeBoardRepository.findNoticeBoardAndAdminByNoticeIdx(
+    
+        NoticeBoard noticeBoard = noticeBoardRepository.findNoticeBoardAndAdminByNoticeIdx(
             dto.getNoticeIdx());
-
-        result.changeTitle(dto.getNoticeTitle());
-        result.changeContent(dto.getNoticeContent());
-        NoticeBoard entity = noticeAndAdminToEntity(result);
-
-        noticeBoardRepository.save(entity);
+    
+        noticeBoard.changeTitle(dto.getNoticeTitle());
+        noticeBoard.changeContent(dto.getNoticeContent());
+       
+        noticeBoardRepository.save(noticeBoard);
     }
-
-
+    
+    
     @Override
     public void remove(Long noticeIdx) {
         noticeBoardRepository.deleteByNoticeIdx(noticeIdx);

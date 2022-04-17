@@ -6,13 +6,16 @@ import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
+import javax.servlet.http.HttpServletRequest;
 
 
 public interface NoticeBoardService {
 
-    Long register(NoticeBoardAndAdminDTO dto);
-
-    PageResultDTO<NoticeBoardAndAdminDTO, Object[]> getList(PageRequestDTO requestDTO);
+   
+    
+    Long register(NoticeBoardAndAdminDTO dto, HttpServletRequest request);
+    
+    PageResultDTO<NoticeBoardAndAdminDTO, NoticeBoard> getList(PageRequestDTO requestDTO);
 
     NoticeBoardAndAdminDTO read(Long noticeIdx);
 
@@ -21,7 +24,7 @@ public interface NoticeBoardService {
     void remove(Long noticeIdx);
     BooleanBuilder getSearch(PageRequestDTO requestDTO);
 //db->화면
-    default NoticeBoardAndAdminDTO entityToDto(NoticeBoard entity, Admin admin) {
+    default NoticeBoardAndAdminDTO entityToDto(NoticeBoard entity) {
 
         return NoticeBoardAndAdminDTO.builder()
             .noticeIdx(entity.getNoticeIdx())
@@ -30,20 +33,20 @@ public interface NoticeBoardService {
             .readCount(entity.getReadCount())
             .regDate(entity.getRegDate())
             .modDate(entity.getModDate())
-            .adminId(admin.getAdminId())
+            .admin(entity.getAdmin())
             .build();
 
     }
 //화면->db
-    default NoticeBoard noticeAndAdminToEntity(NoticeBoardAndAdminDTO dto) {
-        return NoticeBoard.builder()
-            .noticeIdx(dto.getNoticeIdx())
-            .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))
-            .noticeTitle(dto.getNoticeTitle())
-            .noticeContent(dto.getNoticeContent())
-            .readCount(dto.getReadCount())
-            .build();
-    }
+//    default NoticeBoard noticeAndAdminToEntity(NoticeBoardAndAdminDTO dto) {
+//        return NoticeBoard.builder()
+//            .noticeIdx(dto.getNoticeIdx())
+//            .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))
+//            .noticeTitle(dto.getNoticeTitle())
+//            .noticeContent(dto.getNoticeContent())
+//            .readCount(dto.getReadCount())
+//            .build();
+//    }
 }
 
 

@@ -11,19 +11,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 
-public interface NoticeBoardRepository extends JpaRepository<NoticeBoard, Long> ,
-    QuerydslPredicateExecutor<NoticeBoard> {
+public interface NoticeBoardRepository extends JpaRepository<NoticeBoard, Long> {
 //entity(table)return entity로 받는이유: notice+comment동시에 받기에
 // NoticeBoard findByNoticeIdx(Long noticeIdx);
-
-    @Query(
-        "select new com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO(n.noticeIdx, a.adminId, a.adminPw,n.noticeTitle,"
-            +" n.noticeContent, n.readCount, n.regDate, n.modDate) from NoticeBoard n join n.adminId a where n.noticeIdx=:noticeIdx")
-    NoticeBoardAndAdminDTO findNoticeBoardAndAdminByNoticeIdx(Long noticeIdx);
-
-    @Query("select n.noticeIdx,n.noticeTitle, n.noticeContent, n.readCount,n.regDate, n.modDate, a.adminId, a.adminPw"
-        + " from NoticeBoard n join n.adminId a")
-    Page<Object[]> findAllWithAdminId(Pageable pageable);
-
+    
+    @Query("select n from NoticeBoard n join fetch n.admin where n.noticeIdx=:noticeIdx")
+    NoticeBoard findNoticeBoardAndAdminByNoticeIdx(Long noticeIdx);
+    
+    @Query("select n from NoticeBoard n join n.admin")
+    Page<NoticeBoard> findAllWithAdminId(Pageable pageable);
+    
     void deleteByNoticeIdx(Long noticeIdx);
 }
