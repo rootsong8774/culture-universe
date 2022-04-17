@@ -4,10 +4,11 @@ import com.sejong.cultureuniverse.dto.AdminCommentDTO;
 import com.sejong.cultureuniverse.dto.AdminCommentListDTO;
 
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 public interface AdminCommentService {
 
-    Long register(AdminCommentDTO adminCommentDTO);
+    Long register(AdminCommentDTO adminCommentDTO, HttpServletRequest request);
     List<AdminCommentListDTO> getList(Long questionIdx);
 
     void delete(Long commentIdx);

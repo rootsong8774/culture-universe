@@ -17,7 +17,7 @@ public class AdminCommentDTO implements Serializable {
     private String commentContent;
     private LocalDateTime regDate, modDate;
     private Long questionIdx;
-    private String adminId;
+    private Admin admin;
     private Long userIdx;
     
 }
