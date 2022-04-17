@@ -1,12 +1,9 @@
 package com.sejong.cultureuniverse.controller.admin;
 
-import com.sejong.cultureuniverse.SessionConst;
-import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
+import com.sejong.cultureuniverse.dto.admin.NoticeBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
-import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.service.admin.NoticeBoardService;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -45,13 +42,11 @@ public class NoticeBoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(NoticeBoardAndAdminDTO dto, RedirectAttributes redirectAttributes,
+    public String registerPost(NoticeBoardDTO dto, RedirectAttributes redirectAttributes,
         HttpServletRequest request) {
         
         Long noticeIdx = service.register(dto, request);
-
-        redirectAttributes.addFlashAttribute("msg", noticeIdx);
-
+        
         return "redirect:/admin/list";
     }
 
@@ -60,7 +55,7 @@ public class NoticeBoardController {
         Model model) {
         log.info("noticeIdx : " + noticeIdx);
 
-        NoticeBoardAndAdminDTO dto = service.read(noticeIdx);
+        NoticeBoardDTO dto = service.read(noticeIdx);
 
         model.addAttribute("dto", dto);
     }
@@ -77,7 +72,7 @@ public class NoticeBoardController {
     }
 
     @PostMapping("/modify")
-    public String modify(NoticeBoardAndAdminDTO dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
+    public String modify(NoticeBoardDTO dto, @ModelAttribute("requestDTO") PageRequestDTO requestDTO,
         RedirectAttributes redirectAttributes) {
         log.info("post modify..............................");
         log.info("dto: " + dto);

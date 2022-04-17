@@ -140,7 +140,7 @@ public class InitDB {
                     .eventContent("test content" + i)
                     .eventTitle("test title" + i)
                     .readCount(100L)
-                    .adminId(new Admin("admin" + i, "1234"))
+                    .admin(new Admin("admin" + i, "1234"))
                     .build();
                 System.out.println(eventBoardRepository.save(eventBoard));
             });

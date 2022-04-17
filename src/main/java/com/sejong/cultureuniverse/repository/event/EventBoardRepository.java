@@ -17,14 +17,11 @@ import org.springframework.stereotype.Repository;
 
 public interface EventBoardRepository extends JpaRepository<EventBoard, Long> {
     
-    @Query("select new com.sejong.cultureuniverse.dto.admin.EventBoardDTO(e.eventIdx, a.adminId, a.adminPw,e.eventTitle,"
-         +
-        " e.eventContent, e.readCount, e.regDate, e.modDate) from EventBoard e join e.adminId a where e.eventIdx=:eventIdx")
-    EventBoardDTO findEventBoardByEventIdx(Long eventIdx);
+    @Query("select e from EventBoard e left join fetch e.admin where e.eventIdx=:eventIdx")
+    EventBoard findEventBoardByEventIdx(Long eventIdx);
 
-    @Query("select e.eventIdx,e.eventTitle, e.eventContent, e.readCount,e.regDate, e.modDate, a.adminId, a.adminPw"
-        + " from EventBoard e left join Admin a on e.adminId = a ")
-    Page<Object[]> findAllWithAdminId(Pageable pageable);
+    @Query(value = "select e from EventBoard e left join fetch e.admin ", countQuery = "select count(e) from EventBoard e left join e.admin ")
+    Page<EventBoard> findAllWithAdminId(Pageable pageable);
 
     void deleteByEventIdx(Long eventIdx);
 }

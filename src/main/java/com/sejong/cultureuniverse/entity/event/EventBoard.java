@@ -38,11 +38,20 @@ public class EventBoard extends BaseEntity {
     private String eventContent;
     private Long readCount;
     
-    @ManyToOne(fetch = LAZY, cascade = ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "admin_idx")
-    private Admin adminId;
+    private Admin admin;
 
     @OneToMany(mappedBy = "eventBoard", fetch = LAZY, cascade = CascadeType.ALL)
     private List<EventComment> comments;
     
+    public void changeTitle(String eventTitle) {
+        this.eventTitle = eventTitle;
+    }
+    
+    public void changeContent(String eventContent) {
+        this.eventContent = eventContent;
+    }
 }
+    
+

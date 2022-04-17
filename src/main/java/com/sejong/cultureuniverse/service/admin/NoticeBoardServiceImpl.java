@@ -2,7 +2,7 @@ package com.sejong.cultureuniverse.service.admin;
 
 import com.querydsl.core.BooleanBuilder;
 import com.sejong.cultureuniverse.SessionConst;
-import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
+import com.sejong.cultureuniverse.dto.admin.NoticeBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
@@ -28,13 +28,12 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class NoticeBoardServiceImpl implements NoticeBoardService {
     
-    private final AdminRepository adminRepository;
     private final NoticeBoardRepository noticeBoardRepository;
     
     //admin을 찾는단계필요
     
     @Override
-    public Long register(NoticeBoardAndAdminDTO dto, HttpServletRequest request) {
+    public Long register(NoticeBoardDTO dto, HttpServletRequest request) {
     
         HttpSession session = request.getSession();
         if (session == null) {
@@ -53,22 +52,22 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
     }
     
     @Override
-    public PageResultDTO<NoticeBoardAndAdminDTO, NoticeBoard> getList(PageRequestDTO requestDTO) {
+    public PageResultDTO<NoticeBoardDTO, NoticeBoard> getList(PageRequestDTO requestDTO) {
         
         Pageable pageable = requestDTO.getPageable(Sort.by("noticeIdx").descending());
         
         Page<NoticeBoard> result = noticeBoardRepository.findAllWithAdminId(pageable);
         
-        Function<NoticeBoard, NoticeBoardAndAdminDTO> fn = (this::entityToDto);
+        Function<NoticeBoard, NoticeBoardDTO> fn = (this::entityToDto);
         return new PageResultDTO<>(result, fn);
         
     }
     
     @Override
-    public NoticeBoardAndAdminDTO read(Long noticeIdx) {
+    public NoticeBoardDTO read(Long noticeIdx) {
         NoticeBoard noticeBoard = noticeBoardRepository.findNoticeBoardAndAdminByNoticeIdx(
             noticeIdx);
-        return NoticeBoardAndAdminDTO.builder()
+        return NoticeBoardDTO.builder()
             .noticeIdx(noticeBoard.getNoticeIdx())
             .admin(noticeBoard.getAdmin())
             .noticeTitle(noticeBoard.getNoticeTitle())
@@ -82,7 +81,7 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
     
     //업데이트 하는 항목은 제목,내용
     @Override
-    public void modify(NoticeBoardAndAdminDTO dto) {
+    public void modify(NoticeBoardDTO dto) {
     
         NoticeBoard noticeBoard = noticeBoardRepository.findNoticeBoardAndAdminByNoticeIdx(
             dto.getNoticeIdx());

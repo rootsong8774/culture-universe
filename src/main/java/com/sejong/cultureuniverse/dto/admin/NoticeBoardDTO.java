@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 @Data
-public class NoticeBoardAndAdminDTO {
+public class NoticeBoardDTO {
     private Long noticeIdx;
 
     private Admin admin;
