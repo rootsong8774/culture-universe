@@ -7,6 +7,7 @@ import com.sejong.cultureuniverse.service.admin.AdminService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class AdminLoginController {
@@ -35,11 +37,11 @@ public class AdminLoginController {
         if (bindingResult.hasErrors()) {
             return "admin/loginForm";
         }
-    
+        
         Admin loginAdmin = loginService.login(adminLoginDTO.getAdminId(), adminLoginDTO.getAdminPw());
-    
+        
         if (loginAdmin == null) {
-            bindingResult.reject("loginFail", "아이디 도는 비밀번호가 맞지 않습니다.");
+            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
             return "admin/loginForm";
         }
         //세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성
@@ -47,6 +49,8 @@ public class AdminLoginController {
         //세션에 로그인 회원 정보 보관
         session.setAttribute(SessionConst.LOGIN_ADMIN, loginAdmin);
     
+        log.info(redirectURL);
+        
         return "redirect:"+ redirectURL;
         
     }
