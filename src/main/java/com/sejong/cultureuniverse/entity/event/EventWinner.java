@@ -28,8 +28,16 @@ public class EventWinner extends BaseEntity {
     private String winContent;
     private Long readCount;
 
-    @ManyToOne(fetch = LAZY, cascade = ALL)
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name="admin_idx")
-    private Admin adminId;
+    private Admin admin;
+    
+    public void changeTitle(String winTitle) {
+        this.winTitle = winTitle;
+    }
+    
+    public void changeContent(String winContent) {
+        this.winContent = winContent;
+    }
 
 }

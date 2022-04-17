@@ -1,13 +1,18 @@
 package com.sejong.cultureuniverse.service.admin;
 
+import com.sejong.cultureuniverse.SessionConst;
+import com.sejong.cultureuniverse.dto.admin.NoticeBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.dto.admin.WinnerBoardDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
+import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
 import com.sejong.cultureuniverse.entity.event.EventWinner;
 import com.sejong.cultureuniverse.repository.event.WinnerBoardRepository;
 import java.time.LocalDateTime;
 import java.util.function.Function;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -22,66 +27,67 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 @Transactional
 public class WinnerBoardServiceImpl implements WinnerBoardService {
-
+    
     private final WinnerBoardRepository winnerBoardRepository;
-
+    
     @Override
-    public Long register(WinnerBoardDTO dto) {
-        log.info("DTO---------------------------");
-        log.info(dto);
-        EventWinner entity = dtoToEntity(dto);
-
-        log.info(entity);
-
-        winnerBoardRepository.save(entity);
-        return entity.getWinnerIdx();
+    public Long register(WinnerBoardDTO dto, HttpServletRequest request) {
+        
+        HttpSession session = request.getSession();
+        if (session == null) {
+            return null;
+        }
+        Admin admin = (Admin) session.getAttribute(SessionConst.LOGIN_ADMIN);
+        EventWinner eventWinner = EventWinner.builder()
+            .winTitle(dto.getWinTitle())
+            .winContent(dto.getWinContent())
+            .readCount(0L)
+            .admin(admin)
+            .build();
+        winnerBoardRepository.save(eventWinner);
+        return eventWinner.getWinnerIdx();
     }
-
+    
     @Override
-    public PageResultDTO<WinnerBoardDTO, Object[]> getList(PageRequestDTO requestDTO) {
-
+    public PageResultDTO<WinnerBoardDTO, EventWinner> getList(PageRequestDTO requestDTO) {
+        
         Pageable pageable = requestDTO.getPageable(Sort.by("winnerIdx").descending());
-
+        
         //BooleanBuilder booleanBuilder = getSearch(requestDTO);
-
-        Page<Object[]> result = winnerBoardRepository.findAllWithAdminId(pageable);
-
-        Function<Object[], WinnerBoardDTO> fn = (en -> entityToDto(
-            EventWinner.builder()
-                .winnerIdx((Long)en[0])
-                .winTitle((String) en[1])
-                .winContent((String) en[2])
-                .readCount((Long) en[3])
-                .regDate((LocalDateTime) en[4])
-                .modDate((LocalDateTime) en[5])
-                .build(),
-            Admin.builder()
-                .adminId((String) en[6])
-                .adminPw((String) en[7])
-                .build())
-        );
+        
+        Page<EventWinner> result = winnerBoardRepository.findAllWithAdminId(pageable);
+    
+        Function<EventWinner, WinnerBoardDTO> fn = (this::entityToDto);
         return new PageResultDTO<>(result, fn);
-
+        
     }
-
+    
     @Override
     public WinnerBoardDTO read(Long winnerIdx) {
-        return winnerBoardRepository.findEventWinnerByWinnerIdx(
-            winnerIdx);
+        EventWinner eventWinner = winnerBoardRepository.findEventWinnerByWinnerIdx(winnerIdx);
+        return WinnerBoardDTO.builder()
+            .winnerIdx(eventWinner.getWinnerIdx())
+            .admin(eventWinner.getAdmin())
+            .winTitle(eventWinner.getWinTitle())
+            .winContent(eventWinner.getWinContent())
+            .readCount(eventWinner.getReadCount())
+            .regDate(eventWinner.getRegDate())
+            .modDate(eventWinner.getModDate())
+            .build();
     }
+    
     //업데이트 하는 항목은 제목,내용
     @Override
     public void modify(WinnerBoardDTO dto) {
-        WinnerBoardDTO result = winnerBoardRepository.findEventWinnerByWinnerIdx(
+        EventWinner eventWinner = winnerBoardRepository.findEventWinnerByWinnerIdx(
             dto.getWinnerIdx());
-
-        result.changeTitle(dto.getWinTitle());
-        result.changeContent(dto.getWinContent());
-        EventWinner entity = dtoToEntity(result);
-
-        winnerBoardRepository.save(entity);
+    
+        eventWinner.changeTitle(dto.getWinTitle());
+        eventWinner.changeContent(dto.getWinContent());
+        
+        winnerBoardRepository.save(eventWinner);
     }
-
+    
     @Override
     public void remove(Long winnerIdx) {
         winnerBoardRepository.deleteByWinnerIdx(winnerIdx);

@@ -20,7 +20,7 @@ public class EventWinnerRepositoryTest {
                     .winContent("test content" + i)
                     .winTitle("test title" + i)
                     .readCount(100L)
-                    .adminId(new Admin("admin"+i, "1234"))
+                    .admin(new Admin("admin"+i, "1234"))
                     .build();
                 System.out.println(winnerBoardRepository.save(eventWinner));
             });

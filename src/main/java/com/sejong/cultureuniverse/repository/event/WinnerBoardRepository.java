@@ -15,13 +15,11 @@ public interface WinnerBoardRepository extends JpaRepository<EventWinner, Long> 
     QuerydslPredicateExecutor<EventWinner> {
 
     @Query(
-        "select new com.sejong.cultureuniverse.dto.admin.WinnerBoardDTO(w.winnerIdx, a.adminId, a.adminPw, w.winTitle,"
-            + "w.winContent, w.readCount, w.regDate, w.modDate) from EventWinner w join w.adminId a where w.winnerIdx=:winnerIdx")
-    WinnerBoardDTO findEventWinnerByWinnerIdx(Long winnerIdx);
+        "select w from EventWinner w left join fetch w.admin where w.winnerIdx=:winnerIdx")
+    EventWinner findEventWinnerByWinnerIdx(Long winnerIdx);
 
-    @Query("select w.winnerIdx, w.winTitle, w.winContent, w.readCount, w.regDate, w.modDate, a.adminId, a.adminPw"
-    + " from EventWinner w left join Admin a on w.adminId = a")
-    Page<Object[]> findAllWithAdminId(Pageable pageable);
+    @Query(value = "select w from EventWinner w left join fetch w.admin", countQuery = "select count(w) from EventWinner w left join w.admin")
+    Page<EventWinner> findAllWithAdminId(Pageable pageable);
 
     void deleteByWinnerIdx(Long winnerIdx);
 }
