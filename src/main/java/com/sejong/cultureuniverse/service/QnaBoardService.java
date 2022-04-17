@@ -1,11 +1,13 @@
 package com.sejong.cultureuniverse.service;
 
 import com.sejong.cultureuniverse.dto.QnaBoardDTO;
+import com.sejong.cultureuniverse.dto.QnaDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Qna;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface QnaBoardService {
@@ -15,8 +17,8 @@ public interface QnaBoardService {
     PageResultDTO<QnaBoardDTO, Object[]> getList(PageRequestDTO pageRequestDTO);
     //db에서 꺼내오기
     QnaBoardDTO get(Long questionIdx);
-
-
+    //vue->db
+    Long register(QnaDTO qnaDTO);
 
     default Qna dtoToEntity(QnaBoardDTO qnaBoardDTO) {
         Member member = Member.builder()
@@ -46,5 +48,6 @@ public interface QnaBoardService {
 
         return qnaBoardDTO;
     }
-}
+
+   }
 

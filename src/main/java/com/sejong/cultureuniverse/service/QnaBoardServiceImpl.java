@@ -1,10 +1,12 @@
 package com.sejong.cultureuniverse.service;
 
 import com.sejong.cultureuniverse.dto.QnaBoardDTO;
+import com.sejong.cultureuniverse.dto.QnaDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.entity.admin.Qna;
+import com.sejong.cultureuniverse.repository.MemberRepository;
 import com.sejong.cultureuniverse.repository.admin.QnaBoardRepository;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -19,15 +21,33 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class QnaBoardServiceImpl implements QnaBoardService{
+public class QnaBoardServiceImpl implements QnaBoardService {
     private final QnaBoardRepository qnaBoardRepository;
+    private final MemberRepository memberRepository;
 
     @Override
     @Transactional
     public Long register(QnaBoardDTO qnaBoardDTO) {
-        log.info("======qna등록"+qnaBoardDTO);
+        log.info("======qna등록" + qnaBoardDTO);
         Qna qna = dtoToEntity(qnaBoardDTO);
         qnaBoardRepository.save(qna);
+        return qna.getQuestionIdx();
+    }
+    //vue->db
+    @Override
+    @Transactional
+    public Long register(QnaDTO qnaDTO) {
+        Optional<Member> member= memberRepository.findByUsername("회원id1");
+        if (member.isEmpty()) {
+            return null;
+        }
+        Qna qna = Qna.builder()
+                .member(member.get())
+                .type(qnaDTO.getType())
+                .title(qnaDTO.getTitle())
+                .content(qnaDTO.getContent())
+                .build();
+            qnaBoardRepository.save(qna);
         return qna.getQuestionIdx();
     }
 

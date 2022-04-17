@@ -3,6 +3,7 @@ package com.sejong.cultureuniverse.restController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.sejong.cultureuniverse.dto.QnaDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.service.AdminCommentService;
 import com.sejong.cultureuniverse.service.QnaBoardService;
@@ -40,5 +41,11 @@ public class QnaBoardRestController {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.registerModule(new JavaTimeModule())
             .writeValueAsString(adminCommentService.getList(questionIdx));
+    }
+
+    @PostMapping(value = "/register")
+    public void qnaRegister (@RequestBody QnaDTO qnaDTO){
+        log.info("========"+qnaDTO);
+        qnaBoardService.register(qnaDTO);
     }
 }
