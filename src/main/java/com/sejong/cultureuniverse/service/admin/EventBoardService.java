@@ -2,18 +2,21 @@ package com.sejong.cultureuniverse.service.admin;
 
 
 import com.sejong.cultureuniverse.dto.admin.EventBoardDTO;
+import com.sejong.cultureuniverse.dto.admin.NoticeBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
 import com.sejong.cultureuniverse.entity.event.EventComment;
+import javax.servlet.http.HttpServletRequest;
 
 
 public interface EventBoardService {
-    Long register(EventBoardDTO dto);
-
-    PageResultDTO<EventBoardDTO, Object[]> getList(PageRequestDTO requestDTO);
+    
+    Long register(EventBoardDTO dto, HttpServletRequest request);
+    
+    PageResultDTO<EventBoardDTO, EventBoard> getList(PageRequestDTO requestDTO);
 
     EventBoardDTO read(Long eventIdx);
 
@@ -21,7 +24,7 @@ public interface EventBoardService {
 
     void remove(Long eventIdx);
 
-    default EventBoardDTO entityToDto(EventBoard entity, Admin admin) {
+    default EventBoardDTO entityToDto(EventBoard entity) {
 
         return EventBoardDTO.builder()
             .eventIdx(entity.getEventIdx())
@@ -30,19 +33,19 @@ public interface EventBoardService {
             .readCount(entity.getReadCount())
             .regDate(entity.getRegDate())
             .modDate(entity.getModDate())
-            .adminId(admin.getAdminId())
+            .admin(entity.getAdmin())
             .build();
     }
 
-    default EventBoard dtoToEntity(EventBoardDTO dto) {
-        return EventBoard.builder()
-                .eventIdx(dto.getEventIdx())
-                .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))
-                .eventTitle(dto.getEventTitle())
-                .eventContent(dto.getEventContent())
-                .readCount(dto.getReadCount())
-                .build();
-    }
+//    default EventBoard dtoToEntity(EventBoardDTO dto) {
+//        return EventBoard.builder()
+//                .eventIdx(dto.getEventIdx())
+//                .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))
+//                .eventTitle(dto.getEventTitle())
+//                .eventContent(dto.getEventContent())
+//                .readCount(dto.getReadCount())
+//                .build();
+//    }
 }
 
 

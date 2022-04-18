@@ -1,4 +1,4 @@
-package com.sejong.cultureuniverse.controller.admin;
+package com.sejong.cultureuniverse.restController;
 
 import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.repository.MemberRepository;

@@ -21,9 +21,8 @@ public class AdminComment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentIdx; //댓글 번호
+    
     private String commentContent; //댓글 내용
-    private LocalDateTime regDate;
-    private LocalDateTime modDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx")

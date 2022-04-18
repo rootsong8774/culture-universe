@@ -12,10 +12,10 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface QnaBoardRepository extends JpaRepository<Qna, Long> {
-    @Query("select q from Qna q left join fetch q.member m where q.questionIdx = :questionIdx")
-    Object getQnaBoardWithQuestionIdx(@Param("questionIdx") Long questionIdx);
+    @Query("select q,m from Qna q left join q.member m where q.questionIdx = :questionIdx")
+    Object getQnaByMember(@Param("questionIdx") Long questionIdx);
 
-    @Query(value = "select ac from AdminComment ac left join fetch ac.qna q where q.questionIdx=:questionIdx")
+    @Query(value = "select ac from AdminComment ac left join fetch ac.qna where ac.qna.questionIdx=:questionIdx")
     List<Object[]> getQnaWithComment(@Param("questionIdx") Long questionIdx);
 
     //질문 + 어드민 번호 +  댓글 갯수 메인 화면 노출 용

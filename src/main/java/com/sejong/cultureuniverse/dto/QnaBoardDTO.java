@@ -19,9 +19,5 @@ public class QnaBoardDTO {
     private LocalDateTime regDate;
     private LocalDateTime modDate;
     private int commentCount;
-
-    //기존 private String commentContent;
-    //추가 adminComment 자료 전부 가져오기 위해
-    private AdminComment adminComment;
 }
 

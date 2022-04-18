@@ -1,18 +1,18 @@
 package com.sejong.cultureuniverse.service.admin;
 
 
+import com.sejong.cultureuniverse.dto.admin.WinnerBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
-import com.sejong.cultureuniverse.dto.admin.WinnerBoardDTO;
-import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventWinner;
+import javax.servlet.http.HttpServletRequest;
 
 
 public interface WinnerBoardService {
 
-    Long register(WinnerBoardDTO dto);
+    Long register(WinnerBoardDTO dto, HttpServletRequest request);
 
-    PageResultDTO<WinnerBoardDTO, Object[]> getList(PageRequestDTO requestDTO);
+    PageResultDTO<WinnerBoardDTO, EventWinner> getList(PageRequestDTO requestDTO);
 
     WinnerBoardDTO read(Long winnerIdx);
 
@@ -21,7 +21,7 @@ public interface WinnerBoardService {
     void remove(Long winnerIdx);
 
 
-    default WinnerBoardDTO entityToDto(EventWinner entity, Admin admin) {
+    default WinnerBoardDTO entityToDto(EventWinner entity) {
         return WinnerBoardDTO.builder()
             .winnerIdx(entity.getWinnerIdx())
             .winTitle(entity.getWinTitle())
@@ -29,19 +29,19 @@ public interface WinnerBoardService {
             .readCount(entity.getReadCount())
             .regDate(entity.getRegDate())
             .modDate(entity.getModDate())
-            .adminId(admin.getAdminId())
+            .admin(entity.getAdmin())
             .build();
     }
 
-    default EventWinner dtoToEntity(WinnerBoardDTO dto) {
-        return EventWinner.builder()
-            .winnerIdx(dto.getWinnerIdx())
-            .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))
-            .winTitle(dto.getWinTitle())
-            .winContent(dto.getWinContent())
-            .readCount(dto.getReadCount())
-            .build();
-    }
+//    default EventWinner dtoToEntity(WinnerBoardDTO dto) {
+//        return EventWinner.builder()
+//            .winnerIdx(dto.getWinnerIdx())
+//            .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))
+//            .winTitle(dto.getWinTitle())
+//            .winContent(dto.getWinContent())
+//            .readCount(dto.getReadCount())
+//            .build();
+//    }
 }
 
 

@@ -1,5 +1,6 @@
 package com.sejong.cultureuniverse.dto.admin;
 
+import com.sejong.cultureuniverse.entity.admin.Admin;
 import java.time.LocalDateTime;
 
 import lombok.*;
@@ -13,8 +14,7 @@ import lombok.*;
 public class EventBoardDTO {
     private Long eventIdx;
 
-    private String adminId;
-    private String adminPw;
+    private Admin admin;
 
     private String eventTitle;
     private String eventContent;
@@ -25,11 +25,5 @@ public class EventBoardDTO {
     private Long readCount;
     private LocalDateTime regDate, modDate;
 
-    public void changeTitle(String eventTitle) {
-        this.eventTitle = eventTitle;
-    }
-
-    public void changeContent(String eventContent) {
-        this.eventContent = eventContent;
-    }
+   
 }

@@ -127,7 +127,7 @@ public class InitDB {
                     .noticeContent("test content" + i)
                     .noticeTitle("test title" + i)
                     .readCount(100L)
-                    .adminId(new Admin("admin" + i, "1234"))
+                    .admin(new Admin("admin" + i, "1234"))
                     .build();
                 System.out.println(noticeBoardRepository.save(noticeBoard));
             });
@@ -140,7 +140,7 @@ public class InitDB {
                     .eventContent("test content" + i)
                     .eventTitle("test title" + i)
                     .readCount(100L)
-                    .adminId(new Admin("admin" + i, "1234"))
+                    .admin(new Admin("admin" + i, "1234"))
                     .build();
                 System.out.println(eventBoardRepository.save(eventBoard));
             });
@@ -153,7 +153,7 @@ public class InitDB {
                     .winContent("test content" + i)
                     .winTitle("test title" + i)
                     .readCount(100L)
-                    .adminId(new Admin("admin" + i, "1234"))
+                    .admin(new Admin("admin" + i, "1234"))
                     .build();
                 System.out.println(winnerBoardRepository.save(eventWinner));
             });

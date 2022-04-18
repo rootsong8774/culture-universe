@@ -23,7 +23,7 @@ public class NoticeBoardRepositoryTest {
                     .noticeContent("test content" + i)
                     .noticeTitle("test title" + i)
                     .readCount(100L)
-                    .adminId(new Admin("admin"+i, "1234"))
+                    .admin(new Admin("admin"+i, "1234"))
                     .build();
                 System.out.println(noticeBoardRepository.save(noticeBoard));
             });
@@ -41,12 +41,11 @@ public class NoticeBoardRepositoryTest {
     public void findAllWithAdminId() {
         PageRequestDTO pageRequestDTO = new PageRequestDTO();
         Pageable pageable = pageRequestDTO.getPageable(Sort.by("noticeIdx").descending());
-        Page<Object[]> result = noticeBoardRepository.findAllWithAdminId(pageable);
-        for (Object[] objects : result) {
-            for (Object object : objects) {
-                System.out.println("object = " + object);
-            }
+        Page<NoticeBoard> result = noticeBoardRepository.findAllWithAdminId(pageable);
+        for (NoticeBoard noticeBoard : result) {
+            System.out.println("noticeBoard.getNoticeTitle() = " + noticeBoard.getNoticeTitle());
         }
+        
     }
     /*
     @Test

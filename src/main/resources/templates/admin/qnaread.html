@@ -2,37 +2,46 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
     <th:block th:fragment="content">
-        <h1 class="mt-4">문의내역 상세 페이지 </h1>
-        <div class="form-group">
-            <label>번호</label>
-            <input type="text" class="form-control" name="questionIdx" th:value="${qnadto.questionIdx}" readonly>
-        </div>
-        <div class="form-group">
-            <label>작성자</label>
-            <input type="text" class="form-control" name="userIdx" th:value="${qnadto.userIdx}" readonly>
-        </div>
-        <div class="form-group">
-            <label>문의유형</label>
-            <input type="text" class="form-control" name="type"  th:value="${qnadto.type}" readonly>
-        </div>
-        <div class="form-group">
-            <label>문의제목</label>
-            <input type="text" class="form-control" name="title" th:value="${qnadto.title}" readonly>
-        </div>
-        <div class="form-group">
-            <label>문의내용</label>
-            <textarea rows="5" class="form-control" name="content" readonly>[[${qnadto.content}]]</textarea>
-        </div>
-        <div class="form-group">
-            <label>등록일</label>
-            <input type="text" class="form-control" name="regDate"
-                   th:value="${#temporals.format(qnadto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
-        </div>
-        <hr>
-        <!--관리자 답글 작성란 -->
-        <div th:id="adminCommentBox" class="adminCommentBox">
-            <h2 class="mt-4">문의내역 답변
-                <span>
+        <div class="container">
+            <div class="row">
+                <div class="md-col-10">
+                    <h1 class="mt-4">문의내역 상세 페이지 </h1>
+                    <div class="form-group">
+                        <label>번호</label>
+                        <input type="text" class="form-control form-control-long" name="questionIdx"
+                               th:value="${qnadto.questionIdx}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>작성자</label>
+                        <input type="text" class="form-control form-control-long" name="userIdx"
+                               th:value="${qnadto.userIdx}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>문의유형</label>
+                        <input type="text" class="form-control form-control-long" name="type"
+                               th:value="${qnadto.type}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>문의제목</label>
+                        <input type="text" class="form-control form-control-long" name="title"
+                               th:value="${qnadto.title}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>문의내용</label>
+                        <textarea rows="5" class="form-control form-control-long" name="content"
+                                  readonly>[[${qnadto.content}]]</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>등록일</label>
+                        <input type="text" class="form-control form-control-long" name="regDate"
+                               th:value="${#temporals.format(qnadto.regDate, 'yyyy/MM/dd HH:mm:ss')}"
+                               readonly>
+                    </div>
+                    <hr>
+                    <!--관리자 답글 작성란 -->
+                    <div th:id="adminCommentBox" class="adminCommentBox">
+                        <h2 class="mt-4">문의내역 답변
+                            <span>
                 <a th:href="@{/admin/qnalist}">
                     <button type="button" class="btn btn-info">목록</button>
                 </a>
@@ -41,45 +50,66 @@
                         <span class="badge badge-secondary commentCount"> 관리자 답변 수 [[${qnadto.commentCount}]]</span>
                 </h5>
                 </span>
-            </h2>
-            <!--            관리자 답글 목록-->
-            <div class="form-group">
-                <table class="type09">
-                    <tr class="cols">
-                        <th th:width="80px" >관리자ID</th>
-                        <th th:width="850px" >댓글</th>
-                        <th th:width="100px">등록일</th>
-                        <th th:width="80px"></th>
-                    </tr>
-                    <tr th:each="comment: ${commentlist}" class="rows" id="removeDetail">
-                        <form th:action="@{/admin/commentdelete/{type}(type=${comment.commentIdx})}"
-                              th:name="commentIdx" th:method="post">
-                            <input type="hidden" th:name="questionIdx" th:value="${comment.questionIdx}">
-                            <td ><p th:text="${comment.adminId}"></p></td>
-                            <td ><p th:text="${comment.commentContent}"></p></td>
-                            <td ><p th:text="${#temporals.format(comment.regDate, 'yyyy/MM/dd')}"></p></td>
-                            <td >
-                                <button type="submit" class="btn btn-danger commentRemove" id="commentRemove">X</button>
-                            </td>
-                        </form>
-                    </tr>
-                    <!--                        관리자 답글 작성 위치 -->
-                    <tr style="display: none" id="detailComment">
-                        <form th:action="@{/admin/qnaregister/{type}(type=${qnadto.questionIdx}) }" th:method="post">
-<!--                            <input type="hidden" th:name="page" th:value="${page}">-->
-                            <input type="hidden" th:name="questionIdx" th:value="${qnadto.questionIdx}">
-                            <input type="hidden" th:name="userIdx" th:value="${qnadto.userIdx}">
-                            <td><input th:name="adminId" placeholder="관리자id"/></td>
-                            <td><textarea th:name="commentContent" th:width="500px" placeholder="답변작성란"
-                                          id="textarea"></textarea></td>
-                            <td th:name="regDate"></td>
-                            <td>
-                                <button type="submit" class="btn btn-primary commentSave" id="commentSave">답변 등록
-                                </button>
-                            </td>
-                        </form>
-                    </tr>
-                </table>
+                        </h2>
+                        <!--            관리자 답글 목록-->
+                        <div class="form-group form-control-long">
+                            <table class="type09">
+
+                                <!--   관리자 답글 header-->
+                                <tr class="cols">
+                                    <th th:width="100px" class="table-header">관리자ID</th>
+                                    <th th:width="900px"  class="table-header">댓글</th>
+                                    <th th:width="120px"  class="table-header">등록일</th>
+                                    <th th:width="80px"  class="table-header"></th>
+                                </tr>
+
+                                <!--   관리자 답글 목록-->
+                                <tr th:each="comment: ${commentlist}" class="rows"
+                                    id="removeDetail">
+                                    <form
+                                        th:action="@{/admin/commentdelete/{type}(type=${comment.commentIdx})}"
+                                        th:name="commentIdx" th:method="post">
+                                        <input type="hidden" th:name="questionIdx" th:value="${comment.questionIdx}">
+                                        <td><p th:text="${comment.adminId}" class="commentAdminId"></p></td>
+                                        <td><p th:text="${comment.commentContent}" class="commentContent"></p></td>
+                                        <td><p
+                                            th:text="${#temporals.format(comment.regDate, 'yyyy/MM/dd')}" class="commentDate"></p>
+                                        </td>
+                                        <td>
+                                            <button type="submit"
+                                                    class="btn btn-danger commentRemove"
+                                                    id="commentRemove">삭제
+                                            </button>
+                                        </td>
+                                    </form>
+                                </tr>
+                                <!--                        관리자 답글 작성 위치 -->
+                                <tr style="display: none" id="detailComment">
+                                    <form
+                                        th:action="@{/admin/qnaregister/{type}(type=${qnadto.questionIdx}) }"
+                                        th:method="post">
+                                        <!--                            <input type="hidden" th:name="page" th:value="${page}">-->
+                                        <input type="hidden" th:name="questionIdx"
+                                               th:value="${qnadto.questionIdx}">
+                                        <input type="hidden" th:name="userIdx"
+                                               th:value="${qnadto.userIdx}">
+                                        <td><p th:name="adminId" th:text="${admin.adminId}"
+                                               th:value="${admin.adminId}"></p></td>
+                                        <td colspan="2"><textarea th:name="commentContent"
+                                                                  placeholder="답변작성란"
+                                                                  id="textarea"></textarea></td>
+                                        <td>
+                                            <button type="submit"
+                                                    class="btn btn-primary commentSave"
+                                                    id="commentSave">답변 등록
+                                            </button>
+                                        </td>
+                                    </form>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -111,6 +141,7 @@
                 text-align: center;
                 line-height: 1.5;
             }
+
             .cols {
                 padding: 10px;
                 font-weight: bold;
@@ -118,7 +149,8 @@
                 color: #369;
                 border-bottom: 3px solid #036;
             }
-            .rows{
+
+            .rows {
                 width: 150px;
                 padding: 10px;
                 vertical-align: top;
@@ -127,12 +159,36 @@
                 text-align: left;
 
             }
-            .commentRemove{
-                padding-left: 20px;
+
+            .commentRemove {
+                width: 78px;
+                padding: 5px 20px;
+                margin: 10px;
             }
+
             #textarea {
                 width: 100%;
                 height: 10%;
+            }
+
+            .form-control-long {
+                width: 1200px;
+            }
+            .commentDate {
+                width: 150px;
+                text-align: center;
+                margin-top: 1rem;
+            }
+            .commentContent{
+                padding: 3px;
+            }
+            .commentAdminId {
+                width: 150px;
+                text-align: center;
+                margin-top: 1rem;
+            }
+            .table-header {
+                padding: 2px 0px;
             }
         </style>
     </th:block>

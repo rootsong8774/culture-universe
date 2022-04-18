@@ -1,49 +1,51 @@
 package com.sejong.cultureuniverse.service.admin;
 
 import com.querydsl.core.BooleanBuilder;
-import com.sejong.cultureuniverse.dto.admin.NoticeBoardAndAdminDTO;
+import com.sejong.cultureuniverse.dto.admin.NoticeBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
-import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
+import javax.servlet.http.HttpServletRequest;
 
 
 public interface NoticeBoardService {
 
-    Long register(NoticeBoardAndAdminDTO dto);
+   
+    
+    Long register(NoticeBoardDTO dto, HttpServletRequest request);
+    
+    PageResultDTO<NoticeBoardDTO, NoticeBoard> getList(PageRequestDTO requestDTO);
 
-    PageResultDTO<NoticeBoardAndAdminDTO, Object[]> getList(PageRequestDTO requestDTO);
+    NoticeBoardDTO read(Long noticeIdx);
 
-    NoticeBoardAndAdminDTO read(Long noticeIdx);
-
-    void modify(NoticeBoardAndAdminDTO dto);
+    void modify(NoticeBoardDTO dto);
 
     void remove(Long noticeIdx);
     BooleanBuilder getSearch(PageRequestDTO requestDTO);
 //db->화면
-    default NoticeBoardAndAdminDTO entityToDto(NoticeBoard entity, Admin admin) {
+    default NoticeBoardDTO entityToDto(NoticeBoard entity) {
 
-        return NoticeBoardAndAdminDTO.builder()
+        return NoticeBoardDTO.builder()
             .noticeIdx(entity.getNoticeIdx())
             .noticeTitle(entity.getNoticeTitle())
             .noticeContent(entity.getNoticeContent())
             .readCount(entity.getReadCount())
             .regDate(entity.getRegDate())
             .modDate(entity.getModDate())
-            .adminId(admin.getAdminId())
+            .admin(entity.getAdmin())
             .build();
 
     }
 //화면->db
-    default NoticeBoard noticeAndAdminToEntity(NoticeBoardAndAdminDTO dto) {
-        return NoticeBoard.builder()
-            .noticeIdx(dto.getNoticeIdx())
-            .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))
-            .noticeTitle(dto.getNoticeTitle())
-            .noticeContent(dto.getNoticeContent())
-            .readCount(dto.getReadCount())
-            .build();
-    }
+//    default NoticeBoard noticeAndAdminToEntity(NoticeBoardDTO dto) {
+//        return NoticeBoard.builder()
+//            .noticeIdx(dto.getNoticeIdx())
+//            .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))
+//            .noticeTitle(dto.getNoticeTitle())
+//            .noticeContent(dto.getNoticeContent())
+//            .readCount(dto.getReadCount())
+//            .build();
+//    }
 }
 
 

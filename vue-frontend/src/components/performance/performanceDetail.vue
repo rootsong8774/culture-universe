@@ -166,6 +166,15 @@ nav > .nav.nav-tabs{
   padding:30px 25px;
 }
 
+nav > div a.nav-item.nav-link,
+nav > div a.nav-item.nav-link.active {
+  border: none;
+  padding: 18px 25px;
+  color: #fff;
+  background: #272e38;
+  border-radius: 0;
+}
+
 nav > div a.nav-item.nav-link:hover,
 nav > div a.nav-item.nav-link:focus
 {

@@ -161,10 +161,10 @@ export default {
   watch: {
     page: function () {
       this.getList();
-      this.$router.push({
-        name: "winnerDetails",
-        query: {page: this.page},
-      })
+      // this.$router.push({
+      //   name: "winnerDetails",
+      //   query: {page: this.page},
+      // })
     }
   }
 

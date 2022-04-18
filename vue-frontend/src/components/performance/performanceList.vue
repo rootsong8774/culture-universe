@@ -7,8 +7,8 @@
           <ul class="clearfix ">
             <li class="item s1" tabindex="0">
               <div class="date_select">
-                <input type="date" name="startDate" v-model="dateRangeStart">-
-                <input type="date" name="endDate" v-model:value="dateRangeEnd">
+                <input type="date" name="startDate" id="startDate" v-model="dateRangeStart">-
+                <input type="date" name="endDate" id="endDate" v-model="dateRangeEnd">
               </div>
             </li>
             <li class="item s2" tabindex="0">
@@ -105,7 +105,7 @@
             </li>
             <li class="item s3" tabindex="0">
               <div class="searchArea">
-                  <input type="search" placeholder="검색" name="title" v-model="title" @change="getList">
+                  <input type="search" placeholder="검색" name="title" v-model="title" @keyup.enter="getList">
               </div>
             </li>
           </ul>
@@ -179,6 +179,7 @@
 <script>
 import axios from "axios";
 import qs from "qs";
+
 axios.defaults.paramsSerializer = (params) => {
   return qs.stringify(params, { arrayFormat: 'repeat' })
 }
@@ -206,6 +207,7 @@ export default {
       }
     }
   },
+
   created() {
     this.getList();
   },
@@ -247,13 +249,12 @@ export default {
         let jsonData = response.data;
         this.resultList = jsonData.dtoList;
         this.pageData = jsonData;
-        console.log(jsonData);
-        console.log(Array.from(this.resultList));
       })
     },
     setPage: function (value) {
       this.page = value;
     },
+
   },
   watch: {
     page: function () {

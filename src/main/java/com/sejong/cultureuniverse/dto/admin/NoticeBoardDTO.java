@@ -1,5 +1,6 @@
 package com.sejong.cultureuniverse.dto.admin;
 
+import com.sejong.cultureuniverse.entity.admin.Admin;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -10,22 +11,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @ToString
 @Data
-public class NoticeBoardAndAdminDTO {
+public class NoticeBoardDTO {
     private Long noticeIdx;
 
-    private String adminId;
-    private String adminPw;
+    private Admin admin;
 
     private String noticeTitle;
     private String noticeContent;
     private Long readCount;
     private LocalDateTime regDate, modDate;
 
-    public void changeTitle(String noticeTitle) {
-        this.noticeTitle = noticeTitle;
-    }
-
-    public void changeContent(String noticeContent) {
-        this.noticeContent = noticeContent;
-    }
+    
 }

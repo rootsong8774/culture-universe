@@ -4,54 +4,56 @@
       <div>
         <h3 id="maintitle">나의 문의내역 상세페이지</h3>
         <br>
-        <span>
-          <a href="#qna">나의 문의 내역</a> /
-          <a href="#adminComment">답변 확인</a>
-          </span>
+<!--        <span>-->
+<!--          <a href="#qna">나의 문의 내역</a> /-->
+<!--          <a href="#adminComment">답변 확인</a>-->
+<!--        </span>-->
       </div>
       <div>
+        <!--          나의 문의 내역 테이블-->
         <div>
-<!--          나의 문의 내역 테이블-->
           <div class="myQna">
-          <table class=table6_2>
-            <h6 class="qna">나의 문의 내역</h6>
-            <tr>
-              <th>문의유형</th>
-              <th>문의제목</th>
-              <th>문의내용</th>
-              <th>문의등록일</th>
-            </tr>
-            <tr class="result-date" v-for="(adminresult,index) in qnaDetailData" :key="index">
-<!--              <td><a href="#qnadetails">{{ adminresult.type }}</a></td>-->
-              <td>{{ adminresult.title }}</td>
-              <td>{{ adminresult.content }}</td>
-<!--              <td>{{ adminresult.regDate }}</td>-->
-            </tr>
-          </table>
+            <table class=table6_2>
+              <h6 class="qna">나의 문의 내역</h6>
+              <tr>
+                <th>문의유형</th>
+                <th>문의제목</th>
+                <th>문의내용</th>
+                <th>문의등록일</th>
+              </tr>
+              <tr >
+                <td>{{ qnaDetailData.type }}</td>
+                <td>{{ qnaDetailData.title }}</td>
+                <td>{{ qnaDetailData.content }}</td>
+                <td>{{ qnaDetailData.regDate  | yyyyMMdd  }}</td>
+              </tr>
+            </table>
           </div>
           <br>
-<!--          관리자 답변 테이블-->
-          <div class="comment">
-          <table class=table6_2>
-            <h6 class="adminComment">관리자 답변</h6>
-            <tr>
-              <th>담당자</th>
-              <th>답변</th>
-              <th>답변등록일</th>
-            </tr>
-            <tr>
-<!--              <td>{{ adminresult.adminId }}</td>-->
-<!--              <td>{{ adminresult.comment }}</td>-->
-<!--              <td>{{ adminresult.regDate }}</td>-->
-            </tr>
-          </table>
+          <!--          관리자 답변 테이블-->
+          <div class="comment" >
+            <table class=table6_2>
+              <h6 class="adminComment">관리자 답변</h6>
+              <tr>
+                <th>담당자</th>
+                <th>답변</th>
+                <th>답변등록일</th>
+              </tr>
+              <tr class="result-date" v-for="(comment,index) in commentDetailData" :key="index">
+                <td>{{ comment.adminId }}</td>
+                <td>{{ comment.commentContent }}</td>
+                <td>{{ comment.regDate | yyyyMMdd }}</td>
+              </tr>
+            </table>
           </div>
+          <br><br>
         </div>
-
-        <!--     페이지 처리-->
+<!--        목록처리-->
+        <div class="btnWrap">
+          <a @click="reservation" class="btn">목록으로</a>
+        </div>
       </div>
     </div>
-    <div style="clear: both;"></div>
   </div>
 </template>
 
@@ -63,40 +65,38 @@ export default {
   data() {
     return {
       noInfo: '문의 내역이 없습니다.',
-      qnaDetailData: {}
+      qnaDetailData: {},
+      commentDetailData: []
     }
   },
   created() {
     this.getDetails();
+    this.getComments();
   },
   filters: {
     yyyyMMdd: function (value) {
       if (value === '') {
         return '';
       }
-
       // 연도, 월, 일 추출
       let year = value[0];
       let month = value[1];
       let day = value[2];
-
       // 월, 일의 경우 한자리 수 값이 있기 때문에 공백에 0 처리
       if (month < 10) {
         month = '0' + month;
       }
-
       if (day < 10) {
         day = '0' + day;
       }
-
       // 최종 포맷 (ex - '2021.10.08')
       return year + '.' + month + '.' + day;
     }
   },
   methods: {
-    getDetails: function () {
+    getDetails:  function () {
       axios({
-        url: 'api/qnaRead',
+        url: 'api/qna/read',
         params: {
           questionIdx: this.$route.query.questionIdx,
         },
@@ -104,8 +104,27 @@ export default {
       }).then(response => {
         this.qnaDetailData = response.data
       })
+    },
+    getComments: function () {
+      axios({
+        url: 'api/qna/adminComment',
+        params: {
+          questionIdx: this.$route.query.questionIdx,
+        },
+        method: 'get',
+      }).then(response => {
+        this.commentDetailData = response.data
+      })
+    },
+    reservation: function () {
+      this.$router.push({name: 'myPageQna'})
     }
-  }
+  },
+  // watch: {
+  //   page: function () {
+  //     this.getComments();
+  //   }
+  // }
 }
 </script>
 

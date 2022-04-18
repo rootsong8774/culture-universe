@@ -3,35 +3,37 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
 
     <th:block th:fragment="content">
-        <h1>문의 게시판(관리자용)</h1>
+        <div class="container">
+            <div class="row">
+                <div class="md-col-10">
 
-        <table class="table table-striped">
+        <h1 class="mt-4">문의 게시판(관리자용)</h1>
+
+        <table class="table table-striped p-5" >
             <thead>
             <tr>
-                <th scope="col">번호</th>
-                <th scope="col">답변처리</th>
-                <th scope="col">문의유형</th>
-                <th scope="col">문의제목</th>
-                <th scope="col">내용</th>
-                <th scope="col">등록일자</th>
+                <th scope="col" class="qnaIdx">문의번호</th>
+                <th scope="col" class="qnaComment">답변처리</th>
+                <th scope="col" class="qnaType">문의유형</th>
+                <th scope="col" class="qnaTitle">문의제목</th>
+                <th scope="col" class="qnaDate">등록일자</th>
 
             </tr>
             </thead>
             <tbody>
             <tr th:each="dto : ${result.dtoList}" >
-                <th scope="row"><a th:href="@{/admin/qnaread(questionIdx=${dto.questionIdx},
+                <td class="qnaIdx font-weight-bold"><a th:href="@{/admin/qnaread(questionIdx=${dto.questionIdx},
                     page= ${result.page})}">  [[${dto.questionIdx}]]</a>
-                </th>
-                <td>---[[${dto.commentCount}]]</td>
-                <td>[[${dto.type}]]</td>
-                <td>[[${dto.title}]]</td>
-                <td>[[${dto.content}]]</td>
-                <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+                </td>
+                <td class="qnaComment">---[[${dto.commentCount}]]</td>
+                <td class="qnaType">[[${dto.type}]]</td>
+                <td class="qnaTitle">[[${dto.title}]]</td>
+                <td class="qnaDate">[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
 
             </tr>
             </tbody>
         </table>
-        <ul class="pagination h-100 justify-content-center align-items-center">
+        <ul class="pagination justify-content-center align-items-center p-4">
 
             <li class="page-item " th:if="${result.prev}">
                 <a class="page-link" th:href="@{/admin/qnalist(page= ${result.start -1},
@@ -53,6 +55,33 @@
             </li>
 
         </ul>
+                </div>
+            </div>
+        </div>
+        <style>
+            .qnaIdx {
+                width: 120px;
+                text-align: center;
+            }
+
+            .qnaTitle {
+                width: 500px;
+                text-align: center;
+            }
+            .qnaComment {
+                width: 120px;
+                text-align: center;
+            }
+            .qnaType {
+                width: 120px;
+                text-align: center;
+            }
+
+            .qnaDate {
+                width: 150px;
+                text-align: center;
+            }
+        </style>
 
     </th:block>
 </th:block>

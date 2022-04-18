@@ -37,7 +37,7 @@ public class ReservationService {
     @Transactional
     public Long reservation(String name, Long... seatsNos) {
         Optional<Member> findMember = memberRepository.findByName(name);
-        if (findMember.isEmpty()) {
+        if (findMember.isEmpty() || seatsNos.length==0) {
             return null;
         }
         Member member = findMember.get();
@@ -52,6 +52,7 @@ public class ReservationService {
                 seat.getPrice());
         
         }).toArray(SeatsReservation[]::new);
+        
         Reservation reservation = Reservation.createReservation(member, seatsReservations);
         
         reservationRepository.save(reservation);
