@@ -1,6 +1,22 @@
 <template>
   <div>
   <div>
+    <div id="leftColumn">
+      <h2>마이페이지</h2>
+      <ul>
+        <h3>예매/취소내역</h3>
+        <li><a href="#">예매내역</a></li>
+        <li><a href="#">예매 취소내역</a></li>
+      </ul>
+      <ul>
+        <h3>문의 내역</h3>
+        <li>
+          <router-link :to="{name:'myPageQna'}">나의 문의내역</router-link>
+        </li>
+<!--        <li><a href="#">문의내역</a></li>-->
+      </ul>
+    </div>
+    <!--//end #leftColumn//-->
     <h3 id="maintitle">나의 문의내역 </h3>
     <div>
       <div>
@@ -134,6 +150,107 @@ export default {
 </script>
 
 <style scoped>
+#leftColumn {
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 160px;
+  font-size: .9em;
+}
+
+#leftColumn p {
+  padding: 10px
+}
+
+
+#leftColumn h2 {
+  margin: 0;
+  padding: 10px 0 0 10px;
+  font-size: 1em;
+}
+
+#leftColumn ul {
+  margin: 0 0 0 0;
+  list-style: none;
+}
+
+#leftColumn li {
+  margin: 4px 0 5px 10px;
+}
+
+#leftColumn li a {
+  text-decoration: underline;
+}
+
+#leftColumn li a:hover {
+  text-decoration: none;
+}
+div, span,
+h1, h2, h3, h4, h5, h6, p, blockquote,
+a, em, q, s, strong, sub, sup, tt, var,
+ul, li, form, label, legend, tbody, tfoot, thead,
+caption { /*table, tr, th, td*/
+  margin-left: 20px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+}
+
+blockquote, q {
+  quotes: "" "";
+}
+
+a {
+  color: #cc0000;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #cccccc;
+  text-decoration: none;
+}
+
+ul {
+  margin: 0 0 0 20px;
+  list-style-type: disc;
+}
+
+li {
+  margin: 4px 0 5px 10px;
+}
+
+blockquote {
+  margin: 1em;
+  padding: .5em;
+  background-color: #eeeeee;
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+}
+
+blockquote p {
+  margin: .2em;
+}
+
 .table6_2 table {
   width: 100%;
   margin: 15px auto;
