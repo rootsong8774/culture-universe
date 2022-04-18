@@ -1,6 +1,7 @@
 <template>
   <div>
   <div>
+
     <div id="leftColumn">
       <h2>마이페이지</h2>
       <ul>
@@ -288,7 +289,7 @@ blockquote p {
 /*custom css */
 table{
   width: 700px;
-  margin-left: 20%;
+  margin: auto;
 }
 #maintitle{
   text-align: center;

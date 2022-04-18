@@ -1,28 +1,9 @@
 <template>
   <div>
-    <!--    <div id="loading">
-          <div id="loading-center">
-            <div id="loading-center-absolute">
-              <div class="object"></div>
-              <div class="object"></div>
-              <div class="object"></div>
-              <div class="object"></div>
-              <div class="object"></div>
-              <div class="object"></div>
-              <div class="object"></div>
-              <div class="object"></div>
-              <div class="object"></div>
-              <div class="object"></div>
-            </div>
-          </div>
-        </div>-->
-
-    <!--End off Preloader -->
 
 
     <div class="culmn">
       <!--Home page style-->
-
 
       <nav class="navbar navbar-default navbar-fixed white no-background bootsnav text-uppercase">
         <!-- Start Top Search -->
@@ -42,37 +23,13 @@
           <div class="attr-nav">
             <ul>
               <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-shopping-bag"></i>
-                  <span class="badge">3</span>
-                </a>
-                <!--                <ul class="dropdown-menu cart-list">
-                                  <li>
-                                    <a href="#" class="photo"><img src="../assets/images/logo.png"
-                                                                   class="cart-thumb" alt=""/></a>
-                                    <h6><a href="#">Delica omtantur </a></h6>
-                                    <p class="m-top-10">2x - <span class="price">$99.99</span></p>
-                                  </li>
-                                  <li>
-                                    <a href="#" class="photo"><img src="../assets/images/logo.png"
-                                                                   class="cart-thumb" alt=""/></a>
-                                    <h6><a href="#">Delica omtantur </a></h6>
-                                    <p class="m-top-10">2x - <span class="price">$99.99</span></p>
-                                  </li>
-                                  <li>
-                                    <a href="#" class="photo"><img src="../assets/images/logo.png"
-                                                                   class="cart-thumb" alt=""/></a>
-                                    <h6><a href="#">Delica omtantur </a></h6>
-                                    <p class="m-top-10">2x - <span class="price">$99.99</span></p>
-                                  </li>
-                                  &lt;!&ndash;&#45;&#45; More List &#45;&#45;&ndash;&gt;
-                                  <li class="total">
-                                    <span class="pull-right"><strong>Total</strong>: $0.00</span>
-                                    <a href="#" class="btn btn-cart">Cart</a>
-                                  </li>
-                                </ul>-->
-              </li>
+<!--              <li class="dropdown">-->
+<!--                <a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+<!--                  <i class="fa fa-shopping-bag"></i>-->
+<!--                  <span class="badge">3</span>-->
+<!--                </a>-->
+
+<!--              </li>-->
 
             </ul>
           </div>
@@ -96,13 +53,13 @@
             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
               <li class="dropdown">
                 <router-link :to="{name:'performanceList', params: {page: 1}}">공연</router-link>
-                <ul class="dropdown-menu">
-                  <li>
-                    <router-link :to="{name: 'performanceList', params: {page: 1}}">공연일정</router-link>
-                  </li>
-                  <li><a href="#">공연달력</a></li>
-                  <li><a href="#">좌석배치도</a></li>
-                </ul>
+<!--                <ul class="dropdown-menu">-->
+<!--                  <li>-->
+<!--                    <router-link :to="{name: 'performanceList', params: {page: 1}}">공연일정</router-link>-->
+<!--                  </li>-->
+<!--                  <li><a href="#">공연달력</a></li>-->
+<!--                  <li><a href="#">좌석배치도</a></li>-->
+<!--                </ul>-->
               </li>
               <li class="dropdown">
                 <router-link :to="{name: 'eventInProgress'}">이벤트</router-link>
