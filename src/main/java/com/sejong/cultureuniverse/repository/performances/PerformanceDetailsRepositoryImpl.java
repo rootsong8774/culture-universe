@@ -9,14 +9,12 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsSearchCondition;
 import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.persistence.EntityManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
-import org.springframework.format.datetime.DateFormatter;
 
 public class PerformanceDetailsRepositoryImpl implements PerformanceDetailsRepositoryCustom {
     

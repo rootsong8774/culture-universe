@@ -22,6 +22,7 @@ public class AdminComment extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentIdx; //댓글 번호
     
+    @Lob
     private String commentContent; //댓글 내용
 
     @ManyToOne(fetch = FetchType.LAZY)

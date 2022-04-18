@@ -236,7 +236,6 @@ export default {
         next: true,
         pageList: []
       },
-      debug: [],
 
     }
   },
@@ -376,7 +375,7 @@ export default {
           "Content-Type": 'application/json'
         },
         data: {
-          name: "sgh8774",
+          username: "sgh8774",
           seatNos: [...Array.from(this.seatNo)]
         },
         dataType: 'json',
@@ -384,7 +383,7 @@ export default {
       }).then(
         console.log(Array.from(this.seatNo)),
         alert('예약에 성공하였습니다.'),
-        this.$router.replace({name: "main"})
+        this.$router.push({name: "main"})
       )
 
     }

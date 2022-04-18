@@ -25,6 +25,8 @@ public class NoticeBoard extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "notice_seq")
     private Long noticeIdx;
     private String noticeTitle;
+    
+    @Lob
     private String noticeContent;
     private Long readCount;
 

@@ -3,7 +3,6 @@ package com.sejong.cultureuniverse.controller.admin;
 import com.sejong.cultureuniverse.dto.admin.NoticeBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.service.admin.NoticeBoardService;
-import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -42,12 +40,11 @@ public class NoticeBoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(NoticeBoardDTO dto, RedirectAttributes redirectAttributes,
-        HttpServletRequest request) {
+    public String registerPost(NoticeBoardDTO dto, RedirectAttributes redirectAttributes) {
         
-        Long noticeIdx = service.register(dto, request);
-        
-        return "redirect:/admin/list";
+        Long noticeIdx = service.register(dto);
+        redirectAttributes.addAttribute("noticeIdx", noticeIdx);
+        return "redirect:/admin/read";
     }
 
     @GetMapping({"/read", "/modify"})

@@ -125,7 +125,7 @@
                       </h4>
                       <form class="sm-frm" style="padding:25px">
                         <label>ID :</label>
-                        <input type="text" class="form-control" placeholder="Enter Email">
+                        <input type="text" class="form-control" placeholder="Enter Username">
                         <label>Password :</label>
                         <input type="text" class="form-control" placeholder="Enter Password">
                         <label><input type="checkbox" name="personality" class="remember"> Remember
@@ -155,18 +155,13 @@
                       <form class="lg-frm" style="padding:25px">
                         <label>이름 :</label>
                         <input type="text" class="form-control" placeholder="Enter Name"
-                               v-model:name="username">
+                               v-model="name">
                         <label>아이디 :</label>
                         <input type="text" class="form-control" placeholder="Enter ID"
-                               v-model:name="name">
+                               v-model="username">
                         <label>비밀번호 :</label>
                         <input type="text" class="form-control" placeholder="Enter Password"
-                               v-model:name="pw">
-                        <label>이메일 :</label>
-                        <input type="email" class="form-control" placeholder="Enter Email"
-                               v-model:name="email">
-                        <label>휴대폰 :</label>
-                        <input type="text" class="form-control" v-model:name="phoneNum"><br>
+                               v-model="password">
                         <button type="submit" class="btn btn-default pull-right" @click="register" >
                           회원가입 완료
                         </button>
@@ -221,9 +216,7 @@ export default {
     return {
       username: '',
       name: '',
-      pw: '',
-      email: '',
-      phoneNum: ''
+      password: '',
     }
   },
   methods: {
@@ -234,9 +227,7 @@ export default {
         data: {
           username: this.username,
           name: this.name,
-          pw: this.pw,
-          email: this.email,
-          phoneNum: this.phoneNum
+          password: this.password,
         },
       }).then(function (response) {
         console.log(response);
@@ -245,10 +236,11 @@ export default {
       }).catch(function (error) {
         console.log(error);
       });
+    },
+    openLogin: function () {
+      $('.bs-example-modal-sm').modal('show');
+    },
 
-
-
-    }
   }
 }
 

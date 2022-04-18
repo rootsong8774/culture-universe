@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface WinnerBoardService {
 
-    Long register(WinnerBoardDTO dto, HttpServletRequest request);
+    Long register(WinnerBoardDTO dto);
 
     PageResultDTO<WinnerBoardDTO, EventWinner> getList(PageRequestDTO requestDTO);
 

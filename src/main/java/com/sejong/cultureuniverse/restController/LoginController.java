@@ -1,7 +1,9 @@
 package com.sejong.cultureuniverse.restController;
 
+import com.sejong.cultureuniverse.dto.MemberDTO;
 import com.sejong.cultureuniverse.entity.Member;
 import com.sejong.cultureuniverse.repository.MemberRepository;
+import com.sejong.cultureuniverse.service.MemberService;
 import java.util.HashMap;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,25 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
 
     @Autowired
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
     @PostMapping("/register")
-    public void registerNew(@RequestBody HashMap<String, String> map) {
-        HashMap<String, String> rtnMap = new HashMap<>();
-
-        rtnMap.put("username", map.get("username"));
-        rtnMap.put("name", map.get("name"));
-        rtnMap.put("pw", map.get("pw"));
-        rtnMap.put("email", map.get("email"));
-        rtnMap.put("phoneNum", map.get("phoneNum"));
-
-        Member member = Member.builder()
-            .username(rtnMap.get("username"))
-            .name(rtnMap.get("name"))
-            .pw(rtnMap.get("pw"))
-            .email(rtnMap.get("email"))
-            .phoneNum(rtnMap.get("phoneNum"))
-            .build();
-        memberRepository.save(member);
+    public void registerNew(@RequestBody MemberDTO memberDTO) {
+       
+        memberService.register(memberDTO);
     }
 }

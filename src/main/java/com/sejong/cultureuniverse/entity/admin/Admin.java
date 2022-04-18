@@ -36,8 +36,9 @@ public class Admin  {
     private String adminId;
     
     @NotBlank
-    @Size(min=8, max = 16)
     private String adminPw;
+    
+    private String role;
 
     public Admin(String adminId, String adminPw) {
         this.adminId = adminId;

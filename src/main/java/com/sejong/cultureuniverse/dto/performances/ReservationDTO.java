@@ -10,6 +10,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ReservationDTO {
     
-    String name;
+    String username;
     Long[] seatNos;
 }

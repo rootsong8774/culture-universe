@@ -3,8 +3,8 @@
     <!--About Sections-->
     <section id="gallery" class="gallery margin-top-120 bg-white">
       <div class="container">
-        <div class="schedule_w item5 row">
-          <ul class="clearfix ">
+        <div class="schedule_w">
+          <ul class="clearfix of-hidden">
             <li class="item s1" tabindex="0">
               <div class="date_select">
                 <input type="date" name="startDate" id="startDate" v-model="dateRangeStart">-

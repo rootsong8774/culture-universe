@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
 
     <th:block th:fragment="content">
 
         <h1 class="mt-4">관리자 페이지 입니다</h1>
-        <h2 th:if="${session.loginAdmin == null}">관리자 메뉴를 사용하시려면 우측 상단의 로그인 버튼을 눌러주세요</h2>
-        <h2 th:if="${session.loginAdmin != null}" th:text="|${admin.adminId} 님 환영합니다.|"></h2>
+        <h2 sec:authorize="isAnonymous()">관리자 메뉴를 사용하시려면 우측 상단의 로그인 버튼을 눌러주세요</h2>
+        <h2 sec:authorize="isAuthenticated()" th:text="|${admin} 님 환영합니다.|"></h2>
 
 
     </th:block>

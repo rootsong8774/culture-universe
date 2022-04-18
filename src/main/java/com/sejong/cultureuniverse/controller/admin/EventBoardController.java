@@ -3,7 +3,6 @@ package com.sejong.cultureuniverse.controller.admin;
 import com.sejong.cultureuniverse.dto.admin.EventBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.service.admin.EventBoardService;
-import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -41,13 +40,13 @@ public class EventBoardController {
     }
     
     @PostMapping("/register")
-    public String registerPost(EventBoardDTO dto, RedirectAttributes redirectAttributes
-        , HttpServletRequest request) {
+    public String registerPost(EventBoardDTO dto, RedirectAttributes redirectAttributes) {
         log.info("dto...." + dto);
         
-        Long eventIdx = service.register(dto,request);
+        Long eventIdx = service.register(dto);
+        redirectAttributes.addAttribute("eventIdx", eventIdx);
         
-        return "redirect:/event/list";
+        return "redirect:/event/read";
     }
     
     @GetMapping({"/read", "/modify"})

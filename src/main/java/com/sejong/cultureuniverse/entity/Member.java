@@ -1,5 +1,7 @@
 package com.sejong.cultureuniverse.entity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,15 +19,18 @@ public class Member {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long userIdx;
-
+    
+    @NotBlank
+    @Size(min = 4, max = 16)
     private String username;
-    private String pw;
+    
+    @NotBlank
+    private String password;
+    
+    
     private String name;
-    private String email;
-    @Lob
-    private Blob profilePic;
-    private String phoneNum;
-    private Date signDate;
+    
+    private String role;
 
 
 }

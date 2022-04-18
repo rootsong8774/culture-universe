@@ -45,7 +45,7 @@ public class ReservationController {
     
     @PostMapping(value = "/reservation")
     public void reservation(@RequestBody ReservationDTO dto) {
-        
-        reservationService.reservation(dto.getName(), dto.getSeatNos());
+        System.out.println(dto.getUsername()+"," + dto.getSeatNos()[0]);
+        reservationService.reservation(dto.getUsername(), dto.getSeatNos());
     }
 }

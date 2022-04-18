@@ -69,7 +69,7 @@ public class QnaBoardServiceImpl implements QnaBoardService {
                 .title((String) result[4])
                 .type((String) result[5])
                 .build(),
-            (Member) Member.builder().userIdx((Long) result[6]).build(),
+            Member.builder().userIdx((Long) result[6]).build(),
             (Long) result[7]);
     }
 
@@ -79,14 +79,13 @@ public class QnaBoardServiceImpl implements QnaBoardService {
         Function<Object[], QnaBoardDTO> fn = (en -> entityToDto(
             Qna.builder()
                 .questionIdx((Long) en[0])
-                .content((String) en[1])
-                .modDate((LocalDateTime) en[2])
-                .regDate((LocalDateTime) en[3])
-                .title((String) en[4])
-                .type((String) en[5])
+                .modDate((LocalDateTime) en[1])
+                .regDate((LocalDateTime) en[2])
+                .title((String) en[3])
+                .type((String) en[4])
                 .build(),
-            (Member) Member.builder().userIdx((Long) en[6]).build(),
-            (Long) en[7]));
+            Member.builder().userIdx((Long) en[5]).build(),
+            (Long) en[6]));
 
         Page<Object[]> result = qnaBoardRepository.getQnaBoardWithCommentCount(
             pageRequestDTO.getPageable(Sort.by("questionIdx").descending()));

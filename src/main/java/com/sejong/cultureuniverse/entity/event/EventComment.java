@@ -19,6 +19,8 @@ public class EventComment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentIdx;
+    
+    @Lob
     private String eventComment;
 
     @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)

@@ -23,14 +23,13 @@ public interface QnaBoardService {
     default Qna dtoToEntity(QnaBoardDTO qnaBoardDTO) {
         Member member = Member.builder()
             .userIdx(qnaBoardDTO.getUserIdx()).build();
-        Qna qna = Qna.builder()
+        return Qna.builder()
             .questionIdx(qnaBoardDTO.getQuestionIdx())
             .content(qnaBoardDTO.getContent())
             .title(qnaBoardDTO.getTitle())
             .type(qnaBoardDTO.getType())
             .member(member)
             .build();
-        return qna;
 
     }
 

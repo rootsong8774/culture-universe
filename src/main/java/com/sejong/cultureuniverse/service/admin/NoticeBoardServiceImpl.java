@@ -1,25 +1,21 @@
 package com.sejong.cultureuniverse.service.admin;
 
 import com.querydsl.core.BooleanBuilder;
-import com.sejong.cultureuniverse.SessionConst;
 import com.sejong.cultureuniverse.dto.admin.NoticeBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
-import com.sejong.cultureuniverse.repository.admin.AdminRepository;
 import com.sejong.cultureuniverse.repository.admin.NoticeBoardRepository;
-
 import java.util.function.Function;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,20 +29,18 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
     //admin을 찾는단계필요
     
     @Override
-    public Long register(NoticeBoardDTO dto, HttpServletRequest request) {
+    public Long register(NoticeBoardDTO dto) {
     
-        HttpSession session = request.getSession();
-        if (session == null) {
-            return null;
-        }
-        Admin admin = (Admin) session.getAttribute(SessionConst.LOGIN_ADMIN);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Admin admin = (Admin) authentication.getPrincipal();
+    
         NoticeBoard noticeBoard = NoticeBoard.builder()
+            .admin(admin)
             .noticeTitle(dto.getNoticeTitle())
             .noticeContent(dto.getNoticeContent())
             .readCount(0L)
-            .admin(admin)
             .build();
-        
+    
         noticeBoardRepository.save(noticeBoard);
         return noticeBoard.getNoticeIdx();
     }

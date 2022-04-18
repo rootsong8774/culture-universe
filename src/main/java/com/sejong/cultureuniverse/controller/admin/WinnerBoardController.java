@@ -1,9 +1,8 @@
 package com.sejong.cultureuniverse.controller.admin;
 
-import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.admin.WinnerBoardDTO;
+import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.service.admin.WinnerBoardService;
-import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -41,15 +40,13 @@ public class WinnerBoardController {
     }
 
     @PostMapping("/register")
-    public String registerPost(WinnerBoardDTO dto, RedirectAttributes redirectAttributes,
-        HttpServletRequest request) {
+    public String registerPost(WinnerBoardDTO dto, RedirectAttributes redirectAttributes) {
         log.info("dto...." + dto);
 
-        Long winnerIdx = service.register(dto, request);
-
-        redirectAttributes.addFlashAttribute("msg", winnerIdx);
-
-        return "redirect:/winner/list";
+        Long winnerIdx = service.register(dto);
+        redirectAttributes.addAttribute("winnerIdx", winnerIdx);
+        
+        return "redirect:/winner/read";
     }
 
     @GetMapping({"/read", "/modify"})
