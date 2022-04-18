@@ -168,12 +168,10 @@ import axios from "axios";
 
 export default {
   name: "qna",
-  props: {
-  },
   data(){
     return {
       //username:'',
-      type: {환불문의:'환불문의', 공연문의:'공연문의',기타:'기타'},
+      type: {refund:'환불문의', performQna:'공연문의',etc:'기타'},
       title: '',
       content: ''
     }
@@ -182,7 +180,9 @@ export default {
     postData:function (){
       axios({
         url: '/api/qna/register',
-        method: 'post',
+        headers: {
+          "Content-Type": 'application/json'
+        },
         data: {
           //username : this.username,
           type: this.type,
@@ -190,17 +190,13 @@ export default {
           content: this.content,
         },
         dataType: 'json',
+        method: 'post',
       }).then(res => {
         console.log(res);
         alert('문의가 등록되었습니다.')
-        // this.$router.replace({name: "qna"})
-        $('.bs-example-modal-lg').modal('hide')
       }).catch(err => {
         console.log(err);
       });
-    },
-    watch() {
-      this.postData();
     },
   }
 }

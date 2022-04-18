@@ -170,7 +170,7 @@ export default {
 /*init*/
 div, span, h3, p, strong,
 a, em, q, s, sub, sup, tt, var,
-ul, li, form, label { /*table, tr, th, td*/
+ul, li, form, label {
   margin-left: 20px;
   padding: 0;
   border: 0;
@@ -270,7 +270,7 @@ table {
 }
 
 #table6_2 th {
-  background-color: #505050;
+  background-color: #2B3F6B;
   color: #FFFFFF
 }
 
@@ -289,7 +289,6 @@ table {
   border: 1px solid #ffffff;
 }
 
-
 /*add custom css */
 
 #maintitle {
@@ -301,96 +300,6 @@ table {
   margin-inline-start: 0.83em;
   margin-inline-end: 0.83em;
   letter-spacing: -0.03em;
-}
-
-.rightColumn {
-  float: right;
-}
-
-/*페이지 위치 조정*/
-.pagination-part{
-
-}
-/*========================================================
-        Blog Page
-==========================================================*/
-
-.main_blog_fashion{
-
-}
-.blog_fashion_left{}
-.blog_fashion_img img{
-  width:100%;
-}
-.blog_fashion_content{
-  padding: 10px 0px;
-  background-color: #fff;
-  width:90%;
-  position: relative;
-  top:-80px;
-}
-.blog_item .breadcrumb,
-.blog_fashion_content .breadcrumb {
-  padding: 8px 0px;
-  margin-bottom: 0px;
-}
-
-
-.blog_fashion_right{}
-.fashion_test{
-  background-color: #f3f3f3;
-  padding:40px 20px 55px 20px;
-}
-.fashion_test img.img-circle{
-  width:125px;
-  height: 125px;
-  margin: 0px auto;
-}
-
-.fashion_praspect{
-  -webkit-perspective: 12500px;
-  perspective:1200px;
-}
-
-.fashion_praspect_inner{
-  padding:30px 40px 50px 20px;
-  transition: .3s;
-  transform: rotateY(25deg);
-}
-
-/*Blog section*/
-.blog_area{
-  width:100%;
-}
-
-.blog_item .breadcrumb li a{
-  font-size:14px;
-  color:#666666;
-}
-.blog_item h5{
-  font-size:18px;
-  font-weight: 700;
-  color:#000000;
-}
-@media (max-width: 1090px) {
-  .col-md-8 {
-    width: 66.66666667%;
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-    float: left;
-  }
-}
-@media (max-width: 1090px) {
-  .col-md-4 {
-    width: 33.33333333%;
-    position: relative;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-    float: left;
-  }
 }
 
 </style>

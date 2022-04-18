@@ -39,7 +39,6 @@
                 <th>공연명</th>
                 <th>관람일</th>
                 <th>매수</th>
-                <th>취소가능일</th>
                 <th>상태</th>
               </tr>
               <tbody class="performDetail">
@@ -49,31 +48,20 @@
                 <td>엑스칼리버</td>
                 <td>2022.05.10.</td>
                 <td>2</td>
-                <td>2022.04.22.</td>
-                <td>예약확정</td>
-              </tr>
-              <tr>
-                <td>2022-03-30</td>
-                <td>B12000000</td>
-                <td>라이언킹</td>
-                <td>2022.04.10.</td>
-                <td>1</td>
-                <td>2022.03.30.</td>
-                <td>예약취소</td>
+                <td>취소버튼ㄴ</td>
               </tr>
               </tbody>
             </table>
           </div>
           <!--  ad-->
-          <div id="ad" class="child">
-            <div class="container">
-              <div class="main_blog_fashion">
+<!--          <div class="child" id="ad">-->
+<!--            <div class="container" id="childContainer">-->
+<!--              <div class="main_blog_fashion">-->
                 <div class="col-md-4">
                   <div class="blog_fashion_right">
                     <div class="fashion_test text-center">
                       <img class="poster" src="../assets/images/ad/cityLightsPoster.jpg" alt="cityLightsPoster"/>
-
-                      <h6 class="m-top-20">금주 추천 공연</h6>
+                      <h6 class="m-top-20" style="color: #4A35B2"><b>금주 추천 공연</b></h6>
                       <p class="m-top-20">찰리 채플린 라이브 콘서트<br>
                         따뜻한 5월, 찰리 채플린의 로맨스가 <br> 한국 관객을 찾아온다!!</p>
                     </div>
@@ -84,14 +72,13 @@
                           영화 또한 그렇다.</p>
                         <p class="text-white">_ 찰리 채플린(Charlie Chaplin)</p>
                       </div>
-                    </div>
-                  </div>
-                </div>
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                </div>-->
               </div>
             </div>
           </div><!-- End off ad -->
-        </div>
-        <!--        all warp-->
+        </div> <!--        all warp-->
         <br>
       </div>      <!--//end #centerColumn//-->
     </div>
@@ -192,7 +179,7 @@ table {
 }
 
 #table6_2 th {
-  background-color: #505050;
+  background-color: #2B3F6B;
   color: #FFFFFF
 }
 
@@ -260,9 +247,10 @@ blockquote {
   letter-spacing: -0.03em;
 }
 
-#resev-detail {
-  font-style: inherit;
-}
+/*#resev-detail {*/
+/*  font-style: inherit;*/
+/*  margin-left: auto;*/
+/*}*/
 
 h5, h6 {
   font-weight: inherit;
@@ -274,14 +262,23 @@ h5, h6 {
 
 .parent {
   display: flex;
+  margin: 0;
+  padding:0;
+  position: static ;
 }
 
-.child {
+.child #childContainer {
   flex: 1;
+  margin: 0;
+  padding:0;
 }
 
 .poster {
   width: 300px;
   height: 150px;
 }
+.blog_fashion_right{
+  margin-right: 0;
+}
+
 </style>
