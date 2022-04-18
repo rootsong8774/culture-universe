@@ -88,9 +88,9 @@
                     <router-link :to="{name: 'qna'}">고객 문의</router-link>
                   </li>
 <!--                  04/10 추가 확인용-->
-                  <li>
-                    <router-link :to="{name: 'myPageQna'}">1:1 문의확인</router-link>
-                  </li>
+<!--                  <li>-->
+<!--                    <router-link :to="{name: 'myPageQna'}">1:1 문의확인</router-link>-->
+<!--                  </li>-->
                 </ul>
               </li>
               <li class="dropdown">
@@ -108,6 +108,7 @@
                 </ul>
               </li>
               <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">로그인/회원가입</a></li>
+              <li><router-link :to="{name: 'myPage'}">마이페이지</router-link></li>
               <!-- login modal -->
               <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
                    aria-labelledby="mySmallModalLabel">
@@ -174,7 +175,7 @@
                   </div>
                 </div>
               </div>
-              <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">마이페이지</a></li>
+
             </ul>
           </div><!-- /.navbar-collapse -->
         </div>
