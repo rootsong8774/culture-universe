@@ -2,7 +2,9 @@
   <div>
     <div id="container">
       <div id="leftColumn">
-        <h2>마이페이지</h2>
+        <h2>
+          <router-link :to="{name: 'myPage'}">마이페이지</router-link>
+        </h2>
         <ul>
           <h3>예매/취소내역</h3>
           <li><a href="#">예매내역</a></li>
@@ -13,51 +15,85 @@
           <li>
             <router-link :to="{name:'myPageQna'}">나의 문의내역</router-link>
           </li>
+          <li>
+            <router-link :to="{name: 'qna'}">1:1 문의하기</router-link>
+          </li>
         </ul>
       </div>
       <!--//end #leftColumn//-->
       <div id="centerColumn">
-        <h2>마이페이지</h2>
-        <h5>공연 최근 예매 내역</h5>
-        <p>고객님께서 최근 3개월간 예매하신 내용입니다</p>
-        <table border="1">
-          <tr>
-            <!--            <th colspan="2">제목</th>-->
-            <th>예매일</th>
-            <th>예매번호</th>
-            <th>공연명</th>
-            <th>관람일</th>
-            <th>매수</th>
-            <th>취소가능일</th>
-            <th>상태</th>
-          </tr>
-          <tr>
-            <td>2022-03-30</td>
-            <td>A11000000</td>
-            <td>엑스칼리버</td>
-            <td>2022.05.10.</td>
-            <td>2</td>
-            <td>2022.04.22.</td>
-            <td>예약확정</td>
-          </tr>
-          <tr>
-            <td>2022-03-30</td>
-            <td>B12000000</td>
-            <td>라이언킹</td>
-            <td>2022.04.10.</td>
-            <td>1</td>
-            <td>2022.03.30.</td>
-            <td>예약취소</td>
-          </tr>
-        </table>
-
+        <h2 id="maintitle">MY PAGE</h2>
         <blockquote>
-          <p><strong>기타 안내 또는 추가 문구</strong><br/>
-            정해진 문구 없음</p>
+          <p><strong>{{ username }}님, 안녕하세요!</strong><br/>
+            세종문화회관을 방문해주셔서 감사합니다.</p>
         </blockquote>
-      </div>
-      <!--//end #centerColumn//-->
+        <br>
+        <div class="parent">
+          <div class="child" id="resev-detail">
+            <h4>최근 공연 예매 내역 |</h4><h6>고객님께서 최근 3개월간 예매하신 내용입니다</h6>
+            <table class="table table-hover" id="table6_2" border="1">
+              <tr>
+                <!--            <th colspan="2">제목</th>-->
+                <th>예매일</th>
+                <th>예매번호</th>
+                <th>공연명</th>
+                <th>관람일</th>
+                <th>매수</th>
+                <th>취소가능일</th>
+                <th>상태</th>
+              </tr>
+              <tbody class="performDetail">
+              <tr>
+                <td>2022-03-30</td>
+                <td>A11000000</td>
+                <td>엑스칼리버</td>
+                <td>2022.05.10.</td>
+                <td>2</td>
+                <td>2022.04.22.</td>
+                <td>예약확정</td>
+              </tr>
+              <tr>
+                <td>2022-03-30</td>
+                <td>B12000000</td>
+                <td>라이언킹</td>
+                <td>2022.04.10.</td>
+                <td>1</td>
+                <td>2022.03.30.</td>
+                <td>예약취소</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--  ad-->
+          <div id="ad" class="child">
+            <div class="container">
+              <div class="main_blog_fashion">
+                <div class="col-md-4">
+                  <div class="blog_fashion_right">
+                    <div class="fashion_test text-center">
+                      <img class="poster" src="../assets/images/ad/cityLightsPoster.jpg" alt="cityLightsPoster"/>
 
+                      <h6 class="m-top-20">금주 추천 공연</h6>
+                      <p class="m-top-20">찰리 채플린 라이브 콘서트<br>
+                        따뜻한 5월, 찰리 채플린의 로맨스가 <br> 한국 관객을 찾아온다!!</p>
+                    </div>
+
+                    <div class="fashion_praspect m-top-40">
+                      <div class="fashion_praspect_inner bg-black">
+                        <p class="text-white">인생은 가까이서 보면 비극이요, 멀리서보면 희극이다.
+                          영화 또한 그렇다.</p>
+                        <p class="text-white">_ 찰리 채플린(Charlie Chaplin)</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- End off ad -->
+        </div>
+        <!--        all warp-->
+        <br>
+      </div>      <!--//end #centerColumn//-->
     </div>
     <!--//end #container//-->
   </div>
@@ -70,11 +106,10 @@ export default {
 </script>
 
 <style scoped>
-
-div, span,
-h1, h2, h3, h4, h5, h6, p, blockquote,
-a, em, q, s, strong, sub, sup, tt, var,
-ul, li, form, label, legend, tbody, tfoot, thead,
+/*init*/
+div, span, h3, p, strong,
+a, em, q, s, sub, sup, tt, var,
+ul, li, form, label, legend, tfoot, thead,
 caption { /*table, tr, th, td*/
   margin-left: 20px;
   padding: 0;
@@ -87,28 +122,14 @@ caption { /*table, tr, th, td*/
   vertical-align: baseline;
 }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: "";
-}
-
-blockquote, q {
-  quotes: "" "";
+/*left-column custom*/
+#leftColumn h2 {
+  margin-right: 10%;
 }
 
 a {
-  color: #cc0000;
-  text-decoration: underline;
+  color: #2B3F6B;
+  text-decoration: none;
 }
 
 a:hover {
@@ -125,31 +146,17 @@ li {
   margin: 4px 0 5px 10px;
 }
 
-blockquote {
-  margin: 1em;
-  padding: .5em;
-  background-color: #eeeeee;
-  border-top: 1px solid #cccccc;
-  border-bottom: 1px solid #cccccc;
-}
-
-blockquote p {
-  margin: .2em;
-}
-
-
 #leftColumn {
   float: left;
   margin: 0;
   padding: 0;
-  width: 160px;
-  font-size: .9em;
+  width: 15%;
+  font-size: 15px;
 }
 
 #leftColumn p {
   padding: 10px
 }
-
 
 #leftColumn h2 {
   margin: 0;
@@ -166,12 +173,63 @@ blockquote p {
   margin: 4px 0 5px 10px;
 }
 
-#leftColumn li a {
-  text-decoration: underline;
-}
 
 #leftColumn li a:hover {
   text-decoration: none;
+}
+
+/*table custom*/
+table {
+  width: 700px;
+  font-size: 13px;
+
+}
+
+#table6_2 table {
+  width: 100%;
+  margin: 15px auto;
+  border: 0;
+}
+
+#table6_2 th {
+  background-color: #505050;
+  color: #FFFFFF
+}
+
+#table6_2, #table6_2 th, #table6_2 td {
+  font-size: 0.95em;
+  text-align: center;
+  padding: 4px;
+  border-collapse: collapse;
+}
+
+#table6_2 tr {
+  border: 1px solid #ffffff;
+}
+
+.performDetail {
+  padding: 4px;
+  text-align: center;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+}
+
+/*login-greeting*/
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+}
+
+
+blockquote {
+  margin: 1em;
+  padding: .5em;
+  background-color: #EFF1F9;
+  border-top: 1px solid #2B3F6B;
+  border-bottom: 1px solid #2B3F6B;
 }
 
 #centerColumn {
@@ -187,9 +245,43 @@ blockquote p {
 #centerColumn h2 {
   margin: 0;
   padding: 10px 0 5px 0;
-  font-size: 1.3em;
   letter-spacing: .1em;
 }
 
+/*custom*/
+#maintitle {
+  font-weight: bold;
+  line-height: 1.15;
+  font-size: 35px;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0.83em;
+  margin-inline-end: 0.83em;
+  letter-spacing: -0.03em;
+}
 
+#resev-detail {
+  font-style: inherit;
+}
+
+h5, h6 {
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: 100%;
+  font-family: inherit;
+  vertical-align: baseline;
+}
+
+.parent {
+  display: flex;
+}
+
+.child {
+  flex: 1;
+}
+
+.poster {
+  width: 300px;
+  height: 150px;
+}
 </style>
