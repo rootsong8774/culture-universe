@@ -10,8 +10,9 @@
         </ul>
         <ul>
           <h3>문의 내역</h3>
-          <li><a href="#">1:1 상담</a></li>
-          <li><a href="#">문의내역</a></li>
+          <li>
+            <router-link :to="{name:'myPageQna'}">나의 문의내역</router-link>
+          </li>
         </ul>
       </div>
       <!--//end #leftColumn//-->
@@ -68,14 +69,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 div, span,
 h1, h2, h3, h4, h5, h6, p, blockquote,
 a, em, q, s, strong, sub, sup, tt, var,
 ul, li, form, label, legend, tbody, tfoot, thead,
 caption { /*table, tr, th, td*/
-  margin: 0;
+  margin-left: 20px;
   padding: 0;
   border: 0;
   outline: 0;

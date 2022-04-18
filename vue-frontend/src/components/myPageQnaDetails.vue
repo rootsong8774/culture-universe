@@ -4,10 +4,10 @@
       <div>
         <h3 id="maintitle">나의 문의내역 상세페이지</h3>
         <br>
-        <span>
-          <a href="#qna">나의 문의 내역</a> /
-          <a href="#adminComment">답변 확인</a>
-        </span>
+<!--        <span>-->
+<!--          <a href="#qna">나의 문의 내역</a> /-->
+<!--          <a href="#adminComment">답변 확인</a>-->
+<!--        </span>-->
       </div>
       <div>
         <!--          나의 문의 내역 테이블-->
@@ -50,7 +50,7 @@
         </div>
 <!--        목록처리-->
         <div class="btnWrap">
-          <a @click="reservation" class="btn">목록</a>
+          <a @click="reservation" class="btn">목록으로</a>
         </div>
       </div>
     </div>

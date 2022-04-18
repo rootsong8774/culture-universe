@@ -24,7 +24,7 @@
 <!--                <td colspan="3">-->
 <!--                  <div class="tb-l">-->
 <!--                    <input type="text" name="subject" value="" class="txt-input"-->
-<!--                           style="width: 405px"/>-->
+<!--                          v-model="username" style="width: 405px"/>-->
 <!--                  </div>-->
 <!--                </td>-->
 <!--              </tr>-->
@@ -36,9 +36,9 @@
                   <div class="tb-l">
                     <select name="qna_type" onchange="">
                       <option value="">문의 유형을 선택해주세요.</option>
-                      <option v-for="(qnaType,key) in types"
+                      <option v-for="(qnaType,key) in type"
                               v-bind:value="qnaType" :key="key"
-                              v-model="types">
+                              v-model="type">
                         {{qnaType}}</option>
                     </select>
                   </div>
@@ -171,21 +171,22 @@ export default {
   },
   data(){
     return {
+      //username:'',
       type: {환불문의:'환불문의', 공연문의:'공연문의',기타:'기타'},
       title: '',
       content: ''
     }
   },
   methods:{
-    // DateFormat(row){
-    //   return moment(row.regDate).format('YYYY-MM-DD');
-    // },
+    DateFormat(row){
+      return moment(row.regDate).format('YYYY-MM-DD');
+    },
     postData:function (){
       axios({
         url: '/api/qna/register',
         method: 'post',
         data: {
-          //username 추가 하기
+          //username : this.username,
           type: this.type,
           title: this.title,
           content: this.content,
