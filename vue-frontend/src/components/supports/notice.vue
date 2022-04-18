@@ -162,10 +162,10 @@ export default {
   watch: {
     page: function () {
       this.getList();
-      this.$router.push({
-        name: "noticeDetails",
-        query: {page: this.page},
-      })
+      // this.$router.push({
+      //   name: "noticeDetails",
+      //   query: {page: this.page},
+      // })
     }
   }
 

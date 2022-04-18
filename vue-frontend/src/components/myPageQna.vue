@@ -1,7 +1,7 @@
 <template>
   <div>
   <div>
-    <h3 id="maintitle">나의 문의내역 </h3>
+    <h3 id="maintitle" class="mt-4">나의 문의내역 </h3>
     <div>
       <div>
         <table class=table6_2>
@@ -171,7 +171,7 @@ export default {
 /*custom css */
 table{
   width: 700px;
-  margin-left: 20%;
+  margin: auto;
 }
 #maintitle{
   text-align: center;
