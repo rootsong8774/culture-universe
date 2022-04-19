@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 
 public interface NoticeBoardRepository extends JpaRepository<NoticeBoard, Long> ,NoticeBoardDetailsRepositoryCustom{
@@ -16,7 +17,7 @@ public interface NoticeBoardRepository extends JpaRepository<NoticeBoard, Long> 
 // NoticeBoard findByNoticeIdx(Long noticeIdx);
     
     @Query("select n from NoticeBoard n left join fetch n.admin where n.noticeIdx=:noticeIdx")
-    NoticeBoard findNoticeBoardAndAdminByNoticeIdx(Long noticeIdx);
+    NoticeBoard findNoticeBoardAndAdminByNoticeIdx(@Param("noticeIdx") Long noticeIdx);
     
     @Query(value = "select n from NoticeBoard n left join fetch n.admin" , countQuery = "select count(n) from NoticeBoard n left join n.admin")
     Page<NoticeBoard> findAllWithAdminId(Pageable pageable);
