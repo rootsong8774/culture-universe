@@ -37,18 +37,21 @@
                 <th>예매일</th>
                 <th>예매번호</th>
                 <th>공연명</th>
-                <th>관람일</th>
+<!--                <th>관람일</th>-->
                 <th>매수</th>
                 <th>상태</th>
               </tr>
-              <tbody class="performDetail">
+              <tbody class="performDetail" v-if="$delete">
               <tr>
                 <td>2022-03-30</td>
                 <td>A11000000</td>
                 <td>엑스칼리버</td>
-                <td>2022.05.10.</td>
+<!--                <td>2022.05.10.</td>-->
                 <td>2</td>
-                <td>취소버튼ㄴ</td>
+                <td><input type="submit" value="예매취소" id="cancel"
+                v-if="reservationData.reservationStatus === 'CANCEL'">
+<!--                <input v-else="reservationData.reservationStatus === 'BOOKED'">-->
+                </td>
               </tr>
               </tbody>
             </table>
@@ -72,13 +75,13 @@
                           영화 또한 그렇다.</p>
                         <p class="text-white">_ 찰리 채플린(Charlie Chaplin)</p>
                       </div>
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-              </div>
-            </div>
-          </div><!-- End off ad -->
-        </div> <!--        all warp-->
+                    </div>
+                  </div>
+                </div>
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>&lt;!&ndash; End off ad &ndash;&gt;-->
+        </div> <!--  parent-->
         <br>
       </div>      <!--//end #centerColumn//-->
     </div>
@@ -87,8 +90,43 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "myPage",
+  data(){
+    return{
+      reservationData:{},
+      deleteData:{},
+    }
+  },
+  created(){
+    this.getReservationDetail();
+  },
+  methods:{
+    getReservationDetail:function(){
+      axios({
+        url:'/api/reservation/reservationlist',
+        params:{
+          reservationId: this.$route.query.reservationId
+        },
+        method:'get',
+      }).then(res=>{
+        this.reservationData = res.data
+      })
+    },
+    deleteData:function (){
+      axios({
+        url: '/api/reservation/delete',
+        params: {
+          reservationId: this.$route.query.reservationId
+        },
+        method: 'post',
+      }).then(response => {
+        this.commentDetailData = response.data
+      })
+    },
+  }
 }
 </script>
 
