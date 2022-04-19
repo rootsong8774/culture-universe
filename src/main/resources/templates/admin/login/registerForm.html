@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+        .field-error {
+            border-color: #dc3545;
+            color: #dc3545;
+        }
+        .input-large {
+            width: 540px;
+        }
+        .form-horizontal {
+            border: solid 1px;
+            padding: 10px;
+        }
+    </style>
+    <title>관리자 등록</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="py-5 text-center">
+            <h2>관리자 등록</h2>
+        </div>
+
+        <form class="form-horizontal" th:action="@{/register}" method="post">
+            <div class="form-group">
+                <label for="adminId" class="col-sm-4 control-label">아이디</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control input-large" name="adminId"
+                           id="adminId" placeholder="adminId" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="adminPw" class="col-sm-4 control-label">비밀번호</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control input-large" name="adminPw"
+                           id="adminPw" placeholder="Password" data-minlength="6" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-4 float-left">
+                    <button type="Submit" class="btn btn-dark btn-lg">가입하기</button>
+                </div>
+                <div class="col-sm-offset-1 col-sm-3 float-left">
+                    <button class="w-100 btn btn-secondary btn-lg"
+                            th:onclick="|location.href='@{/}'|"
+                            type="button">취소</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div> <!-- /container -->
+</body>
+</html>

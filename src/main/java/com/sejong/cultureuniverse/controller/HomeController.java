@@ -1,9 +1,10 @@
 package com.sejong.cultureuniverse.controller;
 
-import com.sejong.cultureuniverse.authorization.argumentResolver.Login;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,12 +25,16 @@ public class HomeController {
 //    }
     
     @GetMapping("/")
-    public String homeLoginV2(@Login Admin admin, Model model) {
-        
-        
-        
+    public String homeLoginV2(Model model) {
+    
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getPrincipal().equals("anonymousUser")) {
+            return "home";
+        }
+        Admin admin = (Admin) authentication.getPrincipal();
+    
         //세션이 유지되면 로그인으로 이동
-        model.addAttribute("admin", admin);
+        model.addAttribute("admin", admin.getAdminId());
         return "home";
     }
 }

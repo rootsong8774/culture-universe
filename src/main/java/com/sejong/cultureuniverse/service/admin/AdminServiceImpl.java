@@ -1,10 +1,11 @@
 package com.sejong.cultureuniverse.service.admin;
 
-import com.sejong.cultureuniverse.dto.admin.AdminLoginDTO;
+import com.sejong.cultureuniverse.dto.admin.AdminDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.repository.admin.AdminRepository;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class AdminServiceImpl implements AdminService {
     
     private final AdminRepository adminRepository;
+    private final PasswordEncoder passwordEncoder;
     
     @Override
     public Admin login(String adminId, String password) {
@@ -21,10 +23,11 @@ public class AdminServiceImpl implements AdminService {
     }
     
     @Override
-    public void register(AdminLoginDTO adminLoginDTO) {
+    public void register(AdminDTO adminDTO) {
         Admin admin = Admin.builder()
-            .adminId(adminLoginDTO.getAdminId())
-            .adminPw(adminLoginDTO.getAdminPw())
+            .adminId(adminDTO.getAdminId())
+            .adminPw(passwordEncoder.encode(adminDTO.getAdminPw()))
+            .role("ROLE_ADMIN")
             .build();
     
         adminRepository.save(admin);

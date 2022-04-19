@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -35,6 +36,8 @@ public class EventBoard extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_seq")
     private Long eventIdx;
     private String eventTitle;
+    
+    @Lob
     private String eventContent;
     private Long readCount;
     

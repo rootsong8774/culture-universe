@@ -12,7 +12,7 @@ public interface NoticeBoardService {
 
    
     
-    Long register(NoticeBoardDTO dto, HttpServletRequest request);
+    Long register(NoticeBoardDTO dto);
     
     PageResultDTO<NoticeBoardDTO, NoticeBoard> getList(PageRequestDTO requestDTO);
 

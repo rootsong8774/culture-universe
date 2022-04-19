@@ -2,7 +2,7 @@
   <div>
     <section id="p_details_info" class="m_details roomy-100 fix">
       <div class="container">
-        <div class="row">
+        <div >
           <div class="main_details">
             <div class="col-md-5">
               <div class="m_details_img">

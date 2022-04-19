@@ -25,6 +25,8 @@ public class EventWinner extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "winner_seq")
     private Long winnerIdx;
     private String winTitle;
+    
+    @Lob
     private String winContent;
     private Long readCount;
 

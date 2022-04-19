@@ -28,10 +28,8 @@ public class Qna extends BaseEntity {
     private Long questionIdx;
     private String title;
     private String type;
-//    @Lob //글이 길어져야 하는것들에 삽입
+    
     private String content;
-    private LocalDateTime regDate;
-    private LocalDateTime modDate;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx")

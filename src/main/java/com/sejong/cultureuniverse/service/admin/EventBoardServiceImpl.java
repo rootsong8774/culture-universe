@@ -1,24 +1,21 @@
 package com.sejong.cultureuniverse.service.admin;
 
-import com.sejong.cultureuniverse.SessionConst;
 import com.sejong.cultureuniverse.dto.admin.EventBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
-
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.event.EventBoard;
 import com.sejong.cultureuniverse.repository.event.EventBoardRepository;
 import java.util.function.Function;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 
 @Service
 @Log4j2
@@ -29,12 +26,10 @@ public class EventBoardServiceImpl implements EventBoardService {
     private final EventBoardRepository eventBoardRepository;
 
     @Override
-    public Long register(EventBoardDTO dto, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        if (session == null) {
-            return null;
-        }
-        Admin admin = (Admin) session.getAttribute(SessionConst.LOGIN_ADMIN);
+    public Long register(EventBoardDTO dto) {
+    
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Admin admin = (Admin) authentication.getPrincipal();
     
         EventBoard eventBoard = EventBoard.builder()
             .admin(admin)

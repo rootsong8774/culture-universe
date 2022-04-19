@@ -26,10 +26,10 @@ public interface QnaBoardRepository extends JpaRepository<Qna, Long> {
         "having q.questionIdx = :questionIdx")
     Object getQnaBoardByQuestionIdx(@Param("questionIdx") Long questionIdx);
 
-    @Query(value = "select q.questionIdx, q.content, q.modDate, q.regDate, q.title, q.type, m.userIdx ,count (ac.commentIdx) " +
+    @Query(value = "select q.questionIdx, q.modDate, q.regDate, q.title, q.type, m.userIdx ,count (ac.commentIdx) " +
         "from Qna q " +
         "left join q.member m left join AdminComment ac on ac.qna = q " +
-        "group by q.questionIdx, q.content, q.modDate, q.regDate, q.title, q.type , m.userIdx ",
+        "group by q.questionIdx, q.modDate, q.regDate, q.title, q.type , m.userIdx ",
         countQuery = "select count (q) from  Qna q")
     Page<Object[]> getQnaBoardWithCommentCount(Pageable pageable);
 }

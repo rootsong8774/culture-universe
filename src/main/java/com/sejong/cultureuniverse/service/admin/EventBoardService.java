@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface EventBoardService {
     
-    Long register(EventBoardDTO dto, HttpServletRequest request);
+    Long register(EventBoardDTO dto);
     
     PageResultDTO<EventBoardDTO, EventBoard> getList(PageRequestDTO requestDTO);
 

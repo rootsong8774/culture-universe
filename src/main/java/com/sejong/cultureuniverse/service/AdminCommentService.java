@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface AdminCommentService {
 
-    Long register(AdminCommentDTO adminCommentDTO, HttpServletRequest request);
+    Long register(AdminCommentDTO adminCommentDTO);
     List<AdminCommentListDTO> getList(Long questionIdx);
 
     void delete(Long commentIdx);

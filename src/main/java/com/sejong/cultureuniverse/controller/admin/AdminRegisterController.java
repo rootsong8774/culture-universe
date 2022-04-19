@@ -1,17 +1,16 @@
 package com.sejong.cultureuniverse.controller.admin;
 
-import com.sejong.cultureuniverse.dto.admin.AdminLoginDTO;
-import com.sejong.cultureuniverse.repository.admin.AdminRepository;
+import com.sejong.cultureuniverse.dto.admin.AdminDTO;
 import com.sejong.cultureuniverse.service.admin.AdminService;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -19,22 +18,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AdminRegisterController {
     
     private final AdminService adminService;
+    private final PasswordEncoder passwordEncoder;
     
     @GetMapping("/register")
-    public String adminRegisterForm(@ModelAttribute("adminLoginDTO") AdminLoginDTO adminLoginDTO) {
-        return "admin/registerForm";
+    public String adminRegisterForm(@ModelAttribute("adminLoginDTO") AdminDTO adminDTO) {
+        return "admin/login/registerForm";
     }
     
     @PostMapping("/register")
-    public String adminRegister(@Validated @ModelAttribute AdminLoginDTO adminLoginDTO,
+    public String adminRegister(@Validated @ModelAttribute AdminDTO adminDTO,
         BindingResult bindingResult, @RequestParam(defaultValue = "/") String redirectURL,
         HttpServletRequest request) {
         
         if (bindingResult.hasErrors()) {
-            return "admin/registerForm";
+            return "admin/login/registerForm";
         }
         
-        adminService.register(adminLoginDTO);
+        adminService.register(adminDTO);
     
         return "redirect:/";
         
