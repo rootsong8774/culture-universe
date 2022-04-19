@@ -302,7 +302,7 @@ export default {
   methods: {
     getDetails: function () {
       axios({
-        url: '/api/performancesDetails',
+        url: '/api/reservation/performancesDetails',
         params: {
           performCode: this.$route.query.performCode,
         },
