@@ -12,7 +12,7 @@ import lombok.ToString.Exclude;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 
-@SuperBuilder
+@Builder
 @Entity
 @Getter
 @AllArgsConstructor

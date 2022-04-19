@@ -2,11 +2,15 @@ package com.sejong.cultureuniverse.service.admin;
 
 import com.querydsl.core.BooleanBuilder;
 import com.sejong.cultureuniverse.SessionConst;
+import com.sejong.cultureuniverse.dto.NoticeBoardDetailSearchCondition;
 import com.sejong.cultureuniverse.dto.admin.NoticeBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
+import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsSearchCondition;
+import com.sejong.cultureuniverse.dto.performances.PerformanceListDTO;
 import com.sejong.cultureuniverse.entity.admin.Admin;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
+import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
 import com.sejong.cultureuniverse.repository.admin.AdminRepository;
 import com.sejong.cultureuniverse.repository.admin.NoticeBoardRepository;
 
@@ -62,7 +66,18 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
         return new PageResultDTO<>(result, fn);
         
     }
-    
+
+    @Override
+    public PageResultDTO<NoticeBoardDTO, NoticeBoard> getSearch(
+
+        PageRequestDTO pageRequestDTO, NoticeBoardDetailSearchCondition condition) {
+
+        Function<NoticeBoard, NoticeBoardDTO> fn = convertFromDetailsToDTO();
+        Page<NoticeBoard> result = noticeBoardRepository.search(condition,
+            pageRequestDTO.getPageable(Sort.by("startDate").ascending()));
+        return  new PageResultDTO<>(result,fn);
+    }
+
     @Override
     public NoticeBoardDTO read(Long noticeIdx) {
         NoticeBoard noticeBoard = noticeBoardRepository.findNoticeBoardAndAdminByNoticeIdx(
@@ -77,6 +92,17 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
             .modDate(noticeBoard.getModDate())
             .build();
         
+    }
+    private Function<NoticeBoard, NoticeBoardDTO> convertFromDetailsToDTO() {
+
+        return (en-> entityToDto(
+            NoticeBoard.builder()
+                .noticeIdx(en.getNoticeIdx())
+                .noticeContent(en.getNoticeContent())
+                .noticeTitle(en.getNoticeTitle())
+                .readCount(en.getReadCount())
+                .build()
+        ));
     }
     
     //업데이트 하는 항목은 제목,내용
@@ -98,42 +124,6 @@ public class NoticeBoardServiceImpl implements NoticeBoardService {
         noticeBoardRepository.deleteByNoticeIdx(noticeIdx);
     }
     
-    @Override
-    public BooleanBuilder getSearch(PageRequestDTO requestDTO) {
-        return null;
-    }
-   /* private BooleanBuilder getSearch(PageRequestDTO requestDTO) {
-        String type = requestDTO.getType();
-        String keyword = requestDTO.getKeyword();
-        BooleanBuilder builder = new BooleanBuilder();
-        QGuestbook qGuestbook = QGuestbook.guestbook;
 
-        BooleanExpression expression = qGuestbook.gno.gt(0L);
-
-        builder.and(expression);
-
-        if (type == null || type.trim().length() == 0) {
-            return builder;
-        }
-
-        BooleanBuilder conditionBuilder = new BooleanBuilder();
-
-        if (type.contains("t")) {
-            conditionBuilder.or(qGuestbook.title.contains(keyword));
-        }
-
-        if (type.contains("c")) {
-            conditionBuilder.or(qGuestbook.content.contains(keyword));
-        }
-
-        if (type.contains("w")) {
-            conditionBuilder.or(qGuestbook.writer.contains(keyword));
-        }
-
-        builder.and(conditionBuilder);
-
-        return builder;
-
-    }*/
 }
 

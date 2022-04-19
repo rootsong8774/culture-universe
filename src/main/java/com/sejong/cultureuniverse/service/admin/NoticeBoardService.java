@@ -1,28 +1,33 @@
 package com.sejong.cultureuniverse.service.admin;
 
 import com.querydsl.core.BooleanBuilder;
+import com.sejong.cultureuniverse.dto.NoticeBoardDetailSearchCondition;
 import com.sejong.cultureuniverse.dto.admin.NoticeBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.paging.PageResultDTO;
+import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsSearchCondition;
+import com.sejong.cultureuniverse.dto.performances.PerformanceListDTO;
 import com.sejong.cultureuniverse.entity.admin.NoticeBoard;
+import com.sejong.cultureuniverse.entity.performance.PerformanceDetails;
+import java.util.function.Function;
 import javax.servlet.http.HttpServletRequest;
 
 
 public interface NoticeBoardService {
 
-   
-    
-    Long register(NoticeBoardDTO dto, HttpServletRequest request);
-    
+    PageResultDTO<NoticeBoardDTO, NoticeBoard> getSearch(PageRequestDTO pageRequestDTO, NoticeBoardDetailSearchCondition condition);
+
     PageResultDTO<NoticeBoardDTO, NoticeBoard> getList(PageRequestDTO requestDTO);
+
+    Long register(NoticeBoardDTO dto, HttpServletRequest request);
 
     NoticeBoardDTO read(Long noticeIdx);
 
     void modify(NoticeBoardDTO dto);
 
     void remove(Long noticeIdx);
-    BooleanBuilder getSearch(PageRequestDTO requestDTO);
-//db->화면
+
+    //db->화면
     default NoticeBoardDTO entityToDto(NoticeBoard entity) {
 
         return NoticeBoardDTO.builder()
@@ -36,50 +41,5 @@ public interface NoticeBoardService {
             .build();
 
     }
-//화면->db
-//    default NoticeBoard noticeAndAdminToEntity(NoticeBoardDTO dto) {
-//        return NoticeBoard.builder()
-//            .noticeIdx(dto.getNoticeIdx())
-//            .adminId(new Admin(dto.getAdminId(), dto.getAdminPw()))
-//            .noticeTitle(dto.getNoticeTitle())
-//            .noticeContent(dto.getNoticeContent())
-//            .readCount(dto.getReadCount())
-//            .build();
-//    }
+
 }
-
-
-/*    @Autowired
-    private NoticeBoardRepository noticeBoardRepository;
-
-
-  public NoticeBoardService(NoticeBoardRepository noticeBoardRepository) {
-        this.noticeBoardRepository = noticeBoardRepository;
-    }
-
-    @Transactional
-    public Long savePost(NoticeBoardDto noticeBoardDto) {
-        return noticeBoardRepository.save(noticeBoardDto.toEntity()).getNoticeIdx();
-    }
-
-    @Transactional
-    public List<NoticeBoardDto> getBoardList() {
-        List<NoticeBoard> boardList = noticeBoardRepository.findAll();
-        List<NoticeBoardDto> boardDtoList = new ArrayList<>();
-
-        for (NoticeBoard noticeBoard : boardList) {
-            NoticeBoardDto boardDto = NoticeBoardDto.builder()
-                .noticeIdx(noticeBoard.getNoticeIdx())
-                .adminId(noticeBoard.getAdminId())
-                .noticeTitle(noticeBoard.getNoticeTitle())
-                .noticeContent(noticeBoard.getNoticeContent())
-                .readCount(noticeBoard.getReadCount())
-                .build();
-            boardDtoList.add(boardDto);
-        }
-        return boardDtoList;
-
-    }
-}
-*/
-
