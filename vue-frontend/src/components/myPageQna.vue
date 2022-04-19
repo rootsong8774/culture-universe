@@ -1,52 +1,69 @@
 <template>
   <div>
-  <div>
-
-    <div id="leftColumn">
-      <h2>마이페이지</h2>
-      <ul>
-        <h3>예매/취소내역</h3>
-        <li><a href="#">예매내역</a></li>
-        <li><a href="#">예매 취소내역</a></li>
-      </ul>
-      <ul>
-        <h3>문의 내역</h3>
-        <li>
-          <router-link :to="{name:'myPageQna'}">나의 문의내역</router-link>
-        </li>
-<!--        <li><a href="#">문의내역</a></li>-->
-      </ul>
-    </div>
-    <!--//end #leftColumn//-->
-    <h3 id="maintitle">나의 문의내역 </h3>
-    <div>
-      <div>
-        <table class=table6_2>
-          <tr>
-            <th>문의번호</th>
-            <th>문의유형</th>
-            <th>문의내용</th>
-            <th>문의등록일</th>
-            <th>문의답변</th>
-          </tr>
-          <tr class="result-date"  v-for="(result,index) in resultList" :key="index">
-            <td>
-              <router-link
-              :to="{name: 'myPageQnaDetails',query:{questionIdx: result.questionIdx}}">
-              {{ result.questionIdx }}
-                </router-link>
-            </td>
-            <td>{{ result.type }}</td>
-            <td>{{ result.content }}</td>
-            <td>{{ result.regDate  | yyyyMMdd }}</td>
-            <td>{{ result.commentCount }}</td>
-          </tr>
-        </table>
+    <div id="container">
+      <div id="leftColumn">
+        <h2>
+          <router-link :to="{name: 'myPage'}">마이페이지</router-link>
+        </h2>
+        <ul>
+          <h3>예매/취소내역</h3>
+          <li><a href="#">예매내역</a></li>
+          <li><a href="#">예매 취소내역</a></li>
+        </ul>
+        <ul>
+          <h3>문의 내역</h3>
+          <li>
+            <router-link :to="{name:'myPageQna'}">나의 문의내역</router-link>
+          </li>
+          <li>
+            <router-link :to="{name: 'qna'}">1:1 문의하기</router-link>
+          </li>
+        </ul>
       </div>
-<!--     페이지 처리-->
+      <!--//end #leftColumn//-->
+      <div id="centerColumn">
+        <h2 id="maintitle">MY PAGE - 나의 문의내역 </h2>
+        <br>
+        <div>
+          <table class="table table-hover" id=table6_2 >
+            <tr>
+              <th style="width: 10%">문의번호</th>
+              <th style="width: 20%">문의유형</th>
+              <th style="width: 40%">문의내용</th>
+              <th style="width: 10%">문의등록일</th>
+              <th style="width: 10%">문의답변</th>
+            </tr>
+            <tbody>
+            <tr class="result-date" v-for="(result,index) in resultList" :key="index">
+              <td>
+                <router-link
+                  :to="{name: 'myPageQnaDetails',query:{questionIdx: result.questionIdx}}">
+                  {{ result.questionIdx }}
+                </router-link>
+              </td>
+              <td>
+                <router-link
+                  :to="{name: 'myPageQnaDetails',query:{questionIdx: result.questionIdx}}">
+                  {{ result.type }}
+                </router-link>
+              </td>
+              <td>
+                <router-link
+                :to="{name: 'myPageQnaDetails',query:{questionIdx: result.questionIdx}}">
+                  {{ result.content }}
+                </router-link>
+              </td>
+              <td>{{ result.regDate  | yyyyMMdd }}</td>
+              <td>{{ result.commentCount }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div> <!--//end #centerColumn//-->
+        <br>
+      </div><!--end center coulmn-main board -->
+      <!--     페이지 처리-->
       <div class="pagination-part text-center">
         <ul class="pagination h-100 justify-content-center align-items-center">
-
           <li class="page-item " v-if="pageData.prev">
             <a class="page-link" @click="setPage(pageData.start-1)" tabindex="-1"
                style="cursor:pointer;">Previous</a>
@@ -62,12 +79,11 @@
             <a class="page-link"
                @click="setPage(pageData.end+1)" style="cursor:pointer;">Next</a>
           </li>
-
         </ul>
       </div><!--/.pagination-part(&raquo;)-->
-    </div>
-  </div>
-  <div style="clear: both;"></div>
+      <br>
+    </div>      <!--//end #container//-->
+    <div style="clear: both;"></div>
   </div>
 </template>
 
@@ -151,46 +167,10 @@ export default {
 </script>
 
 <style scoped>
-#leftColumn {
-  float: left;
-  margin: 0;
-  padding: 0;
-  width: 160px;
-  font-size: .9em;
-}
-
-#leftColumn p {
-  padding: 10px
-}
-
-
-#leftColumn h2 {
-  margin: 0;
-  padding: 10px 0 0 10px;
-  font-size: 1em;
-}
-
-#leftColumn ul {
-  margin: 0 0 0 0;
-  list-style: none;
-}
-
-#leftColumn li {
-  margin: 4px 0 5px 10px;
-}
-
-#leftColumn li a {
-  text-decoration: underline;
-}
-
-#leftColumn li a:hover {
-  text-decoration: none;
-}
-div, span,
-h1, h2, h3, h4, h5, h6, p, blockquote,
-a, em, q, s, strong, sub, sup, tt, var,
-ul, li, form, label, legend, tbody, tfoot, thead,
-caption { /*table, tr, th, td*/
+/*init*/
+div, span, h3, p, strong,
+a, em, q, s, sub, sup, tt, var,
+ul, li, form, label {
   margin-left: 20px;
   padding: 0;
   border: 0;
@@ -202,28 +182,14 @@ caption { /*table, tr, th, td*/
   vertical-align: baseline;
 }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-caption, th, td {
-  text-align: left;
-  font-weight: normal;
-}
-
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: "";
-}
-
-blockquote, q {
-  quotes: "" "";
+/*left-column custom*/
+#leftColumn h2 {
+  margin-right: 10%;
 }
 
 a {
-  color: #cc0000;
-  text-decoration: underline;
+  color: #2B3F6B;
+  text-decoration: none;
 }
 
 a:hover {
@@ -240,59 +206,101 @@ li {
   margin: 4px 0 5px 10px;
 }
 
-blockquote {
-  margin: 1em;
-  padding: .5em;
-  background-color: #eeeeee;
-  border-top: 1px solid #cccccc;
-  border-bottom: 1px solid #cccccc;
+#leftColumn {
+  float: left;
+  margin: 0;
+  padding: 0;
+  width: 15%;
+  font-size: 15px;
 }
 
-blockquote p {
-  margin: .2em;
+#leftColumn p {
+  padding: 10px
 }
 
-.table6_2 table {
-  width: 100%;
+#leftColumn h2 {
+  margin: 0;
+  padding: 10px 0 0 10px;
+  font-size: 1em;
+}
+
+#leftColumn ul {
+  margin: 0 0 0 0;
+  list-style: none;
+}
+
+#leftColumn li {
+  margin: 4px 0 5px 10px;
+}
+
+
+#leftColumn li a:hover {
+  text-decoration: none;
+}
+
+#centerColumn {
+  margin: 0 0 0 180px;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+#centerColumn p {
+  padding: 10px
+}
+
+#centerColumn h2 {
+  margin: 0;
+  padding: 10px 0 5px 0;
+  letter-spacing: .1em;
+}
+
+/*table custom*/
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 800px;
+  /*margin: auto;*/
+}
+
+#table6_2 table {
+  float: left;
+  width: 50%;
   margin: 15px auto;
   border: 0;
 }
 
-.table6_2 th {
-  background-color: #505050;
+#table6_2 th {
+  background-color: #2B3F6B;
   color: #FFFFFF
 }
 
-.table6_2, .table6_2 th, .table6_2 td {
+#table6_2, #table6_2 th, #table6_2 td {
   font-size: 0.95em;
   text-align: center;
   padding: 4px;
   border-collapse: collapse;
 }
-
-.table6_2 th, .table6_2 td {
+#table6_2 th, #table6_2 td {
   border: 1px solid #202020;
   border-width: 1px 0 1px 0
 }
 
-.table6_2 tr {
+#table6_2 tr {
   border: 1px solid #ffffff;
 }
 
-.table6_2 tr:nth-child(odd) {
-  background-color: #c4c4c4;
+/*add custom css */
+
+#maintitle {
+  font-weight: bold;
+  line-height: 1.15;
+  font-size: 35px;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0.83em;
+  margin-inline-end: 0.83em;
+  letter-spacing: -0.03em;
 }
 
-.table6_2 tr:nth-child(even) {
-  background-color: #ffffff;
-}
-/*custom css */
-table{
-  width: 700px;
-  margin: auto;
-}
-#maintitle{
-  text-align: center;
-}
 </style>
 

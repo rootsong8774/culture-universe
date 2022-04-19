@@ -24,7 +24,7 @@ class SeatsRepositoryTest {
     @Autowired
     private SeatsRepository seatsRepository;
     
-    
+//    postman localhost:9090/feign/performances/200
     @Test
     public void registerSchedule() {
         List<PerformanceDetails> detailsList = detailsRepository.findAll();
