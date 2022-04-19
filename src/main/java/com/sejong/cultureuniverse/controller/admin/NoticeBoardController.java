@@ -90,12 +90,12 @@ public class NoticeBoardController {
 
     }
     @GetMapping(value = "/noticeBoardList")
-    public String noticeSearch(PageRequestDTO pageRequestDTO)
+    public String noticeSearch(PageRequestDTO pageRequestDTO, NoticeBoardDetailSearchCondition condition)
         throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
 
         return mapper.registerModule(new JavaTimeModule())
-            .writeValueAsString(service.getSearch(pageRequestDTO));
+            .writeValueAsString(service.getSearch(pageRequestDTO, condition));
 
     }
 }
