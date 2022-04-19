@@ -12,14 +12,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component
+
 public class CustomAuthenticationProvider implements AuthenticationProvider {
     
     @Autowired
     private CustomAdminDetailsService adminDetailsService;
     
     @Autowired
-    private final PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
     
     public CustomAuthenticationProvider(
         PasswordEncoder passwordEncoder) {

@@ -3,7 +3,6 @@ package com.sejong.cultureuniverse.controller.admin;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.sejong.cultureuniverse.dto.NoticeBoardDetailSearchCondition;
 import com.sejong.cultureuniverse.dto.admin.NoticeBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsSearchCondition;
@@ -90,12 +89,13 @@ public class NoticeBoardController {
 
     }
     @GetMapping(value = "/noticeBoardList")
-    public String noticeSearch(PageRequestDTO pageRequestDTO, NoticeBoardDetailSearchCondition condition)
+    public String noticeSearch(PageRequestDTO pageRequestDTO)
         throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
 
         return mapper.registerModule(new JavaTimeModule())
-            .writeValueAsString(service.getSearch(pageRequestDTO, condition));
+            .writeValueAsString(service.getSearch(pageRequestDTO));
 
     }
+  
 }
