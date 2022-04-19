@@ -9,7 +9,7 @@
         <fieldset>
           <div class="table-w">
             <table summary="고객명, 비밀번호, 아이디, 문의자, 연락처, 핸드폰, 문의유형, 파일첨부, 제목, 내용">
-              <caption id="maintitle"><h3>1:1문의 게시판</h3></caption>
+              <caption id="maintitle"><h3>1:1 고객 문의 게시판</h3></caption>
               <colgroup>
                 <col width="85"/>
                 <col width="*"/>
@@ -73,7 +73,7 @@
                 <td colspan="4">
                   <div class="agree">
                     <div class="tb-l">
-                      "*" 필수항목입니다.
+                      <font color=red>"*" 필수항목입니다.</font>
                     </div>
                   </div>
                 </td>
@@ -86,9 +86,13 @@
                         고객만족을 위한 응대를 준비하고 있으니, <br/>
                         폭언이나 욕설은 삼가해 주시고, 따뜻한 마음으로 문의 접수 부탁드립니다.</b></h6>
                     </div>
+                    <button type="submit" class="btn btn-default pull-right" id="button">
+                      문의등록
+                    </button>
                   </div>
                 </td>
               </tr>
+
 <!--              <tr>-->
 <!--                <td colspan="4">-->
 <!--                  <div class="tb-c">-->
@@ -150,9 +154,6 @@
 <!--                  </div>-->
 <!--                </td>-->
 <!--              </tr>-->
-              <button type="submit" class="btn btn-default pull-right">
-                문의등록
-              </button>
               </tbody>
             </table>
           </div>
@@ -167,24 +168,21 @@ import axios from "axios";
 
 export default {
   name: "qna",
-  props: {
-  },
   data(){
     return {
       //username:'',
-      type: {환불문의:'환불문의', 공연문의:'공연문의',기타:'기타'},
+      type: {refund:'환불문의', performQna:'공연문의',etc:'기타'},
       title: '',
       content: ''
     }
   },
   methods:{
-    DateFormat(row){
-      return moment(row.regDate).format('YYYY-MM-DD');
-    },
     postData:function (){
       axios({
         url: '/api/qna/register',
-        method: 'post',
+        headers: {
+          "Content-Type": 'application/json'
+        },
         data: {
           //username : this.username,
           type: this.type,
@@ -192,17 +190,13 @@ export default {
           content: this.content,
         },
         dataType: 'json',
+        method: 'post',
       }).then(res => {
         console.log(res);
         alert('문의가 등록되었습니다.')
-        // this.$router.replace({name: "qna"})
-        $('.bs-example-modal-lg').modal('hide')
       }).catch(err => {
         console.log(err);
       });
-    },
-    watch() {
-      this.postData();
     },
   }
 }
@@ -210,30 +204,33 @@ export default {
 
 <style scoped>
 #contactWrite {
-  min-height: 675px;
-  _height: 675px;
+  width: 900px;
+  margin-left: 20%;
+  /*min-height: 675px;*/
+  /*_height: 675px;*/
 }
+/*테이블 테두리*/
 #contactWrite th,
 #contactWrite td {
   border: 1px solid #d6e2e9;
 }
-
+/*section*/
 #contactWrite th {
-  padding: 10px 0 9px;
-  font-size: 14px;
+  padding: 10px 0 5px;
+  font-size: 16px;
   font-weight: bold;
   color: #414141;
   background-color: #f6f9fa;
 }
 
 #contactWrite th .tb-l {
-  padding-left: 14px;
+  padding-left: 12px;
   letter-spacing: -1px;
 }
 
 #contactWrite td {
   padding: 8px 0 7px;
-  font-size: 12px;
+  font-size: 14px;
   color: #6b6b6b;
   background-color: #fff;
 }
@@ -415,11 +412,19 @@ export default {
 }
 #maintitle{
   text-align: center;
+  font-weight: bold;
+  line-height: 1.15;
+  font-size: 2.5rem;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0.83em;
+  margin-inline-end: 0.83em;
+  letter-spacing: -0.03em;
 }
 h6{
   font-size: small;
 }
-#qnaregister{
-
+#button{
+float: right;
   }
 </style>

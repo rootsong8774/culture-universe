@@ -3,6 +3,7 @@ package com.sejong.cultureuniverse.restController.reservation;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.sejong.cultureuniverse.dto.ReservationRepositoryListDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
 import com.sejong.cultureuniverse.dto.performances.ReservationDTO;
 import com.sejong.cultureuniverse.service.reservation.ReservationService;
@@ -47,5 +48,16 @@ public class ReservationController {
     public void reservation(@RequestBody ReservationDTO dto) {
         System.out.println(dto.getUsername()+"," + dto.getSeatNos()[0]);
         reservationService.reservation(dto.getUsername(), dto.getSeatNos());
+    }
+
+    @GetMapping(value = "/reservationlist")
+    public String getReservationList(Long reservationId) throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.registerModule(new JavaTimeModule())
+            .writeValueAsString(reservationService.getReservation(reservationId));
+    }
+    @PostMapping(value = "/delete")
+    public void delete(@RequestBody ReservationRepositoryListDTO dto) {
+        reservationService.cancelReservation(dto.getReservationId());
     }
 }
