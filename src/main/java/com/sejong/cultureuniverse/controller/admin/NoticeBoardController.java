@@ -1,7 +1,12 @@
 package com.sejong.cultureuniverse.controller.admin;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.sejong.cultureuniverse.dto.NoticeBoardDetailSearchCondition;
 import com.sejong.cultureuniverse.dto.admin.NoticeBoardDTO;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsSearchCondition;
 import com.sejong.cultureuniverse.service.admin.NoticeBoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -84,19 +89,13 @@ public class NoticeBoardController {
         return "redirect:/admin/read";
 
     }
+    @GetMapping(value = "/noticeBoardList")
+    public String noticeSearch(PageRequestDTO pageRequestDTO, NoticeBoardDetailSearchCondition condition)
+        throws JsonProcessingException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        return mapper.registerModule(new JavaTimeModule())
+            .writeValueAsString(service.getSearch(pageRequestDTO, condition));
+
+    }
 }
-/*
-@Autowired
-private NoticeBoardService noticeBoardService;
-    //서비스를 이용하여 공지사항 목록을 가져온다
-   @GetMapping
-    public @ResponseBody List<NoticeBoardDto> getNotices() {
-        return noticeBoardService.getNotices();
-    }
-    //서비스를 이용하여 공지사항을 등록한다 등록후 메인으로 이동
-    @PostMapping
-    public RedirectView newNotices(@ModelAttribute NoticeBoardDto noticeBoardDto) {
-        noticeBoardService.newNotices(noticeBoardDto);
-        return new RedirectView("/admin/noticeboard");
-    }
-}*/
