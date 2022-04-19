@@ -10,17 +10,8 @@
           <form>
             <ul style="text-align: center">
               <li>
-                <select name="language">
-                  <option value="none">=== 전체 ===</option>
-                  <option value="Num">번호</option>
-                  <option value="title">제목</option>
-                  <option value="wregDate">등록일자</option>
-                  <option value="noAndTitle">번호+제목</option>
-                </select>
-              </li>
-              <li>
                 <div class="search">
-                  <input type="text" placeholder="검색어 입력">
+                  <input type="search" placeholder="검색" name="title" v-model="title" @keyup.enter="getList">
                 </div>
               </li>
             </ul>
@@ -98,6 +89,8 @@ export default {
     return {
       page: 1,
       resultList: [],
+      title:'',
+      content: '',
       pageData: {
         dtoList: [],
         totalPage: 13,
@@ -143,6 +136,8 @@ export default {
         url: '/api/notice/noticeList',
         params: {
           page: this.page,
+          title : this.title,
+          content : this.content
         },
         method: 'get',
       }).then(response => {
@@ -162,10 +157,10 @@ export default {
   watch: {
     page: function () {
       this.getList();
-      // this.$router.push({
-      //   name: "noticeDetails",
-      //   query: {page: this.page},
-      // })
+       this.$router.push({
+         name: "noticeDetails",
+         query: {page: this.page},
+       })
     }
   }
 

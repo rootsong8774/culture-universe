@@ -3,7 +3,9 @@ package com.sejong.cultureuniverse.restController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.sejong.cultureuniverse.dto.NoticeBoardDetailSearchCondition;
 import com.sejong.cultureuniverse.dto.paging.PageRequestDTO;
+import com.sejong.cultureuniverse.dto.performances.PerformanceDetailsSearchCondition;
 import com.sejong.cultureuniverse.service.admin.EventBoardService;
 import com.sejong.cultureuniverse.service.admin.NoticeBoardService;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,7 @@ public class NoticeBoardRestController {
             .writeValueAsString(noticeBoardService.getList(pageRequestDTO));
 
     }
+
 
     @GetMapping("/noticeDetails")
     public String noticeDetail(@ModelAttribute("noticeIdx") Long noticeIdx, @ModelAttribute("requestDTO") PageRequestDTO pageRequestDTO)
