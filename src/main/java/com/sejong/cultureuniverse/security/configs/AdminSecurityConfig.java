@@ -1,9 +1,11 @@
 package com.sejong.cultureuniverse.security.configs;
 
+import com.sejong.cultureuniverse.security.filter.JwtAuthenticationFilter;
 import com.sejong.cultureuniverse.security.handler.CustomAccessDeniedHandler;
 import com.sejong.cultureuniverse.security.handler.CustomAuthenticationFailureHandler;
 import com.sejong.cultureuniverse.security.handler.CustomAuthenticationSuccessHandler;
 import com.sejong.cultureuniverse.security.provider.CustomAuthenticationProvider;
+import com.sejong.cultureuniverse.security.provider.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @RequiredArgsConstructor
 @Order(2)
@@ -25,14 +28,17 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
     
     
-        
+       
         private final CustomAuthenticationSuccessHandler authenticationSuccessHandler;
         private final CustomAuthenticationFailureHandler authenticationFailureHandler;
        
+        
         @Override
         public void configure(WebSecurity web) throws Exception {
             web.ignoring().antMatchers("/css/**","/vendor/**");
         }
+    
+        @Bean
         @Override
         public AuthenticationManager authenticationManagerBean() throws Exception {
             return super.authenticationManagerBean();
@@ -53,14 +59,13 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(authenticationSuccessHandler)
                 .failureHandler(authenticationFailureHandler)
                 .permitAll()
-            
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler());
         
             http.
                 csrf().disable();
-        
+            
             
            
         }
