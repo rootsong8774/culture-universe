@@ -8,7 +8,7 @@
             <br/>
             <h2>종료된 이벤트</h2>
             <p>당첨자 확인은 당첨자 페이지에서 확인 해주세요</p>
-
+            &nbsp;
           </div><!--/.section-header-->
           <div class="news-card">
             <div class="row">
@@ -27,9 +27,9 @@
                         </div><!--/.team-box-bg-->
                         <div class="news-box-inner">
                           <h3>
-                            <a href="#">
+<!--                            <a href="#">
                               종료된 이벤트
-                            </a>
+                            </a>-->
                           </h3>
                           <p class="news-meta">
                             이벤트 기간:2022.01.02~2022.02.01

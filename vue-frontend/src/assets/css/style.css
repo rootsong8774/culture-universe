@@ -160,7 +160,7 @@ section { overflow: hidden; }*/
 }
 
 .bg-mega {
-  background-color: #e5e5e5;
+  background-color: #FAB99B;
 }
 
 .bg-grey {
@@ -1048,7 +1048,7 @@ Nav Menu style
 }
 
 .home {
-  background: url(../images/background/Anno1800.jpg) no-repeat top center;
+ <!-- background: url(../images/background/Anno1800.jpg) no-repeat top center;-->
 }
 
 .service-banner {

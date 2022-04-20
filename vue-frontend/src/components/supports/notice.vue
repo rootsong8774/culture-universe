@@ -9,11 +9,11 @@
         <div>
           <form>
             <ul style="text-align: center">
-              <li>
+<!--              <li>
                 <div class="search">
                   <input type="search" placeholder="검색" name="title" v-model="title" @keyup.enter="getList">
                 </div>
-              </li>
+              </li>-->
             </ul>
           </form>
 

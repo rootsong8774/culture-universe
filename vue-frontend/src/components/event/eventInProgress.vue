@@ -9,7 +9,7 @@
         </div>
         <div>
           <form>
-            <ul style="text-align: center">
+<!--            <ul style="text-align: center">
               <li>
                 <select name="language">
                   <option value="none">=== 전체 ===</option>
@@ -24,7 +24,7 @@
                   <input type="text" placeholder="검색어 입력">
                 </div>
               </li>
-            </ul>
+            </ul>-->
           </form>
           <br>
           <table class=table6_2>

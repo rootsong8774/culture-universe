@@ -393,6 +393,8 @@
                 <div >
                   <a href="http://sjartgroups.or.kr/sjartgroups/main/main.do" value="바로가기">
                     <img src="src/assets/images/bg_08.jpg"></a >
+                  &nbsp
+                  <h4>이미지 클릭시 해당 페이지로 이동합니다.</h4>
                 </div>
               </div>
             </div>
