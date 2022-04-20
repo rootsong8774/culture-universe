@@ -126,12 +126,7 @@ export default {
         this.commentDetailData = response.data
       })
     },
-  },
-  // watch: {
-  //   page: function () {
-  //     this.getComments();
-  //   }
-  // }
+  }
 }
 </script>
 

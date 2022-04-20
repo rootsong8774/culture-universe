@@ -36,19 +36,16 @@
                 <!--            <th colspan="2">제목</th>-->
                 <th>예매일</th>
                 <th>예매번호</th>
-                <th>공연명</th>
-<!--                <th>관람일</th>-->
-                <th>매수</th>
+                <th>좌석번호</th>
                 <th>상태</th>
               </tr>
               <tbody class="performDetail" v-if="$delete">
-              <tr>
-                <td>2022-03-30</td>
-                <td>A11000000</td>
-                <td>엑스칼리버</td>
-<!--                <td>2022.05.10.</td>-->
-                <td>2</td>
-                <td><input type="submit" value="예매취소" id="cancel"
+              <tr v-for="(confirm,index) in reservationData" :key="index">
+                <td>{{confirm.reservationDate | yyyyMMdd}}</td>
+                <td>{{confirm.reservationId}}</td>
+                <td>{{confirm.seatNo}}2</td>
+                <td>{{confirm.reservationStatus}}
+                  <input type="submit" value="예매취소" id="cancel"
                 v-if="reservationData.reservationStatus === 'CANCEL'">
 <!--                <input v-else="reservationData.reservationStatus === 'BOOKED'">-->
                 </td>
@@ -57,9 +54,6 @@
             </table>
           </div>
           <!--  ad-->
-<!--          <div class="child" id="ad">-->
-<!--            <div class="container" id="childContainer">-->
-<!--              <div class="main_blog_fashion">-->
                 <div class="col-md-4">
                   <div class="blog_fashion_right">
                     <div class="fashion_test text-center">
@@ -78,14 +72,10 @@
                     </div>
                   </div>
                 </div>
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>&lt;!&ndash; End off ad &ndash;&gt;-->
         </div> <!--  parent-->
         <br>
       </div>      <!--//end #centerColumn//-->
-    </div>
-    <!--//end #container//-->
+    </div>    <!--//end #container//-->
   </div>
 </template>
 
@@ -98,10 +88,35 @@ export default {
     return{
       reservationData:{},
       deleteData:{},
+
     }
   },
   created(){
     this.getReservationDetail();
+  },
+  filters: {
+    yyyyMMdd: function (value) {
+      if (value === '') {
+        return '';
+      }
+
+      // 연도, 월, 일 추출
+      let year = value[0];
+      let month = value[1];
+      let day = value[2];
+
+      // 월, 일의 경우 한자리 수 값이 있기 때문에 공백에 0 처리
+      if (month < 10) {
+        month = '0' + month;
+      }
+
+      if (day < 10) {
+        day = '0' + day;
+      }
+
+      // 최종 포맷 (ex - '2021.10.08')
+      return year + '.' + month + '.' + day;
+    }
   },
   methods:{
     getReservationDetail:function(){
@@ -115,7 +130,7 @@ export default {
         this.reservationData = res.data
       })
     },
-    deleteData:function (){
+    deleteReservation:function (){
       axios({
         url: '/api/reservation/delete',
         params: {

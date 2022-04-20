@@ -375,7 +375,7 @@ export default {
           "Content-Type": 'application/json'
         },
         data: {
-          username: "sgh8774",
+          username: "cucu",
           seatNos: [...Array.from(this.seatNo)]
         },
         dataType: 'json',

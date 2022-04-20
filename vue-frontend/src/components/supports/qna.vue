@@ -21,10 +21,14 @@
                 <td colspan="3">
                   <div class="tb-l">
                     <select name="type" id="type" @change=$event>
-                      <option value="">문의 유형을 선택해주세요.</option>
+                      <option v-model="typeList" value="">문의 유형을 선택해주세요.</option>
                       <option value="환불문의">환불문의</option>
                       <option value="공연문의">공연문의</option>
                       <option value="기타">기타</option>
+<!--                      <option v-for="(qnaType,key) in types"-->
+<!--                              v-bind:value="qnaType" :key="key"-->
+<!--                              v-model="types">-->
+<!--                        {{qnaType}}</option>-->
                     </select>
                   </div>
                 </td>
@@ -96,6 +100,7 @@ export default {
   data(){
     return {
       type:'' ,
+      // type: {환불문의:'환불문의', 공연문의:'공연문의',기타:'기타'},
       title: '',
       content: ''
     }
@@ -122,6 +127,11 @@ export default {
       }).catch(err => {
         console.log(err);
       });
+    }
+  },
+  watch: {
+    type: function () {
+      this.postData();
     }
   }
 }
