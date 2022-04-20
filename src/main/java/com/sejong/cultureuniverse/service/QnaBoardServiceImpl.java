@@ -40,7 +40,7 @@ public class QnaBoardServiceImpl implements QnaBoardService {
     @Override
     @Transactional
     public Long register(QnaDTO qnaDTO) {
-        Optional<Member> member = memberRepository.findByUsername("회원id1");
+        Optional<Member> member = memberRepository.findById(1L);
         if (member.isEmpty()) {
             return null;
         }

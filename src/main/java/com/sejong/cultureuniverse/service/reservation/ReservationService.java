@@ -39,7 +39,7 @@ public class ReservationService {
     @Transactional
 
     public Long reservation(String name, Long... seatsNos) {
-        Optional<Member> findMember = memberRepository.findByName(name);
+        Optional<Member> findMember = memberRepository.findByUsername(name);
         if (findMember.isEmpty() || seatsNos.length == 0) {
 
             return null;

@@ -3,10 +3,13 @@ package com.sejong.cultureuniverse.repository.reservation;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sejong.cultureuniverse.dto.QReservationRepositoryListDTO;
 import com.sejong.cultureuniverse.dto.ReservationRepositoryListDTO;
+import com.sejong.cultureuniverse.entity.QMember;
+import com.sejong.cultureuniverse.entity.reservation.QSeatsReservation;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
+import static com.sejong.cultureuniverse.entity.QMember.member;
 import static com.sejong.cultureuniverse.entity.reservation.QReservation.reservation;
 import static com.sejong.cultureuniverse.entity.reservation.QSeatsReservation.seatsReservation;
 
@@ -19,8 +22,9 @@ public class ReservationRepositoryImpl implements ReservationRepositoryCustom {
 
     @Override
     public List<ReservationRepositoryListDTO> getReservationList(Long reservationId) {
-        return queryFactory
+                return queryFactory
             .select(new QReservationRepositoryListDTO(
+                seatsReservation.reservation.member.userIdx,
                 seatsReservation.reservation.reservationId,
                 seatsReservation.reservation.reservationDate,
                 seatsReservation.sr_no,
