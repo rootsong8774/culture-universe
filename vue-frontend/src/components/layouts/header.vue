@@ -103,7 +103,8 @@
                   </li>
                 </ul>
               </li>
-              <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">로그인/회원가입</a></li>
+              <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm" >로그인/회원가입</a></li>
+
               <li><router-link :to="{name: 'myPage'}">마이페이지</router-link></li>
               <!-- login modal -->
               <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
@@ -121,13 +122,13 @@
                       </h4>
                       <form class="sm-frm" style="padding:25px">
                         <label>ID :</label>
-                        <input type="text" class="form-control" placeholder="Enter Username">
+                        <input type="text" class="form-control" placeholder="Enter Username" v-model:value="username">
                         <label>Password :</label>
-                        <input type="text" class="form-control" placeholder="Enter Password">
+                        <input type="password" class="form-control" placeholder="Enter Password" v-model:value="password">
                         <label><input type="checkbox" name="personality" class="remember"> Remember
                           Me</label>
                         <br>
-                        <button type="button" class="btn btn-default pull-right">로그인</button>
+                        <button type="button" class="btn btn-default pull-right" @click="attemptLogin">로그인</button>
                         <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg"
                                 class="btn btn-default pull-left">회원가입
                         </button>
@@ -156,7 +157,7 @@
                         <input type="text" class="form-control" placeholder="Enter ID"
                                v-model="username">
                         <label>비밀번호 :</label>
-                        <input type="text" class="form-control" placeholder="Enter Password"
+                        <input type="password" class="form-control" placeholder="Enter Password"
                                v-model="password">
                         <button type="submit" class="btn btn-default pull-right" @click="register" >
                           회원가입 완료
@@ -213,6 +214,7 @@ export default {
       username: '',
       name: '',
       password: '',
+      jwtToken: ''
     }
   },
   methods: {
@@ -230,7 +232,24 @@ export default {
         alert('회원가입 성공');
         $('.bs-example-modal-lg').modal('hide');
       }).catch(function (error) {
-        console.log(error);
+        alert(error);
+      });
+    },
+    attemptLogin: function () {
+      axios({
+        url: '/api/login',
+        method: 'post',
+        data: {
+          username: this.username,
+          password: this.password,
+        },
+      }).then(function (response) {
+        console.log(response.data);
+        alert( '로그인에 성공하였습니다.');
+        this.jwtToken=response.data;
+        $('.bs-example-modal-sm').modal('hide');
+      }).catch(function (error) {
+        alert(error);
       });
     },
     openLogin: function () {

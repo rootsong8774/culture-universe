@@ -1,5 +1,6 @@
 package com.sejong.cultureuniverse.entity;
 
+import java.util.Collection;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import lombok.*;
@@ -7,6 +8,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.sql.Blob;
 import java.util.Date;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Builder
@@ -14,7 +17,7 @@ import java.util.Date;
 @NoArgsConstructor
 @Getter
 @ToString
-public class Member {
+public class Member{
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -31,6 +34,6 @@ public class Member {
     private String name;
     
     private String role;
-
-
+    
+    
 }

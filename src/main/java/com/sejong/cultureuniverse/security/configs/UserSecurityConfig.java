@@ -1,18 +1,16 @@
 package com.sejong.cultureuniverse.security.configs;
 
-import com.sejong.cultureuniverse.repository.MemberRepository;
+import com.sejong.cultureuniverse.security.filter.CorsFilter;
 import com.sejong.cultureuniverse.security.filter.JwtAuthenticationFilter;
-import com.sejong.cultureuniverse.security.filter.JwtAuthorizationFilter;
+import com.sejong.cultureuniverse.security.provider.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.filter.CorsFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -20,15 +18,15 @@ import org.springframework.web.filter.CorsFilter;
 @Order(1)
 public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
     
-    private final CorsConfig corsConfig;
-    private final MemberRepository memberRepository;
+    private final CorsFilter corsFilter;
+    private final JwtTokenProvider jwtTokenProvider;
     
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         
         http
-            .addFilter(corsConfig.corsFilter()) //인증이 없을 때는 컨트롤러에 CrossOrigin만으로 충분, 하지만 인증이 필요할때는 필터를 추가해야함
+             //인증이 없을 때는 컨트롤러에 CrossOrigin만으로 충분, 하지만 인증이 필요할때는 필터를 추가해야함
             .csrf().disable()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -36,18 +34,18 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .formLogin().disable()
             .httpBasic().disable()
-            
-//            .addFilter(new JwtAuthenticationFilter(authenticationManager()))
-//            .addFilter(new JwtAuthorizationFilter(authenticationManager(), memberRepository))
         ;
         
         http
             .antMatcher("/api/**")
             .authorizeRequests()
-            .antMatchers("/api/reservation/**")
-            .hasRole("USER")
-            .anyRequest().permitAll();
-        
+//            .antMatchers("/api/reservation/**")
+//            .hasRole("USER")
+            .antMatchers("/api/**").permitAll()
+            .and()
+            .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+                UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(corsFilter, JwtAuthenticationFilter.class);
         
     }
     
