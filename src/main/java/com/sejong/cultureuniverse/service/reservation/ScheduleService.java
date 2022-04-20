@@ -23,10 +23,10 @@ public class ScheduleService {
     private final SeatsRepository seatsRepository;
     
     public PageResultDTO<PerformanceScheduleDTO, PerformanceSchedule> getScheduleList(
-        String performanceCode, PageRequestDTO pageRequestDTO) {
+        String performCode, PageRequestDTO pageRequestDTO) {
         
         Page<PerformanceSchedule> scheduleList = scheduleRepository.findByPerformanceDetails_PerformCode(
-            performanceCode, pageRequestDTO.getPageable(Sort.by("scheduleCode").ascending()));
+            performCode, pageRequestDTO.getPageable(Sort.by("scheduleCode").ascending()));
         
         
         Function<PerformanceSchedule, PerformanceScheduleDTO> fn = (en ->
