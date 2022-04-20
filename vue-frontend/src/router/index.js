@@ -155,9 +155,11 @@ const router = new VueRouter({
     {
       name: 'myPage',
       path: '/myPage/list',
-      component: myPage
+      component: myPage,
+      props: (route) => ({
+        reservationId: route.query.reservationId
+      })
     },
-    //확인용 추가
     {
       name: 'myPageQna',
       path: '/myPageQna/list',

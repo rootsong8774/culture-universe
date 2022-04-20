@@ -105,7 +105,7 @@
               </li>
               <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm" >로그인/회원가입</a></li>
 
-              <li><router-link :to="{name: 'myPage'}">마이페이지</router-link></li>
+              <li><router-link :to="{name: 'myPage',query:{reservationId:1}}">마이페이지</router-link></li>
               <!-- login modal -->
               <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
                    aria-labelledby="mySmallModalLabel">
