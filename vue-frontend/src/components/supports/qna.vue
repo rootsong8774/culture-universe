@@ -1,14 +1,11 @@
 <template>
   <div>
     <div id="contactWrite" style="position:relative;">
-      <!-- 비회원 입력 폼 -->
-      <form id="support_write_form" name="writeForm" enctype="multipart/form-data"
-      @submit="postData"  method="post">
-        <input type="hidden" name="is_member" value="N"/>
-        <input type="hidden" name="logout">
+      <!-- 비회원 입력 폼-->
+      <form id="support_write_form" name="writeForm">
         <fieldset>
           <div class="table-w">
-            <table summary="고객명, 비밀번호, 아이디, 문의자, 연락처, 핸드폰, 문의유형, 파일첨부, 제목, 내용">
+            <table>
               <caption id="maintitle"><h3>1:1 고객 문의 게시판</h3></caption>
               <colgroup>
                 <col width="85"/>
@@ -17,29 +14,17 @@
                 <col width="*"/>
               </colgroup>
               <tbody>
-<!--              <tr>-->
-<!--                <th scope="col">-->
-<!--                  <div class="tb-l">작성자id *</div>-->
-<!--                </th>-->
-<!--                <td colspan="3">-->
-<!--                  <div class="tb-l">-->
-<!--                    <input type="text" name="subject" value="" class="txt-input"-->
-<!--                          v-model="username" style="width: 405px"/>-->
-<!--                  </div>-->
-<!--                </td>-->
-<!--              </tr>-->
               <tr>
                 <th scope="col">
                   <div class="tb-l">문의유형 *</div>
                 </th>
                 <td colspan="3">
                   <div class="tb-l">
-                    <select name="qna_type" onchange="">
+                    <select name="type" id="type" @change=$event>
                       <option value="">문의 유형을 선택해주세요.</option>
-                      <option v-for="(qnaType,key) in type"
-                              v-bind:value="qnaType" :key="key"
-                              v-model="type">
-                        {{qnaType}}</option>
+                      <option value="환불문의">환불문의</option>
+                      <option value="공연문의">공연문의</option>
+                      <option value="기타">기타</option>
                     </select>
                   </div>
                 </td>
@@ -50,7 +35,7 @@
                 </th>
                 <td colspan="3">
                   <div class="tb-l">
-                    <input type="text" name="subject" value="" class="txt-input"
+                    <input type="text" name="title" id="title" value="" class="txt-input"
                            v-model="title"
                            style="width: 405px"/>
                   </div>
@@ -64,7 +49,7 @@
                   <div class="tb-l">
                     <p>평일 업무시간 : AM 09:30 ~ PM 18:00 (주말 , 공휴일 휴무)</p>
                     <font color=blue><b>* 정확하고 빠른 문의파악을 위해 문의사항과 관련된 필수입력정보를 확인하여<br/>내용 기재해 주시기 바랍니다.<br/></b></font>
-                    <textarea name="contents" cols="70" rows="10" onchange=""
+                    <textarea name="content" id="content" cols="70" rows="10"
                               v-model="content"></textarea>
                   </div>
                 </td>
@@ -80,80 +65,18 @@
               </tr>
               <tr>
                 <td colspan="4">
-                  <div class="agree">
+                  <div class="agree" >
                     <div class="tb-l" style='text-align:center;padding:10px;font-size:15px;'>
                       <h6><b>2018년 10월 18일 부터 산업안전보건법에 의거 고객응대근로자 보호 조치가 시행되었습니다.<br/>
                         고객만족을 위한 응대를 준비하고 있으니, <br/>
                         폭언이나 욕설은 삼가해 주시고, 따뜻한 마음으로 문의 접수 부탁드립니다.</b></h6>
                     </div>
-                    <button type="submit" class="btn btn-default pull-right" id="button">
+                    <button type="button" class="btn btn-default pull-right" id="button" @click="postData">
                       문의등록
                     </button>
                   </div>
                 </td>
               </tr>
-
-<!--              <tr>-->
-<!--                <td colspan="4">-->
-<!--                  <div class="tb-c">-->
-<!--                    <h3 class="box-tit">개인정보 수집,이용동의 (필수)-->
-<!--                    </h3>-->
-<!--                    <table border="0" summary="목적, 항목, 보유기간, 동의여부" class="tbl">-->
-<!--                      <caption>개인정보 수집/이용 동의</caption>-->
-<!--                      <colgroup>-->
-<!--                        <col width="*"/>-->
-<!--                        <col width="35%"/>-->
-<!--                        <col width="25%"/>-->
-<!--                        <col width="16%"/>-->
-<!--                      </colgroup>-->
-<!--                      <thead>-->
-<!--                      <tr>-->
-<!--                        <th scope="col">-->
-<!--                          <div>목적</div>-->
-<!--                        </th>-->
-<!--                        <th scope="col">-->
-<!--                          <div>항목</div>-->
-<!--                        </th>-->
-<!--                        <th scope="col">-->
-<!--                          <div>보유기간</div>-->
-<!--                        </th>-->
-<!--                        <th scope="col">-->
-<!--                          <div>동의여부</div>-->
-<!--                        </th>-->
-<!--                      </tr>-->
-<!--                      </thead>-->
-<!--                      <tbody>-->
-<!--                      <tr>-->
-<!--                        <td>-->
-<!--                          <div>1:1문의 답변</div>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                          <div>고객명,비밀번호,이메일,연락처,IP</div>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                          <div>문의내역 삭제시 까지</div>-->
-<!--                        </td>-->
-<!--                        <td>-->
-<!--                          <div>-->
-<!--                            <ul>-->
-<!--                              <li><label><input type="radio" name="privacy_type_A"-->
-<!--                                                value="Y" class="chk-rdo"  checked="checked"/> 동의</label></li>-->
-<!--                              <li><label><input type="radio" name="privacy_type_A"-->
-<!--                                                value="N" /> 미동의</label></li>-->
-<!--                            </ul>-->
-<!--                          </div>-->
-<!--                        </td>-->
-<!--                      </tr>-->
-<!--                      </tbody>-->
-<!--                    </table>-->
-<!--                    <div class="btm-txt">* 수집하는 개인정보는 그 목적에 맞게 사용되며, 미동의 시 서비스 이용이 어렵습니다.-->
-<!--                      <button type="submit" class="btn btn-default pull-right" @click="register" >-->
-<!--                        문의등록-->
-<!--                      </button>-->
-<!--                       </div>-->
-<!--                  </div>-->
-<!--                </td>-->
-<!--              </tr>-->
               </tbody>
             </table>
           </div>
@@ -162,42 +85,44 @@
     </div>
   </div>
 </template>
-<script>
 
+<script>
 import axios from "axios";
 
 export default {
   name: "qna",
+  props: {
+  },
   data(){
     return {
-      //username:'',
-      type: {refund:'환불문의', performQna:'공연문의',etc:'기타'},
+      type:'' ,
       title: '',
       content: ''
     }
   },
   methods:{
     postData:function (){
+      console.log("데이터 실행 확인")
       axios({
         url: '/api/qna/register',
+        method: 'post',
         headers: {
           "Content-Type": 'application/json'
         },
         data: {
-          //username : this.username,
           type: this.type,
           title: this.title,
           content: this.content,
         },
         dataType: 'json',
-        method: 'post',
       }).then(res => {
         console.log(res);
         alert('문의가 등록되었습니다.')
+        this.$router.push({name: "qna"})
       }).catch(err => {
         console.log(err);
       });
-    },
+    }
   }
 }
 </script>
@@ -209,11 +134,13 @@ export default {
   /*min-height: 675px;*/
   /*_height: 675px;*/
 }
+
 /*테이블 테두리*/
 #contactWrite th,
 #contactWrite td {
   border: 1px solid #d6e2e9;
 }
+
 /*section*/
 #contactWrite th {
   padding: 10px 0 5px;
@@ -404,13 +331,15 @@ export default {
   color: #666;
   text-align: left;
 }
+
 /*custom*/
 #contactWrite .table-w {
   padding: 10px;
   padding-left: 25%;
   margin-left: auto;
 }
-#maintitle{
+
+#maintitle {
   text-align: center;
   font-weight: bold;
   line-height: 1.15;
@@ -421,10 +350,12 @@ export default {
   margin-inline-end: 0.83em;
   letter-spacing: -0.03em;
 }
-h6{
+
+h6 {
   font-size: small;
 }
-#button{
-float: right;
-  }
+
+#button {
+  float: right;
+}
 </style>

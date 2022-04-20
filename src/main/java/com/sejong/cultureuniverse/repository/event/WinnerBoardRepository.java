@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.data.repository.query.Param;
 
 
 public interface WinnerBoardRepository extends JpaRepository<EventWinner, Long> ,
@@ -16,7 +17,7 @@ public interface WinnerBoardRepository extends JpaRepository<EventWinner, Long> 
 
     @Query(
         "select w from EventWinner w left join fetch w.admin where w.winnerIdx=:winnerIdx")
-    EventWinner findEventWinnerByWinnerIdx(Long winnerIdx);
+    EventWinner findEventWinnerByWinnerIdx(@Param("winnerIdx") Long winnerIdx);
 
     @Query(value = "select w from EventWinner w left join fetch w.admin", countQuery = "select count(w) from EventWinner w left join w.admin")
     Page<EventWinner> findAllWithAdminId(Pageable pageable);
