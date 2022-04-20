@@ -36,4 +36,18 @@ public class MemberServiceImpl implements MemberService{
         return member.getUserIdx();
     
     }
+    
+    @Override
+    public Member login(MemberDTO memberDTO) {
+        Optional<Member> findMember = memberRepository.findByUsername(memberDTO.getUsername());
+        if (findMember.isEmpty()) {
+            throw new IllegalArgumentException("아이디 혹은 비밀번호가 잘못 되었습니다.");
+        }
+        Member member = findMember.get();
+        if (!passwordEncoder.matches(memberDTO.getPassword(), member.getPassword())) {
+            throw new IllegalArgumentException("아이디 혹은 비밀번호가 잘못 되었습니다.");
+        }
+        
+        return member;
+    }
 }

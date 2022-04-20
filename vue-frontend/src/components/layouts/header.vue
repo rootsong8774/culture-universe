@@ -23,13 +23,7 @@
           <div class="attr-nav">
             <ul>
               <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-<!--              <li class="dropdown">-->
-<!--                <a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
-<!--                  <i class="fa fa-shopping-bag"></i>-->
-<!--                  <span class="badge">3</span>-->
-<!--                </a>-->
 
-<!--              </li>-->
 
             </ul>
           </div>
@@ -53,13 +47,7 @@
             <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
               <li class="dropdown">
                 <router-link :to="{name:'performanceList', params: {page: 1}}">공연</router-link>
-<!--                <ul class="dropdown-menu">-->
-<!--                  <li>-->
-<!--                    <router-link :to="{name: 'performanceList', params: {page: 1}}">공연일정</router-link>-->
-<!--                  </li>-->
-<!--                  <li><a href="#">공연달력</a></li>-->
-<!--                  <li><a href="#">좌석배치도</a></li>-->
-<!--                </ul>-->
+
               </li>
               <li class="dropdown">
                 <router-link :to="{name: 'eventInProgress'}">이벤트</router-link>
@@ -124,11 +112,11 @@
                         <label>ID :</label>
                         <input type="text" class="form-control" placeholder="Enter Username" v-model:value="username">
                         <label>Password :</label>
-                        <input type="password" class="form-control" placeholder="Enter Password" v-model:value="password">
+                        <input type="password" class="form-control" placeholder="Enter Password" v-model:value="password" >
                         <label><input type="checkbox" name="personality" class="remember"> Remember
                           Me</label>
                         <br>
-                        <button type="button" class="btn btn-default pull-right" @click="attemptLogin">로그인</button>
+                        <button type="button" class="btn btn-default pull-right" @click="attemptLogin" >로그인</button>
                         <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg"
                                 class="btn btn-default pull-left">회원가입
                         </button>
@@ -183,14 +171,7 @@
           <div class="row">
             <div class="main_home text-center">
               <div class="home_text">
-<!--                <h4 class="text-white text-uppercase">a new creative studio</h4>-->
-<!--                <h1 class="text-white text-uppercase">good design is always in season</h1>-->
 
-<!--                <div class="separator"></div>-->
-
-<!--                <h5 class=" text-uppercase text-white"><em>One day, the dream will come true with-->
-<!--                  lorem ipsum dolor sit amet,-->
-<!--                  consectetuer adipiscing elit, nummy nibh euismod tincidunt laoreet.</em></h5>-->
               </div>
             </div>
           </div><!--End off row-->
@@ -204,6 +185,8 @@
 <script>
 import axios from 'axios';
 
+const storage = window.sessionStorage;
+
 export default {
   name: "LayoutHeader",
   props: {
@@ -214,10 +197,20 @@ export default {
       username: '',
       name: '',
       password: '',
-      jwtToken: ''
+      jwtToken: '',
+      status: ''
     }
   },
   methods: {
+    setInfo: function(jwtToken) {
+      this.jwtToken = jwtToken;
+    },
+    logout: function() {
+      storage.setItem("jwt-auth-token","");
+      storage.setItem("login_user", "");
+      this.setInfo("");
+    },
+
     register: function () {
       axios({
         url: '/api/register',
@@ -236,6 +229,8 @@ export default {
       });
     },
     attemptLogin: function () {
+      // storage.setItem("jwt-auth-token","");
+      // storage.setItem("login_user", "");
       axios({
         url: '/api/login',
         method: 'post',
@@ -244,12 +239,23 @@ export default {
           password: this.password,
         },
       }).then(function (response) {
-        console.log(response.data);
-        alert( '로그인에 성공하였습니다.');
-        this.jwtToken=response.data;
+        if (response.data.status) {
+          alert(response.data.data.username+ "로 로그인 되었습니다.");
+
+          console.log(response.headers["jwt-auth-token"]);
+          this.setInfo(response.headers["jwt-auth-token"]);
+          storage.setItem('jwt-auth-token', this.jwtToken);
+          storage.setItem('login_user', response.data.data.username);
+          console.log(storage.getItem("jwt-auth-token"))
+        } else {
+          this.setInfo("");
+          alert("입력 정보가 잘못 되었습니다.")
+        }
+
+        console.log(response);
         $('.bs-example-modal-sm').modal('hide');
       }).catch(function (error) {
-        alert(error);
+        // this.setInfo(JSON.stringify(error.response || error.message));
       });
     },
     openLogin: function () {

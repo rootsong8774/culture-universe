@@ -1,5 +1,9 @@
 package com.sejong.cultureuniverse.security.filter;
 
+import static com.sejong.cultureuniverse.security.jwt.JwtProperties.HEADER_STRING;
+import static com.sejong.cultureuniverse.security.jwt.JwtProperties.SECRET;
+import static com.sejong.cultureuniverse.security.jwt.JwtProperties.TOKEN_PREFIX;
+
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.sejong.cultureuniverse.entity.Member;
@@ -7,7 +11,6 @@ import com.sejong.cultureuniverse.repository.MemberRepository;
 import com.sejong.cultureuniverse.security.service.MemberContext;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.FilterChain;
@@ -37,17 +40,17 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
         FilterChain chain) throws IOException, ServletException {
         
-        String jwtHeader = request.getHeader("Authorization");
+        String jwtHeader = request.getHeader(HEADER_STRING);
         
         //header가 있는지 확인
-        if (jwtHeader == null || !jwtHeader.startsWith("Bearer")) {
+        if (jwtHeader == null || !jwtHeader.startsWith(TOKEN_PREFIX)) {
             chain.doFilter(request, response);
             return;
         }
         
-        String jwtToken = request.getHeader("Authorization").replace("Bearer ", "");
+        String jwtToken = request.getHeader(HEADER_STRING).replace(TOKEN_PREFIX+" ", "");
         
-        String username = JWT.require(Algorithm.HMAC512("culture-universe")).build()
+        String username = JWT.require(Algorithm.HMAC512(SECRET)).build()
             .verify(jwtToken).getClaim("username").asString();
     
         if (username != null) {

@@ -11,4 +11,8 @@ public interface MemberService {
     Optional<Member> findByUsername(String username);
     
     Long register(MemberDTO memberDTO);
+    
+    Member login(MemberDTO memberDTO);
+    
+    
 }
