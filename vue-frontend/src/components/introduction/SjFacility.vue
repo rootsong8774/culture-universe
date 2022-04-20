@@ -17,9 +17,10 @@
             </div>
           </li>
         </ul>
-        <br>
-        <br>
-        <div>
+
+        <div class="content-section">
+          <br>
+          <br>
           <div v-show="currentTab == 0" class="tab-cont">
             <img id="theater" src="src/assets/images/t1.jpg" alt="대극장 이미지"><br>
           </div>
@@ -35,6 +36,7 @@
           <div v-show="currentTab == 4" class="tab-cont">
             <img id="artTheater" src="src/assets/images/t5.jpg" alt="세종예술동 이미지"><br>
           </div>
+          <br>
         </div>
         <br>
       </div>
@@ -109,7 +111,7 @@ ul, li {
   justify-content: space-around;
   align-items: flex-end;
   list-style: none;
-  border-bottom: 1px solid #ffa594;
+  border-bottom: 1px solid #FAB99B;
 }
 
 .tabItem {
@@ -119,16 +121,16 @@ ul, li {
   height: 60px;
   flex-basis: 20%;
   flex-shrink: 0;
-  border-left: 1px solid #ffa594;
-  border-right: 1px solid #ffa594;
-  border-top: 1px solid #ffa594;
+  border-left: 1px solid #FAB99B;
+  border-right: 1px solid #FAB99B;
+  border-top: 1px solid #FAB99B;
   border-radius: 10px 10px 0 0;
   font-weight: bold;
   text-align: center;
 }
 
 .tabItem.active {
-  background-color: #ffa594;
+  background-color: #FAB99B;
 }
 
 .tabContent {
@@ -136,7 +138,7 @@ ul, li {
 }
 
 .tabContent > a {
-  color: #ce8483;
+  color: #966666;
 }
 
 .tabMenu {
@@ -144,7 +146,10 @@ ul, li {
   justify-content: space-around;
   align-items: flex-end;
   list-style: none;
-  border-bottom: 1px solid #ffa594;
+  border-bottom: 1px solid #FAB99B;
 }
-
+.content-section{
+  border: 0.4em outset #FAB99B;
+  border-radius: 2px;
+}
 </style>

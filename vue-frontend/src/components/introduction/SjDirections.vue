@@ -17,25 +17,27 @@
             </div>
           </li>
         </ul>
-        <br>
-        <br>
-        <div>
-          <div v-show="currentTab == 0" class="tab-cont">
-            <br>
-            <img src="src/assets/images/p1.jpg" alt=""><br><br>
+        <div class="round-section">
+          <br>
+          <br>
+          <div>
+            <div v-show="currentTab == 0" class="tab-cont">
+              <br>
+              <img src="src/assets/images/p1.jpg" alt=""><br><br>
+            </div>
+            <div v-show="currentTab == 1" class="tab-cont">
+              <br>
+              <img src="src/assets/images/p2.jpg" alt=""><br><br>
+            </div>
+            <div v-show="currentTab == 2" class="tab-cont">
+              <img src="src/assets/images/p3.jpg" alt="지하철"><br>
+            </div>
           </div>
-          <div v-show="currentTab == 1" class="tab-cont">
-            <br>
-            <img src="src/assets/images/p2.jpg" alt=""><br><br>
-          </div>
-          <div v-show="currentTab == 2" class="tab-cont">
-            <img src="src/assets/images/p3.jpg" alt="지하철" ><br>
-          </div>
+          <br>
         </div>
-        <br>
       </div>
     </div>
-
+    <br><br>
   </div>
 </template>
 
@@ -105,7 +107,7 @@ ul, li {
   justify-content: space-around;
   align-items: flex-end;
   list-style: none;
-  border-bottom: 1px solid #ffa594;
+  border-bottom: 1px solid #FAB99B;
 }
 
 .tabItem {
@@ -115,16 +117,16 @@ ul, li {
   height: 60px;
   flex-basis: 20%;
   flex-shrink: 0;
-  border-left: 1px solid #ffa594;
-  border-right: 1px solid #ffa594;
-  border-top: 1px solid #ffa594;
+  border-left: 1px solid #FAB99B;
+  border-right: 1px solid #FAB99B;
+  border-top: 1px solid #FAB99B;
   border-radius: 10px 10px 0 0;
   font-weight: bold;
   text-align: center;
 }
 
 .tabItem.active {
-  background-color: #ffa594;
+  background-color: #FAB99B;
 }
 
 .tabContent {
@@ -137,9 +139,13 @@ ul, li {
 
 .tabMenu {
   display: flex;
-  justify-content:left;
+  justify-content: left;
   list-style: none;
-  border-bottom: 1px solid #ffa594;
+  border-bottom: 1px solid #FAB99B;
 }
 
+.round-section {
+  border: 0.4em outset #FAB99B;
+  border-radius: 2px;
+}
 </style>

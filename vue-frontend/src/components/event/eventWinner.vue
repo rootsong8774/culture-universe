@@ -8,24 +8,24 @@
         </div>
         <div>
           <form>
-            <ul style="text-align: center">
-              <li>
-                <select name="language">
-                  <option value="none">=== 전체 ===</option>
-                  <option value="Num">번호</option>
-                  <option value="title">제목</option>
-                  <option value="wregDate">등록일자</option>
-                  <option value="noAndTitle">번호+제목</option>
-                </select>
-              </li>
-              <li>
-                <div class="search">
-                  <input type="text" placeholder="검색어 입력">
-                  <img
-                    src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
-                </div>
-              </li>
-            </ul>
+            <!--             <ul style="text-align: center">
+                       <li>
+                           <select name="language">
+                             <option value="none">=== 전체 ===</option>
+                             <option value="Num">번호</option>
+                             <option value="title">제목</option>
+                             <option value="wregDate">등록일자</option>
+                             <option value="noAndTitle">번호+제목</option>
+                           </select>
+                         </li>
+                         <li>
+                           <div class="search">
+                             <input type="text" placeholder="검색어 입력">
+                             <img
+                               src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/icon/search.png">
+                           </div>
+                         </li>
+                       </ul>-->
           </form>
           <br>
           <table class=table6_2>
