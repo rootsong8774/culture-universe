@@ -20,15 +20,16 @@
                 </th>
                 <td colspan="3">
                   <div class="tb-l">
-                    <select name="type" id="type" @change=$event>
-                      <option v-model="typeList" value="">문의 유형을 선택해주세요.</option>
+                    <select name="type" id="type" v-model="type">
+<!--                       v-model="types"-->
+                      <option value="" selected disabled>문의 유형을 선택해주세요.</option>
                       <option value="환불문의">환불문의</option>
-                      <option value="공연문의">공연문의</option>
-                      <option value="기타">기타</option>
-<!--                      <option v-for="(qnaType,key) in types"-->
-<!--                              v-bind:value="qnaType" :key="key"-->
+                      <option  value="공연문의">공연문의</option>
+                      <option  value="기타">기타</option>
+<!--                      <option v-for="(qType,key) in types"-->
+<!--                              v-bind:value="qType" :key="key"-->
 <!--                              v-model="types">-->
-<!--                        {{qnaType}}</option>-->
+<!--                        {{qType}}</option>-->
                     </select>
                   </div>
                 </td>
@@ -99,13 +100,16 @@ export default {
   },
   data(){
     return {
-      type:'' ,
-      // type: {환불문의:'환불문의', 공연문의:'공연문의',기타:'기타'},
+      type: '' ,
+      // types: {qRefund:'환불문의', qPerform:'공연문의',qEtc:'기타'},
       title: '',
       content: ''
     }
   },
   methods:{
+    onChange(event) {
+      console.log(event.target.value)
+    },
     postData:function (){
       console.log("데이터 실행 확인")
       axios({
@@ -127,11 +131,6 @@ export default {
       }).catch(err => {
         console.log(err);
       });
-    }
-  },
-  watch: {
-    type: function () {
-      this.postData();
     }
   }
 }

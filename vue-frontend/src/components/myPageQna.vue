@@ -29,7 +29,7 @@
             <tr>
               <th style="width: 10%">문의번호</th>
               <th style="width: 20%">문의유형</th>
-              <th style="width: 40%">문의내용</th>
+              <th style="width: 40%">문의제목</th>
               <th style="width: 10%">문의등록일</th>
               <th style="width: 10%">문의답변</th>
             </tr>
@@ -50,7 +50,7 @@
               <td>
                 <router-link
                 :to="{name: 'myPageQnaDetails',query:{questionIdx: result.questionIdx}}">
-                  {{ result.content }}
+                  {{ result.title }}
                 </router-link>
               </td>
               <td>{{ result.regDate  | yyyyMMdd }}</td>
