@@ -247,6 +247,9 @@ export default {
       this.username= '';
       this.password= '';
     },
+    openLogin: function () {
+      $('.bs-example-modal-sm').modal('show');
+    },
   },
 
 }

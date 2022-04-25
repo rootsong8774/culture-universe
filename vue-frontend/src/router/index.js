@@ -27,7 +27,15 @@ import myPageQna from "../components/myPageQna";
 import myPageQnaDetails from "../components/myPageQnaDetails";
 
 Vue.use(VueRouter)
+const storage = window.sessionStorage;
 
+const requireAuth = () => (to,from, next) => {
+  if(storage.getItem("jwt-auth-token")){
+    return next();
+  } else {
+    next(false)
+  }
+}
 const router = new VueRouter({
   routes: [
     {
@@ -53,7 +61,8 @@ const router = new VueRouter({
       component: performanceReservation,
       props: (route) => ({
         performCode: route.query.performCode
-      })
+      }),
+      beforeRouteEnter: requireAuth()
     },
     {
       path: '/performances',

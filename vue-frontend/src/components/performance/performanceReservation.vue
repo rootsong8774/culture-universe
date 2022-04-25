@@ -390,7 +390,7 @@ export default {
           "X-AUTH-TOKEN": storage.getItem("jwt-auth-token")
         },
         data: {
-          username: "cucu",
+          username: storage.getItem("login_user"),
           seatNos: [...Array.from(this.seatNo)]
         },
         dataType: 'json',
