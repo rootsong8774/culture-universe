@@ -134,7 +134,8 @@ export default {
       })
     },
     reservation: function () {
-      this.$router.push({name: 'performanceReservation', query: {performCode: this.performData.performCode}})
+      this.$router.push({name: 'performanceReservation',
+        query: {performCode: this.performData.performCode}})
     },
   },
 }

@@ -91,7 +91,10 @@
                   </li>
                 </ul>
               </li>
-              <li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm" >로그인/회원가입</a></li>
+              <li>
+                <a href="#" v-if="jwtToken" @click="logout">로그아웃</a>
+                <a href="#" data-toggle="modal" data-target=".bs-example-modal-sm" v-else>로그인/회원가입</a>
+              </li>
 
               <li><router-link :to="{name: 'myPage',query:{reservationId:1}}">마이페이지</router-link></li>
               <!-- login modal -->
@@ -113,8 +116,6 @@
                         <input type="text" class="form-control" placeholder="Enter Username" v-model:value="username">
                         <label>Password :</label>
                         <input type="password" class="form-control" placeholder="Enter Password" v-model:value="password" >
-                        <label><input type="checkbox" name="personality" class="remember"> Remember
-                          Me</label>
                         <br>
                         <button type="button" class="btn btn-default pull-right" @click="attemptLogin" >로그인</button>
                         <button type="button" data-toggle="modal" data-target=".bs-example-modal-lg"
@@ -186,7 +187,6 @@
 import axios from 'axios';
 
 const storage = window.sessionStorage;
-
 export default {
   name: "LayoutHeader",
   props: {
@@ -197,20 +197,15 @@ export default {
       username: '',
       name: '',
       password: '',
-      jwtToken: '',
-      status: ''
+      status: '',
+      jwtToken: ''
     }
   },
   methods: {
-    setInfo: function(jwtToken) {
-      this.jwtToken = jwtToken;
-    },
     logout: function() {
-      storage.setItem("jwt-auth-token","");
-      storage.setItem("login_user", "");
-      this.setInfo("");
+      storage.clear();
+      this.jwtToken = '';
     },
-
     register: function () {
       axios({
         url: '/api/register',
@@ -229,8 +224,6 @@ export default {
       });
     },
     attemptLogin: function () {
-      // storage.setItem("jwt-auth-token","");
-      // storage.setItem("login_user", "");
       axios({
         url: '/api/login',
         method: 'post',
@@ -238,31 +231,24 @@ export default {
           username: this.username,
           password: this.password,
         },
-      }).then(function (response) {
+      }).then(response => {
         if (response.data.status) {
           alert(response.data.data.username+ "로 로그인 되었습니다.");
-
-          console.log(response.headers["jwt-auth-token"]);
-          this.setInfo(response.headers["jwt-auth-token"]);
-          storage.setItem('jwt-auth-token', this.jwtToken);
+          storage.setItem('jwt-auth-token', response.headers["jwt-auth-token"]);
           storage.setItem('login_user', response.data.data.username);
-          console.log(storage.getItem("jwt-auth-token"))
-        } else {
-          this.setInfo("");
-          alert("입력 정보가 잘못 되었습니다.")
+          $('.bs-example-modal-sm').modal('hide');
+          this.jwtToken = storage.getItem("jwt-auth-token");
         }
 
-        console.log(response);
-        $('.bs-example-modal-sm').modal('hide');
       }).catch(function (error) {
-        // this.setInfo(JSON.stringify(error.response || error.message));
+        console.log(error);
+        alert("아이디 혹은 비밀번호가 잘못 되었습니다.");
       });
+      this.username= '';
+      this.password= '';
     },
-    openLogin: function () {
-      $('.bs-example-modal-sm').modal('show');
-    },
+  },
 
-  }
 }
 
 

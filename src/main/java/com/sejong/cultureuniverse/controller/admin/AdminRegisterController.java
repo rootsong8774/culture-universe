@@ -27,8 +27,7 @@ public class AdminRegisterController {
     
     @PostMapping("/register")
     public String adminRegister(@Validated @ModelAttribute AdminDTO adminDTO,
-        BindingResult bindingResult, @RequestParam(defaultValue = "/") String redirectURL,
-        HttpServletRequest request) {
+        BindingResult bindingResult) {
         
         if (bindingResult.hasErrors()) {
             return "admin/login/registerForm";

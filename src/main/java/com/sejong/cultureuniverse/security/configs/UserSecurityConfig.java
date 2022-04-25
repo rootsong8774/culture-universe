@@ -39,8 +39,8 @@ public class UserSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .antMatcher("/api/**")
             .authorizeRequests()
-//            .antMatchers("/api/reservation/**")
-//            .hasRole("USER")
+            .antMatchers("/api/reservation/**")
+            .hasRole("USER")
             .antMatchers("/api/**").permitAll()
             .and()
             .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),

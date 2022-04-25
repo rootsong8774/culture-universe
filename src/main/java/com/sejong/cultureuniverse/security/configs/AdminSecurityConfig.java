@@ -66,8 +66,6 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
             http.
                 csrf().disable();
             
-            
-           
         }
         
         @Bean

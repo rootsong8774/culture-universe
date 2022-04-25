@@ -211,6 +211,8 @@
 
 <script>
 import axios from "axios";
+const storage = window.sessionStorage;
+
 
 export default {
   name: "seat",
@@ -307,6 +309,10 @@ export default {
           performCode: this.$route.query.performCode,
         },
         method: 'get',
+        headers: {
+          "Content-Type": 'application/json',
+          "X-AUTH-TOKEN": storage.getItem("jwt-auth-token")
+        },
       }).then(response => {
         this.performData = response.data
       })
@@ -322,6 +328,10 @@ export default {
           page: this.page,
         },
         method: 'get',
+        headers: {
+          "Content-Type": 'application/json',
+          "X-AUTH-TOKEN": storage.getItem("jwt-auth-token")
+        },
       }).then(response => {
         this.scheduleList = response.data
       })
@@ -337,6 +347,10 @@ export default {
           scheduleCode: value,
         },
         method: 'get',
+        headers: {
+          "Content-Type": 'application/json',
+          "X-AUTH-TOKEN": storage.getItem("jwt-auth-token")
+        },
       }).then(response => {
         this.seatsList = response.data
         this.scheduleDate = response.data[0].scheduleDate;
@@ -372,7 +386,8 @@ export default {
       axios({
         url: '/api/reservation/reservation',
         headers: {
-          "Content-Type": 'application/json'
+          "Content-Type": 'application/json',
+          "X-AUTH-TOKEN": storage.getItem("jwt-auth-token")
         },
         data: {
           username: "cucu",

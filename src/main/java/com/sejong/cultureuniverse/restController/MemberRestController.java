@@ -31,8 +31,6 @@ public class MemberRestController {
     
     private final MemberService memberService;
     private final JwtTokenProvider jwtTokenProvider;
-    private final MemberRepository memberRepository;
-    private final PasswordEncoder passwordEncoder;
     
     
     @PostMapping("/register")
@@ -45,9 +43,9 @@ public class MemberRestController {
     public ResponseEntity<Map<String, Object>> login(@RequestBody MemberDTO memberDTO, HttpServletResponse res) {
         
         Map<String, Object> resultMap = new ConcurrentHashMap<>();
-        HttpStatus status = null;
+        HttpStatus status;
     
-        Member member = null;
+        Member member;
         try {
             member = memberService.login(memberDTO);
             String token = jwtTokenProvider.createToken(member.getUsername(), member.getRole());

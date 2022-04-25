@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequiredArgsConstructor
 public class AdminLoginController {
     
-    private final AdminService loginService;
     
     
     @GetMapping("/login")
@@ -28,40 +27,6 @@ public class AdminLoginController {
         return "admin/login/loginForm";
     }
     
-//    @PostMapping("/login")
-//    public String login(@Validated @ModelAttribute AdminDTO adminDTO,
-//        BindingResult bindingResult, @RequestParam(defaultValue = "/") String redirectURL,
-//        HttpServletRequest request) {
-//        if (bindingResult.hasErrors()) {
-//            return "admin/login/loginForm";
-//        }
-//
-//        Admin loginAdmin = loginService.login(adminDTO.getAdminId(),
-//            adminDTO.getAdminPw());
-//
-//        if (loginAdmin == null) {
-//            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 맞지 않습니다.");
-//            return "admin/login/loginForm";
-//        }
-//        //세션이 있으면 있는 세션 반환, 없으면 신규 세션을 생성
-//        HttpSession session = request.getSession();
-//        //세션에 로그인 회원 정보 보관
-//        session.setAttribute(SessionConst.LOGIN_ADMIN, loginAdmin);
-//
-//        log.info(redirectURL);
-//
-//        return "redirect:" + redirectURL;
-//
-//    }
-
-//    @RequestMapping("/logout")
-//    public String logoutV3(HttpServletRequest request) {
-//        HttpSession session = request.getSession(false);
-//        if (session != null) {
-//            session.invalidate();
-//        }
-//        return "redirect:/";
-//    }
     
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
